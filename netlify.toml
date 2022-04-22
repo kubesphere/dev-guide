@@ -1,0 +1,13 @@
+[context.production.environment]
+  HUGO_VERSION = "0.97.2"
+  HUGO_BASEURL = "https://kubesphere-dev-guide.netlify.app"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.97.2"
+  HUGO_ENABLEGITINFO = "true"
+
+[context.deploy-preview]
+command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+
+[context.branch-deplpy]
+command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"

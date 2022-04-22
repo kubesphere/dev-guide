@@ -1,0 +1,39 @@
+baseURL = "/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh"
+
+title = "KubeSphere Development Guide"
+theme = "hugo-theme-learn"
+themesdir = "themes"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+
+[params]
+  editURL = "https://github.com/kubesphere/dev-guide/edit/master/content/"
+  description = "A set of development guidelines for KubeSphere developers."
+  author = "KubeSphere"
+  showVisitedLinks = true
+  disableBreadcrumb = false
+  disableNextPrev = false
+  disableLandingPageButton = true
+  disableMermaid = false
+  customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
+  titleSeparator = "::"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[Languages]
+[Languages.en]
+title = "KubeSphere Development Guide"
+weight = 1
+languageName = "English"
+landingPageURL = "/en"
+landingPageName = "<i class='fas fa-home'></i> Home"
+
+[Languages.zh]
+title = "KubeSphere 开发指南"
+weight = 3
+languageName = "简体中文"
+landingPageURL = "/zh"
+landingPageName = "<i class='fas fa-home'></i> 家"
