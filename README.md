@@ -1,6 +1,8 @@
 # KubeSphere Dev Guide
 
-This project uses [Hugo](https://gohugo.io/) and [Hugo theme learn](https://github.com/matcornic/hugo-theme-learn) to build the website.
+This project uses [Hugo](https://gohugo.io/) and [Hugo theme learn](https://github.com/matcornic/hugo-theme-learn) to build the website. 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1d4f2e02-aadc-4bab-a8d0-ec9f37293d07/deploy-status)](https://app.netlify.com/sites/kubesphere-dev-guide/deploys)
 
 ## Contribute
 
@@ -45,3 +47,11 @@ Open a [pull request (PR)](https://help.github.com/en/desktop/contributing-to-pr
 ```bash
 git commit -s -m "xxx"
 ```
+
+## Contributors
+
+Thanks goes to these wonderful contributors, they made our community and product grow fast.
+
+<a href="https://github.com/kubesphere/dev-guide/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=kubesphere/dev-guide" />
+</a>
