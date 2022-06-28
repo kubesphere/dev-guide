@@ -29,7 +29,38 @@ git clone https://github.com/kubesphere/console.git
 
 ## 本地运行 KubeSphere 后端代码
 
-TBD
+### 准备
+
+#### 配置文件
+Kubesphere 使用 [viper](https://github.com/spf13/viper) 管理和加载配置。在开始运行之前，您需要在本地创建一个配置文件以供程序加载。
+在集群中部署完 kubesphere 之后会生成一个 configmap 配置字典。 您可以执行以下命令查看
+
+```bash
+kubectl -n kubesphere-system get cm kubesphere-config -o yaml
+```
+
+复制 "kubesphere.yaml" 键的值。作为后续的配置文件的输入
+
+Kubesphere 会在以下路径中加载配置文件
+- Linux 根目录下 /etc/kubesphere.yaml
+- Kubesphere 代码根目录下 kubesphere.yaml
+
+在以上任意一个路径中，使用上述 configmap 中的值，创建配置文件 kubesphere.yaml 以提供给 Kubesphere 运行时加载。
+
+#### K8s集群
+Kubesphere 在运行时会加载本地 K8s 集群的 kubeconfig 文件，如果您想使用远端集群，可以使用远端集群中的 kubeconfig ，在本地 root 目录下创建 .kube/config，以供程序运行时加载。
+
+### 运行 ks-apiserver
+在 kubesphere 代码根目录下运行 
+```bash
+go run cmd/ks-apiserver/apiserver.go
+```
+
+### 运行 ks-controller-manager
+在 kubesphere 代码根目录下运行
+```bash
+go run cmd/controller-manager/controller-manager.go
+```
 
 ## 本地运行 KubeSphere 前端代码
 
