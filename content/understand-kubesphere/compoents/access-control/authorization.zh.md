@@ -4,14 +4,14 @@ weight: 221
 description: KubeSphere 中的多用户授权
 ---
 
-# 概述
+## 概述
     
 KubeSphere 为满足企业级 Kubernetes 需求，提供了基于 Kubernetes 的多租户系统。在 KubeSphere 中，我们提供了不同层级和粒度的
 的资源管理机制，同时包含了一整套 IAM（身份识别与访问控制）系统，用来保障企业级集群的安全。
 
-# 角色与权限
+## 角色与权限
 
-## 内置角色
+### 内置角色
 KubeSphere 租户的设计基于 [RBAC (Role-Based Access Control) ](https://en.wikipedia.org/wiki/Role-based_access_control) 权限模型。
 以角色为权限基础，不同角色被授予不同的资源访问权限。每个用户都有对应的角色。
 
@@ -35,7 +35,7 @@ KubeSphere 在安装完成后提供了内置的管理员用户 `admin`，此内�
 除此之外，我们也支持自定义角色，自定义的角色可根据内置的权限模板自由定制角色。
 ![custom-role](/images/access-control/costom-role.png)
 
-## RBAC 在 KubeSphere 权限控制中的实践
+### RBAC 在 KubeSphere 权限控制中的实践
 
 KubeSphere 中的权限控制依赖 [CRD (Custom Resources Define)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 定义，使用 CR 存储在 Kubernetes 集群中。 CRD 的 Group 一般为 `iam.kubesphere.io` 。例如，用户的账号信息存储在 `Users` 中。
@@ -106,7 +106,7 @@ subjects:
 
 从上面的实例中可以看出，KubeSphere 中的权限定义借鉴了 Kubernetes 对于资源权限控制的设计。这种方式减少了 KubeSphere 对外部中间件的依赖。
 
-## 权限项
+### 权限项
 
 上面示例中我们讲过自定义角色可以根据权限模板自由定制需要的角色。从之前的示例中可以看出，我们将 KubeSphere 中所有的资源使用到的权限拆分成单独的选项，
 在 KubeSphere 中这些选项也是单独的权限定义。 KubeSphere 使用权限模板保存这些权限项。如果你在阅读上面的文档时足够细心，就会发现 platform-admin 
