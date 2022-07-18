@@ -5,7 +5,7 @@ description: 插件的菜单挂载
 ---
 
 ## 菜单挂载点
-插件入口菜单目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
+插件的入口菜单需要挂载在界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
 
 1. 顶部导航栏
 ![](/images/plugin-arch/menu1.png)
@@ -48,7 +48,7 @@ globals.context.registerPlugin(pluginConfig);    // 通过全局对象注册插�
 * 当值为 `top` 时菜单挂载在顶部导航栏；
 * 当值为 `global` 时菜单挂载在平台管理菜单；
 * 当值为 `toolbox` 时菜单挂载在工具箱。
-* 左侧菜单的挂载需根据当前 menu 在系统配置文件 `config.yaml` 里的配置来设置，如：
+* 左侧菜单的挂载需根据当前 menu 在系统配置文件 `config.yaml` 里的菜单配置里的 name 字段来设置，如：
 ```yaml
   clusterNavs:
     name: cluster
