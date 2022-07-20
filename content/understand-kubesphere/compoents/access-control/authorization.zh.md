@@ -38,7 +38,7 @@ KubeSphere 在安装完成后提供了内置的管理员用户 `admin`，此内�
 ### RBAC 在 KubeSphere 权限控制中的实践
 
 KubeSphere 中的权限控制依赖 [CRD (Custom Resources Define)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-定义，使用 CR 存储在 Kubernetes 集群中。 CRD 的 Group 一般为 `iam.kubesphere.io` 。例如，用户的账号信息存储在 `Users` 中。
+，使用 CR 存储在 Kubernetes 集群中。 CRD 的 Group 一般为 `iam.kubesphere.io` 。例如，用户的账号信息存储在 `Users` 中。
 下面示例是 `admin`(平台管理员) 的账户信息。
 
 ```yaml
@@ -138,6 +138,42 @@ role-template-view-users                 24d
 role-template-view-workspaces            24d
 ```
 
+## 权限层级
 
+在上文中我们详细介绍了 KubeSphere 通过 RBAC 基于角色来实现不同角色和用户的绑定，角色又基于不同的权限项组成。
+为了实现细粒度的访问控制，我们将角色划分为不同层级，相应的，角色对应的权限模板也被划分为不同层级。
+![role](/images/access-control/role.png)
+
+从图中可以看出，蓝色实线框内，我们将角色划分为以下四个层级
+- Global Role
+- Cluster Role
+- Workspace Role
+- Project/DevOps Role
+
+对应的，层级角色用来管理以下相应层级的资源
+- Global Scope 表示全局范围
+- Cluster Scope 表示集群范围
+- Workspace Scope 表示企业空间范围
+- Namespace Scope 表示命名空间范围
+
+
+每个层级中都有这样的三个模块 
+- Role-Template
+- Built-in Role
+- Custom Role
+
+这三个模块都不难理解，
+Role-Template 表示权限模板;
+Built-in Role 表示这是内置角色(我们提到过内置平台管理员 platform-admin 就是 Global 层级中的内置角色）;
+Custom Role 则是用户自定义的定制角色。每个层次的自定义角色都是由 Role-Template 组合而成。正如我们在上文提到过的角色的定义中
+`iam.kubesphere.io/aggregation-roles` 标签中的值就是此角色的所包含的权限项。内置角色也包含也包含了这个字段，只不过内置角色是系统在初始化时
+会被自动预设，而自定义角色是用户自己定制完成的。
+
+**RoleBase 又是什么？**
+
+RoleBase 对用户来说是无法感知的，这个模块作为其他模块的基础，主要用来构建 Project/DevOps Role 和 Workspace Role
+RoleBase中包含两种CR， **权限项模板（Role Template）** 和 **内置角色模板（Built-in Role）**。
+在 Namespace 层，由于Namespace 天生的隔离性限制，Workspace 是由 Namespace 构成，所以我们在每个 Namespace 被创建时都会将 RoleBase 
+中的 Role Template复制到这个NS中。 同时也将相应的 Built-in Role 复制到 Workspace 和 Namespace 中。这样做可以方便后续的角色和用户绑定。
 
 
