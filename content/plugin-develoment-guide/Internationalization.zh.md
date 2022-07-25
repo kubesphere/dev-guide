@@ -4,9 +4,9 @@ weight: 404
 description: 插件的国际化设置
 ---
 
-KubeSphere4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际化组件，插件开发者可以通过 i18next 的方式来在插件前端项目中实现国际化。
+KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际化组件，插件开发者可以通过 i18next 的方式来在插件前端项目中实现国际化。
 
-![](/images/plugin-arch/locales.png)
+![](/images/pluggable-arch/locales.png)
 
 如上图，在前端项目的 `locales` 目录中书写翻译文件。然后在插件的 entry file 中引入翻译文件，如下：
 

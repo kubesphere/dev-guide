@@ -31,7 +31,7 @@ cd poject-direcotry // 切换到工程目录内
 ks-builder create // 运行命令并按照提示输入信息
 ```
 输入命令回车后进入命令行提示界面，如下图：
-![](/images/plugin-arch/ks-builder-cli.png)
+![](/images/pluggable-arch/ks-builder-cli.png)
 
 按照命令行提示依次输入插件名称、描述和所属分类后，回车即可创建出插件目录。内容如下：
 
