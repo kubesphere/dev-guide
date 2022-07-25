@@ -4,10 +4,10 @@ weight: 213
 description: KubeSphere 前端可插拔架构介绍
 ---
 
-在 KubeSphere4.0 中为实现“可插拔”的特性，我们设计了“微内核+插件”的架构。其中“内核”部分仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个插件中。系统可在运行时动态的安装、卸载、启动、停止插件。架构总体设计如下图：
+在 KubeSphere 4.0 中为实现“可插拔”的特性，我们设计了“微内核+插件”的架构。其中“内核”部分仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个插件中。系统可在运行时动态的安装、卸载、启动、停止插件。架构总体设计如下图：
 
 
-![前端架构](/images/plugin-arch/frontend-framework.svg "前端架构")
+![前端架构](/images/pluggable-arch/frontend-framework.svg "前端架构")
 
 ## 设计思想
 谈到解构“巨石应用”、谈到动态扩展，我们必然会想到近年来流行的“微前端”方案。知名的“微前端”实现比如 “qiankun”、“micro-app”为了解决子应用技术栈无关、样式侵入问题在 JS沙箱、样式隔离上做了很多工作。而“隔离”往往是为了解决某些技术债问题或者团队配合问题而做的妥协。一套前端系统里如果融合了 react、Vue、angular 那么 ui 体验的一致性则会很难保证，前端 bundle 的大小也会大大提高。而且各个子应用隔离在自己独立的运行时，与主应用融合度也不够紧密。
@@ -42,7 +42,7 @@ description: KubeSphere 前端可插拔架构介绍
 ## 插件
 
 前端插件统一使用 `create-ks-app` 脚手架工具初始化。初始化后目录如下图
-![image alt](/images/plugin-arch/plugin-directory.png)
+![image alt](/images/pluggable-arch/plugin-directory.png)
 
 可以看出这和普通的 react app 基本一样。不同的点在于对 entry 的定义。示例如下：
 ```javascript=
