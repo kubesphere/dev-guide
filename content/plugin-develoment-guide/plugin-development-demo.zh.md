@@ -20,7 +20,7 @@ description: 包含前后端的插件开发示例
 
 ## 创建插件管理目录
 
-如前一章节所讲，我们首先执行一下命令把插件的管理目录创建出来，在 `/root/lab/plugin-repo/` 中执行：
+如前一章节所讲，我们首先执行以下命令把插件的管理目录创建出来，在 `/root/lab/plugin-repo/` 中执行：
 
 ```shell
 $ ksbuilder create
@@ -68,12 +68,12 @@ r.Run()
 具体的业务代码实现过程我们不做赘述，源码参见：[GitHub - chenz24/employee: A demo app build with go gin, gorm and sqlite](https://github.com/chenz24/employee)
 
 开发完成后我们需要 build 代码并将其打包成 docker 镜像：
-```
-GOOS=linux GOARCH=amd64 go build main.go
+```shell
+$ GOOS=linux GOARCH=amd64 go build main.go
 
-docker build --platform linux/amd64 -t poppub123/employee-api .
+$ docker build --platform linux/amd64 -t kubesphere/employee-api .
 
-docker push poppub123/employee-api:latest
+$ docker push kubesphere/employee-api:latest
 ```
 
 执行完成以上命令后，我们需要将后端代码进行部署，以给前端开发提供接口调试。我们回到上面讲到的插件的管理工程目录中。编辑 `values.yaml`
@@ -99,7 +99,7 @@ backend:
 ksbuilder install employee
 ```
 
-这样后端就部署到了 k8s 集群中并且注册到 ks 的插件体系里了。可以通过 curl 测试接口是否已经被 ks-apiserver 接管。
+这样插件的后端就部署到了 k8s 集群中并且注册到 ks 的插件体系里了。可以通过 curl 测试接口是否已经被 ks-apiserver 接管。
 
 ## 前端开发
 
@@ -118,19 +118,60 @@ ksbuilder install employee
 ## 开始开发
 
 1. 安装开发脚手架
-```
+
+在任意目录下执行下面命令(这里我们选择在`/root/lab/`下执行)：
+
+```shell
 yarn create ks-app my-app  # 在 my-app 目录下创建一个新的 ks-app
 ```
+命令执行完成后，我们会在终端上看到如下输出：
+```shell
+Success! Created my-app at /Users/chenzhen/Workspace/lab/my-app
+Inside that directory, you can run several commands:
 
-安装完成后，切换到脚手架目录。在 configs 目录下配置 local_config.yaml  ，填写正确的 ks apiserver 地址
+  yarn create-plugin <plugin-name>
+    Create a new plugin.
 
-![](https://qui-site.pek3a.qingstor.com/B7AF514B-2236-4E4C-BBAA-4C5FAA298105.png)
+  yarn dev
+    Starts the development server.
+
+  yarn build:dll
+    Builds the dll files.
+
+  yarn build:prod
+    Builds the app for production.
+
+  yarn start
+    Runs the built app in production mode.
+
+We suggest that you begin by typing:
+
+  cd my-app
+  yarn create-plugin <plugin-name>
+
+And
+
+  yarn dev
+
+✨  Done in 117.41s.
+```
+这样，前端脚手架就创建好了。下面我们切换到脚手架目录里的 configs 目录下，编辑 `local_config.yaml` 配置正确的 ks apiserver 地址
+如图：
+```shell
+server:
+  apiServer:
+    url: https://api.kubesphere.io
+    wsUrl: ws://api.kubesphere.io
+```
 
 2. 新建插件目录
-```
-yarn create-plugin // 按照提示填写信息
-```
 
+在脚手架目录下执行：
+
+```shell
+yarn create-plugin
+```
+回车执行命令会进入交互式命令行界面。按照提示输入响应信息。
 命令执行成功后，我们在 plugins 目录可以看到插件的框架代码已经生成。目录结构如图：
 
 ![](/images/pluggable-arch/plugin-directory.png)
