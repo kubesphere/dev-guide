@@ -1,5 +1,5 @@
 ---
-title: 插件开发
+title: 插件开发指南
 weight: 400
 pre: "<b>4. </b>"
 ---

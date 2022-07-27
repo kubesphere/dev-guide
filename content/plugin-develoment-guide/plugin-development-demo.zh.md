@@ -1,7 +1,7 @@
 ---
-title: 编码开发
+title: 包含前后端的插件开发示例
 weight: 402
-description: 开发插件的前后端代码
+description: 包含前后端的插件开发示例
 ---
 
 在上个章节中我们创建了插件的管理工程，本章节我们以一个典型的包含前后端的 crud 插件的例子开始讲解具体的开发过程。
@@ -18,9 +18,32 @@ description: 开发插件的前后端代码
 3. 员工详情页
    ![](/images/pluggable-arch/995810AD-639C-4F33-8B8E-9D347225DAB9.png)
 
+## 创建插件管理目录
+
+如前一章节所讲，我们首先执行一下命令把插件的管理目录创建出来，在 `/root/lab/plugin-repo/` 中执行：
+
+```shell
+$ ksbuilder create
+Please input plugin name:  employee
+Input: employee
+Please input plugin description:  employee plugin
+Input: employee plugin
+Other: app
+✔ Monitoring
+Input: Monitoring
+Please input plugin author:  wayne
+Input: wayne
+Please input Email:  wayne@kubesphere.io
+Input: wayne@kubesphere.io
+Directory: /root/lab/plugin-repo/employee
+```
+
+如上，按照命令行提示输入信息后生成了 employee 目录。我们暂且不做配置，先进行业务代码的开发。
+
 ## 后端开发
 
-后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言进行开发。在这个示例中我们采用 `go`  `gin`   `gorm`  `sqlite`  的技术栈来开发。由需求看出我们需要实现针对 employee 的增删改查接口，接口的定义如下：
+后端开发不限制技术栈，也没有任何目录或者配置的束缚，开发者可以自由的选择自己擅长的语言和框架进行开发。在这个示例中我们采用 `go`  `gin`   `gorm`  `sqlite`  的技术栈来开发。
+由需求看出我们需要实现针对 employee 的增删改查接口，接口的定义如下：
 
 ```go
 v1 := r.Group("/kapis/employee.kubesphere.io/v1alpha1")
@@ -39,9 +62,12 @@ r.Run()
 
 ```
 
+>需要注意的是，应用的路由我们定义在了 `/kapis/employee.kubesphere.io/v1alpha1` 前缀下。这是因为这里的访问路径需要与
+`/lab/plugin-repo/employee/charts/backend/templates/extensions.yaml` 里定义的 api group 和 version 一致。
+
 具体的业务代码实现过程我们不做赘述，源码参见：[GitHub - chenz24/employee: A demo app build with go gin, gorm and sqlite](https://github.com/chenz24/employee)
 
-开发完成后我们需要 build 代码并将其打包成 docker 镜像
+开发完成后我们需要 build 代码并将其打包成 docker 镜像：
 ```
 GOOS=linux GOARCH=amd64 go build main.go
 
@@ -50,19 +76,46 @@ docker build --platform linux/amd64 -t poppub123/employee-api .
 docker push poppub123/employee-api:latest
 ```
 
-执行完成以上命令后，我们需要将后端代码进行部署，以给前端开发提供接口调试。我们回到上个章节中讲到的插件的管理工程目录中。编辑 `values.yaml`
+执行完成以上命令后，我们需要将后端代码进行部署，以给前端开发提供接口调试。我们回到上面讲到的插件的管理工程目录中。编辑 `values.yaml`
 
-![](https://qui-site.pek3a.qingstor.com/059BC227-2692-4C9C-830D-1242057DA126.png)
+```yaml
+frontend:
+  enabled: false
+  image:
+    repository:
+    tag: latest
 
-如图，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到插件管理工程根目录执行：
+backend:
+  enabled: true
+  image:
+    repository: kubesphere/employee-api
+    tag: latest
+```
 
-`ks-builder install employee `
+如上，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到插件管理工程根目录执行：
+
+```shell
+# 在 /root/lab/plugin-repo/ 中执行
+ksbuilder install employee
+```
 
 这样后端就部署到了 k8s 集群中并且注册到 ks 的插件体系里了。可以通过 curl 测试接口是否已经被 ks-apiserver 接管。
 
 ## 前端开发
 
-> 前置条件：已安装 nodejs yarn
+### 前置准备
+
+- 安装 Node.js [Active LTS Release](https://nodejs.org/en/about/releases/)
+  方法:
+   - 使用 `nvm` (推荐)
+      - [Installing nvm](https://github.com/nvm-sh/nvm#install--update-script)
+      - [Install and change Node version with nvm](https://nodejs.org/en/download/package-manager/#nvm)
+   - [Binary Download](https://nodejs.org/en/download/)
+   - [Package manager](https://nodejs.org/en/download/package-manager/)
+   - [Using NodeSource packages](https://github.com/nodesource/distributions/blob/master/README.md)
+- `yarn` [安装教程](https://classic.yarnpkg.com/en/docs/install)
+
+## 开始开发
 
 1. 安装开发脚手架
 ```
@@ -97,17 +150,29 @@ yarn build:plugin employee                                              # 编译
 
 cd /path/to                                                             # 进入插件目录
 
-docker build --platform linux/amd64  -t poppub123/employee-frontend .   # 打包成 docker 镜像
+docker build --platform linux/amd64  -t kubesphere/employee-frontend .   # 打包成 docker 镜像
 ```
 
 将镜像 push 到镜像仓库后，我们再回到插件管理工程的目录中，编辑 `values.yaml`，配置前端镜像
 
-![](https://qui-site.pek3a.qingstor.com/48BAF7B0-C554-4910-938D-6276BB146DA2.png)
+```yaml
+frontend:
+  enabled: true
+  image:
+    repository: kubesphere/employee-frontend
+    tag: latest
+
+backend:
+  enabled: true
+  image:
+    repository: kubesphere/employee-api
+    tag: latest
+```
 
 然后执行如下命令，将前端部署到集群中。
 
 ```
-ks-builder upgrade employee
+ksbuilder upgrade employee
 ```
 
 命令执行成功后，我们在前端工程中执行下面命令。在本地以 production 模式启动前端，查看插件是否安装成功。
