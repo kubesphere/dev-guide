@@ -37,8 +37,9 @@ KubeSphere 在安装完成后提供了内置的管理员用户 `admin`，此内�
 
 ### RBAC 在 KubeSphere 权限控制中的实践
 
-KubeSphere 中的权限控制依赖 [CRD (Custom Resources Define)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-，使用 CR 存储在 Kubernetes 集群中。 CRD 的 Group 一般为 `iam.kubesphere.io` 。例如，用户的账号信息存储在 `Users` 中。
+KubeSphere 中的权限控制依赖 [CRD (Custom Resources Define)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，
+使用 CR 存储在 Kubernetes 集群中。 CRD 的 Group 一般为 `iam.kubesphere.io` 。例如，用户的账号信息存储在 `Users` 中。
+
 下面示例是 `admin`(平台管理员) 的账户信息。
 
 ```yaml
@@ -175,5 +176,6 @@ RoleBase 对用户来说是无法感知的，这个模块作为其他模块的�
 RoleBase中包含两种CR， **权限项模板（Role Template）** 和 **内置角色模板（Built-in Role）**。
 在 Namespace 层，由于Namespace 天生的隔离性限制，Workspace 是由 Namespace 构成，所以我们在每个 Namespace 被创建时都会将 RoleBase 
 中的 Role Template复制到这个NS中。 同时也将相应的 Built-in Role 复制到 Workspace 和 Namespace 中。这样做可以方便后续的角色和用户绑定。
+
 
 

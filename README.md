@@ -14,10 +14,11 @@ Contributions of any kind are welcome!
 
 2. Run the following commands to clone your fork and enter into it. Make sure you replace `<Your GitHub ID>` with your GitHub ID.
 
-   ```
+   ```bash
    git clone https://github.com/<Your GitHub ID>/dev-guide.git
    cd dev-guide
    ```
+
 ### Build and preview the website
 
 You have to install [Hugo](https://gohugo.io/) to build the website in order to **preview it as static content**.
@@ -34,7 +35,7 @@ Note: If you install Hugo on Windows, you need to add environment variables for 
 
 After you install Hugo, run the following command:
 
-```
+```bash
 hugo server
 ```
 
