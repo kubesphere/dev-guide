@@ -106,15 +106,15 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 此步骤建议您对 `k8s`、`helm` 有一定了解并阅读 [可插拔介绍](/zh/understand-kubesphere/pluggable/backend-pluggable-architecture/).
 
-如上面所示的目录结构，在插件的根目录下有一个 `values.yaml` 文件，在这个文件中配置插件前后端镜像(当然，前提是前后端代码已准备好并打包好了镜像，如何打包请参考后面章节)。
+如上面所示的目录结构，在插件的根目录下有一个 `values.yaml` 文件，在这个文件中配置插件前后端镜像(当然，前提是前后端代码已准备好并打包好了镜像，如何打包请参考[后面章节](/zh/plugin-develoment-guide/plugin-development-demo/))。
 
 ```yaml
 image:
   frontend:
-    repository: registry.cn-hangzhou.aliyuncs.com/demo-frontend
+    repository: kubesphere/demo-frontend
     tag: latest
   backend:
-    repository: registry.cn-hangzhou.aliyuncs.com/demo-backend
+    repository: kubesphere/demo-backend
     tag: latest
 ```
 

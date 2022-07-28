@@ -108,11 +108,9 @@ ksbuilder install employee
 - 安装 Node.js [Active LTS Release](https://nodejs.org/en/about/releases/)
   方法:
    - 使用 `nvm` (推荐)
-      - [Installing nvm](https://github.com/nvm-sh/nvm#install--update-script)
-      - [Install and change Node version with nvm](https://nodejs.org/en/download/package-manager/#nvm)
-   - [Binary Download](https://nodejs.org/en/download/)
-   - [Package manager](https://nodejs.org/en/download/package-manager/)
-   - [Using NodeSource packages](https://github.com/nodesource/distributions/blob/master/README.md)
+      - [安装 nvm](https://github.com/nvm-sh/nvm#install--update-script)
+      - [使用 nvm 安装和切换 Node 版本](https://nodejs.org/en/download/package-manager/#nvm)
+   - [安装包安装](https://nodejs.org/en/download/)
 - `yarn` [安装教程](https://classic.yarnpkg.com/en/docs/install)
 
 ## 开始开发
