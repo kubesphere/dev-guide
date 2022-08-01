@@ -14,7 +14,7 @@ description: 安装 ksbuilder 插件管理 CLI
 接下来在安装 `ksbuilder` 前我们需要在本地安装 `helm`，安装教程请点击链接[安装 helm](https://helm.sh/docs/intro/install/).
 
 
-2. 安装 ks-builder 命令行工具
+2. 安装 ksbuilder 命令行工具
 
 * Linux 系统下安装：
 点击访问 `ksbuilder` 的 [github release 页面](https://github.com/kubesphere/ksbuilder/releases)，下载适配自己系统的最新的版本，解压安装。
@@ -55,7 +55,7 @@ The project has been created.
 
 工程创建成功后，如果我们要进行某个插件的开发还需要创建一个插件目录。比如我们在 `/root/lab/plugin-repo` 目录下创建一个 demo 插件目录，命令如下：
 ```shell 
-$ ks-builder create
+$ ksbuilder create
 Please input plugin name:  demo
 Input: demo
 Please input plugin description:  This is demo plugin
@@ -126,19 +126,19 @@ image:
 配置好后，以上面的 demo 插件为示例，在插件管理工程根目录 `/root/lab/plugin-repo/` 下执行如下命令：
 
 ```shell
-$ ks-builder install demo
+$ ksbuilder install demo
 ```
 即可将插件部署到集群中
 
 执行
 ```shell
-$ ks-builder upgrade demo
+$ ksbuilder upgrade demo
 ```
 即可将插件更新插件
 
 执行
 ```shell
-$ ks-builder uninstall demo
+$ ksbuilder uninstall demo
 ```
 即可将插件从集群中卸载
 
