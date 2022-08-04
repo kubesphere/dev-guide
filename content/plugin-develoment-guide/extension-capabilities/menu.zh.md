@@ -1,7 +1,7 @@
 ---
-title: 菜单设置
-weight: 403
-description: 插件的菜单挂载
+title: 菜单栏
+weight: 502
+description: 菜单栏拓展
 ---
 
 ## 菜单挂载点

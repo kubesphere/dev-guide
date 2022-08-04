@@ -1,10 +1,10 @@
 ---
-title: 部署 KubeSphere 4.0 开发环境
-weight: 400
-description: 部署 KubeSphere 4.0 开发环境
+title: 部署 KubeSphere 4.0
+weight: 401
+description: 部署 KubeSphere 4.0
 ---
 
-在开始之前，您需要准备一个 Kubernetes 集群并安装 ks-core。
+在开始之前，您需要准备一个 Kubernetes 集群并安装 ks-core 作为开发测试环境。
 
 
 {{% notice note %}}
@@ -28,11 +28,15 @@ curl -sfL https://get-kk.kubesphere.io | sh -
 
 2. 安装依赖
 
-[KubeKey 依赖 conntrack、socat](https://github.com/kubesphere/kubekey#requirements-and-recommendations)，我们需要提前进行安装，以 Ubuntu 为例：
+[KubeKey 依赖 conntrack、socat](https://github.com/kubesphere/kubekey#requirements-and-recommendations)，检出 KubeSphere 需要用到 git，我们需要提前进行安装，以 Ubuntu 为例：
 
 ```
-apt update && apt install conntrack socat -y
+apt update && apt install conntrack socat git -y
 ```
+
+{{% notice note %}}
+KubeKey 会自动安装后文中出现的 kubectl、helm 等工具，如果您使用其他方式安装 Kubernetes，请自行安装。 
+{{% /notice %}}
 
 3. 创建 Kubernetes 集群
 
@@ -40,7 +44,7 @@ apt update && apt install conntrack socat -y
 ./kk create cluster --with-kubernetes v1.23.7 -y
 ```
 
-4. 验证
+4. 验证 Kubenertes 部署是否完成
 
 看到以下日志表示 Kubernetes 安装成功
 
@@ -73,9 +77,11 @@ kube-system   kube-scheduler-allinone                    1/1     Running   0    
 kube-system   nodelocaldns-gxhtj                         1/1     Running   0          6m44s
 ```
 
+Kubenetes 命令行工具 kubectl 的使用，请参考 https://kubernetes.io/zh-cn/docs/reference/kubectl/
+
 ## 安装 ks-core
 
-目前 KubeSphere 4.0 还处于开发状态，您需要登录到您的虚拟机，通过以下步骤将 KubeSphere 代码克隆到本地，通过 Helm 安装 ks-core
+目前 KubeSphere 4.0 还处于开发状态，您需要登录到 Kuberntes 集群，通过以下步骤将 KubeSphere 代码克隆到本地，并通过 Helm 安装 ks-core。
 
 1. 克隆 KubeSphere 代码
 
@@ -110,8 +116,10 @@ helm upgrade --install ks-core ./ks-core/ --namespace kubesphere-system \
 ```
 
 {{% notice note %}}
-通过 --set 命令设置 ks-core 所用到的的 image repo 和 tag，您也可以[本地直接构建 ks-core 的镜像](../get-started/build-docker-image/)。
+通过 `--set` 命令设置 ks-core 所用到的的 image repo 和 tag，您也可以选择 [本地构建 ks-core 的镜像](../get-started/build-docker-image/)。
 {{% /notice %}}
+
+Helm 命令行工具的使用请参考 https://helm.sh/zh/docs/intro/using_helm/
 
 5. 验证安装
 
@@ -159,47 +167,3 @@ Redirecting to <a href="/login">/login</a>.* Closing connection 0
 ```
 
 至此，KubeSphere 4.0 的安装已经完成。
-
-## 准备开发环境
-
-1. 将访问 Kubernetes 集群所用到的 kubeconfig 文件复制到本地开发环境
-
-您需要将虚拟机中 `~/.kube/config` 文件复制到开发环境中 `~/.kube/config` 路径下。以 scp 命令为例：
-
-```
-scp root@172.31.73.180:~/.kube/config ~/.kube/config
-```
-
-2. 确保 kubeconfig 文件中 server 可以在开发环境中访问
-
-您可以借助 vpn，端口转发等方式将 kubeconfig 中 kube-apiserver 的地址暴露到本地开发环境
-
-如果 kubeconfig 中 server 地址为域名，您需要添加一条 hosts 将 kubeconfig 中的 server 域名指向您本地环境可访问的 kube-apiserver 的 ip 地址
-
-例：kubeconfig 中 server 地址为 https://lb.kubesphere.local:6443，本地环境中可以通过 172.31.73.180:6443 端口访问到 kube-apiserver，则需要添加以下 hosts
-
-```bash
-echo "172.31.73.180  lb.kubesphere.local" | sudo tee -a /etc/hosts
-```
-
-3. 开发环境中安装 kubectl 工具
-
-- [Install kubectl on Linux](/docs/tasks/tools/install-kubectl-linux)
-- [Install kubectl on macOS](/docs/tasks/tools/install-kubectl-macos)
-- [Install kubectl on Windows](/docs/tasks/tools/install-kubectl-windows)
-
-4. 验证
-
-在本地开发环境中执行以下命令确保 K8s 集群可以正常连接
-
-```
-kubectl get no
-```
-
-正常情况下该命令可以返回 K8s 集群中的节点列表
-
-```
-➜  ~ kubectl get no
-NAME       STATUS   ROLES                         AGE     VERSION
-allinone   Ready    control-plane,master,worker   4h38m   v1.23.7
-```

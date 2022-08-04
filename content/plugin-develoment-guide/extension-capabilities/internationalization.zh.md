@@ -1,7 +1,7 @@
 ---
 title: 国际化
-weight: 404
-description: 插件的国际化设置
+weight: 504
+description: 国际化多语言
 ---
 
 KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际化组件，插件开发者可以通过 i18next 的方式来在插件前端项目中实现国际化。

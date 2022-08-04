@@ -1,6 +1,6 @@
 ---
 title: 包含前后端的插件开发示例
-weight: 402
+weight: 901
 description: 包含前后端的插件开发示例
 ---
 
