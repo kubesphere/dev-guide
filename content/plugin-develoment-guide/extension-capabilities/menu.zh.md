@@ -1,7 +1,7 @@
 ---
 title: 菜单栏
 weight: 502
-description: 菜单栏拓展
+description: 拓展 KubeSphere 中的菜单栏与导航栏
 ---
 
 ## 菜单挂载点

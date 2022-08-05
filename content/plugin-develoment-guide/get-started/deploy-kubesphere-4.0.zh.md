@@ -4,13 +4,7 @@ weight: 401
 description: 部署 KubeSphere 4.0
 ---
 
-在开始之前，您需要准备一个 Kubernetes 集群并安装 ks-core 作为开发测试环境。
-
-
-{{% notice note %}}
-区别于 KubeSphere 3.x，这里 ks-core 特指 KubeSphere 4.0 版本的 Helm Chart。
-{{% /notice %}}
-
+在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 作为开发测试环境。
 
 ## 准备 Kubernetes 集群
 
@@ -89,7 +83,7 @@ Kubenetes 命令行工具 kubectl 的使用，请参考 https://kubernetes.io/zh
 git clone https://github.com/kubesphere/kubesphere.git
 ```
 
-2. 检出 feat-pluggable 分支
+2. 检出 `feature-pluggablee` 分支
 
 ```
 cd kubesphere
@@ -135,13 +129,13 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-通过以下命令检查 ks-core 是否正常 Running
+通过以下命令检查 ks-core 是否正常运行，所有 Pod 都应该是 Running 状态
 
 ```
 kubectl -n kubesphere-system get po
 ```
 
-通过虚拟机（本示例中虚拟机ip为172.31.73.180） 30880 端口可以访问到 KubeSphere 前端界面，通过 curl 或者浏览器进行验证
+通过虚拟机（本示例中虚拟机 IP 为172.31.73.180） 30880 端口可以访问到 KubeSphere 前端界面
 
 ```
 ➜  ~ curl 172.31.73.180:30880 -v
