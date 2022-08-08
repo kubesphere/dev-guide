@@ -1,7 +1,7 @@
 ---
 title: Contribute to KubeSphere
-weight: 300
-pre: "<b>2. </b>"
+weight: 400
+pre: "<b>4. </b>"
 ---
 
 {{%children description="true" %}}
