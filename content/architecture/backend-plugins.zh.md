@@ -1,7 +1,7 @@
 ---
-title: 后端可插拔架构
-weight: 214
-description: KubeSphere 后端可插拔架构介绍
+title: 后端插件机制
+weight: 7200
+description: KubeSphere 后端插件机制介绍
 ---
 
 后端的插件化主要包含 API 的动态注册、静态资源的代理、插件的生命周期管理三个部分。可以把 `ks-apiserver` 看作一个可拓展的 API 网关，提供统一的 API 认证鉴权、请求的代理转发能力。`ks-controller-manager` 则提供了插件的生命周期管理能力。

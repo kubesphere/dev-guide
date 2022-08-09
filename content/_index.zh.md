@@ -1,13 +1,15 @@
 ---
-title: "KubeSphere 开发指南"
+title: KubeSphere 插件开发指南
+weight: 200
 ---
 
-# KubeSphere 开发指南
+## 如何制作插件
 
-欢迎阅读 KubeSphere 开发指南。本指南是一个面向 KubeSphere 开发者的文档集合，可以帮助您理解 KubeSphere 的架构和功能实现，引导您向 KubeSphere 贡献代码，帮助您基于 KubeSphere 最新的插件模式来扩展功能或是在 KubeSphere 的基础之上开发新功能。
+KubeSphere 4.0 实现了灵活的[可插拔架构](../understand-kubesphere/pluggable/)，开发者可以在不修改 KubeSphere 核心代码的前提下通过插件无缝的拓展 KubeSphere 的功能。你可以通过下面的内容从零开始开发 KubeSphere 插件。
 
-您还可以从 [KubeSphere Community](https://github.com/kubesphere/community) 获取到其他形式的贡献指南。您有任何问题都可以到 Github 提交 issue，或是在 [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE) 联系我们。
+- **入门指南** 描述了以 Hello World 为例制作插件的基本概念
+- **示例与教程** 包含了一些简单易懂的插件开发示例与教程
+- **插件功能** 描述了 KubeSphere 中提供的扩展点
+- **测试与发布** 包含了插件的测试与发布相关的所有内容
+- **用户体验指南** 包含了创建与 KubeSphere 的原生界面和模式无缝集成的插件的最佳实践
 
-## 章节列表
-
-{{% children depth="999" showhidden="true" %}}

@@ -1,10 +1,7 @@
 ---
 title: "概述"
-weight: 10
-pre: "<b>1. </b>"
+weight: 1000
 ---
 
-## 开发 KubeSphere 的几种方式
-
-## 插件与应用的区别
+## 为什么 KubeSphere 4.0 引入插件机制
 
