@@ -1,6 +1,6 @@
 ---
 title: 可插拔
-weight: 220
+weight: 201
 description: KubeSphere 可插拔架构介绍
 ---
 

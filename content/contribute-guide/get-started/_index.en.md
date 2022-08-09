@@ -1,6 +1,6 @@
 ---
 title: Get Started
-weight: 100
+weight: 301
 pre: "<b>1. </b>"
 ---
 
