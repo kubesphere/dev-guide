@@ -1,7 +1,6 @@
 ---
-title: "参考"
+title: "参考资料"
 weight: 8000
-description: "参考"
 ---
 
 {{%children description="true" %}}
