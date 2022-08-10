@@ -25,6 +25,7 @@ home = [ "HTML", "RSS", "JSON"]
 
 [Languages]
 [Languages.en]
+contentDir = "content/en"
 title = "KubeSphere Development Guide"
 weight = 1
 languageName = "English"
@@ -32,6 +33,7 @@ landingPageURL = "/en"
 landingPageName = "<i class='fas fa-home'></i> Home"
 
 [Languages.zh]
+contentDir = "content/zh"
 title = "KubeSphere 开发指南"
 weight = 3
 languageName = "简体中文"
