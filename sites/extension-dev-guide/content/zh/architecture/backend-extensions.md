@@ -8,7 +8,7 @@ description: KubeSphere 后端扩展机制介绍
 
 KubeSphere 构建在 Kubernetes 之上，借助 [Kubernetes 提供的扩展能力](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)实现了基本的数据存储、缓存同步等功能。
 
-![backend-extension-arch](/images/pluggable-arch/backend-arch.svg)
+![backend-extension-arch](/extension-dev-guide/images/pluggable-arch/backend-arch.svg)
 
 ## 后端扩展机制原理
 
