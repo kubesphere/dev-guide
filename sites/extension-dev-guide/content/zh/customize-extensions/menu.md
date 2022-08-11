@@ -5,7 +5,7 @@ description: 拓展 KubeSphere 中的菜单栏与导航栏
 ---
 
 ## 菜单挂载点
-插件的入口菜单需要挂载在界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
+扩展组件的入口菜单需要挂载在界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
 
 1. 顶部导航栏
 ![](/images/pluggable-arch/menu1.png)
@@ -19,7 +19,7 @@ description: 拓展 KubeSphere 中的菜单栏与导航栏
    ![](/images/pluggable-arch/menu3.png)
 
 ## 挂载设置
-插件的入口菜单放置在何处，是在插件的 entry file 里设置的，如下面代码
+扩展组件的入口菜单放置在何处，是在扩展组件的 entry file 里设置的，如下面代码
 
 ```javascript
 import routes from './routes';                   // 导入路由
@@ -41,7 +41,7 @@ const pluginConfig = {
   menus: [menu],
   locales,
 };
-globals.context.registerPlugin(pluginConfig);    // 通过全局对象注册插件
+globals.context.registerPlugin(pluginConfig);    // 通过全局对象注册扩展组件
 ```
 
 通过 `menu` 的 parent 字段设置挂载点：
@@ -111,6 +111,6 @@ globals.context.registerPlugin(pluginConfig);    // 通过全局对象注册插�
           }
  ...
 ```
-在 `congfig.yaml` 里，集群管理的菜单配置如上代码所示。假如我们要把插件的入口放到集群管理侧边栏，我们可以把 parent 值设置成 `cluster`。
+在 `congfig.yaml` 里，集群管理的菜单配置如上代码所示。假如我们要把扩展组件的入口放到集群管理侧边栏，我们可以把 parent 值设置成 `cluster`。
 
-菜单的挂载也支持多级。比如我们想把插件的入口点放到"集群管理-节点管理""下。我们可以把 parent 值设置成 `cluster.nodes`
+菜单的挂载也支持多级。比如我们想把扩展组件的入口点放到"集群管理-节点管理""下。我们可以把 parent 值设置成 `cluster.nodes`

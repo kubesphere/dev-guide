@@ -43,13 +43,13 @@ NAME       STATUS   ROLES                         AGE     VERSION
 allinone   Ready    control-plane,master,worker   4h38m   v1.23.7
 ```
 
-## 安装 KubeSphere 插件开发工具与依赖
+## 安装 KubeSphere 扩展组件开发工具与依赖
 
-KubeSphere 插件的开发依赖 [ksbuilder](https://github.com/kubesphere/ksbuilder)、[helm](https://github.com/helm/helm) 命令行工具，您可以参考以下步骤进行安装。
+KubeSphere 扩展组件的开发依赖 [ksbuilder](https://github.com/kubesphere/ksbuilder)、[helm](https://github.com/helm/helm) 命令行工具，您可以参考以下步骤进行安装。
 
 ### 安装 ksbuilder 命令行工具
 
-ksbuidler 是一个命令行工具，可以帮助我们快速搭建 KubeSphere 插件开发脚手架，帮助我们打包、发布插件。
+ksbuidler 是一个命令行工具，可以帮助我们快速搭建 KubeSphere 扩展组件开发脚手架，帮助我们打包、发布扩展组件。
 
 * Linux 系统下安装：
 
@@ -79,7 +79,7 @@ $ ksbuilder version
 
 ### 安装 Helm
 
-插件的打包、发布过程依赖 helm 进行编排，请参考 [Helm 官方文档](https://helm.sh/docs/intro/install/)进行安装。
+扩展组件的打包、发布过程依赖 helm 进行编排，请参考 [Helm 官方文档](https://helm.sh/docs/intro/install/)进行安装。
 
 在完成安装后执行以下命令检查安装是否成功：
 

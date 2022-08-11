@@ -1,12 +1,12 @@
 ---
-title: 创建第一个 KubeSphere 插件
+title: 创建第一个 KubeSphere 扩展组件
 weight: 403
-description: 创建第一个 KubeSphere 插件
+description: 创建第一个 KubeSphere 扩展组件
 ---
 
-参照前面的章节准备好 KubeSphere 4.0 环境与本地开发环境之后就可以开始插件的开发了，我们从一个简单的 demo 项目开始。
+参照前面的章节准备好 KubeSphere 4.0 环境与本地开发环境之后就可以开始扩展组件的开发了，我们从一个简单的 demo 项目开始。
 
-## 初始化插件项目
+## 初始化扩展组件项目
 
 
 1. 创建项目脚手架
@@ -50,7 +50,7 @@ And
 ✨  Done in 117.41s.
 ```
 
-2. 创建 demo 插件
+2. 创建 demo 扩展组件
 
 
 ```shell
@@ -66,17 +66,17 @@ $ ksc create:plugin
 ✨  Done in 10.90s.
 ```
 回车执行命令会进入交互式命令行界面。按照提示输入响应信息。
-命令执行成功后，我们在 plugins 目录可以看到插件的框架代码已经生成。目录结构如图：
+命令执行成功后，我们在 plugins 目录可以看到扩展组件的框架代码已经生成。目录结构如图：
 
 ![](/images/pluggable-arch/plugin-directory.png)
 
 
-## 插件的运行与调试
+## 扩展组件的运行与调试
 
 1. 将 ks-apiserver 代理至本地
 
 
-ks-core 与插件开发过程依赖 ks-apiserver 提供的 API，需要通过 kubectl port-forward 将 ks-apiserver 这个 service 代理到本地开发环境
+ks-core 与扩展组件开发过程依赖 ks-apiserver 提供的 API，需要通过 kubectl port-forward 将 ks-apiserver 这个 service 代理到本地开发环境
 
 ```
 $ kubectl -n kubesphere-system port-forward service/ks-apiserver 8080:80
@@ -88,7 +88,7 @@ Forwarding from [::1]:8080 -> 9090
 
 2. 配置启动参数
 
-编辑编辑插件目录下配置文件 `configs/local_config.yaml`，修改 apiServer 为 kubectl 的代理地址：
+编辑编辑扩展组件目录下配置文件 `configs/local_config.yaml`，修改 apiServer 为 kubectl 的代理地址：
 
 ```shell
 server:
@@ -126,6 +126,6 @@ No issues found.
 ```
 
 
-到此为止，您的第一个 KubeSphere 插件就已经成功运行，您可以在顶部导航栏看到该插件的入口。
+到此为止，您的第一个 KubeSphere 扩展组件就已经成功运行，您可以在顶部导航栏看到该扩展组件的入口。
 
 ![demo-plugin-dashboard.png](/images/pluggable-arch/demo-plugin-dashboard.png)

@@ -1,18 +1,18 @@
 ---
-title: 后端插件机制
+title: 后端扩展机制
 weight: 7200
-description: KubeSphere 后端插件机制介绍
+description: KubeSphere 后端扩展机制介绍
 ---
 
-后端的插件化主要包含 API 的动态注册、静态资源的代理、插件的生命周期管理三个部分。可以把 `ks-apiserver` 看作一个可拓展的 API 网关，提供统一的 API 认证鉴权、请求的代理转发能力。`ks-controller-manager` 则提供了插件的生命周期管理能力。
+后端扩展机制主要包含 API 的动态注册、静态资源的代理、扩展组件的生命周期管理三个部分。可以把 `ks-apiserver` 看作一个可拓展的 API 网关，提供统一的 API 认证鉴权、请求的代理转发能力。`ks-controller-manager` 则提供了扩展组件的生命周期管理能力。
 
-KubeSphere 构建在 Kubernetes 之上，借助 [Kubernetes 提供的拓展能力](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)实现了基本的数据存储、缓存同步等功能。
+KubeSphere 构建在 Kubernetes 之上，借助 [Kubernetes 提供的扩展能力](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)实现了基本的数据存储、缓存同步等功能。
 
-![backend](/images/pluggable-arch/backend-arch.svg)
+![backend-extension-arch](/images/pluggable-arch/backend-arch.svg)
 
-## 插件模型
+## 后端扩展机制原理
 
-我们定义了以下 CRD 用来对插件模型进行抽象：
+用户可以通过定义了以下 CRD 来将后端组件与 KubeSphere 核心组件，进而扩展 KubeSphere 的功能：
 
 ### APIService
 
@@ -80,7 +80,7 @@ spec:
 | 字段 | 描述 |
 | --- | ---|
 | `spec.raw`、`spec.rawFrom.configMapKeyRef`、`spec.rawFrom.secretKeyRef` | 为了便于开发，体积较小的 js 文件可以直接在 CR 中进行定义或者直接嵌入到 ConfigMap 或 Secret 中 |
-| `spec.rawFrom.url` | 体积较大的 js 文件则需要通过额外的后端服务来提供，插件被启用之后，ks-console 会自动注入该 bundle 文件 |
+| `spec.rawFrom.url` | 体积较大的 js 文件则需要通过额外的后端服务来提供，扩展组件被启用之后，ks-console 会自动注入该 bundle 文件 |
 
 
 ### ReverseProxy
@@ -124,11 +124,11 @@ spec:
 | `spec.header` | 请求头的注入，这在后端服务需要额外的认证信息时非常有用 |
 
 
-## 插件开发与打包
+## 扩展组件的开发与打包
 
-在开发过程中，借助上述 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](../../plugin-develoment-guide/deploy-kubesphere-4.0/)中灵活的注册 API、静态资源代理，并通过 JSBundle 注入新的页面或导航菜单。在此基础之上我们可以使用 Docker、与 Helm 完成插件的编排打包。
+在开发过程中，借助上述 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](../../plugin-develoment-guide/deploy-kubesphere-4.0/)中灵活的注册 API、静态资源代理，并通过 JSBundle 注入新的页面或导航菜单。在此基础之上我们可以使用 Docker、与 Helm 完成扩展组件的编排打包。
 
-通过开发者工具我们可以[初始化一个插件项目](../../plugin-develoment-guide/init-a-plugin-project/)，插件项目目录结构示例：
+通过开发者工具我们可以[初始化一个扩展组件项目](../../plugin-develoment-guide/init-a-plugin-project/)，扩展组件项目目录结构示例：
 
 ```bash
 devops/
@@ -144,7 +144,7 @@ devops/
     ├── extensions.yaml     # 定义 APIService、JSBundle、ReverseProxy
     ├── roletemplates.yaml  # 通过 role template 动态注册权限控制项
     └── tests/
-logging/  # 可以同时打包发布多个插件
+logging/  # 可以同时打包发布多个扩展组件
 ├── .helmignore  
 ├── Chart.yaml   
 ├── LICENSE     
@@ -160,7 +160,7 @@ logging/  # 可以同时打包发布多个插件
 Dockerfile # 将 charts 打包到 docker image 进行发布
 ```
 
-其中 Chart.yaml 中包含了插件元信息，字段示例：
+其中 Chart.yaml 中包含了扩展组件元信息，字段示例：
 
 ```yaml
 apiVersion: v2
@@ -194,7 +194,7 @@ annotations:
   extensions.kubesphere.io/foo: bar # 额外的注释信息
 ```
 
-插件根目录中 `Dockerfile` 的作用是通过 Docker 将项目下多个插件 Helm Chart 打包到 Docker Image 中进行分发
+扩展组件根目录中 `Dockerfile` 的作用是通过 Docker 将项目下多个扩展组件 Helm Chart 打包到 Docker Image 中进行分发
 
 ```docker
 FROM baseimage # 由 KubeSphere 提供的 baseimage，包含 chartmuseum 等依赖工具
@@ -204,14 +204,14 @@ RUN helm index .
 CMD ["serve"] # Helm Repo Serve，提供静态资源、Helm Repo 相关的 API
 ```
 
-## 插件分发
+## 扩展组件的分发
 
-通过 Docker Image 将编排为 Helm Chart 的一组插件进行打包之后，可以借助 Docker Image 来分发我们开发的插件。为了便于插件的分发管理，KubeSphere 中包含了以下资源定义：
+通过 Docker Image 将编排为 Helm Chart 的一组扩展组件进行打包之后，可以借助 Docker Image 来分发我们开发的扩展组件。为了便于扩展组件的分发管理，KubeSphere 中包含了以下资源定义：
 
 
 ### Category
 
-Category 声明了需要渲染到前端页面的插件分类信息
+Category 声明了需要渲染到前端页面的扩展组件分类信息
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -226,7 +226,7 @@ spec:
 
 ### Repository
 
-Repository 用于声明需要加载到 KubeSphere 中包含插件包的 Docker Image，称之为插件仓库。
+Repository 用于声明需要加载到 KubeSphere 中包含扩展组件包的 Docker Image，称之为扩展组件仓库。
 
 示例与字段说明：
 
@@ -244,16 +244,16 @@ spec:
       interval: 10m 
 ```
 
-ks-controller-manager 会将插件仓库中声明的 Docker Image 作为工作负载在 K8s 集群中部署，从部署的工作负载中可以通过预设的 API 获取到打包为 Helm Chart 插件包中的元数据，插件仓库会根据预设策略定时更新（重新拉取镜像，同步插件信息）。
+ks-controller-manager 会将扩展组件仓库中声明的 Docker Image 作为工作负载在 K8s 集群中部署，从部署的工作负载中可以通过预设的 API 获取到打包为 Helm Chart 扩展组件包中的元数据，扩展组件仓库会根据预设策略定时更新（重新拉取镜像，同步扩展组件信息）。
 
 
-## 插件的生命周期管理
+## 扩展组件的生命周期管理
 
-当我们通过 Repository 声明了需要同步到 KubeSphere 中的插件仓库之后，ks-controller-manager 会从预设 Docker Image 中获取插件包(Chart)的元数据，经过数据校验、转换，同时写入 Plugin、PluginVersion 对象，用以实现插件发现、版本控制相关的功能。具体的示例如下：
+当我们通过 Repository 声明了需要同步到 KubeSphere 中的扩展组件仓库之后，ks-controller-manager 会从预设 Docker Image 中获取扩展组件包(Chart)的元数据，经过数据校验、转换，同时写入 Plugin、PluginVersion 对象，用以实现扩展组件发现、版本控制相关的功能。具体的示例如下：
 
 ###  Plugin
 
-Plugin CR 声明了从插件包(Chart)中解析出的基础元数据信息，Chart 的 name 会作为 Plugin 的 ID，在 KubeSphere 中 Plugin ID 全局唯一，且同一 Plugin ID 仅允许被相同的 Repository 所管理。
+Plugin CR 声明了从扩展组件包(Chart)中解析出的基础元数据信息，Chart 的 name 会作为 Plugin 的 ID，在 KubeSphere 中 Plugin ID 全局唯一，且同一 Plugin ID 仅允许被相同的 Repository 所管理。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -283,7 +283,7 @@ status:
 
 ### PluginVersion
 
-PluginVersion CR 中包含了详细的不同版本的插件包的元数据信息
+PluginVersion CR 中包含了详细的不同版本的扩展组件包的元数据信息
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -307,7 +307,7 @@ spec:
 
 ### Subscription
 
-通过订阅的方式对插件的声明周期进行管理，通过 Subscription CR 来控制插件的安装卸载，启用、停用、配置变更、状态同步、版本升级。
+通过订阅的方式对扩展组件的声明周期进行管理，通过 Subscription CR 来控制扩展组件的安装卸载，启用、停用、配置变更、状态同步、版本升级。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -321,6 +321,6 @@ spec:
     version: 0.10.0  # 通过更新版本触发 upgrade, rollback
   targetNamespace: kubesphere-devops-system
   config:
-    foo: bar # 插件的配置信息
+    foo: bar # 扩展组件的配置信息
 ```
 
