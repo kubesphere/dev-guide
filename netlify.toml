@@ -1,14 +1,14 @@
 [build]
 publish = "public"
-command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL/dev-guide --config=dev-guide.toml ; hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL/extension-dev-guide --config=extension-dev-guide.toml"
+command = "URL=$DEPLOY_PRIME_URL make build"
 
 [context.production]
-command = "hugo --gc --minify --buildFuture -b $URL/dev-guide --config=dev-guide.toml ; hugo --gc --minify --buildFuture -b $URL/extension-dev-guide --config=extension-dev-guide.toml"
+command = "make build"
   [context.production.environment]
   HUGO_VERSION = "0.97.2"
 
 [context.deploy-preview]
-command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL/dev-guide --config=dev-guide.toml ; hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL/extension-dev-guide --config=extension-dev-guide.toml"
+command = "URL=$DEPLOY_PRIME_URL make build"
   [context.deploy-preview.environment]
   HUGO_VERSION = "0.97.2"
   HUGO_ENABLEGITINFO = "true"

@@ -8,15 +8,15 @@ description: 拓展 KubeSphere 中的菜单栏与导航栏
 扩展组件的入口菜单需要挂载在界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
 
 1. 顶部导航栏
-![](/extension-dev-guide/images/pluggable-arch/menu1.png)
+![](images/pluggable-arch/menu1.png)
 
 2. 平台管理
-![](/extension-dev-guide/images/pluggable-arch/menu2.png)
+![](images/pluggable-arch/menu2.png)
 
 3. 左侧菜单
-   ![](/extension-dev-guide/images/pluggable-arch/menu4.png)
+   ![](images/pluggable-arch/menu4.png)
 4. 工具箱
-   ![](/extension-dev-guide/images/pluggable-arch/menu3.png)
+   ![](images/pluggable-arch/menu3.png)
 
 ## 挂载设置
 扩展组件的入口菜单放置在何处，是在扩展组件的 entry file 里设置的，如下面代码
