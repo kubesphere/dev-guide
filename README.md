@@ -36,7 +36,15 @@ Note: If you install Hugo on Windows, you need to add environment variables for 
 After you install Hugo, run the following command:
 
 ```bash
-hugo server
+# Launch KubeSphere extension development guide
+hugo server --config extension-dev-guide.toml
+```
+
+or
+
+```bash
+# Launch KubeSphere development guide
+hugo server --config dev-guide.toml
 ```
 
 Now you can preview the website in your browser at `http://localhost:1313/`.
@@ -51,7 +59,7 @@ git commit -s -m "xxx"
 
 ## Contributors
 
-Thanks goes to these wonderful contributors, they made our community and product grow fast.
+Thanks to all the wonderful contributors who continue to evolve KubeSphere within a great community.
 
 <a href="https://github.com/kubesphere/dev-guide/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=kubesphere/dev-guide" />

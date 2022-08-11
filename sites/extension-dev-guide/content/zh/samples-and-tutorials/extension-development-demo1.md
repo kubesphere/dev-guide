@@ -1,10 +1,10 @@
 ---
-title: 从零开始开发 KubeSphere 插件
+title: 从零开始开发 KubeSphere 扩展组件
 weight: 901
-description: 一个包含完整的前后端开发过程的插件示例
+description: 一个包含完整的前后端开发过程的扩展组件示例
 ---
 
-在上个章节中我们创建了插件的管理工程，本章节我们以一个典型的包含前后端的 crud 插件的例子开始讲解具体的开发过程。
+在上个章节中我们创建了扩展组件的管理工程，本章节我们以一个典型的包含前后端的 crud 扩展组件的例子开始讲解具体的开发过程。
 
 ## 需求、设计
 假设我们想在 ks 里增加一个员工管理模块。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
@@ -18,9 +18,9 @@ description: 一个包含完整的前后端开发过程的插件示例
 3. 员工详情页
    ![](/images/pluggable-arch/995810AD-639C-4F33-8B8E-9D347225DAB9.png)
 
-## 创建插件管理目录
+## 创建扩展组件管理目录
 
-如前一章节所讲，我们首先执行以下命令把插件的管理目录创建出来，在 `/root/lab/plugin-repo/` 中执行：
+如前一章节所讲，我们首先执行以下命令把扩展组件的管理目录创建出来，在 `/root/lab/plugin-repo/` 中执行：
 
 ```shell
 $ ksbuilder create
@@ -76,7 +76,7 @@ $ docker build --platform linux/amd64 -t kubesphere/employee-api .
 $ docker push kubesphere/employee-api:latest
 ```
 
-执行完成以上命令后，我们需要将后端代码进行部署，以给前端开发提供接口调试。我们回到上面讲到的插件的管理工程目录中。编辑 `values.yaml`
+执行完成以上命令后，我们需要将后端代码进行部署，以给前端开发提供接口调试。我们回到上面讲到的扩展组件的管理工程目录中。编辑 `values.yaml`
 
 ```yaml
 frontend:
@@ -92,14 +92,14 @@ backend:
     tag: latest
 ```
 
-如上，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到插件管理工程根目录执行：
+如上，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到扩展组件管理工程根目录执行：
 
 ```shell
 # 在 /root/lab/plugin-repo/ 中执行
 ksbuilder install employee
 ```
 
-这样插件的后端就部署到了 k8s 集群中并且注册到 ks 的插件体系里了。可以通过 curl 测试接口是否已经被 ks-apiserver 接管。
+这样扩展组件的后端就部署到了 k8s 集群中并且注册到 ks 的扩展组件体系里了。可以通过 curl 测试接口是否已经被 ks-apiserver 接管。
 
 ## 前端开发
 
@@ -162,7 +162,7 @@ server:
     wsUrl: ws://api.kubesphere.io
 ```
 
-2. 新建插件目录
+2. 新建扩展组件目录
 
 在脚手架目录下执行：
 
@@ -170,7 +170,7 @@ server:
 yarn create-plugin
 ```
 回车执行命令会进入交互式命令行界面。按照提示输入响应信息。
-命令执行成功后，我们在 plugins 目录可以看到插件的框架代码已经生成。目录结构如图：
+命令执行成功后，我们在 plugins 目录可以看到扩展组件的框架代码已经生成。目录结构如图：
 
 ![](/images/pluggable-arch/plugin-directory.png)
 
@@ -187,12 +187,12 @@ yarn dev
 ```
 yarn build:plugin employee                                              # 编译打包前端项目
 
-cd /path/to                                                             # 进入插件目录
+cd /path/to                                                             # 进入扩展组件目录
 
 docker build --platform linux/amd64  -t kubesphere/employee-frontend .   # 打包成 docker 镜像
 ```
 
-将镜像 push 到镜像仓库后，我们再回到插件管理工程的目录中，编辑 `values.yaml`，配置前端镜像
+将镜像 push 到镜像仓库后，我们再回到扩展组件管理工程的目录中，编辑 `values.yaml`，配置前端镜像
 
 ```yaml
 frontend:
@@ -214,11 +214,11 @@ backend:
 ksbuilder upgrade employee
 ```
 
-命令执行成功后，我们在前端工程中执行下面命令。在本地以 production 模式启动前端，查看插件是否安装成功。
+命令执行成功后，我们在前端工程中执行下面命令。在本地以 production 模式启动前端，查看扩展组件是否安装成功。
 
 ```
 yarn start
 ```
 
-这样，插件在本地的开发调试就完成了。如上面所述我们可以看出，插件的开发还是大家熟悉的典型前后端分离的开发方式，通过脚手架、cli 我们尽量简化了插件的部署、发布流程。
+这样，扩展组件在本地的开发调试就完成了。如上面所述我们可以看出，扩展组件的开发还是大家熟悉的典型前后端分离的开发方式，通过脚手架、cli 我们尽量简化了扩展组件的部署、发布流程。
 使开发者可以专注在业务代码的实现上。
