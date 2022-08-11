@@ -1,6 +1,6 @@
 ---
 title: 提交 issue
-weight: 303
+weight: 302
 description: 在 Github 提交 issue
 ---
 

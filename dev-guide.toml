@@ -1,7 +1,8 @@
 baseURL = "/"
+publishdir = "public/dev-guide"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh"
-
+staticDir = "static/dev-guide"
 title = "KubeSphere Development Guide"
 theme = "hugo-theme-learn"
 themesdir = "themes"
@@ -9,7 +10,6 @@ metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 
 [params]
-  editURL = "https://github.com/kubesphere/dev-guide/edit/master/content/"
   description = "A set of development guidelines for KubeSphere developers."
   author = "KubeSphere"
   showVisitedLinks = true
@@ -25,7 +25,8 @@ home = [ "HTML", "RSS", "JSON"]
 
 [Languages]
 [Languages.en]
-contentDir = "content/en"
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/en/"
+contentDir = "sites/dev-guide/content/en"
 title = "KubeSphere Development Guide"
 weight = 1
 languageName = "English"
@@ -33,7 +34,8 @@ landingPageURL = "/en"
 landingPageName = "<i class='fas fa-home'></i> Home"
 
 [Languages.zh]
-contentDir = "content/zh"
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/zh/"
+contentDir = "sites/dev-guide/content/zh"
 title = "KubeSphere 开发指南"
 weight = 3
 languageName = "简体中文"
