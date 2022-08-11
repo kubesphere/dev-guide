@@ -68,7 +68,7 @@ $ ksc create:plugin
 回车执行命令会进入交互式命令行界面。按照提示输入响应信息。
 命令执行成功后，我们在 plugins 目录可以看到扩展组件的框架代码已经生成。目录结构如图：
 
-![](/extension-dev-guide/images/pluggable-arch/plugin-directory.png)
+![](images/pluggable-arch/plugin-directory.png)
 
 
 ## 扩展组件的运行与调试
@@ -128,4 +128,4 @@ No issues found.
 
 到此为止，您的第一个 KubeSphere 扩展组件就已经成功运行，您可以在顶部导航栏看到该扩展组件的入口。
 
-![demo-plugin-dashboard.png](/extension-dev-guide/images/pluggable-arch/demo-plugin-dashboard.png)
+![demo-plugin-dashboard.png](images/pluggable-arch/demo-plugin-dashboard.png)

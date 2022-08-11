@@ -30,13 +30,13 @@ telepresence intercept ks-apiserver -n kubesphere-system --port 9090:9090 --env-
 
 添加运行环境
 
-![debug1](/dev-guide/images/get-started/debug1.png)
+![debug1](images/get-started/debug1.png)
 
-![debug2](/dev-guide/images/get-started/debug2.png)
+![debug2](images/get-started/debug2.png)
 
 确认WSL为运行环境
 
-![debug3](/dev-guide/images/get-started/debug3.png)
+![debug3](images/get-started/debug3.png)
 
 ### ks-apiserver
 

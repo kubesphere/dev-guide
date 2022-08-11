@@ -10,13 +10,13 @@ description: 一个包含完整的前后端开发过程的扩展组件示例
 假设我们想在 ks 里增加一个员工管理模块。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
 1. 员工管理列表页
-   ![](/extension-dev-guide/images/pluggable-arch/794091EB-6190-4FF7-9533-3FE81EC4877A.png)
+   ![](images/pluggable-arch/794091EB-6190-4FF7-9533-3FE81EC4877A.png)
 
 2. 新增员工
-   ![](/extension-dev-guide/images/pluggable-arch/6667BBCE-0400-4562-BCB1-EC12A2D0BEB7.png)
+   ![](images/pluggable-arch/6667BBCE-0400-4562-BCB1-EC12A2D0BEB7.png)
 
 3. 员工详情页
-   ![](/extension-dev-guide/images/pluggable-arch/995810AD-639C-4F33-8B8E-9D347225DAB9.png)
+   ![](images/pluggable-arch/995810AD-639C-4F33-8B8E-9D347225DAB9.png)
 
 ## 创建扩展组件管理目录
 
@@ -172,7 +172,7 @@ yarn create-plugin
 回车执行命令会进入交互式命令行界面。按照提示输入响应信息。
 命令执行成功后，我们在 plugins 目录可以看到扩展组件的框架代码已经生成。目录结构如图：
 
-![](/extension-dev-guide/images/pluggable-arch/plugin-directory.png)
+![](images/pluggable-arch/plugin-directory.png)
 
 如目录所示，前端的开发与普通的 react app 开发基本无异。执行下面命令开启前端开发环境
 
