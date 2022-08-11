@@ -1,5 +1,5 @@
 ---
-title: 创建第一个 KubeSphere 扩展组件
+title: Hello World 扩展组件
 weight: 403
 description: 创建第一个 KubeSphere 扩展组件
 ---
@@ -50,7 +50,7 @@ And
 ✨  Done in 117.41s.
 ```
 
-2. 创建 demo 扩展组件
+2. 创建 Hello World 扩展组件
 
 
 ```shell
@@ -58,8 +58,8 @@ $ yarn create:plugin
 yarn run v1.22.10
 $ ksc create:plugin
 ? Plugin Name demo
-? Display Name demo
-? Description demo
+? Display Name Hello World!
+? Description Hello World
 ? Author demo
 ? Language JavaScript
 ? Ensure to create plugin: [demo] ? Yes
