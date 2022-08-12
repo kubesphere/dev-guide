@@ -110,7 +110,7 @@ helm upgrade --install ks-core ./ks-core/ --namespace kubesphere-system \
 ```
 
 {{% notice note %}}
-通过 `--set` 命令设置 ks-core 所用到的的 image repo 和 tag，您也可以选择 [本地构建 ks-core 的镜像](../get-started/build-docker-image/)。
+通过 `--set` 命令设置 ks-core 所用到的的 image repo 和 tag，您也可以选择 [本地构建 ks-core 的镜像](https://kubesphere-dev-guide.netlify.app/dev-guide/zh/get-started/build-docker-image/)。
 {{% /notice %}}
 
 Helm 命令行工具的使用请参考 https://helm.sh/zh/docs/intro/using_helm/
