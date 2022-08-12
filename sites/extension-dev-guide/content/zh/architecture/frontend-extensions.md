@@ -7,7 +7,7 @@ description: KubeSphere 前端扩展机制介绍
 在 KubeSphere 4.0 中为实现“可插拔”的特性，我们设计了“微内核+扩展组件”的架构。其中“内核”部分仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件中。系统可在运行时动态的安装、卸载、启动、停止扩展组件。架构总体设计如下图：
 
 
-![frontend-extension-arch](images/pluggable-arch/frontend-framework.svg)
+![frontend-extension-arch](images/pluggable-arch/frontend-arch.png)
 
 ## 设计思想
 谈到解构“巨石应用”、谈到动态扩展，我们必然会想到近年来流行的“微前端”方案。知名的“微前端”实现比如 “qiankun”、“micro-app”为了解决子应用技术栈无关、样式侵入问题在 JS沙箱、样式隔离上做了很多工作。而“隔离”往往是为了解决某些技术债问题或者团队配合问题而做的妥协。一套前端系统里如果融合了 react、Vue、angular 那么 ui 体验的一致性则会很难保证，前端 bundle 的大小也会大大提高。而且各个子应用隔离在自己独立的运行时，与主应用融合度也不够紧密。
@@ -42,8 +42,39 @@ description: KubeSphere 前端扩展机制介绍
 
 ## 扩展组件
 
-前端扩展组件统一使用 `create-ks-app` 脚手架工具初始化。初始化后目录如下图
-![image alt](images/pluggable-arch/plugin-directory.png)
+前端扩展组件统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
+```
+.
+├── babel.config.js
+├── configs
+│   ├── config.yaml
+│   ├── console.config.js
+│   └── local_config.yaml
+├── extensions
+│   ├── entry.ts
+│   └── hello-world
+│       ├── Dockerfile
+│       ├── README.md
+│       ├── package.json
+│       └── src
+│           ├── App.jsx
+│           ├── index.js
+│           ├── locales
+│           │   ├── en
+│           │   │   ├── base.json
+│           │   │   └── index.js
+│           │   ├── index.js
+│           │   └── zh
+│           │       ├── base.json
+│           │       └── index.js
+│           └── routes
+│               └── index.js
+├── node_modules
+├── package.json
+├── tsconfig.base.json
+├── tsconfig.json
+└── yarn.lock
+```
 
 可以看出这和普通的 react app 基本一样。不同的点在于对 entry 的定义。示例如下：
 ```javascript=
@@ -51,28 +82,29 @@ import routes from './routes';                   // 导入路由
 import locales from './locales';                 // 导入国际化文件
 
 const menu = {                                   // 定义菜单 
-  parent: 'global',                              // 菜单父级
-  name: 'employee',                              // 菜单 name 标识 
-  link: '/employee/list',                        // 入口 url    
-  title: 'EMPLOYEE_MANAGEMENT',                  // 菜单名称  
+  parent: 'topbar',                              // 菜单父级
+  name: 'hello-world',                           // 菜单 name 标识 
+  link: '/hello-world',                          // 入口 url    
+  title: 'Hello World',                          // 菜单名称  
   icon: 'cluster',                               // 菜单 icon
   order: 0,                                      // 菜单排序  
-  desc: 'Employee management system',            // 菜单描述
+  desc: 'This is hello-world extension',         // 菜单描述
   skipAuth: true,                                // 是否忽略权限检查
 };
 
-const pluginConfig = {
+const extensionConfig = {
   routes,
   menus: [menu],
   locales,
 };
-globals.context.registerPlugin(pluginConfig);    // 通过全局对象注册扩展组件
+
+globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
 ```
 如上，扩展组件使用脚手架初始化后，定义入口文件。业务代码开发模式和普通前端项目无异。开发完成后打包发布。扩展组件有自己独立的 repo，代码层面对内核部分没有任何侵入。
 
 ## 开发赋能
 为方便开发者更高效的开发扩展组件，同时也为了系统体验一致性的约束及运行效率的考虑，我们提供了一些通用的组件、工具等库。
 1. 通用组件库 [KubeDesign](https://github.com/kubesphere/kube-design)
-2. 轻量的状态管理库 @ks-console/stook
-3. 通用 util 库 @ks-console/shared
-4. 前端脚手架工具 [create-ks-app](https://github.com/chenz24/create-ks-app)
+2. 前端脚手架工具 [create-ks-ext](https://github.com/kubesphere/create-ks-ext)
+3. 轻量的状态管理库 @ks-console/stook
+4. 通用 util 库 @ks-console/shared
