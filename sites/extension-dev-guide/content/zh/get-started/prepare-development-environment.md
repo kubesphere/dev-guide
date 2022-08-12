@@ -90,10 +90,12 @@ version.BuildInfo{Version:"v3.6.3", GitCommit:"d506314abfb5d21419df8c7e7e6801237
 
 ### 安装 Node.js 与 yarn
 
+扩展组件前端开发依赖 `Node.js` 和 `yarn`，请参考下面文档进行安装。
+
 - 安装 Node.js [Active LTS Release](https://nodejs.org/en/about/releases/)
   方法:
    - 使用 `nvm` (推荐)
       - [安装 nvm](https://github.com/nvm-sh/nvm#install--update-script)
       - [使用 nvm 安装和切换 Node 版本](https://nodejs.org/en/download/package-manager/#nvm)
    - [安装包安装](https://nodejs.org/en/download/)
-- `yarn` [安装教程](https://classic.yarnpkg.com/en/docs/install)
+- `yarn` [安装教程](https://yarnpkg.com/getting-started/install)
