@@ -12,7 +12,7 @@ Contributions of any kind are welcome!
 
 1. Fork the repository.
 
-2. Run the following commands to clone your fork and enter into it. Make sure you replace `<Your GitHub ID>` with your GitHub ID.
+2. Run the following commands to clone your fork. Make sure you replace `<Your GitHub ID>` with your GitHub ID.
 
    ```bash
    git clone https://github.com/<Your GitHub ID>/dev-guide.git
@@ -21,7 +21,7 @@ Contributions of any kind are welcome!
 
 ### Build and preview the website
 
-You have to install [Hugo](https://gohugo.io/) to build the website in order to **preview it as static content**.
+You'll need to install [Hugo](https://gohugo.io/) to build the website before you can **preview it**.
 
 #### Install Hugo extended
 
