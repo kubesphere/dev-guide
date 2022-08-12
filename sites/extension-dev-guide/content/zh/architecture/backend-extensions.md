@@ -42,7 +42,7 @@ spec:
 
 | 字段 | 描述 |
 | --- | ---|
-| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](../../understand-kubesphere/api-concepts/) |
+| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](zh/understand-kubesphere/api-concepts/) |
 | `spec.nonResourceURLs` | 除了资源型的 API，也可以借助 APIService 注册非资源型的 API |
 | `spec.url`、`spec.insecureSkipTLSVerify`、`spec.caBundle`| 可以为 APIervice 指定外部服务，将 API 请求代理到指定的 endpoint，请参考 [Endpoint](https://github.com/kubesphere-sigs/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L40-L49) |
 | `spec.service` | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址，请参考 [ServiceReference](https://github.com/kubesphere-sigs/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L21-L38) |
@@ -126,9 +126,9 @@ spec:
 
 ## 扩展组件的开发与打包
 
-在开发过程中，借助上述 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](../../plugin-develoment-guide/deploy-kubesphere-4.0/)中灵活的注册 API、静态资源代理，并通过 JSBundle 注入新的页面或导航菜单。在此基础之上我们可以使用 Docker、与 Helm 完成扩展组件的编排打包。
+在开发过程中，借助上述 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](zh/plugin-develoment-guide/deploy-kubesphere-4.0/)中灵活的注册 API、静态资源代理，并通过 JSBundle 注入新的页面或导航菜单。在此基础之上我们可以使用 Docker、与 Helm 完成扩展组件的编排打包。
 
-通过开发者工具我们可以[初始化一个扩展组件项目](../../plugin-develoment-guide/init-a-plugin-project/)，扩展组件项目目录结构示例：
+通过开发者工具我们可以[初始化一个扩展组件项目](zh/plugin-develoment-guide/init-a-plugin-project/)，扩展组件项目目录结构示例：
 
 ```bash
 devops/

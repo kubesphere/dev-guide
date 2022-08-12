@@ -5,7 +5,7 @@ weight: 200
 
 ## 如何制作 KubeSphere 扩展组件
 
-KubeSphere 4.0 实现了灵活的[可插拔架构](../understand-kubesphere/pluggable/)，开发者可以在不修改 KubeSphere 核心代码的前提下通过KubeSphere 扩展组件无缝的拓展 KubeSphere 的功能。你可以通过下面的内容从零开始开发 KubeSphere KubeSphere 扩展组件。
+KubeSphere 4.0 实现了灵活的[可插拔架构](zh/understand-kubesphere/pluggable/)，开发者可以在不修改 KubeSphere 核心代码的前提下通过KubeSphere 扩展组件无缝的拓展 KubeSphere 的功能。你可以通过下面的内容从零开始开发 KubeSphere KubeSphere 扩展组件。
 
 - **入门指南** 描述了以 Hello World 为例制作扩展组件的基本概念
 - **示例与教程** 包含了一些简单易懂的KubeSphere 扩展组件开发示例与教程
