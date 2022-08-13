@@ -23,7 +23,7 @@ KubeSphere 4.0 实现了灵活的[可插拔架构](zh/architecture)，开发者�
 
 该章节帮助大家深入了解 KubeSphere 4.0 扩展机制的系统架构。
 
-### [扩展组件定制](zh/customize-extensions)
+### [扩展组件定制](zh/extension-customization)
 
 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，验证您的扩展组件想法是否可以实现。
 
