@@ -1,13 +1,13 @@
 ---
-title: 从零开始开发 KubeSphere 扩展组件
+title: 开发扩展组件
 weight: 901
-description: 一个包含完整的前后端开发过程的扩展组件示例
+description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
 ---
 
-在[入门指南](/extension-dev-guide/zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](/extension-dev-guide/zh/get-started/create-your-first-extension/) 扩展组件项目。
-本章节我们以一个更典型的包含前后端的 crud 扩展组件的例子开始讲解扩展组件的具体开发过程。
+在[入门指南](/extension-dev-guide/zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](/extension-dev-guide/zh/get-started/hello-world-extension/) 扩展组件项目。
+本章节我们演示一个更典型的、包含前后端、具备增删改查能力的例子介绍扩展组件的具体开发过程。
 
-## 需求、设计
+## 需求与设计
 假设我们要在 KubeSphere Console 里增加一个员工管理模块，菜单入口在页面的顶部栏。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
 1. 员工管理列表页
@@ -114,7 +114,7 @@ r.Run()
 需要特别注意的是，应用的路由我们定义在了 `/kapis/employee.kubesphere.io/v1alpha1` 前缀下。这是因为 api 的访问路径需要与我们前面创建的插件管理目录中的 `charts/backend/templates/extensions.yaml`
 里定义的 `api group` 和 `version` 一致。
 
-> 注：参考 [后端扩展机制--APIService](/zh/architecture/backend-extensions/#apiservice)
+> 注：参考 [后端扩展机制--APIService](/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice)
 
 具体的业务代码实现过程我们不做赘述，源码参见：[GitHub - chenz24/employee: A demo app build with go gin, gorm and sqlite](https://github.com/chenz24/employee)
 
@@ -164,7 +164,7 @@ REVISION: 1
 
 ## 前端开发
 
-在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/create-your-first-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
+在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
 我们可以继续在这个脚手架目录中执行
 ```shell
 $ yarn create:ext
