@@ -43,7 +43,8 @@ description: KubeSphere 前端扩展机制介绍
 ## 扩展组件
 
 前端扩展组件统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
-```
+
+```bash
 .
 ├── babel.config.js
 ├── configs
@@ -77,7 +78,7 @@ description: KubeSphere 前端扩展机制介绍
 ```
 
 可以看出这和普通的 react app 基本一样。不同的点在于对 entry 的定义。示例如下：
-```javascript=
+```javascript
 import routes from './routes';                   // 导入路由
 import locales from './locales';                 // 导入国际化文件
 
@@ -100,7 +101,7 @@ const extensionConfig = {
 
 globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
 ```
-如上，扩展组件使用脚手架初始化后，定义入口文件。业务代码开发模式和普通前端项目无异。开发完成后打包发布。扩展组件有自己独立的 repo，代码层面对内核部分没有任何侵入。
+如上，扩展组件使用脚手架初始化后，定义入口文件。业务代码开发模式和普通前端项目无异。开发完成后打包发布。扩展组件有自己独立的仓库，代码层面对内核部分没有任何侵入。
 
 ## 开发赋能
 为方便开发者更高效的开发扩展组件，同时也为了系统体验一致性的约束及运行效率的考虑，我们提供了一些通用的组件、工具等库。
