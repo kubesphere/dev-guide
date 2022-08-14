@@ -6,7 +6,7 @@ description: "KubeSphere 扩展组件开发指南章节介绍"
 
 # KubeSphere 扩展组件开发指南
 
-KubeSphere 4.0 实现了灵活的[可插拔架构](zh/architecture)，开发者可以在不修改 KubeSphere 核心代码的前提下通过扩展组件功能无缝的拓展 KubeSphere 的功能。您可以通过以下章节的内容，学习如何从零开始开发 KubeSphere 扩展组件或无缝集成您的云原生应用。
+KubeSphere 4.0 实现了灵活的[扩展机制](zh/architecture)，开发者可以在不修改 KubeSphere 核心代码的前提下通过扩展组件功能无缝的拓展 KubeSphere 的功能。您可以通过以下章节的内容，学习如何从零开始开发 KubeSphere 扩展组件或无缝集成您的云原生应用。
 
 {{% children depth="999" showhidden="true" %}}
 
@@ -17,11 +17,11 @@ KubeSphere 4.0 实现了灵活的[可插拔架构](zh/architecture)，开发者�
 
 ### [入门指南](zh/get-started)
 
-帮助开发者快速搭建开发环境和介绍入门级的插件开发流程。
+帮助开发者快速搭建开发环境和介绍入门级的扩展组件开发流程。
 
 ### [系统架构](zh/architecture)
 
-该章节帮助大家深入了解 KubeSphere 4.0 扩展机制的系统架构。
+该章节帮助大家深入了解 KubeSphere 4.0 扩展机制的整体架构。
 
 ### [扩展组件定制](zh/extension-customization)
 
