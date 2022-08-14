@@ -4,98 +4,93 @@ weight: 402
 description: 准备本地开发环境
 ---
 
-在完成 KubeSphere 4.0 的部署之后，请参照以下步骤准备本地开发环境：
+在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 用作开发集成。
+
+### 安装 Docker 
+
+请参考以下文档在您的开发环境中安装好 Docker：
+
+* [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/)
+* [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
+* [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
 
 
-## 安装 kubectl 命令行工具
+### 创建 KubeSphere All-in-One 集群
 
-1. 将访问 Kubernetes 集群所用到的 kubeconfig 文件复制到本地开发环境
+执行下述命令，将在您的地开发环境中使用 Docker 运行一个 K3s 单节点环境并通过 Helm 部署 KubeSphere 4.0。 可以直接使用我们事先构建好的 All-in-One 容器镜像 `kubespheredev/ks-quickstart:v0.0.1` 快速完成部署。
 
-您需要将 KubeSphere 部署环境中 `~/.kube/config` 文件复制到本地开发环境中 `~/.kube/config` 路径下。以 scp 命令为例：
+在开始之前我们需要创建一个本地文件目录用作数据持久化与文件共享。
 
 ```
-scp root@172.31.73.180:~/.kube/config ~/.kube/config
+$ mkdir -p ~/Workspace/kubesphere
 ```
 
-2. 确保 kubeconfig 文件中 server 地址可以在本地访问
-
-您需要借助 vpn，端口转发，反向代理等方式将 kube-apiserver 的地址暴露到本地开发环境。 请参考 https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/
-
-例：使用 KubeKey 安装的 K8s 环境中，kubeconfig 中 server 地址默认配置为 https://lb.kubesphere.local:6443，本地环境中可以通过 172.31.73.180:6443 端口访问到 kube-apiserver，则需要修改本地开发环境 hosts 将 lb.kubesphere.local 域名解析指向 172.31.73.180，这样可以确保通过 kubeconfig 中 server 证书校验。
+紧接着通过 Docker 创建 KubeSphere 4.0 单节点环境，容器名称 kubesphere。
 
 ```bash
-echo "172.31.73.180  lb.kubesphere.local" | sudo tee -a /etc/hosts
+$ docker run -d --name kubesphere --privileged=true --restart=always -v ~/Workspace/kubesphere:/Workspace/kubesphere \
+     kubespheredev/ks-quickstart:v0.0.1 \
+     server --cluster-init --disable-cloud-controller --disable=servicelb,traefik,metrics-server --write-kubeconfig=/Workspace/kubesphere/kubeconfig --write-kubeconfig-mode=644 --tls-san=kubesphere
+$ docker exec kubesphere /bin/sh /kubesphere/bootstrap.sh
 ```
 
-3. 开发环境中安装 kubectl 工具
-
-- [Install kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux)
-- [Install kubectl on macOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos)
-- [Install kubectl on Windows](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows)
-
-4. 验证
-
-在本地开发环境中执行以下命令确保 K8s 集群可以正常连接，正常情况下该命令可以返回 K8s 集群中的节点列表。
-
-```
-➜  ~ kubectl get no
-NAME       STATUS   ROLES                         AGE     VERSION
-allinone   Ready    control-plane,master,worker   4h38m   v1.23.7
-```
-
-## 安装 KubeSphere 扩展组件开发工具与依赖
-
-KubeSphere 扩展组件的开发依赖 [ksbuilder](https://github.com/kubesphere/ksbuilder)、[helm](https://github.com/helm/helm) 命令行工具，您可以参考以下步骤进行安装。
-
-### 安装 ksbuilder 命令行工具
-
-ksbuidler 是一个命令行工具，可以帮助我们快速搭建 KubeSphere 扩展组件开发脚手架，帮助我们打包、发布扩展组件。
-
-* Linux 系统下安装：
-
-访问 `ksbuilder` 的 [github release 页面](https://github.com/kubesphere/ksbuilder/releases)，下载适配自己系统的最新的版本，解压安装。
-
-```shell
-$ wget https://github.com/kubesphere/ksbuilder/releases/download/v0.0.1-alpha2/ksbuilder_0.0.1-alpha2_linux_amd64.tar.gz
-$ tar -xzf ksbuilder_0.0.1-alpha2_linux_amd64.tar.gz
-$ sudo mv ksbuilder /usr/local/bin/ksbuilder
-```
-
-* macOS 系统下可以使用 `homebrew` 运行如下命令安装：
-
-```shell
-// 新增 brew 私有仓
-brew tap kubesphere/tap
-// 安装
-brew install kubesphere/tap/ksbuilder
-```
-
-安装完成后在终端工具中执行 `ksbuilder version` 看到返回的版本号信息即代表安装成功。如：
-
-```
-$ ksbuilder version
-0.0.1-alpha3
-```
-
-### 安装 Helm
-
-扩展组件的打包、发布过程依赖 helm 进行编排，请参考 [Helm 官方文档](https://helm.sh/docs/intro/install/)进行安装。
-
-在完成安装后执行以下命令检查安装是否成功：
+成功部署您将看到以下提示信息：
 
 ```bash
-$ helm version
-version.BuildInfo{Version:"v3.6.3", GitCommit:"d506314abfb5d21419df8c7e7e68012379db2354", GitTreeState:"clean", GoVersion:"go1.16.5"}
+Release "ks-core" does not exist. Installing it now.
+NAME: ks-core
+LAST DEPLOYED: Sun Aug 14 17:18:11 2022
+NAMESPACE: kubesphere-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Please wait for several seconds for KubeSphere deployment to complete.
+
+1. Make sure KubeSphere components are running:
+
+     kubectl get pods -n kubesphere-system
+
+2. Then you should be able to visit the console NodePort:
+
+     Console: http://172.17.0.2:30880
+
+3. To login to your KubeSphere console:
+
+     Account: admin
+     Password: P@88w0rd
+     NOTE: Please change the default password after login.
+
+For more details, please visit https://kubesphere.io.
 ```
 
-### 安装 Node.js 与 yarn
+### 通过 Docker 创建容器化的开发环境
 
-扩展组件前端开发依赖 `Node.js` 和 `yarn`，请参考下面文档进行安装。
+KubeSphere 与扩展组件的开发用到了许多开发工具（Node.js、Helm、ksbuilder等），为了方便您快速熟悉这个过程，节约您环境配置的时间，我们提供了一个  All-in-One 的容器镜像作为示例，您可以很方便的[使用 VS Code 在容器中进行开发](https://code.visualstudio.com/docs/remote/containers)。
 
-- 安装 Node.js [Active LTS Release](https://nodejs.org/en/about/releases/)
-  方法:
-   - 使用 `nvm` (推荐)
-      - [安装 nvm](https://github.com/nvm-sh/nvm#install--update-script)
-      - [使用 nvm 安装和切换 Node 版本](https://nodejs.org/en/download/package-manager/#nvm)
-   - [安装包安装](https://nodejs.org/en/download/)
-- `yarn` [安装教程](https://yarnpkg.com/getting-started/install)
+1. 通过 Docker 启动开发环境，容器名称 dev-workspace。
+
+```
+docker run -d --name dev-workspace -v ~/Workspace/kubesphere:/Workspace/kubesphere -p 8000:8000 -p 8001:8001 --link kubesphere kubespheredev/dev-workspace:v0.0.1
+```
+
+{{% notice note %}}
+注意挂载部署 KubeSphere 时使用的本地目录，以实现数据的共享。
+{{% /notice %}}
+
+
+2. 使用 VS Code 并安装 Remote - Containers 扩展
+
+参考该教程：[https://code.visualstudio.com/docs/remote/containers-tutorial](https://code.visualstudio.com/docs/remote/containers-tutorial)
+
+3. 使用  VS Code 打开容器开发环境中的文件目录
+
+Attach to Running Container 选择 dev-workspace 容器
+
+![attach-to-running-container.png](images/get-started/attach-to-running-container.png)
+
+![open-folder.png](images/get-started/open-folder.png)
+
+![dev-workspace.png](images/get-started/dev-workspace.png)
+
+至此 KubeSphere 扩展组件的本地开发环境就已经准备就绪。
