@@ -74,7 +74,7 @@ brew install kubesphere/tap/ksbuilder
 
 ```
 $ ksbuilder version
-0.0.1-alpha2
+0.0.1-alpha3
 ```
 
 ### 安装 Helm
