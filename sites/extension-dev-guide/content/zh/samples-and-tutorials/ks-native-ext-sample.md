@@ -44,12 +44,12 @@ $ cd extension-repo
 $ ksbuilder create
 Please input extension name:  employee
 Input: employee
-Please input extension description: this is employee plugin
+Please input extension description: this is employee extension
 Input: this is employee extension
 Other: app
 ✔ Monitoring
 Input: Monitoring
-Please input plugin author:  ks
+Please input extension author:  ks
 Input: ks
 Please input Email:  ks@kubesphere.io
 Input: ks@kubesphere.io
@@ -153,7 +153,7 @@ ksbuilder install employee
 
 ```shell
 $ ksbuilder install employee
-install plugin employee
+install extension employee
 NAME: employee
 LAST DEPLOYED: Sat Aug 13 01:42:20 2022
 NAMESPACE: extension-default
@@ -171,7 +171,7 @@ $ yarn create:ext
 ```
 进入交互式命令行界面，按提示输入创建出 `employee` 扩展组件。
 
-```bash
+```
 $ yarn create:ext
 yarn run v1.22.10
 $ ksc create:ext
@@ -186,7 +186,7 @@ $ ksc create:ext
 
 这样，扩展组件的前端目录就创建出来了。我们可以执行以下命令运行本地开发环境
 
-```bash
+```
 $ yarn dev
 yarn run v1.22.10
 $ concurrently -k --raw 'yarn dev:client' 'yarn dev:server'
@@ -210,12 +210,12 @@ Successfully started server on http://localhost:8000
 
 前端开发完成后，我们同样需要将前端代码打包成 docker 镜像。
 
-```
-yarn build:ext employee                                                 # 编译打包前端项目
+```shell
+$ yarn build:ext employee                                                 # 编译打包前端项目
 
-cd /path/to                                                             # 进入扩展组件目录
+$ cd /path/to                                                             # 进入扩展组件目录
 
-docker build --platform linux/amd64  -t <yourname>/employee-frontend .   # 打包成 docker 镜像
+$ docker build --platform linux/amd64  -t <yourname>/employee-frontend .   # 打包成 docker 镜像
 ```
 
 将镜像 push 到镜像仓库后，我们再回到扩展组件管理工程的目录中，编辑 `values.yaml`，配置前端镜像并将 `frontend.enabled` 设置为 `true`
@@ -236,13 +236,13 @@ backend:
 
 然后在扩展组件管理工程根目录执行下面命令，将前端部署到集群中。
 
-```
-ksbuilder upgrade employee
+```shell
+$ ksbuilder update employee
 ```
 
 命令执行成功后，我们在前端工程中执行下面命令。在本地以 production 模式启动前端，查看扩展组件是否安装成功。
 
-```
+```shell
 $ yarn build:prod
 $ yarn start
 ```
