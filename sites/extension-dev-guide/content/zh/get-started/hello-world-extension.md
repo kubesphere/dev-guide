@@ -4,9 +4,11 @@ weight: 403
 description: 创建一个简单的 KubeSphere 示例扩展组件 Hello World 
 ---
 
-参照前面的章节准备好 KubeSphere 4.0 环境与本地开发环境之后就可以开始扩展组件的开发了，我们从一个简单的 Hello World 项目开始。
+参照前面的章节准备好 KubeSphere 4.0 环境与本地开发环境之后就可以使用 VS Code 中 Remote Container 功能开始扩展组件的开发了，我们从一个简单的 Hello World 项目开始。
 
 ## 初始化扩展组件项目
+
+后文中出现的命令行操作都需要我们通过 VS Code 在 dev-workspace 下打开终端，在容器中进行操作。
 
 1. 创建项目脚手架
 
@@ -19,7 +21,7 @@ yarn create ks-ext my-ext
 当看到如下的提示信息，表示项目初始化完成：
 
 ```
-Success! Created my-ext at /Users/sombody/KubeSphereProjects/my-ext
+Success! Created my-ext at /Workspace/kubesphere/my-ext
 Inside that directory, you can run several commands:
 
   yarn create:ext
@@ -46,7 +48,7 @@ And
 
   yarn dev
 
-✨  Done in 89.17s.
+Done in 560.43s
 ```
 
 2. 创建 Hello World 扩展组件
@@ -54,7 +56,7 @@ And
 通过交互式命令，创建第一个拓展组件 hello-world
 
 ```bash
-$ cd hello-world
+$ cd my-ext
 $ yarn create:ext
 yarn run v1.22.10
 $ ksc create:ext
@@ -97,28 +99,24 @@ $ tree -I 'node_modules' -L 4
 
 ## 扩展组件的运行与调试
 
-1. 将 ks-apiserver 代理至本地
+1. 配置 ks-apiserver 访问
 
 
-扩展组件开发过程依赖 ks-apiserver 提供的 API，需要通过 kubectl port-forward 将 ks-apiserver 这个 service 代理到本地开发环境
+扩展组件开发过程依赖 ks-apiserver 提供的 API，需要将 KubeSphere 4.0 容器中 ks-apiserver 通过 NodePort 暴露给开发容器（dev-workspace）
 
+```sh
+$ mkdir ~/.kube
+$ cp /Workspace/kubesphere/kubeconfig ~/.kube/config
+$ sed -i 's/127.0.0.1/kubesphere/g' ~/.kube/config # 复制 kubesphere 环境中的 kubeconfig
+$ kubectl -n kubesphere-system patch svc ks-apiserver --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"},{"op":"replace","path":"/spec/ports/0/nodePort","value":30881}]' # 设置 ks-apiserver 为 NodePort 类型并指定端口为 30881
+$ sed -i "s/apiserver.local/kubesphere:30881/g" /Workspace/kubesphere/my-ext/configs/local_config.yaml # 配置 ks-apiserver 地址
 ```
-$ kubectl -n kubesphere-system port-forward service/ks-apiserver 9090:80
-Forwarding from 127.0.0.1:9090 -> 9090
-Forwarding from [::1]:9090 -> 9090
-```
 
-上述命令将 ks-apiserver 代理至本地 http://127.0.0.1:9090，您也可以替换命令行中的本地端口
+上述命令将 ks-apiserver 的访问地址 http://kubesphere:30881 暴露到 dev-workspace，并写入  `configs/local_config.yaml` 配置文件中 `server.apiServer` 地址。 
 
-{{% notice note %}}
-ks-apiserver 的本地代理地址需要与 `configs/local_config.yaml` 配置文件中 `server.apiServer` 的配置一致，默认值为 `http://127.0.0.1:9090`。
-{{% /notice %}}
+2. 运行
 
-
-
-2. 本地运行
-
-前端的开发与普通的 react app 开发基本无异，执行以下命令本地运行 ks-console 并加载 Hello World 扩展组件。
+前端的开发与普通的 react app 开发基本无异，执行以下命令在容器中运行 ks-console 并加载 Hello World 扩展组件。
 
 ```
 $ yarn dev
@@ -141,6 +139,6 @@ Successfully started server on http://localhost:8000
 ```
 
 
-访问 `http://localhost:8000` 并使用默认用户名密码（admin/P@88w0rd）登录 ks-console，您的第一个 KubeSphere 扩展组件已经成功加载，您可以通过点击顶部导航栏菜单访问该扩展组件的页面。
+在创建 dev-workspace 容器时我们就已经配置了 8000 与 8001 端口的转发规则，此时在本机访问 `http://localhost:8000` 并使用默认用户名密码（admin/P@88w0rd）登录 ks-console，您的第一个 KubeSphere 扩展组件已经成功加载，您可以通过点击顶部导航栏菜单访问该扩展组件的页面。
 
 ![demo-plugin-dashboard.png](images/get-started/hello-world-extension-dashboard.png)
