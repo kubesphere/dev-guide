@@ -60,28 +60,28 @@ description: KubeSphere 前端扩展机制介绍
 .
 ├── babel.config.js
 ├── configs
-│   ├── config.yaml
-│   ├── console.config.js
-│   └── local_config.yaml
+│   ├── config.yaml
+│   ├── console.config.js
+│   └── local_config.yaml
 ├── extensions
-│   ├── entry.ts
-│   └── hello-world
-│       ├── Dockerfile
-│       ├── README.md
-│       ├── package.json
-│       └── src
-│           ├── App.jsx
-│           ├── index.js
-│           ├── locales
-│           │   ├── en
-│           │   │   ├── base.json
-│           │   │   └── index.js
-│           │   ├── index.js
-│           │   └── zh
-│           │       ├── base.json
-│           │       └── index.js
-│           └── routes
-│               └── index.js
+│   ├── entry.ts
+│   └── hello-world
+│       ├── Dockerfile
+│       ├── README.md
+│       ├── package.json
+│       └── src
+│           ├── App.jsx
+│           ├── index.js
+│           ├── locales
+│           │   ├── en
+│           │   │   ├── base.json
+│           │   │   └── index.js
+│           │   ├── index.js
+│           │   └── zh
+│           │       ├── base.json
+│           │       └── index.js
+│           └── routes
+│               └── index.js
 ├── node_modules
 ├── package.json
 ├── tsconfig.base.json
