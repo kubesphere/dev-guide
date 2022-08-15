@@ -6,7 +6,7 @@ description: 国际化多语言的支持
 
 KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际化组件，扩展组件开发者可以通过自定义语言包的方式在扩展组件前端项目中实现国际化。
 
-## 配置方法
+## 语言包
 
 我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如下面目录结构：
 
@@ -44,6 +44,9 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 ```
 
 我们看到在 `hello-world/src/locales` 目录下默认有 zh(中文) en(英文) 两个目录。其中目录内的 index.js 是索引文件，能够自动索引目录内的 json 文件。翻译的文本放在目录内的 json 文件里。如 base.json
+如果想增加语言包，可以参照 `zh` 或 `en` 目录的内容格式，添加新的语言目录。
+
+```shell
 
 ```json
 {
@@ -66,7 +69,7 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 ```    
    
 
-3. 在扩展组件的 entry file 中引入翻译文件，如下：
+2. 在扩展组件的 entry file 中引入翻译文件，如下：
 
 ```js
 import routes from './routes';
