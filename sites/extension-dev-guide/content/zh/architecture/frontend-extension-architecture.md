@@ -43,7 +43,18 @@ description: KubeSphere 前端扩展机制介绍
 
 ## 扩展组件
 
-前端扩展组件统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
+如上面架构图，扩展组件分为`本地扩展组件`和`远程扩展组件`。区别是：
+* `本地扩展组件`基本上是系统必备或者常用的功能组件，它们会和`core`在编译时打包在一块。`本地扩展组件` 目前包括：
+1. Cluster 集群管理
+2. Access 访问控制
+3. Workspaces 工作空间
+4. Projects 项目管理
+5. Apps 应用商店
+6. Settings 平台设置
+
+* `远程扩展组件`是开发者在自己的代码仓库里开发的扩展组件，独立编译打包。它们会发布在`扩展组件市场`上。用户安装后，内核会远程加载扩展组件的 `js bundle` 并注册到内核中。
+
+远程扩展组件的前端部分统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
 
 ```bash
 .
