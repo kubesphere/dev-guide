@@ -12,7 +12,7 @@ description: 创建一个简单的 KubeSphere 示例扩展组件 Hello World
 {{% tab name="Shell Aliases" %}}
 
 ```bash
-alias yarn='docker run --rm -v $PWD:/Workspace/kubesphere -w /Workspace/kubesphere -p 8000 -p 8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+alias yarn='docker run --rm -v $PWD:/Workspace/kubesphere -w /Workspace/kubesphere -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
 alias kubectl='docker run --rm -v ~/Workspace/kubesphere:/Workspace/kubesphere -w /Workspace/kubesphere -it kubespheredev/dev-tools:v0.0.1 kubectl --kubeconfig /Workspace/kubesphere/config'
 ```
 
@@ -132,10 +132,10 @@ $ tree -I 'node_modules' -L 4
 1. 配置 ks-apiserver 访问
 
 
-扩展组件开发过程依赖 ks-apiserver 提供的 API，需需要在开发容器（dev-tools）中做以下配置
+扩展组件开发过程依赖 ks-apiserver 提供的 API，需要参考一下命令行修改本地配置文件
 
 ```sh
-$ sed -i "s/apiserver.local/172.17.0.2:30881/g" /Workspace/kubesphere/my-ext/configs/local_config.yaml # 配置 ks-apiserver 地址
+$ sed -i '' "s/apiserver.local/172.17.0.2:30881/g" ~/Workspace/kubesphere/my-ext/configs/local_config.yaml # 配置 ks-apiserver 地址
 ```
 
 {{% notice note %}}
