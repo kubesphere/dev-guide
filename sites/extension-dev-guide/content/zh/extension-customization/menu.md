@@ -51,11 +51,11 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
 ```
 
-通过 `menu` 的 parent 字段设置挂载点：
+通过 `menu` 的 `parent` 字段设置挂载点：
 * 当值为 `top` 时菜单挂载在顶部导航栏；
 * 当值为 `global` 时菜单挂载在平台管理菜单；
 * 当值为 `toolbox` 时菜单挂载在工具箱。
-* 左侧菜单的挂载需根据当前 menu 在系统配置文件 `config.yaml` 里的菜单配置里的 name 字段来设置，如：
+* 如果需要挂载在左侧菜单某一个地方，则需要根据系统配置文件 `config.yaml` 的菜单配置里的 name 字段来设置这个 `parent` 字段，通常 `config.yaml` 内容如下：
 
 ```yaml
   clusterNavs:
@@ -120,6 +120,5 @@ globals.context.registerExtension(extensionConfig);    // 通过全局对象注�
  ...
 
 ```
-在 `congfig.yaml` 里，集群管理的菜单配置如上代码所示。假如我们要把扩展组件的入口放到集群管理侧边栏，我们可以把 parent 值设置成 `cluster`。
 
-菜单的挂载也支持多级。比如我们想把扩展组件的入口点放到"集群管理-节点管理""下。我们可以把 parent 值设置成 `cluster.nodes`
+假如我们要把扩展组件的入口放到集群管理侧边栏，我们可以把 parent 值设置成 `cluster`。菜单的挂载也支持多级，比如我们想把扩展组件的入口点放到”集群管理-节点管理“下。我们可以把 `parent` 值设置成 `cluster.nodes`。
