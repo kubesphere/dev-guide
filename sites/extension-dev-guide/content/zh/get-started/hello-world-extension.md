@@ -6,38 +6,6 @@ description: 创建一个简单的 KubeSphere 示例扩展组件 Hello World
 
 参照前面的章节准备好 KubeSphere 集群环境与本地开发环境之后就可以开始扩展组件的开发了，我们从一个简单的 Hello World 项目开始。
 
-您可以根据习惯选择使用 Shell Aliases 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
-
-{{< tabs >}}
-{{% tab name="Shell Aliases" %}}
-
-```bash
-alias yarn='docker run --rm -v $PWD:/Workspace/kubesphere -w /Workspace/kubesphere -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
-alias kubectl='docker run --rm -v ~/Workspace/kubesphere:/Workspace/kubesphere -w /Workspace/kubesphere -it kubespheredev/dev-tools:v0.0.1 kubectl --kubeconfig /Workspace/kubesphere/config'
-```
-
-{{% /tab %}}
-{{% tab name="VS Code Remote - Containers" %}}
-
-您可以很方便的[使用 VS Code 在容器中进行开发](https://code.visualstudio.com/docs/remote/containers)，首先您需要[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
-
-Attach to Running Container 选择 dev-tools 容器
-
-![attach-to-running-container.png](images/get-started/attach-to-running-container.png)
-
-打开 `/Workspace/kubesphere` 目录
-
-![open-folder.png](images/get-started/open-folder.png)
-
-打开终端
-
-![dev-tools.png](images/get-started/dev-tools.png)
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
 ## 初始化扩展组件项目
 
 1. 创建项目脚手架
@@ -45,7 +13,8 @@ Attach to Running Container 选择 dev-tools 容器
 通过 `yarn create ks-ext <directory>` 命令初始化项目目录
 
 ```bash
-yarn create ks-ext my-ext
+$ cd ~/Workspace/kubesphere
+$ yarn create ks-ext my-ext
 ```
 
 当看到如下的提示信息，表示项目初始化完成：
