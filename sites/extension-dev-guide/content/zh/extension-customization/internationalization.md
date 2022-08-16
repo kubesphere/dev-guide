@@ -8,7 +8,7 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 
 ## 语言包
 
-我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如下面目录结构：
+我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如我们在[Hello World 入门教程](/extension-dev-guide/zh/get-started/hello-world-extension/)里生成下面的目录结构：
 
 ```shell
 .
@@ -43,10 +43,10 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 └── yarn.lock
 ```
 
-我们看到在 `hello-world/src/locales` 目录下默认有 zh(中文) en(英文) 两个目录。其中目录内的 index.js 是索引文件，能够自动索引目录内的 json 文件。翻译的文本放在目录内的 json 文件里。如 base.json
+我们看到在 `hello-world/src/locales` 目录下默认有 zh(中文) en(英文) 两个目录。其中目录内的 index.js 是索引文件，能够自动索引目录内的 JSON 文件。翻译的文本放在目录内的 json 文件里，如 base.json。
 如果想增加语言包，可以参照 `zh` 或 `en` 目录的内容格式，添加新的语言目录。
 
-> 如果翻译的文本条目很多，建议按照模块或者页面将翻译的文本放到不同的 json 文件中。
+> 如果翻译的文本条目很多，建议按照模块或者页面将翻译的文本放到不同的 JSON 文件中。
 
 
 ## 使用方法
@@ -61,7 +61,7 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 ```    
    
 
-2. 在扩展组件的 entry file 中引入翻译文件，如下：
+2. 在扩展组件的 entry file（如上述扩展组件里指的是 hello-world/src/index.js）中引入翻译文件，如下：
 
 ```js
 import routes from './routes';
