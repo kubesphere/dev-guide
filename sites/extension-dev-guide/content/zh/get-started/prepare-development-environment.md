@@ -10,15 +10,9 @@ description: 准备开发环境
 
 ### 安装 Docker 
 
-桌面环境请参考：
+非桌面环境请参考：[Install Docker Engine](https://docs.docker.com/engine/install/)
 
-* [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/)
-* [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
-* [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
-
-非桌面环境请参考：
-
-* [Install Docker Engine](https://docs.docker.com/engine/install/)
+桌面环境请参考：[Install Docker Desktop](https://docs.docker.com/desktop/)
 
 ### 通过 Docker 部署 KubeSphere All-in-One
 
@@ -98,7 +92,7 @@ $ docker exec -it kubesphere wget -qO- http://172.17.0.2:30881/kapis/version
 
 ### 通过 Docker 创建容器化的开发环境
 
-KubeSphere 与扩展组件的开发用到了许多开发工具（Node.js、Helm、ksbuilder等），为了方便您快速熟悉这个过程，节约您环境配置的时间，我们提供了一个同样提供了一个 All-in-One 的容器镜像来提供这些工具。
+KubeSphere 与扩展组件的开发用到了许多开发工具（create-ks-ext，ksbuilder）和依赖（Node.js、Helm 等），为了方便您快速熟悉这个过程，节约您环境配置的时间，我们提供了一个同样提供了一个 All-in-One 的容器镜像来提供这些工具。
 
 在开始之前我们需要创建一个本地文件目录用作数据持久化，用来保存项目文件。
 
@@ -112,3 +106,34 @@ $ mkdir -p ~/Workspace/kubesphere
 $ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/Workspace/kubesphere/config
 $ sed -i '' "s/127.0.0.1/172.17.0.2/g" ~/Workspace/kubesphere/config
 ```
+
+您可以根据习惯选择使用 Shell Aliases 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
+
+{{< tabs >}}
+{{% tab name="Shell Aliases" %}}
+
+```bash
+alias yarn='docker run --rm -v $PWD:/Workspace/kubesphere -w /Workspace/kubesphere -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+alias kubectl='docker run --rm -v ~/Workspace/kubesphere:/Workspace/kubesphere -w /Workspace/kubesphere -it kubespheredev/dev-tools:v0.0.1 kubectl --kubeconfig /Workspace/kubesphere/config'
+```
+
+{{% /tab %}}
+{{% tab name="VS Code Remote - Containers" %}}
+
+您可以很方便的[使用 VS Code 在容器中进行开发](https://code.visualstudio.com/docs/remote/containers)，首先您需要[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
+
+Attach to Running Container 选择 dev-tools 容器
+
+![attach-to-running-container.png](images/get-started/attach-to-running-container.png)
+
+打开 `/Workspace/kubesphere` 目录
+
+![open-folder.png](images/get-started/open-folder.png)
+
+打开终端
+
+![dev-tools.png](images/get-started/dev-tools.png)
+
+
+{{% /tab %}}
+{{< /tabs >}}
