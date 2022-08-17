@@ -132,7 +132,7 @@ spec:
 
 在开发过程中，通过创建上述类型的 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](/extension-dev-guide/zh/get-started/deploy-kubesphere-4.0/)中向 `ks-apiserver` 灵活的注册 API、静态资源代理，并通过 JSBundle 前端扩展包，注入新的页面、导航菜单。在此基础之上我们需要使用 Docker、与 Helm 完成扩展组件的编排与打包。
 
-通过开 [ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 发者工具我们可以初始化一个扩展组件仓库项目，扩展组件仓库项目目录结构示例：
+通过开发者工具 [ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 我们可以初始化一个扩展组件仓库项目，扩展组件仓库项目目录结构示例：
 
 ```bash
 devops/
