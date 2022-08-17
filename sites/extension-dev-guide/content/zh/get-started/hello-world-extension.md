@@ -1,7 +1,7 @@
 ---
 title:  创建 Hello World 扩展组件
 weight: 403
-description: 创建一个简单的 KubeSphere 示例扩展组件 Hello World 
+description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hello World，快速了解开发扩展组件的流程 
 ---
 
 参照前面的章节准备好 KubeSphere 集群环境与本地开发环境之后就可以开始扩展组件的开发了，我们从一个简单的 Hello World 项目开始。
