@@ -4,6 +4,9 @@ weight: 505
 description: "创建新的功能页面并设置路由"
 ---
 
+在基于 `React` 的开发中，如果我们的应用包含多个页面，那必然需要为应用设置路由。简单理解路由是访问路径与 React 组件的映射关系。
+在我们的扩展组件开发中，路由的使用方法如下：
+
 ## 路由定义
 
 KubeSphere4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便的实现路由注册，我们使用了 `Route Object` 的方式书写路由。
