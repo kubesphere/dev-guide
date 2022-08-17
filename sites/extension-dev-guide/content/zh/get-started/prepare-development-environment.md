@@ -4,7 +4,7 @@ weight: 402
 description: 准备开发环境
 ---
 
-在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 用作开发集成。为了简化安装部署的过程，我们提供了 KubeSphere All-in-One 容器镜像，您可以选择在本地或远程环境中进行部署。
+在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 的扩展组件运行环境。为了简化安装，我们提供了 KubeSphere All-in-One 容器镜像，您可以选择在本地或远程环境中进行部署。
 
 无论何种部署方式，您首先需要安装好 Docker 或其他兼容 OCI 的容器引擎，下文将以 Docker 为例。
 
@@ -16,34 +16,30 @@ description: 准备开发环境
 
 ### 通过 Docker 部署 KubeSphere All-in-One
 
-我们事先将 KubeSphere 部署所依赖的环境及工具打包为一个 All-in-One 容器镜像 `docker.io/kubespheredev/ks-allinone:v4.0.0-alpha.0`
-
 通过以下命令可以快速创建一个 KubeSphere All-in-One 环境
-
-
-{{% notice note %}}
-如果是在远程环境中部署 KubeSphere，您需要在容器启动命令中指定 `-p 30881:30881` 参数，将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
-{{% /notice %}}
 
 {{< tabs >}}
 {{% tab name="本地环境" %}}
 
 ```bash
-$ docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
+docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
 ```
 
 {{% /tab %}}
 {{% tab name="远程环境" %}}
 
 ```bash
-$ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
+docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% notice note %}}
+如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
+{{% /notice %}}
 
-容器正常运行之后，可以通过 kubesphere 容器IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
+容器正常运行之后，可以通过 kubesphere 容器 IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
 
 ```bash
 $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
@@ -100,15 +96,14 @@ docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
 {{% /expand%}}
 
 
+### 通过 Docker 创建容器化的本地开发环境
 
-### 通过 Docker 创建容器化的开发环境
-
-KubeSphere 与扩展组件的开发用到了许多开发工具（create-ks-ext，ksbuilder）和依赖（Node.js、Helm 等），为了方便您快速熟悉这个过程，节约您环境配置的时间，我们提供了一个同样提供了一个 All-in-One 的容器镜像来提供这些工具。
+KubeSphere 扩展组件的开发用到了一些开发工具（create-ks-ext，ksbuilder）和依赖（Node.js、Helm 等），我们同样把这些工具打包成一个镜像方便快速搭建开发环境。
 
 在开始之前我们需要创建一个本地文件目录用作数据持久化，用来保存项目文件。
 
 ```bash
-$ mkdir -p ~/workspace/kubesphere
+mkdir -p ~/workspace/kubesphere
 ```
 
 保存 kubesphere 集群的 kubeconfig 到本地，并配置 kube-apiserver 的地址与端口。
@@ -118,14 +113,14 @@ $ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
 $ sed -i '' "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
 ```
 
-您可以根据习惯选择使用 Shell Aliases 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
+您可以根据习惯选择使用 Shell 命令行（可以使用 Shell Aliases 简化命令行） 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
 
 {{< tabs >}}
 {{% tab name="Shell Aliases" %}}
 
 ```bash
-alias yarn='docker run --rm -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
-alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
+$ alias yarn='docker run --rm -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+$ alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
 ```
 
 {{% /tab %}}
