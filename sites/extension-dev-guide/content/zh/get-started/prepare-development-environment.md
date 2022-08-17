@@ -16,56 +16,37 @@ description: 准备开发环境
 
 ### 通过 Docker 部署 KubeSphere All-in-One
 
-我们事先将 KubeSphere 部署所依赖的环境及工具打包为一个 All-in-One 容器镜像 `docker.io/kubespheredev/ks-quickstart:v0.0.1`
+我们事先将 KubeSphere 部署所依赖的环境及工具打包为一个 All-in-One 容器镜像 `docker.io/kubespheredev/ks-allinone:v4.0.0-alpha.0`
 
 通过以下命令可以快速创建一个 KubeSphere All-in-One 环境
 
-```bash
-$ docker run -d --name kubesphere --privileged=true --restart=always \
-     kubespheredev/ks-quickstart:v0.0.1 \
-     server --cluster-init --disable-cloud-controller --disable=servicelb,traefik,metrics-server --write-kubeconfig-mode=644 --tls-san=kubesphere
-$ docker exec kubesphere /bin/sh /kubesphere/bootstrap.sh # 部署 KubeSphere
-$ docker exec kubesphere kubectl -n kubesphere-system patch svc ks-apiserver --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"},{"op":"replace","path":"/spec/ports/0/nodePort","value":30881}]' # 设置 ks-apiserver 为 NodePort 类型并指定端口为 30881
-```
 
 {{% notice note %}}
 如果是在远程环境中部署 KubeSphere，您需要在容器启动命令中指定 `-p 30881:30881` 参数，将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
 {{% /notice %}}
 
-成功部署您将看到以下提示信息
+{{< tabs >}}
+{{% tab name="本地环境" %}}
 
 ```bash
-Release "ks-core" does not exist. Installing it now.
-NAME: ks-core
-LAST DEPLOYED: Sun Aug 14 17:18:11 2022
-NAMESPACE: kubesphere-system
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-Please wait for several seconds for KubeSphere deployment to complete.
-
-1. Make sure KubeSphere components are running:
-
-     kubectl get pods -n kubesphere-system
-
-2. Then you should be able to visit the console NodePort:
-
-     Console: http://172.17.0.2:30880
-
-3. To login to your KubeSphere console:
-
-     Account: admin
-     Password: P@88w0rd
-     NOTE: Please change the default password after login.
-
-For more details, please visit https://kubesphere.io.
+$ docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
 ```
 
-可以通过 kubesphere 容器IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常：
+{{% /tab %}}
+{{% tab name="远程环境" %}}
 
 ```bash
-$ docker exec -it kubesphere wget -qO- http://172.17.0.2:30881/kapis/version
+$ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+容器运行后，可以通过 kubesphere 容器IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
+
+```bash
+$ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
 {
  "gitVersion": "v3.3.0-40+c5e2c55ba72765-dirty",
  "gitMajor": "3",
@@ -97,14 +78,14 @@ KubeSphere 与扩展组件的开发用到了许多开发工具（create-ks-ext�
 在开始之前我们需要创建一个本地文件目录用作数据持久化，用来保存项目文件。
 
 ```bash
-$ mkdir -p ~/Workspace/kubesphere
+$ mkdir -p ~/workspace/kubesphere
 ```
 
 保存 kubesphere 集群的 kubeconfig 到本地，并配置 kube-apiserver 的地址与端口。
 
 ```
-$ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/Workspace/kubesphere/config
-$ sed -i '' "s/127.0.0.1/172.17.0.2/g" ~/Workspace/kubesphere/config
+$ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
+$ sed -i '' "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
 ```
 
 您可以根据习惯选择使用 Shell Aliases 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
@@ -113,8 +94,8 @@ $ sed -i '' "s/127.0.0.1/172.17.0.2/g" ~/Workspace/kubesphere/config
 {{% tab name="Shell Aliases" %}}
 
 ```bash
-alias yarn='docker run --rm -v $PWD:/Workspace/kubesphere -w /Workspace/kubesphere -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
-alias kubectl='docker run --rm -v ~/Workspace/kubesphere:/Workspace/kubesphere -w /Workspace/kubesphere -it kubespheredev/dev-tools:v0.0.1 kubectl --kubeconfig /Workspace/kubesphere/config'
+alias yarn='docker run --rm -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
 ```
 
 {{% /tab %}}
@@ -122,18 +103,23 @@ alias kubectl='docker run --rm -v ~/Workspace/kubesphere:/Workspace/kubesphere -
 
 您可以很方便的[使用 VS Code 在容器中进行开发](https://code.visualstudio.com/docs/remote/containers)，首先您需要[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
 
-Attach to Running Container 选择 dev-tools 容器
+1. 通过 Docker 启动开发环境
+
+```bash
+docker run -d --name dev-tools -v ~/workspace/kubesphere/config:/root/.kube/config -v ~/workspace/kubesphere:/workspace/kubesphere -w /workspace/kubesphere -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
+```
+
+2. Attach to Running Container 选择 dev-tools 容器
 
 ![attach-to-running-container.png](images/get-started/attach-to-running-container.png)
 
-打开 `/Workspace/kubesphere` 目录
+3. 打开 `/workspace/kubesphere` 目录
 
 ![open-folder.png](images/get-started/open-folder.png)
 
-打开终端
+4. 打开终端
 
 ![dev-tools.png](images/get-started/dev-tools.png)
-
 
 {{% /tab %}}
 {{< /tabs >}}
