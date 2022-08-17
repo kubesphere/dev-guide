@@ -43,7 +43,7 @@ $ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30
 {{< /tabs >}}
 
 
-容器运行后，可以通过 kubesphere 容器IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
+容器正常运行之后，可以通过 kubesphere 容器IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
 
 ```bash
 $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
@@ -70,6 +70,36 @@ $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .Netw
  }
 }%
 ```
+
+{{%expand "如果您的服务出现异常，可以展开当前内容，通过以下命令查看相关日志，进行排查。" %}}
+
+查看 K3s 日志
+```bash
+docker logs -f kubesphere
+```
+
+查看 KubeSphere 部署日志
+```bash
+docker exec kubesphere tail -f -n +1 nohup.out
+```
+
+查看 pod 运行状态
+
+```
+docker exec kubesphere kubectl get po -A
+```
+
+查看 ks-apiserver pod 日志
+
+```
+docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
+```
+
+如果您无法解决发现的问题，欢迎向我们[提交 issue](https://github.com/kubesphere/kubesphere/issues/new?assignees=&labels=kind%2Fbug&template=bug_report.md)。
+
+{{% /expand%}}
+
+
 
 ### 通过 Docker 创建容器化的开发环境
 
