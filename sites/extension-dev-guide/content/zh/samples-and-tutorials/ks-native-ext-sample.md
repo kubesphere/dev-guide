@@ -116,7 +116,7 @@ r.Run()
 
 > 注：参考 [后端扩展机制--APIService](/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice)
 
-具体的业务代码实现过程我们不做赘述，源码参见：[GitHub - chenz24/employee: A demo app build with go gin, gorm and sqlite](https://github.com/chenz24/employee)
+具体的业务代码实现过程我们不做赘述，源码参见：[GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/employee-backend)
 
 开发完成后我们需要编译代码并将其打包成 docker 镜像，在源码目录里执行（注意镜像名称可自定义）：
 ```shell
@@ -206,7 +206,7 @@ Dashboard app running at port 8000
 Successfully started server on http://localhost:8000 
 ```
 
-开发环境启动后，我们就可以进行具体的业务代码开发了。开发方式与普通 react app 基本一致，具体实现过程我们同样不做赘述了，源码参见：[GitHub - chenz24/my-app](https://github.com/chenz24/my-app)
+开发环境启动后，我们就可以进行具体的业务代码开发了。开发方式与普通 react app 基本一致，具体实现过程我们同样不做赘述了，源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/my-ext/extensions/employee)
 
 前端开发完成后，我们同样需要将前端代码打包成 docker 镜像。
 
