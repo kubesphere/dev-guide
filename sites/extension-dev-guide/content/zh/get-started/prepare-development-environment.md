@@ -1,7 +1,7 @@
 ---
 title: 准备开发环境
 weight: 402
-description: 准备开发环境
+description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组件运行环境和一个容器化的本地开发工具。
 ---
 
 在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 的扩展组件运行环境。为了简化安装，我们提供了 KubeSphere All-in-One 容器镜像，您可以选择在本地或远程环境中进行部署。

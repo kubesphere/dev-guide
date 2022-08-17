@@ -1,7 +1,7 @@
 ---
 title: 扩展组件结构解析
 weight: 404
-description: 解读 KubeSphere 扩展组件核心的概念
+description: 解读 KubeSphere 扩展组件核心的概念并初识扩展组件的文件组织结构
 ---
 
 
