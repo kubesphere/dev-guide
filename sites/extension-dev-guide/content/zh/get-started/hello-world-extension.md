@@ -13,7 +13,7 @@ description: 创建一个简单的 KubeSphere 示例扩展组件 Hello World
 通过 `yarn create ks-ext <directory>` 命令初始化项目目录
 
 ```bash
-$ cd ~/Workspace/kubesphere
+$ cd ~/workspace/kubesphere
 $ yarn create ks-ext my-ext
 ```
 
@@ -104,11 +104,11 @@ $ tree -I 'node_modules' -L 4
 扩展组件开发过程依赖 ks-apiserver 提供的 API，需要参考一下命令行修改本地配置文件
 
 ```sh
-$ sed -i '' "s/apiserver.local/172.17.0.2:30881/g" ~/Workspace/kubesphere/my-ext/configs/local_config.yaml # 配置 ks-apiserver 地址
+$ sed -i '' "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/workspace/kubesphere/my-ext/configs/local_config.yaml # 配置 ks-apiserver 地址
 ```
 
 {{% notice note %}}
-上述命令将 ks-apiserver 的访问地址 http://172.17.0.2:30881 写入 `configs/local_config.yaml` 配置文件中，您需要根据实际情况修改命令行中 ks-apiserver 的地址与端口信息。 
+上述命令将 ks-apiserver 的访问地址，写入 `configs/local_config.yaml` 配置文件中，本地环境中 kubesphere 容器的IP地址可以通过命令 `docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere` 获得，ks-apiserver 默认的访问端口为 30881。如果您的 kubesphere 容器部署在远程环境中，您需要将 kubesphere 容器的 30881 端口通过VPN、端口转发等方式暴露到开发环境中，并根据实际情况修改命令行中 ks-apiserver 的地址与端口信息。 
 {{% /notice %}}
 
 
@@ -142,7 +142,7 @@ Successfully started server on http://localhost:8000
 
 3. 调试
 
-您可以通过文本工具或是任何 IDE 打开挂载到容器内部的工程目录 `~/Workspace/kubesphere/my-ext` 对我们的扩展组件的代码进行编辑，可以在浏览器中实时看到我们的修改。
+您可以通过文本工具或是任何 IDE 打开挂载到容器内部的工程目录 `~/workspace/kubesphere/my-ext` 对我们的扩展组件的代码进行编辑，可以在浏览器中实时看到我们的修改。
 
 ![coding.png](images/get-started/coding.png)
 
