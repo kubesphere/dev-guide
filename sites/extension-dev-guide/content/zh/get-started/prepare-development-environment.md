@@ -123,7 +123,7 @@ Linux 下 sed 命令需要去掉紧跟在 sed -i 后面的 `''`。
 {{% tab name="Shell Aliases" %}}
 
 ```bash
-$ alias yarn='docker run --rm -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+$ alias yarn='docker run --rm --user $(id -u):$(id -g) -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
 $ alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
 ```
 
