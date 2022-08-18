@@ -48,7 +48,7 @@ spec:
 | --- | ---|
 | `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](/extension-dev-guide/zh/references/kubesphere-api/) |
 | `spec.nonResourceURLs` | 除了资源型的 API，也可以借助 APIService 注册非资源型的 API |
-| `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify`| 可以为 APIervice 指定外部服务，将 API 请求代理到指定的 endpoint，请参考 [Endpoint](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L40-L49) |
+| `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify`| 可以为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint，请参考 [Endpoint](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L40-L49) |
 | `spec.service` | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址，请参考 [ServiceReference](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L21-L38) |
 
 
