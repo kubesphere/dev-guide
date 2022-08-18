@@ -31,7 +31,7 @@ $ ksbuilder init my-extensions
 执行完成后，可以看到如下信息，表示项目初始化成功：
 ```shell
 $ ksbuilder init my-extensions
-Directory: /root/workspace/kubesphere/extension-repo
+Directory: ~/workspace/kubesphere/extension-repo
 
 The project has been created.
 ```
@@ -53,7 +53,7 @@ Please input extension author:  ks
 Input: ks
 Please input Email:  ks@kubesphere.io
 Input: ks@kubesphere.io
-Directory: /root/workspace/kubesphere/extension-repo/employee
+Directory: ~/workspace/kubesphere/extension-repo/employee
 
 The extension charts has been created.
 ```
@@ -127,7 +127,7 @@ $ docker build --platform linux/amd64 -t <yourname>/employee-api .
 $ docker push <yourname>/employee-api:latest
 ```
 
-执行完成以上命令后，我们需要将后端代码部署以给前端开发提供接口调试。我们回到前面创建的扩展组件的管理工程目录中。编辑 `employee` 根目录的 `values.yaml`(即 `/root/workspace/kubesphere/extension-repo/employee/values.yaml`)，添加如下配置：
+执行完成以上命令后，我们需要将后端代码部署以给前端开发提供接口调试。我们回到前面创建的扩展组件的管理工程目录中。编辑 `employee` 根目录的 `values.yaml`(即 `~/workspace/kubesphere/extension-repo/employee/values.yaml`)，添加如下配置：
 
 
 ```yaml
@@ -144,7 +144,7 @@ backend:
     tag: latest
 ```
 
-如上，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到扩展组件管理工程根目录(`/root/workspace/kubesphere/extension-repo/`)执行：
+如上，因为前端尚未有镜像，我们先将前端 disable。后端填好镜像名称及 tag。 回到扩展组件管理工程根目录(`~/workspace/kubesphere/extension-repo/`)执行：
 
 ```shell
 $ ksbuilder install employee
@@ -166,7 +166,7 @@ REVISION: 1
 ## 前端开发
 
 在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
-我们可以继续在这个脚手架目录(`/root/workspace/kubesphere/my-ext/`)中执行
+我们可以继续在这个脚手架目录(`~/workspace/kubesphere/my-ext/`)中执行
 ```shell
 $ yarn create:ext
 ```
@@ -229,7 +229,7 @@ Dashboard app running at port 8000
 <i> [webpack-dev-server] Loopback: http://localhost:8001/
 <i> [webpack-dev-server] On Your Network (IPv4): http://192.168.1.133:8001/
 <i> [webpack-dev-server] On Your Network (IPv6): http://[fe80::1]:8001/
-<i> [webpack-dev-server] Content not from webpack is served from '/root/workspace/kubesphere/my-ext/dist' directory
+<i> [webpack-dev-server] Content not from webpack is served from '~/workspace/kubesphere/my-ext/dist' directory
 <i> [webpack-dev-server] 404s will fallback to '/index.html'
 Successfully started server on http://localhost:8000 
 ```
@@ -238,19 +238,17 @@ Successfully started server on http://localhost:8000
 
 前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像：
 
-1. 编译前端代码，在前端项目根目录(`/root/workspace/kubesphere/my-ext/`)执行：
+1. 编译前端代码，在前端项目根目录(`~/workspace/kubesphere/my-ext/`)执行：
 ```shell
 $ yarn build:ext employee
 ```
 
-2. 打包成镜像，在扩展组件目录(`/root/workspace/kubesphere/my-ext/extensions/employee`)执行：
+2. 打包成镜像，在扩展组件目录(`~/workspace/kubesphere/my-ext/extensions/employee`)执行：
 ```shell
-$ cd /extensions/employee                                                  # 进入扩展组件目录
-
 $ docker build --platform linux/amd64  -t <yourname>/employee-frontend .   # 打包成 docker 镜像
 ```
 
-打包完成将镜像 push 到镜像仓库后，我们再回到扩展组件管理工程的目录中(`/root/workspace/kubesphere/extension-repo/employee/`)，编辑 `values.yaml`，配置前端镜像并将 `frontend.enabled` 设置为 `true`
+打包完成将镜像 push 到镜像仓库后，我们再回到扩展组件管理工程的目录中(`~/workspace/kubesphere/extension-repo/employee/`)，编辑 `values.yaml`，配置前端镜像并将 `frontend.enabled` 设置为 `true`
 
 ```yaml
 frontend:
@@ -266,7 +264,7 @@ backend:
     tag: latest
 ```
 
-然后在扩展组件管理工程根目录(`/root/workspace/kubesphere/extension-repo/`)执行下面命令，将前端部署到集群中。
+然后在扩展组件管理工程根目录(`~/workspace/kubesphere/extension-repo/`)执行下面命令，将前端部署到集群中。
 
 ```shell
 $ ksbuilder update employee

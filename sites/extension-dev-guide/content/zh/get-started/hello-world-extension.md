@@ -20,7 +20,7 @@ description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hel
     当看到如下的提示信息，表示项目初始化完成：
 
     ```
-    Success! Created my-ext at /Workspace/kubesphere/my-ext
+    Success! Created my-ext at ~/workspace/kubesphere/my-ext
     Inside that directory, you can run several commands:
 
       yarn create:ext
@@ -135,7 +135,7 @@ Linux 下 sed 命令需要去掉紧跟在 sed -i 后面的 `''`。
     <i> [webpack-dev-server] Loopback: http://localhost:8001/
     <i> [webpack-dev-server] On Your Network (IPv4): http://192.168.1.133:8001/
     <i> [webpack-dev-server] On Your Network (IPv6): http://[fe80::1]:8001/
-    <i> [webpack-dev-server] Content not from webpack is served from '/Workspace/kubesphere/my-ext/dist' directory
+    <i> [webpack-dev-server] Content not from webpack is served from '~/workspace/kubesphere/my-ext/dist' directory
     <i> [webpack-dev-server] 404s will fallback to '/index.html'
     Successfully started server on http://localhost:8000
     ```
