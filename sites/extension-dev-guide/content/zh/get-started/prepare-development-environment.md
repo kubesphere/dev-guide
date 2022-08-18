@@ -16,7 +16,7 @@ description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组�
 
 ### 通过 Docker 部署 KubeSphere All-in-One
 
-通过以下命令可以快速创建一个 KubeSphere All-in-One 环境
+通过以下命令可以快速创建一个 KubeSphere All-in-One 环境。
 
 {{< tabs >}}
 {{% tab name="本地环境" %}}
@@ -39,7 +39,7 @@ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:3088
 如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
 {{% /notice %}}
 
-容器正常运行之后，可以通过 kubesphere 容器 IP:30881 可以访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常
+容器正常运行之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
 
 ```bash
 $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
@@ -98,7 +98,7 @@ docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
 
 ### 通过 Docker 创建容器化的本地开发环境
 
-KubeSphere 扩展组件的开发用到了一些开发工具（create-ks-ext，ksbuilder）和依赖（Node.js、Helm 等），我们同样把这些工具打包成一个镜像方便快速搭建开发环境。
+KubeSphere 扩展组件的开发用到了一些开发工具（[create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)，[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/)）和依赖（Node.js、Helm 等），我们同样把这些工具打包成一个镜像方便快速搭建开发环境。
 
 在开始之前我们需要创建一个本地文件目录用作数据持久化，用来保存项目文件。
 
@@ -112,6 +112,10 @@ mkdir -p ~/workspace/kubesphere
 $ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
 $ sed -i '' "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
 ```
+
+{{% notice note %}}
+Linux 下 sed 命令需要去掉紧跟在 sed -i 后面的 `''`。
+{{% /notice %}}
 
 您可以根据习惯选择使用 Shell 命令行（可以使用 Shell Aliases 简化命令行） 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
 
