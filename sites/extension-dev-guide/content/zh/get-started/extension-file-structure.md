@@ -5,15 +5,15 @@ description: 解读 KubeSphere 扩展组件核心的概念并初识扩展组件�
 ---
 
 
-在上一个章节中，您已经可以在本地运行 ks-console 并正确加载扩展组件。下面我们来看看他是如何工作的？
+在上一个章节中，您已经可以在本地运行 ks-console 并正确加载扩展组件，下面我们来看看它是如何工作的。
 
-Hello World 扩展组件做了 3 件事情
+Hello World 扩展组件做了 3 件事情：
 
-1. 在注册顶部导航栏菜单按钮，将扩展组件入口插入到顶部导航栏，便于快速访问扩展组件的页面。
+1. 在顶部导航栏注册菜单按钮，便于快速访问扩展组件的页面。
 2. 添加独立的页面路由，当用户访问 `http://localhost:8000/hello-world` 路径时可以正确的渲染扩展组件页面。
 3. 实现扩展组件页面。
 
-这三个步骤对于开发 KubeSphere 扩展组件来说至关重要，让我们仔细看看 Hello World 扩展组件的源代码，看看这些功能是如何实现的。
+这三个步骤对于开发 KubeSphere 扩展组件来说至关重要，我们再仔细看看 Hello World 扩展组件的文件结构和源代码，进一步了解这些功能是如何实现的。
 
 **扩展组件的目录结构**
 
@@ -45,7 +45,7 @@ extensions/hello-world
 ```json
 {
   "name": "hello-world",
-  "description": "Hello World",
+  "description": "Hello World!",
   "author": "",
   "version": "1.0.0",
   "homepage": "",
@@ -71,7 +71,7 @@ const menu = {
   title: 'Hello World',
   icon: 'cluster',
   order: 0,
-  desc: 'Hello World',
+  desc: 'Hello World!',
   skipAuth: true,
 };
 
@@ -98,8 +98,6 @@ export default [
 ];
 
 ```
-
-您可以通过链接跳转到相关功能的说明页面获取更多信息。
 
 ### 扩展组件功能实现
 
