@@ -52,7 +52,7 @@ globals.context.registerExtension(extensionConfig);    // 通过全局对象注�
 ```
 
 通过 `menu` 的 `parent` 字段设置挂载点：
-* 当值为 `top` 时菜单挂载在顶部导航栏；
+* 当值为 `topbar` 时菜单挂载在顶部导航栏；
 * 当值为 `global` 时菜单挂载在平台管理菜单；
 * 当值为 `toolbox` 时菜单挂载在工具箱。
 * 如果需要挂载在左侧菜单某一个地方，则需要根据系统配置文件 `config.yaml` 的菜单配置里的 name 字段来设置这个 `parent` 字段，通常 `config.yaml` 内容如下：

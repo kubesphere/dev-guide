@@ -11,13 +11,13 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 假设我们要在 KubeSphere Console 里增加一个员工管理模块，菜单入口在页面的顶部栏。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
 1. 员工管理列表页
-   ![](images/pluggable-arch/794091EB-6190-4FF7-9533-3FE81EC4877A.png)
+   ![](images/pluggable-arch/employee-sample-list.png)
 
 2. 新增员工
-   ![](images/pluggable-arch/6667BBCE-0400-4562-BCB1-EC12A2D0BEB7.png)
+   ![](images/pluggable-arch/employee-sample-form.png)
 
 3. 员工详情页
-   ![](images/pluggable-arch/995810AD-639C-4F33-8B8E-9D347225DAB9.png)
+   ![](images/pluggable-arch/employee-sample-detail.png)
 
 ## 创建扩展组件管理工程
 
