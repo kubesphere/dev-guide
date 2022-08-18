@@ -16,11 +16,11 @@ KubeSphere 拥有完整的访问权限控制机制，我们为每一个资源都
 
 我们约定了每个资源都应该属于某一个层级，资源分层有利于我们在 KubeSphere 多租户系统中为不同租户分配资源权限，为不同资源限定了其可分配的权限边界。
 我们将资源分为以下层级：
-- Global 平台
-- Cluster 集群
-- Workspace 企业空间
-- Project 项目空间
-- DevOps DevOps项目
+- Global（平台）
+- Cluster（集群）
+- Workspace（企业空间）
+- Project （项目）
+- DevOps Project（DevOps 项目）
 
 当我们在开发 KubeSphere 扩展组件时，首先需要考虑扩展组件需要包含哪些资源，然后需要确定资源所属的层级。这样 KubeSphere 才能对资源进行权限控制。
 
