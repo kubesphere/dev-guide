@@ -54,7 +54,7 @@ spec:
 
 ### JSBundle
 
-JSBundle 定义了需要注入到前端框架中的 js 扩展包。`ks-console ` 会自动加载此类资源，实现功能动态扩展。
+JSBundle 定义了需要注入到前端框架中的 js 扩展包。`ks-console` 会自动加载此类资源，实现功能动态扩展。
 
 示例与字段说明：
 
@@ -257,7 +257,9 @@ ks-controller-manager 会将扩展组件仓库中声明的 Docker Image 作为�
 
 ###  Extension
 
-Extension CR 声明了从扩展组件包(Chart)中解析出的基础元数据信息，Chart 的 name 会作为 Extension 的 ID，Extension ID 仅允许被相同的 Repository 所管理。
+Extension 声明了从扩展组件包(Chart)中解析出的基础元数据信息，Chart 的 name 会作为 Extension 的 Name.
+
+> 扩展组件仅被允许注册一次，并且只能被一个 Repository 所管理。如果先后创建的两个 Repository A 和 B 均包含 devops 这个扩展组件，那么只有先创建的 Repository A 被允许管理 devops 这个扩展组件。
 
 ```yaml
 apiVersion: kubesphere.io/v1alpha1
@@ -287,7 +289,7 @@ status:
 
 ### ExtensionVersion
 
-ExtensionVersion CR 中包含了详细的不同版本的扩展组件包的元数据信息
+ExtensionVersion 中包含了详细的不同版本的扩展组件包的元数据信息
 
 ```yaml
 apiVersion: kubesphere.io/v1alpha1
