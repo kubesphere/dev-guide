@@ -1,151 +1,155 @@
 ---
-title: 准备开发环境
+title: 搭建开发环境
 weight: 402
-description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组件运行环境和一个容器化的本地开发工具
+description: 介绍如何搭建扩展组件开发环境。
 ---
 
-在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 的扩展组件运行环境。为了简化安装，我们提供了 KubeSphere All-in-One 容器镜像，您可以选择在本地或远程环境中进行部署。
+本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要使用 Docker 创建两个容器：
 
-无论何种部署方式，您首先需要安装好 Docker 或其他兼容 OCI 的容器引擎，下文将以 Docker 为例。
+* kubesphere：最小化模式的 KubeSphere 平台，仅包含 KubeSphere 的基本组件，用于为扩展组件提供 API 服务。kubesphere 容器可以运行在本地主机上，也可以运行在远程主机上以避免本地主机资源占用过高。
 
-### 安装 Docker 
+* dev-tools：扩展组件开发工具链，包含 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在本地主机上的扩展组件源代码文件将挂载到 dev-tools 容器中，并在 dev-tools 容器中运行和测试。dev-tools 容器必须在本地主机上运行。
 
-非桌面环境请参考：[Install Docker Engine](https://docs.docker.com/engine/install/)
+### 前提条件
 
-桌面环境请参考：[Install Docker Desktop](https://docs.docker.com/desktop/)
+* 为避免兼容性问题，建议采用 Linux 主机作为开发主机。
 
-### 通过 Docker 部署 KubeSphere All-in-One
+* 您需要提前在开发主机上安装 Docker。有关更多信息，请参阅 [Docker 官方文档](https://docs.docker.com/engine/install/)。
 
-通过以下命令可以快速创建一个 KubeSphere All-in-One 环境。
+### 安装最小化 KubeSphere
 
-{{< tabs >}}
-{{% tab name="本地环境" %}}
+1. 登录本地主机或远程主机，执行以下命令快速在容器中安装最小化 KubeSphere：
 
-```bash
-docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
-```
+   {{< tabs >}}
+   {{% tab name="本地主机" %}}
 
-{{% /tab %}}
-{{% tab name="远程环境" %}}
+   ```bash
+   docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
+   ```
 
-```bash
-docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
-```
+   {{% /tab %}}
+   {{% tab name="远程主机" %}}
 
-{{% /tab %}}
-{{< /tabs >}}
+   ```bash
+   docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
+   ```
 
-{{% notice note %}}
-如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
-{{% /notice %}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
-等待 kubesphere 容器正常运行，状态变为 healthy 之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
 
-```bash
-$ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
-{
- "gitVersion": "v3.3.0-40+c5e2c55ba72765-dirty",
- "gitMajor": "3",
- "gitMinor": "3+",
- "gitCommit": "c5e2c55ba7276566150b72b5e2e88130bb83ad7c",
- "gitTreeState": "dirty",
- "buildDate": "2022-07-28T08:32:18Z",
- "goVersion": "go1.18.4",
- "compiler": "gc",
- "platform": "linux/amd64",
- "kubernetes": {
-  "major": "1",
-  "minor": "23",
-  "gitVersion": "v1.23.9+k3s1",
-  "gitCommit": "f45cf3267307b153ed8b418ae5b8ea6c6b9ebaca",
-  "gitTreeState": "clean",
-  "buildDate": "2022-07-19T00:42:17Z",
-  "goVersion": "go1.17.5",
-  "compiler": "gc",
-  "platform": "linux/amd64"
- }
-}%
-```
+   {{% notice note %}}
+   在远程主机上安装 KubeSphere 时，需要在容器启动命令中指定 `-p 30881:30881` 参数将 API 服务器 ks-apiserver 对应的 30881 端口映射到主机的 30881 端口，以确保可以通过主机端口访问 ks-apiserver。
+   {{% /notice %}}
 
-{{%expand "如果您的服务出现异常，可以展开当前内容，通过以下命令查看相关日志，进行排查。" %}}
+2. 容器正常运行并且状态为 `Healthy` 之后，执行以下命令检查 ks-apiserver 是否运行正常：
 
-查看 K3s 日志
-```bash
-docker logs -f kubesphere
-```
+   ```bash
+   docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
+   ```
 
-查看 KubeSphere 部署日志
-```bash
-docker exec kubesphere tail -f -n +1 nohup.out
-```
+   如果显示以下信息，则表明 ks-apiserver 运行正常：
+   ```bash
+   {
+    "gitVersion": "v3.3.0-40+c5e2c55ba72765-dirty",
+    "gitMajor": "3",
+    "gitMinor": "3+",
+    "gitCommit": "c5e2c55ba7276566150b72b5e2e88130bb83ad7c",
+    "gitTreeState": "dirty",
+    "buildDate": "2022-07-28T08:32:18Z",
+    "goVersion": "go1.18.4",
+    "compiler": "gc",
+    "platform": "linux/amd64",
+    "kubernetes": {
+     "major": "1",
+     "minor": "23",
+     "gitVersion": "v1.23.9+k3s1",
+     "gitCommit": "f45cf3267307b153ed8b418ae5b8ea6c6b9ebaca",
+     "gitTreeState": "clean",
+     "buildDate": "2022-07-19T00:42:17Z",
+     "goVersion": "go1.17.5",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+    }
+   }
+   ```
 
-查看 pod 运行状态
+   {{%expand "如果 ks-apiserver 未正常运行，您可以展开当前内容，执行以下命令查看日志进行排查。" %}}
 
-```
-docker exec kubesphere kubectl get po -A
-```
+   * 执行以下命令查看 K3s 日志：
 
-查看 ks-apiserver pod 日志
+     ```bash
+     docker logs -f kubesphere
+     ```
 
-```
-docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
-```
+   * 执行以下命令查看 KubeSphere 安装日志：
 
-如果您无法解决发现的问题，欢迎向我们[提交 issue](https://github.com/kubesphere/kubesphere/issues/new?assignees=&labels=kind%2Fbug&template=bug_report.md)。
+     ```bash
+     docker exec kubesphere tail -f -n +1 nohup.out
+     ```
+
+   * 执行以下命令查看 pod 运行状态：
+
+     ```
+     docker exec kubesphere kubectl get po -A
+     ```
+
+   * 执行以下命令查看 ks-apiserver pod 日志：
+
+     ```
+     docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
+     ```
+
+   如果您无法解决发现的问题，[请向 KubeSphere 开源社区提交 issue](https://github.com/kubesphere/kubesphere/issues/new?assignees=&labels=kind%2Fbug&template=bug_report.md)。
 
 {{% /expand%}}
 
 
-### 通过 Docker 创建容器化的本地开发环境
+### 安装开发工具链 dev-tools
 
-KubeSphere 扩展组件的开发用到了一些开发工具（[create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)，[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/)）和依赖（Node.js、Helm 等），我们同样把这些工具打包成一个镜像方便快速搭建开发环境。
+您可以采用以下两种方式安装开发工具链：
 
-在开始之前我们需要创建一个本地文件目录用作数据持久化，用来保存项目文件。
+* 设置命令别名：在本地主机上为开发工具命令设置别名，使开发工具命令自动在 dev-tools 容器中运行，并根据开发工具命令的运行和终止自动创建和删除 dev-tools 容器。
 
-```bash
-mkdir -p ~/workspace/kubesphere
-```
-
-保存 kubesphere 集群的 kubeconfig 到本地，并配置 kube-apiserver 的地址与端口。
-
-```
-$ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
-$ perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
-```
-
-您可以根据习惯选择使用 Shell 命令行（可以使用 Shell Aliases 简化命令行） 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
+* 连接 IDE：在本地主机上持续运行 dev-tools 容器，将 IDE 连接到 dev-tools 容器中，通过 IDE 在 dev-tools 容器中调用开发工具。
 
 {{< tabs >}}
-{{% tab name="Shell Aliases" %}}
+{{% tab name="设置命令别名" %}}
+
+执行以下命令为开发工具命令设置别名：
 
 ```bash
-$ alias yarn='docker run --rm --user $(id -u):$(id -g) -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
-$ alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
-$ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 ksbuilder'
+alias yarn='docker run --rm --user $(id -u):$(id -g) -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+```
+
+```bash
+alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
+```
+
+```bash
+alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 ksbuilder'
 ```
 
 {{% /tab %}}
-{{% tab name="VS Code Remote - Containers" %}}
+{{% tab name="连接 IDE" %}}
 
-您可以很方便的[使用 VS Code 在容器中进行开发](https://code.visualstudio.com/docs/remote/containers)，首先您需要[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
+以下介绍如何使用 VS Code 连接 dev-tools 容器。如果您使用其他 IDE，请参阅 IDE 的官方文档。
 
-1. 通过 Docker 启动开发环境
+1. 登录本地主机，执行以下命令创建 dev-tools 容器：
 
-```bash
-docker run -d --name dev-tools -v ~/workspace/kubesphere/config:/root/.kube/config -v ~/workspace/kubesphere:/workspace/kubesphere -w /workspace/kubesphere -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
-```
+   ```bash
+   docker run -d --name dev-tools -v ~/workspace/kubesphere/config:/root/.kube/config -v ~/workspace/kubesphere:/workspace/kubesphere -w /workspace/kubesphere -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
+   ```
 
-2. Attach to Running Container 选择 dev-tools 容器
+2. 打开 VS Code 并[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
 
-![attach-to-running-container.png](images/get-started/attach-to-running-container.png)
+3. 打开 VS Code 命令面板，输入 `attach to running container`，在搜索结果中选择 `Remote-Containers: Attach to Running Container`，然后选择 dev-tools 容器。
 
-3. 打开 `/workspace/kubesphere` 目录
+  ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
 
-![open-folder.png](images/get-started/open-folder.png)
+4. 打开 VS Code 终端。您可以在 VS Code 终端调用开发工具。
 
-4. 打开终端
-
-![dev-tools.png](images/get-started/dev-tools.png)
+  ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
 
 {{% /tab %}}
 {{< /tabs >}}
