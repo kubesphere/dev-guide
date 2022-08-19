@@ -26,11 +26,11 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 1. 通过 `ksbuilder init <directory>` 初始化工程目录
 
 ```shell
-$ ksbuilder init my-extensions
+$ ksbuilder init extension-repo
 ```
 执行完成后，可以看到如下信息，表示项目初始化成功：
 ```shell
-$ ksbuilder init my-extensions
+$ ksbuilder init extension-repo
 Directory: ~/workspace/kubesphere/extension-repo
 
 The project has been created.
