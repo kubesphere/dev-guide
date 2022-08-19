@@ -1,7 +1,7 @@
 ---
 title: 准备开发环境
 weight: 402
-description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组件运行环境和一个容器化的本地开发工具。
+description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组件运行环境和一个容器化的本地开发工具
 ---
 
 在开始之前，您需要准备一个 Kubernetes 集群并安装 KubeSphere 4.0 的扩展组件运行环境。为了简化安装，我们提供了 KubeSphere All-in-One 容器镜像，您可以选择在本地或远程环境中进行部署。
@@ -39,7 +39,7 @@ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:3088
 如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
 {{% /notice %}}
 
-容器正常运行之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
+等待容器正常运行之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
 
 ```bash
 $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
@@ -110,12 +110,8 @@ mkdir -p ~/workspace/kubesphere
 
 ```
 $ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
-$ sed -i '' "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
+$ perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
 ```
-
-{{% notice note %}}
-Linux 下 sed 命令需要去掉紧跟在 sed -i 后面的 `''`。
-{{% /notice %}}
 
 您可以根据习惯选择使用 Shell 命令行（可以使用 Shell Aliases 简化命令行） 或者 VS Code Remote - Containers 扩展连接到开发环境容器中执行后文中的命令行操作。
 

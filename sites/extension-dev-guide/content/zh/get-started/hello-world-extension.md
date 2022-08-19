@@ -104,12 +104,8 @@ description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hel
     扩展组件开发过程依赖 ks-apiserver 提供的 API，需要参考一下命令行修改本地配置文件 ks-apiserver 地址
 
     ```sh
-    sed -i '' "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/workspace/kubesphere/my-ext/configs/local_config.yaml 
+    perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/workspace/kubesphere/my-ext/configs/local_config.yaml 
     ```
-
-{{% notice note %}}
-Linux 下 sed 命令需要去掉紧跟在 sed -i 后面的 `''`。
-{{% /notice %}}
 
 {{% notice note %}}
 上述命令将 ks-apiserver 的访问地址，写入 `configs/local_config.yaml` 配置文件中，本地环境中 kubesphere 容器的IP地址可以通过命令 `docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere` 获得，ks-apiserver 默认的访问端口为 30881。如果您的 kubesphere 容器部署在远程环境中，您需要将 kubesphere 容器的 30881 端口通过VPN、端口转发等方式暴露到开发环境中，并根据实际情况修改命令行中 ks-apiserver 的地址与端口信息。 
