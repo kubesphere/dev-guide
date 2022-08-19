@@ -39,7 +39,7 @@ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:3088
 如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
 {{% /notice %}}
 
-等待容器正常运行之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
+等待 kubesphere 容器正常运行，状态变为 healthy 之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
 
 ```bash
 $ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
