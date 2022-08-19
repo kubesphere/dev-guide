@@ -1,7 +1,7 @@
 ---
-title: Helo World 扩展组件结构解析
+title: Hello World 扩展组件结构解析
 weight: 404
-description: 解读 Helo World 扩展组件的工作方式
+description: 解读 Hello World 扩展组件的工作方式
 ---
 
 在上一个章节中，您已经可以在本地运行 ks-console 并正确加载扩展组件，下面我们来看看它是如何工作的。
