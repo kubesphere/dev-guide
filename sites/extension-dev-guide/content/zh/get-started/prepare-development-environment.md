@@ -18,31 +18,18 @@ description: 介绍如何安装一个 All in One 的 KubeSphere 示例扩展组�
 
 通过以下命令可以快速创建一个 KubeSphere All-in-One 环境。
 
-{{< tabs >}}
-{{% tab name="本地环境" %}}
-
-```bash
-docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
 ```
-
-{{% /tab %}}
-{{% tab name="远程环境" %}}
-
-```bash
-docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
+docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 {{% notice note %}}
-如果是在远程环境中部署 KubeSphere，需要在容器启动命令中指定 `-p 30881:30881` 参数，如上面命令所示，目的是将 ks-apiserver 对应的 30881 端口暴露，确保在开发环境中可以访问到该端口。
+kubesphere 容器 -p 暴露的 30880 端口为 ks-console 的访问端口，30881 为 ks-apiserver 的访问端口
 {{% /notice %}}
 
-等待 kubesphere 容器正常运行，状态变为 healthy 之后，可以通过 KubeSphere 容器 IP:30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
+等待 kubesphere 容器正常运行，状态变为 healthy 之后，可以通过 30881 访问到 ks-apiserver，通过下述命令验证 ks-apiserver 服务是否正常。
 
 ```bash
-$ docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
+$ curl -s -u admin:P@88w0rd http://localhost:30881/version
 {
  "gitVersion": "v3.3.0-40+c5e2c55ba72765-dirty",
  "gitMajor": "3",

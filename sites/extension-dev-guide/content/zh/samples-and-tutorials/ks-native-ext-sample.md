@@ -84,10 +84,10 @@ EOF
 $ kubectl apply -f employee-api.yaml
 ```
 
-验证 API 注册是否成功，正常情况下您可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。本地开发环境中 kubesphere 中 ks-apiserver 的访问端口 30881 默认是不直接暴露的，您需要在 kubesphere 容器网络中访问 ks-apiserver 的，远程环境部署 kubesphere 提供了本地环境可以访问的 ks-apiserver 的访问端口。注意如果您修改了 admin 用户的默认密码，您需要修改命令行中 password 参数进行验证。
+验证 API 注册是否成功，正常情况下您可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，您需要修改命令行中 password 参数。
 
 ```bash
-$ docker exec -it kubesphere wget -qO- http://admin:P@88w0rd@localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees | jq 
+$ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees | jq 
 {
   "items": [
     {
