@@ -4,21 +4,19 @@ weight: 402
 description: 介绍如何搭建扩展组件开发环境。
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要使用 Docker 创建两个容器：
+本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要使用 Docker 创建 kubesphere 和 dev-tools 两个容器：
 
-* kubesphere：最小化模式的 KubeSphere 平台，仅包含 KubeSphere 的基本组件，用于为扩展组件提供 API 服务。kubesphere 容器可以运行在本地主机上，也可以运行在远程主机上以避免本地主机资源占用过高。
+* kubesphere：运行 KubeSphere Core，即 KubeSphere 的核心组件，用于为扩展组件提供 API 服务。kubesphere 容器可以运行在本地主机上，也可以运行在远程主机上以避免本地主机资源占用过高。
 
-* dev-tools：扩展组件开发工具链，包含 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在本地主机上的扩展组件源代码文件将挂载到 dev-tools 容器中，并在 dev-tools 容器中运行和测试。dev-tools 容器必须在本地主机上运行。
+* dev-tools：提供扩展组件开发工具链，包括 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在本地主机上的扩展组件源代码文件将挂载到 dev-tools 容器中，并在 dev-tools 容器中运行和测试。dev-tools 容器必须在本地主机上运行。
 
 ### 前提条件
 
-* 为避免兼容性问题，建议采用 Linux 主机作为开发主机。
+您需要提前在开发主机上安装 Docker。有关更多信息，请参阅 [Docker 官方文档](https://docs.docker.com/engine/install/)。
 
-* 您需要提前在开发主机上安装 Docker。有关更多信息，请参阅 [Docker 官方文档](https://docs.docker.com/engine/install/)。
+### 安装 KubeSphere Core
 
-### 安装最小化 KubeSphere
-
-1. 登录本地主机或远程主机，执行以下命令快速在容器中安装最小化 KubeSphere：
+1. 登录本地主机或远程主机，执行以下命令快速在容器中安装 KubeSphere Core：
 
    {{< tabs >}}
    {{% tab name="本地主机" %}}
@@ -39,7 +37,7 @@ description: 介绍如何搭建扩展组件开发环境。
 
 
    {{% notice note %}}
-   在远程主机上安装 KubeSphere 时，需要在容器启动命令中指定 `-p 30881:30881` 参数将 API 服务器 ks-apiserver 对应的 30881 端口映射到主机的 30881 端口，以确保可以通过主机端口访问 ks-apiserver。
+   在远程主机上安装 KubeSphere Core 时，需要在容器启动命令中指定 `-p 30881:30881` 参数将 API 服务器 ks-apiserver 对应的 30881 端口映射到主机的 30881 端口，以确保可以通过主机端口访问 ks-apiserver。
    {{% /notice %}}
 
 2. 容器正常运行并且状态为 `Healthy` 之后，执行以下命令检查 ks-apiserver 是否运行正常：
@@ -105,18 +103,18 @@ description: 介绍如何搭建扩展组件开发环境。
 {{% /expand%}}
 
 
-### 安装开发工具链 dev-tools
+### 安装开发工具链
 
 您可以采用以下两种方式安装开发工具链：
 
 * 设置命令别名：在本地主机上为开发工具命令设置别名，使开发工具命令自动在 dev-tools 容器中运行，并根据开发工具命令的运行和终止自动创建和删除 dev-tools 容器。
 
-* 连接 IDE：在本地主机上持续运行 dev-tools 容器，将 IDE 连接到 dev-tools 容器中，通过 IDE 在 dev-tools 容器中调用开发工具。
+* 连接代码编辑器：在本地主机上持续运行 dev-tools 容器，将代码编辑器连接到 dev-tools 容器中，通过代码编辑器在 dev-tools 容器中调用开发工具。
 
 {{< tabs >}}
 {{% tab name="设置命令别名" %}}
 
-执行以下命令为开发工具命令设置别名：
+登录本地主机，执行以下命令为开发工具命令设置别名：
 
 ```bash
 alias yarn='docker run --rm --user $(id -u):$(id -g) -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
@@ -131,9 +129,9 @@ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesph
 ```
 
 {{% /tab %}}
-{{% tab name="连接 IDE" %}}
+{{% tab name="连接代码编辑器" %}}
 
-以下介绍如何使用 VS Code 连接 dev-tools 容器。如果您使用其他 IDE，请参阅 IDE 的官方文档。
+以下介绍如何使用 VS Code 连接 dev-tools 容器。如果您使用其他代码编辑器，请参阅代码编辑器的官方文档。
 
 1. 登录本地主机，执行以下命令创建 dev-tools 容器：
 
@@ -145,11 +143,11 @@ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesph
 
 3. 打开 VS Code 命令面板，输入 `attach to running container`，在搜索结果中选择 `Remote-Containers: Attach to Running Container`，然后选择 dev-tools 容器。
 
-  ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
+   ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
 
 4. 打开 VS Code 终端。您可以在 VS Code 终端调用开发工具。
 
-  ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
+   ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
 
 {{% /tab %}}
 {{< /tabs >}}
