@@ -28,7 +28,7 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/employee-backend)。
 
 {{% notice note %}}
-借助 [KubeSphere API 扩展机制](zh/architecture/backend-extension-architecture/)，可以灵活的将您的 API 接入 KubeSphere API 网关，以提供统一的认证、鉴权能力，您还可以通过 ks-core 提供的 [API](zh/references/kubesphere-api/) 接入 KubeSphere 租户体系。
+借助 [KubeSphere API 扩展机制](zh/architecture/backend-extension-architecture/)，可以动态的将您的 API 注册到 ks-apiserver，扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](zh/references/kubesphere-api/) 接入 KubeSphere 租户体系。
 {{% /notice %}}
 
 #### 1. 构建镜像
