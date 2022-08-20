@@ -23,7 +23,7 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 3. 员工详情页
    ![](images/pluggable-arch/employee-sample-detail.png)
 
-## 后端开发
+## 后端扩展组件开发
 
 紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/employee-backend)。
 
@@ -49,7 +49,7 @@ $ popd
 当后端容器镜像构建完成后，可以借助 (alias 或者 dev-tools 中提供的) kubectl 将 employee-api 部署到 KubeSphere 环境中。
 
 ```bash
-$ kubectl create deployment employee-api --image=kubespheredev/employee-api # 可以使用我们已经事先构建好的镜像直接部署
+$ kubectl create deployment employee-api --image=kubespheredev/employee-api:latest # 可以使用我们已经事先构建好的镜像直接部署
 $ kubectl expose deployment employee-api --type=ClusterIP --name=employee-api --port=8080
 ```
 
@@ -61,14 +61,14 @@ NAME                            READY   STATUS    RESTARTS   AGE
 employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 ```
 
-#### 3. 注册 API 到 ks-apiserver
+#### 3. 注册后端扩展组件 API 到 ks-apiserver
 
 通过创建 [APIService](zh/architecture/backend-extension-architecture/#apiservice) 资源对象，我们可以将 employee-api 提供的 API 注册到 ks-apiserver 中供前端组件统一集成。
 
 以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API
 
 ```bash
-$ cat << EOF > v1alpha1.employee.kubesphere.io.yaml
+$ cat << EOF > employee-api.yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
@@ -81,24 +81,48 @@ spec:
 status:
   state: Enabled
 EOF
-$ kubectl apply -f v1alpha1.employee.kubesphere.io.yaml
+$ kubectl apply -f employee-api.yaml
 ```
 
-验证 API 注册是否成功，正常情况下您可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。
+验证 API 注册是否成功，正常情况下您可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。本地开发环境中 kubesphere 中 ks-apiserver 的访问端口 30881 默认是不直接暴露的，您需要在 kubesphere 容器网络中访问 ks-apiserver 的，远程环境部署 kubesphere 提供了本地环境可以访问的 ks-apiserver 的访问端口。注意如果您修改了 admin 用户的默认密码，您需要修改命令行中 password 参数进行验证。
 
 ```bash
-docker run --rm kubespheredev/dev-tools:v0.0.1 curl -su admin:P@88w0rd  http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/employee.kubesphere.io/v1alpha1/employees 
-{"items":[{"ID":0,"CreatedAt":"0001-01-01T00:00:00Z","UpdatedAt":"2022-05-12T01:27:14.475941+08:00","DeletedAt":null,"id":3,"name":"Jack","email":"jack@yunify.com","age":21},{"ID":0,"CreatedAt":"2022-05-12T01:22:01.276225+08:00","UpdatedAt":"2022-05-12T01:26:39.561368+08:00","DeletedAt":null,"id":4,"name":"Jerry","email":"jerry@yunify.com","age":24}],"totalItems":2}
+$ docker exec -it kubesphere wget -qO- http://admin:P@88w0rd@localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees | jq 
+{
+  "items": [
+    {
+      "ID": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "UpdatedAt": "2022-05-12T01:27:14.475941+08:00",
+      "DeletedAt": null,
+      "id": 3,
+      "name": "Jack",
+      "email": "jack@yunify.com",
+      "age": 21
+    },
+    {
+      "ID": 0,
+      "CreatedAt": "2022-05-12T01:22:01.276225+08:00",
+      "UpdatedAt": "2022-05-12T01:26:39.561368+08:00",
+      "DeletedAt": null,
+      "id": 4,
+      "name": "Jerry",
+      "email": "jerry@yunify.com",
+      "age": 24
+    }
+  ],
+  "totalItems": 2
+}
 ```
 
 
 到这里后端的开发与 API 的注册就已经完成了，紧接着我们来看看前端的开发与测试流程。
 
 
-## 前端开发
+## 前端扩展组件开发
 
 在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
-我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/my-ext/`)中创建我们的第二个扩展组建 employee
+我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/my-ext/`)中创建我们的第二个前端扩展组件 employee
 
 ```shell
 $ yarn create:ext
@@ -172,24 +196,67 @@ Successfully started server on http://localhost:8000
 
 前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像：
 
-1. 编译前端代码，在前端项目根目录(`~/workspace/kubesphere/my-ext/`)执行：
+#### 1. 编译前端代码，在前端项目根目录(`~/workspace/kubesphere/my-ext/`)执行：
 ```shell
 $ yarn build:ext employee
 ```
 
-2. 打包成镜像，在扩展组件目录(`~/workspace/kubesphere/my-ext/extensions/employee`)执行：
+#### 2. 打包成镜像，在扩展组件目录(`~/workspace/kubesphere/my-ext/extensions/employee`)执行：
 ```shell
 $ docker build --platform linux/amd64  -t <yourname>/employee-frontend .   # 打包成 docker 镜像
 ```
 
-## 扩展组件编排与打包
+#### 3. 部署前端服务
 
-当我们准备好前后端扩展组件的镜像，以及扩展资源声明后，就可以借助 ksbuilder、Helm 对我们的扩展组件进行编排、打包、测试了。
+```bash
+$ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest # 可以使用我们已经事先构建好的镜像直接部署
+$ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=8080
+```
+
+验证部署是否成功，pod 是否处于 Running 状态
+
+```bash
+$ kubectl get po
+NAME                            READY   STATUS    RESTARTS   AGE
+employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
+```
+
+#### 3. 注册前端扩展组件到 ks-apiserver
+
+通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，我们可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+
+以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
+
+```bash
+$ cat << EOF > employee-frontend.yaml
+apiVersion: extensions.kubesphere.io/v1alpha1
+kind: JSBundle
+metadata:
+  name: v1alpha1.employee.kubesphere.io
+spec:
+  rawFrom:
+    url: https://employee-frontend.default.svc/dist/index.js
+status:
+  state: Enabled
+EOF
+$ kubectl apply -f employee-frontend.yaml
+```
+
+前端扩展组件注册成功后，可以在本地以 production 模式启动 ks-console，测试扩展组件相关功能。
+
+```shell
+$ yarn build:prod
+$ yarn start
+```
+
+## 扩展组件打包
+
+当我们准备好前后端扩展组件的镜像，以及扩展资源声明后，就可以借助 ksbuilder、Helm 对我们的扩展组件进行打包与测试了。
 
 
 #### 1. 初始化扩展组件管理工程
 
-使用 `ksbuilder` 创建一个扩展组件的管理工程，该工程可以帮助我们管理需要打包扩展组件，借助该工程可以构建一个可以对外发布的扩展组件仓库镜像。
+前后端扩展组件都开发完成后，我们需要使用 `ksbuilder` 创建一个扩展组件的管理工程，该工程可以帮助我们管理需要打包的前后端扩展组件。基于该工程我们还可以构建一个可以对外发布的扩展组件仓库镜像。
 
 通过 `ksbuilder init <directory>` 初始化工程目录
 
@@ -204,9 +271,9 @@ Directory: ~/workspace/kubesphere/extension-repo
 The project has been created.
 ```
 
-#### 2. 创建 employee 扩展组件编排目录
+#### 2. 初始化 employee 扩展组件包目录
 
-工程初始化成功后，我们进入到工程目录中，通过交互式命令创建出扩展组件的管理目录。
+工程初始化成功后，我们进入到工程目录中，通过交互式命令创建出扩展组件包的目录。
 
 ```shell
 $ cd extension-repo
@@ -227,7 +294,7 @@ Directory: ~/workspace/kubesphere/extension-repo/employee
 The extension charts has been created.
 ```
 
-当看到上面提示信息时表示扩展组件的编排目录 `employee` 创建成功，这同样是一个 [Helm Chart](https://helm.sh/zh/docs/topics/charts/) 工程目录(我们借助 Helm Chart 对我们的扩展组件进行编排)，目录结构如下：
+当看到上面提示信息时表示扩展组件包的目录 `employee` 创建成功，这同样是一个 [Helm Chart](https://helm.sh/zh/docs/topics/charts/) 工程目录(我们借助 Helm Chart 对我们的扩展组件进行编排)，目录结构如下：
 
 ```shell
 .
@@ -258,7 +325,7 @@ The extension charts has been created.
 └── values.yaml
 ```
 
-我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 APIService、JSBundle 等 API 扩展声明。
+我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 [APIService](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
 
 ```yaml
 frontend:
@@ -277,10 +344,7 @@ backend:
 
 #### 3. 打包扩展组件
 
-上述步骤已经完成了扩展组件的编排工作，我们可以借助 ks-builder 对我们的扩展组件进行打包。
-
-
-
+通过上述步骤我们已经完成了扩展组件包的创建，我们还可以借助 ks-builder 将扩展组件部署后测试。
 
 ## 测试扩展组件包
 
@@ -290,14 +354,6 @@ backend:
 $ ksbuilder update employee
 ```
 
-命令执行成功后，我们在前端工程中执行下面命令。在本地以 production 模式启动 ks-console，测试扩展组件相关功能。
-
-```shell
-$ yarn build:prod
-$ yarn start
-```
-
-至此，扩展组件在本地的开发调试就完成了。
-
+命令执行成功后，我们可以直接访问 kubesphere 容器 30880 端口打开 ks-console 页面并登陆，查看对应的扩展组件页面、导航栏按钮是否正常加载
 
 
