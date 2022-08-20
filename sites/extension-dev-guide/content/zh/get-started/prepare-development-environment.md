@@ -30,7 +30,7 @@ docker run -d --name kubesphere --privileged=true --restart=always -p 30881:3088
 2. 容器正常运行并且状态为 `healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
 
    ```bash
-   curl -s -u admin:P@88w0rd http://localhost:30881/version
+   curl -s http://localhost:30881/kapis/version
    ```
 
    如果显示以下信息，则表明 `ks-apiserver` 运行正常：
