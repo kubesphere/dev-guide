@@ -8,7 +8,20 @@ description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hel
 
 ## 初始化扩展组件项目
 
-1. 创建项目脚手架
+1. 在开始之前我们需要创建一个本地文件目录用来保存项目文件。
+
+```bash
+mkdir -p ~/workspace/kubesphere
+```
+
+保存 kubesphere 集群的 kubeconfig 到本地，并配置 kube-apiserver 的地址与端口。
+
+```
+$ docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/workspace/kubesphere/config
+$ perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/workspace/kubesphere/config
+```
+
+2. 创建项目脚手架
 
     通过 `yarn create ks-ext <directory>` 命令初始化项目目录
 
@@ -50,7 +63,7 @@ description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hel
     Done in 560.43s
     ```
 
-2. 创建 Hello World 扩展组件
+3. 创建 Hello World 扩展组件
 
     通过交互式命令，创建第一个拓展组件 hello-world
 
@@ -101,15 +114,17 @@ description: 演示如何创建一个简单的 KubeSphere 示例扩展组件 Hel
 1. 配置 ks-apiserver 访问
 
 
-    扩展组件开发过程依赖 ks-apiserver 提供的 API，需要参考一下命令行修改本地配置文件 ks-apiserver 地址
+   扩展组件开发过程依赖 ks-apiserver 提供的 API，需要参考一下命令行修改本地配置文件 ks-apiserver 地址
 
-    ```sh
-    perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/workspace/kubesphere/my-ext/configs/local_config.yaml 
-    ```
+   ```sh
+   perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/workspace/kubesphere/my-ext/configs/local_config.yaml 
+   ```
 
-{{% notice note %}}
-上述命令将 ks-apiserver 的访问地址，写入 `configs/local_config.yaml` 配置文件中，本地环境中 kubesphere 容器的IP地址可以通过命令 `docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere` 获得，ks-apiserver 默认的访问端口为 30881。如果您的 kubesphere 容器部署在远程环境中，您需要将 kubesphere 容器的 30881 端口通过VPN、端口转发等方式暴露到开发环境中，并根据实际情况修改命令行中 ks-apiserver 的地址与端口信息。 
-{{% /notice %}}
+   {{% notice note %}}
+
+   上述命令将 ks-apiserver 的访问地址，写入 `configs/local_config.yaml` 配置文件中，本地环境中 kubesphere 容器的IP地址可以通过命令 `docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere` 获得，ks-apiserver 默认的访问端口为 30881。如果您的 kubesphere 容器部署在远程环境中，您需要将 kubesphere 容器的 30881 端口通过VPN、端口转发等方式暴露到开发环境中，并根据实际情况修改命令行中 ks-apiserver 的地址与端口信息。 
+
+   {{% /notice %}}
 
 
 2. 运行

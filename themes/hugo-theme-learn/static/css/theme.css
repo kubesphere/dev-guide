@@ -1141,3 +1141,7 @@ pre .copy-to-clipboard:hover {
 option {
     color: initial;
 }
+
+div.highlight+div.highlight {
+  margin-top: 20px;
+}
