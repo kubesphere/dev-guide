@@ -125,6 +125,7 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
 
 ```shell
+cd ~/workspace/kubesphere/extensions-frontend/
 yarn create:ext
 ```
 
@@ -192,25 +193,35 @@ Dashboard app running at port 8000
 Successfully started server on http://localhost:8000 
 ```
 
+开发环境启动后，我们就可以进行具体的业务代码开发。开发方式与普通 react app 基本一致，本示例前端部分源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
+
+便于演示，我们可以将示例仓库中的代码直接复制过来
+
+```
+cp -r ~/workspace/kubesphere/extension-samples/extensions-frontend/extensions/employee/* ~/workspace/kubesphere/extensions-frontend/extensions/employee
+```
+
 
 #### 2. 构建镜像
 
-开发环境启动后，我们就可以进行具体的业务代码开发了。开发方式与普通 react app 基本一致，具体实现过程我们同样不做赘述了，源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
 
-前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像，也可以直接使用官方提供的镜像 kubespheredev/employee-frontend:latest。
+前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像，也可以直接使用官方提供的镜像 `kubespheredev/employee-frontend:latest`。
 
 ```shell
-$ cd ~/workspace/kubesphere/extensions-frontend/
 $ yarn build:ext employee # 编译前端代码
-$ cd extensions/employee/
-$ docker build --platform linux/amd64  -t <yourname>/employee-frontend .
+$ pushd extensions/employee/
+$ docker build -t <YOUR_REPO>/employee-frontend:latest .
+$ docker push <YOUR_REPO>/employee-frontend:latest
+$ popd
 ```
 
 #### 3. 部署前端服务
 
+可以使用官方已经构建好的镜像直接部署
+
 ```bash
-$ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest # 可以使用官方已经构建好的镜像直接部署
-$ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=8080
+$ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest 
+$ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=80
 ```
 
 验证部署是否成功，pod 是否处于 Running 状态
@@ -235,19 +246,27 @@ metadata:
   name: v1alpha1.employee.kubesphere.io
 spec:
   rawFrom:
-    url: https://employee-frontend.default.svc/dist/index.js
+    url: http://employee-frontend.default.svc/dist/employee-frontend/index.js
 status:
   state: Enabled
+  link: /dist/employee-frontend/index.js
 EOF
 $ kubectl apply -f employee-frontend.yaml
 ```
 
-前端扩展组件注册成功后，可以在本地以 production 模式启动 ks-console，测试扩展组件相关功能。
+前端扩展组件注册成功后，可以在本地以 production 模式启动 ks-console。
 
 ```shell
 $ yarn build:prod
 $ yarn start
 ```
+
+访问 `http://localhost:8000`，测试扩展组件是否正确加载，正常情况下您可以通过以下入口访问到本示例中扩展组件的页面。
+
+![employee-entry](images/get-started/employee-entry.png)
+
+![employee-management](images/get-started/employee-management.png)
+
 
 ## 扩展组件打包
 
