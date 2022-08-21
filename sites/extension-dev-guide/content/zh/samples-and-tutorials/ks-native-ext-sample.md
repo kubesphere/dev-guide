@@ -10,18 +10,16 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 
 ## 需求与设计
 
-在需求设计阶段，我们需要完成功能需求分析，UI 设计。
-
-假设我们要在 KubeSphere 前段页面中增加员工管理模块，菜单入口在页面的顶部栏。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
+假设我们要在 KubeSphere 前端页面中增加员工管理模块，菜单入口在页面的顶部栏。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
 1. 员工管理列表页
-   ![](images/pluggable-arch/employee-sample-list.png)
+   ![Employee Management](images/pluggable-arch/employee-sample-list.png)
 
 2. 新增员工
-   ![](images/pluggable-arch/employee-sample-form.png)
+   ![Addn New Employee](images/pluggable-arch/employee-sample-form.png)
 
 3. 员工详情页
-   ![](images/pluggable-arch/employee-sample-detail.png)
+   ![Employee Details](images/pluggable-arch/employee-sample-detail.png)
 
 ## 后端扩展组件开发
 
@@ -33,7 +31,7 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 
 #### 1. 构建镜像
 
-当完成后端的 API 开发之后，需要将的后端组件通过容器进行构建，以下为开发环境中构建镜像的示例：
+当完成后端的 API 开发之后，需要将组件后端部分通过容器进行构建，以下为开发环境中构建镜像的示例，您也可以直接使用官方提供的镜像 kubespheredev/employee-api:latest。
 
 ```shell
 $ cd ~/workspace/kubesphere
@@ -49,7 +47,7 @@ $ popd
 当后端容器镜像构建完成后，可以借助 (alias 或者 dev-tools 中提供的) kubectl 将 employee-api 部署到 KubeSphere 环境中。
 
 ```bash
-$ kubectl create deployment employee-api --image=kubespheredev/employee-api:latest # 可以使用我们已经事先构建好的镜像直接部署
+$ kubectl create deployment employee-api --image=kubespheredev/employee-api:latest # 可以使用官方已经构建好的镜像直接部署
 $ kubectl expose deployment employee-api --type=ClusterIP --name=employee-api --port=8080
 ```
 
@@ -65,7 +63,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 
 通过创建 [APIService](zh/architecture/backend-extension-architecture/#apiservice) 资源对象，我们可以将 employee-api 提供的 API 注册到 ks-apiserver 中供前端组件统一集成。
 
-以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API
+以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
 
 ```bash
 $ cat << EOF > employee-api.yaml
@@ -84,7 +82,7 @@ EOF
 $ kubectl apply -f employee-api.yaml
 ```
 
-验证 API 注册是否成功，正常情况下您可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，您需要修改命令行中 password 参数。
+验证 API 注册是否成功，正常情况下可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，则需要修改命令行中 password 参数。
 
 ```bash
 $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees | jq 
@@ -121,11 +119,13 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 
 ## 前端扩展组件开发
 
+#### 1. 创建项目脚手架
+
 在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
-我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/my-ext/`)中创建我们的第二个前端扩展组件 employee
+我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
 
 ```shell
-$ yarn create:ext
+yarn create:ext
 ```
 
 进入交互式命令行界面，按提示输入创建出 `employee` 扩展组件。
@@ -187,29 +187,29 @@ Dashboard app running at port 8000
 <i> [webpack-dev-server] Loopback: http://localhost:8001/
 <i> [webpack-dev-server] On Your Network (IPv4): http://192.168.1.133:8001/
 <i> [webpack-dev-server] On Your Network (IPv6): http://[fe80::1]:8001/
-<i> [webpack-dev-server] Content not from webpack is served from '~/workspace/kubesphere/my-ext/dist' directory
+<i> [webpack-dev-server] Content not from webpack is served from '~/workspace/kubesphere/extensions-frontend/dist' directory
 <i> [webpack-dev-server] 404s will fallback to '/index.html'
 Successfully started server on http://localhost:8000 
 ```
 
-开发环境启动后，我们就可以进行具体的业务代码开发了。开发方式与普通 react app 基本一致，具体实现过程我们同样不做赘述了，源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/my-ext/extensions/employee)
 
-前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像：
+#### 2. 构建镜像
 
-#### 1. 编译前端代码，在前端项目根目录(`~/workspace/kubesphere/my-ext/`)执行：
+开发环境启动后，我们就可以进行具体的业务代码开发了。开发方式与普通 react app 基本一致，具体实现过程我们同样不做赘述了，源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
+
+前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像，也可以直接使用官方提供的镜像 kubespheredev/employee-frontend:latest。
+
 ```shell
-$ yarn build:ext employee
-```
-
-#### 2. 打包成镜像，在扩展组件目录(`~/workspace/kubesphere/my-ext/extensions/employee`)执行：
-```shell
-$ docker build --platform linux/amd64  -t <yourname>/employee-frontend .   # 打包成 docker 镜像
+$ cd ~/workspace/kubesphere/extensions-frontend/
+$ yarn build:ext employee # 编译前端代码
+$ cd extensions/employee/
+$ docker build --platform linux/amd64  -t <yourname>/employee-frontend .
 ```
 
 #### 3. 部署前端服务
 
 ```bash
-$ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest # 可以使用我们已经事先构建好的镜像直接部署
+$ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest # 可以使用官方已经构建好的镜像直接部署
 $ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=8080
 ```
 
@@ -221,7 +221,7 @@ NAME                            READY   STATUS    RESTARTS   AGE
 employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 ```
 
-#### 3. 注册前端扩展组件到 ks-apiserver
+#### 4. 注册前端扩展组件到 ks-apiserver
 
 通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，我们可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
@@ -261,7 +261,7 @@ $ yarn start
 通过 `ksbuilder init <directory>` 初始化工程目录
 
 ```shell
-$ ksbuilder init extension-repo
+ksbuilder init extension-repo
 ```
 执行完成后，可以看到如下信息，表示项目初始化成功：
 ```shell
@@ -341,19 +341,16 @@ backend:
     tag: latest
 ```
 
+通过上述步骤我们已经完成了扩展组件包的创建，接下来借助 ks-builder 将扩展组件部署后测试。
 
-#### 3. 打包扩展组件
+## 扩展组件部署
 
-通过上述步骤我们已经完成了扩展组件包的创建，我们还可以借助 ks-builder 将扩展组件部署后测试。
-
-## 测试扩展组件包
-
-然后在扩展组件管理工程根目录(`~/workspace/kubesphere/extension-repo/`)执行下述命令，将扩展组件部署到 kubesphere 环境中。
+在扩展组件管理工程根目录（`~/workspace/kubesphere/extension-repo/`）执行下述命令，将扩展组件部署到 KubeSphere 环境中。
 
 ```shell
-$ ksbuilder update employee
+ksbuilder update employee
 ```
 
-命令执行成功后，我们可以直接访问 kubesphere 容器 30880 端口打开 ks-console 页面并登陆，查看对应的扩展组件页面、导航栏按钮是否正常加载
+命令执行成功后，我们可以直接访问 kubesphere 容器 30880 端口打开 ks-console 页面并登陆，查看对应的扩展组件页面、导航栏按钮是否正常加载。
 
 
