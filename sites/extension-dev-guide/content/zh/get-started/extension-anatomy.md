@@ -118,15 +118,15 @@ export default function App() {
 
 ### 了解更多
 
-在您的第一个扩展组件中，您学习了如何在本地创建、运行和调试扩展。然而，我们只看到了冰山一角，扩展组件还可以通过 API 与外部系统或工具进行集成，帮助您实现更多有趣的功能；您可以将扩展组件打包并发布，通过扩展组件中心进行部署，与他人分享您开发的扩展组件。这里有一些建议的路线来进一步提高您的 KubeSphere 扩展组件开发技能：
+在这个快速入门中，我们学习了如何在本地创建、运行和调试一个简单扩展组件的前端部分。一个完整的、具备实际业务能力的扩展组件应包含前后端，甚至需要通过 API 与外部系统或工具进行集成；同时，还需要将扩展组件打包和部署。也可以发布到扩展组件中心，与他人分享您开发的扩展组件。下面是一些建议的学习路线来进一步提高您开发 KubeSphere 扩展组件的技能：
 
 [系统架构](zh/architecture) 该章节帮助大家深入了解 KubeSphere 4.0 基于扩展机制的系统架构。
 
-[扩展组件定制](zh/customize-extensions) 在该章节中，我们将 KubeSphere API和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API或阅读扩展功能定制部分，验证您的扩展组件想法是否可以实现。
+[扩展组件定制](zh/customize-extensions) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
 
 [示例与教程](zh/samples-and-tutorials) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
 
-[测试和发布](zh/testing-and-publishing) 该章节的内容，可帮助您开发高质量 KubeSphere 扩展组件或将您的 KubeSphere 扩展组件发布到扩展组件中心。
+[测试和发布](zh/testing-and-publishing) 该章节介绍如何保证开发高质量 KubeSphere 扩展组件并将其发布到扩展组件中心。
 
-[最佳实践](zh/best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，您将在此章节中学习创建扩展组件 UI 的最佳实践。
+[最佳实践](zh/best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
 
