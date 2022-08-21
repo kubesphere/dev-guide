@@ -18,36 +18,23 @@ description: 介绍如何搭建扩展组件开发环境。
 
 1. 登录本地主机或远程主机，执行以下命令快速在容器中安装 KubeSphere Core：
 
-   {{< tabs >}}
-   {{% tab name="本地主机" %}}
+```
+docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
+```
+
+{{% notice note %}}
+创建 kubesphere 容器时 -p 暴露的 30880 端口为前端服务 ks-console 的访问端口，30881 为后端服务 ks-apiserver 的访问端口
+{{% /notice %}}
+
+
+2. 容器正常运行并且状态为 `healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
 
    ```bash
-   docker run -d --name kubesphere --privileged=true --restart=always kubespheredev/ks-allinone:v4.0.0-alpha.0
-   ```
-
-   {{% /tab %}}
-   {{% tab name="远程主机" %}}
-
-   ```bash
-   docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 kubespheredev/ks-allinone:v4.0.0-alpha.0
-   ```
-
-   {{% /tab %}}
-   {{< /tabs >}}
-
-
-   {{% notice note %}}
-   在远程主机上安装 KubeSphere Core 时，需要在容器启动命令中指定 `-p 30881:30881` 参数将 API 服务器 `ks-apiserver` 对应的 30881 端口映射到主机的 30881 端口，以确保可以通过主机端口访问 `ks-apiserver`。
-   {{% /notice %}}
-
-2. 容器正常运行并且状态为 `Healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
-
-   ```bash
-   docker exec -it kubesphere wget -qO- http://`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/kapis/version
+   curl -s http://localhost:30881/kapis/version
    ```
 
    如果显示以下信息，则表明 `ks-apiserver` 运行正常：
-   ```bash
+   ```json
    {
     "gitVersion": "v3.3.0-40+c5e2c55ba72765-dirty",
     "gitMajor": "3",
