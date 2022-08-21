@@ -4,7 +4,7 @@ weight: 402
 description: 介绍如何搭建扩展组件开发环境。
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要使用 Docker 创建 `kubesphere` 和 `dev-tools` 两个容器：
+本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要下载 `kubesphere` 和 `dev-tools` 这两个 Docker 容器：
 
 * `kubesphere`：运行 KubeSphere Core，即 KubeSphere 的核心组件，用于为扩展组件提供 API 服务。`kubesphere` 容器可以运行在本地主机上，也可以运行在远程主机上以避免本地主机资源占用过高。
 
@@ -16,16 +16,11 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ### 安装 KubeSphere Core
 
-1. 登录本地主机或远程主机，执行以下命令快速在容器中安装 KubeSphere Core：
+1. 登录本地主机或远程主机，执行以下命令快速在容器中安装 KubeSphere Core，同时暴露前端服务 ks-console 访问端口 30880 和 后端服务 ks-apiserver 访问端口 30881：
 
-```
-docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
-```
-
-{{% notice note %}}
-创建 kubesphere 容器时 -p 暴露的 30880 端口为前端服务 ks-console 的访问端口，30881 为后端服务 ks-apiserver 的访问端口
-{{% /notice %}}
-
+    ```
+    docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
+    ```
 
 2. 容器正常运行并且状态为 `healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
 
