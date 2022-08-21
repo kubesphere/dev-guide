@@ -1,7 +1,7 @@
 ---
 title: 菜单栏
 weight: 502
-description: 拓展 KubeSphere 中的菜单栏与导航栏
+description: 设置扩展组件在 KubeSphere 控制台中菜单栏或导航栏的位置
 ---
 
 ### 菜单挂载点
