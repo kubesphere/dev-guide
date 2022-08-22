@@ -99,7 +99,7 @@ description: 介绍如何搭建扩展组件开发环境。
 登录本地主机，执行以下命令为开发工具命令设置别名：
 
 ```bash
-alias yarn='docker run --rm --user $(id -u):$(id -g) -v $PWD:$PWD -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+alias yarn='touch $PWD/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v $PWD/.yarnrc:/.yarnrc -v $PWD/.yarn:/.yarn -v $PWD/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
 ```
 
 ```bash
