@@ -195,7 +195,7 @@ maintainers:
 icon: 'data:image/png;base64, <Base64Encoded Image>'
 appVersion: v0.10.0
 annotations:
-  extensions.kubesphere.io/foo: bar # 额外的注释信息
+  kubesphere.io/foo: bar # 额外的注释信息
 ```
 
 扩展组件根目录中 `Dockerfile` 的作用是通过 Docker 将项目下多个扩展组件 Helm Chart 打包到 Docker Image 中进行分发
@@ -267,7 +267,7 @@ kind: Extension
 metadata:
   name: devops
   labels:
-    extensions.kubesphere.io/category=devops
+    kubesphere.io/category=devops
 spec:
   displayName: "DevOps"
   description: DevOps Extension for KubeSphere.

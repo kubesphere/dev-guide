@@ -67,7 +67,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 
 ```bash
 $ cat << EOF > employee-api.yaml
-apiVersion: extensions.kubesphere.io/v1alpha1
+apiVersion: kubesphere.io/v1alpha1
 kind: APIService
 metadata:
   name: v1alpha1.employee.kubesphere.io
@@ -77,7 +77,7 @@ spec:
   nonResourceURLs: []
   url: http://employee-api.default.svc:8080
 status:
-  state: Enabled
+  state: Available
 EOF
 $ kubectl apply -f employee-api.yaml
 ```
@@ -240,7 +240,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 ```bash
 $ cat << EOF > employee-frontend.yaml
-apiVersion: extensions.kubesphere.io/v1alpha1
+apiVersion: kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
   name: v1alpha1.employee.kubesphere.io
@@ -248,7 +248,7 @@ spec:
   rawFrom:
     url: http://employee-frontend.default.svc/dist/employee-frontend/index.js
 status:
-  state: Enabled
+  state: Available
   link: /dist/employee-frontend/index.js
 EOF
 $ kubectl apply -f employee-frontend.yaml
