@@ -91,7 +91,7 @@ description: 介绍如何搭建扩展组件开发环境。
 
 * 设置命令别名：在本地主机上为开发工具命令设置别名，使开发工具命令自动在 `dev-tools` 容器中运行，并根据开发工具命令的运行和终止自动创建和删除 `dev-tools` 容器。
 
-* 连接代码编辑器：在本地主机上持续运行 `dev-tools` 容器，将代码编辑器连接到 `dev-tools` 容器中，通过代码编辑器在 `dev-tools` 容器中调用开发工具。
+* 连接 IDE：在本地主机上持续运行 `dev-tools` 容器，将 IDE 连接到 `dev-tools` 容器中，通过 IDE 在 `dev-tools` 容器中调用开发工具。
 
 {{< tabs >}}
 {{% tab name="设置命令别名" %}}
@@ -111,9 +111,9 @@ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesph
 ```
 
 {{% /tab %}}
-{{% tab name="连接代码编辑器" %}}
+{{% tab name="连接 IDE" %}}
 
-以下介绍如何使用 VS Code 连接 `dev-tools` 容器。如果您使用其他代码编辑器，请参阅代码编辑器的官方文档。
+以下介绍如何使用 VS Code 连接 `dev-tools` 容器。如果您使用其他 IDE，请参阅 IDE 的官方文档。
 
 1. 登录本地主机，执行以下命令创建 `dev-tools` 容器：
 
