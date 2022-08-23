@@ -67,7 +67,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 
 ```bash
 $ cat << EOF > employee-api.yaml
-apiVersion: kubesphere.io/v1alpha1
+apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
   name: v1alpha1.employee.kubesphere.io
@@ -240,7 +240,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 ```bash
 $ cat << EOF > employee-frontend.yaml
-apiVersion: kubesphere.io/v1alpha1
+apiVersion: extensions.kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
   name: v1alpha1.employee.kubesphere.io
