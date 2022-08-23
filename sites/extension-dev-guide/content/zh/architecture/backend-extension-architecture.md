@@ -25,7 +25,7 @@ KubeSphere 提供了一种与 [Kubernetes API Aggregation Layer](https://kuberne
 示例与字段说明：
 
 ```yaml
-apiVersion: kubesphere.io/v1alpha1
+apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
   name: v1alpha1.devops.kubesphere.io
@@ -59,7 +59,7 @@ JSBundle 定义了需要注入到前端框架中的 js 扩展包。`ks-console` 
 示例与字段说明：
 
 ```yaml
-apiVersion: kubesphere.io/v1alpha1
+apiVersion: extensions.kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
   name: v1alpha1.devops.kubesphere.io
@@ -94,7 +94,7 @@ spec:
 示例与字段说明：
 
 ```yaml
-apiVersion: kubesphere.io/v1alpha1
+apiVersion: extensions.kubesphere.io/v1alpha1
 kind: ReverseProxy
 metadata:
   name: devops.kubesphere.io
@@ -208,7 +208,7 @@ RUN helm index .
 CMD ["serve"] # Helm Repo Serve，提供静态资源、Helm Repo 相关的 API
 ```
 
-## 扩展组件的分发
+## 扩展组件的管理与分发
 
 通过 Docker Image 将编排为 Helm Chart 的一组扩展组件进行打包之后，可以借助 Docker Image 来分发我们开发的扩展组件。为了便于扩展组件的分发管理，KubeSphere 中包含了以下资源定义：
 
