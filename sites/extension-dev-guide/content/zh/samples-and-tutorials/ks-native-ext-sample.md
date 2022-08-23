@@ -193,7 +193,7 @@ Dashboard app running at port 8000
 Successfully started server on http://localhost:8000 
 ```
 
-开发环境启动后，我们就可以进行具体的业务代码开发。开发方式与普通 react app 基本一致，本示例前端部分源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
+开发环境启动后，我们就可以在本地环境中进行业务代码开发。开发方式与普通 react app 基本一致，本示例前端部分源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
 
 便于演示，我们可以将示例仓库中的代码直接复制过来
 
@@ -203,7 +203,6 @@ cp -r ~/workspace/kubesphere/extension-samples/extensions-frontend/extensions/em
 
 
 #### 2. 构建镜像
-
 
 前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像，也可以直接使用官方提供的镜像 `kubespheredev/employee-frontend:latest`。
 
@@ -234,7 +233,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. 注册前端扩展组件到 ks-apiserver
 
-通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，我们可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
@@ -254,14 +253,16 @@ EOF
 $ kubectl apply -f employee-frontend.yaml
 ```
 
-前端扩展组件注册成功后，可以在本地以 production 模式启动 ks-console。
+可以在本地以 production 模式启动 ks-console，访问 `http://localhost:8000`
 
 ```shell
 $ yarn build:prod
 $ yarn start
 ```
 
-访问 `http://localhost:8000`，测试扩展组件是否正确加载，正常情况下您可以通过以下入口访问到本示例中扩展组件的页面。
+或者直接访问 kubesphere 容器的 30880 端口，测试 production 模式下扩展组件是否正确加载。
+
+正常情况下您可以通过以下入口访问到本示例中扩展组件的页面。
 
 ![employee-entry](images/get-started/employee-entry.png)
 
