@@ -20,6 +20,10 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 
 本节介绍的 Hello World 扩展组件仅包含前端模块。有关扩展组件前后端开发的完整示例，请参阅[示例与教程](zh/samples-and-tutorials/)。
 
+### 前提条件
+
+您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](zh/get-started/prepare-development-environment/)。
+
 ### 初始化扩展组件开发项目
 
 1. 登录开发主机，执行以下命令初始化扩展组件开发目录：
