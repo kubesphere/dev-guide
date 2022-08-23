@@ -4,11 +4,11 @@ weight: 402
 description: 介绍如何搭建扩展组件开发环境。
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要下载 `kubesphere` 和 `dev-tools` 这两个 Docker 容器：
+本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您只需要使用 Docker 运行 `kubesphere` 和 `dev-tools` 两个容器：
 
-* `kubesphere`：运行 KubeSphere Core，即 KubeSphere 的核心组件，用于为扩展组件提供 API 服务。`kubesphere` 容器可以运行在本地主机上，也可以运行在远程主机上以避免本地主机资源占用过高。
+* `kubesphere`：运行 KubeSphere Core，即 KubeSphere 的核心组件，用于为扩展组件提供 API 服务。
 
-* `dev-tools`：提供扩展组件开发工具链，包括 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在本地主机上的扩展组件源代码文件将挂载到 `dev-tools` 容器中，并在 `dev-tools` 容器中运行和测试。`dev-tools` 容器必须在本地主机上运行。
+* `dev-tools`：提供扩展组件开发工具链，包括 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在开发主机上的扩展组件源代码文件将挂载到 `dev-tools` 容器中，并在 `dev-tools` 容器中运行和测试。
 
 ### 前提条件
 
@@ -16,7 +16,7 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ### 安装 KubeSphere Core
 
-1. 登录本地主机或远程主机，执行以下命令快速在容器中安装 KubeSphere Core，同时暴露前端服务 ks-console 访问端口 30880 和 后端服务 ks-apiserver 访问端口 30881：
+1. 登录开发主机，执行以下命令快速在容器中安装 KubeSphere Core，同时暴露前端 Web 控制台服务 `ks-console` 访问端口 30880 和后端 API 服务 `ks-apiserver` 访问端口 30881：
 
     ```
     docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
@@ -87,49 +87,59 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ### 安装开发工具链
 
-您可以采用以下两种方式安装开发工具链：
-
-* 设置命令别名：在本地主机上为开发工具命令设置别名，使开发工具命令自动在 `dev-tools` 容器中运行，并根据开发工具命令的运行和终止自动创建和删除 `dev-tools` 容器。
-
-* 连接 IDE：在本地主机上持续运行 `dev-tools` 容器，将 IDE 连接到 `dev-tools` 容器中，通过 IDE 在 `dev-tools` 容器中调用开发工具。
-
-{{< tabs >}}
-{{% tab name="设置命令别名" %}}
-
-登录本地主机，执行以下命令为开发工具命令设置别名：
-
-```bash
-alias yarn='touch $PWD/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v $PWD/.yarnrc:/.yarnrc -v $PWD/.yarn:/.yarn -v $PWD/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
-```
-
-```bash
-alias kubectl='docker run --rm -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
-```
-
-```bash
-alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/workspace/kubesphere/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 ksbuilder'
-```
-
-{{% /tab %}}
-{{% tab name="连接 IDE" %}}
-
-以下介绍如何使用 VS Code 连接 `dev-tools` 容器。如果您使用其他 IDE，请参阅 IDE 的官方文档。
-
-1. 登录本地主机，执行以下命令创建 `dev-tools` 容器：
+1. 执行以下命令将 `kubesphere` 容器中的 kubeconfig 配置文件复制到开发主机，并在文件中设置 Kubernetes API 服务 `kube-apiserver` 的访问地址：
 
    ```bash
-   docker run -d --name dev-tools -v ~/workspace/kubesphere/config:/root/.kube/config -v ~/workspace/kubesphere:/workspace/kubesphere -w /workspace/kubesphere -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
+   docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/.kubesphere/dev-tools/config
    ```
 
-2. 打开 VS Code 并[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
+   ```bash
+   perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/.kubesphere/dev-tools/config
+   ```
 
-3. 打开 VS Code 命令面板，输入 `attach to running container`，在搜索结果中选择 `Remote-Containers: Attach to Running Container`，然后选择 `dev-tools` 容器。
+2. 根据您的开发习惯，通过设置命令别名或连接 IDE 安装开发工具链：
 
-   ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
+   {{< tabs >}}
+   {{% tab name="设置命令别名" %}}
 
-4. 打开 VS Code 终端。您可以在 VS Code 终端调用开发工具。
+   在开发主机上为开发工具命令设置别名，使开发工具命令自动在 `dev-tools` 容器中运行，并根据开发工具命令的运行和终止自动运行和删除 `dev-tools` 容器。
 
-   ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
+   登录开发主机，执行以下命令为开发工具命令设置别名：
 
-{{% /tab %}}
-{{< /tabs >}}
+   ```bash
+   alias yarn='touch $PWD/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v $PWD/.yarnrc:/.yarnrc -v $PWD/.yarn:/.yarn -v $PWD/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+   ```
+
+   ```bash
+   alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
+   ```
+
+   ```bash
+   alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 ksbuilder'
+   ```
+
+   {{% /tab %}}
+   {{% tab name="连接 IDE" %}}
+
+   在开发主机上持续运行 `dev-tools` 容器，将 IDE 连接到 `dev-tools` 容器中，通过 IDE 在 `dev-tools` 容器中调用开发工具。
+   
+   以下介绍如何使用 VS Code 连接 `dev-tools` 容器。如果您使用其他 IDE，请参阅 IDE 的官方文档。
+
+   1. 登录开发主机，执行以下命令创建 `dev-tools` 容器：
+
+      ```bash
+      docker run -d --name dev-tools -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v ~/kubesphere-extensions:/kubesphere-extensions -w /kubesphere-extensions -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
+      ```
+
+   2. 打开 VS Code 并[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
+
+   3. 打开 VS Code 命令面板，输入 `attach to running container`，在搜索结果中选择 `Remote-Containers: Attach to Running Container`，然后选择 `dev-tools` 容器。
+
+      ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
+
+   4. 打开 VS Code 终端。您可以在 VS Code 终端调用开发工具。
+
+      ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
+
+   {{% /tab %}}
+   {{< /tabs >}}
