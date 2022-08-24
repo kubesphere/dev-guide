@@ -66,7 +66,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
 
 ```bash
-$ cat << EOF > employee-api.yaml
+cat <<EOF | kubectl apply -f -
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
@@ -79,7 +79,6 @@ spec:
 status:
   state: Available
 EOF
-$ kubectl apply -f employee-api.yaml
 ```
 
 验证 API 注册是否成功，正常情况下可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，则需要修改命令行中 password 参数。
@@ -238,7 +237,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
 ```bash
-$ cat << EOF > employee-frontend.yaml
+cat <<EOF | kubectl apply -f -
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
@@ -250,7 +249,6 @@ status:
   state: Available
   link: /dist/employee-frontend/index.js
 EOF
-$ kubectl apply -f employee-frontend.yaml
 ```
 
 可以在本地以 production 模式启动 ks-console，访问 `http://localhost:8000`
