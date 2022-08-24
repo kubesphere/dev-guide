@@ -34,7 +34,7 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 当完成后端的 API 开发之后，需要将组件后端部分通过容器进行构建，以下为开发环境中构建镜像的示例，您也可以直接使用官方提供的镜像 kubespheredev/employee-api:latest。
 
 ```shell
-$ cd ~/workspace/kubesphere
+$ cd  ~/kubesphere-extensions
 $ git clone https://github.com/kubesphere/extension-samples.git
 $ pushd extension-samples/extensions-backend/employee
 $ docker build -t <YOUR_REPO>/employee-api:latest .
@@ -66,7 +66,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat << EOF | kubectl apply -f -
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
@@ -84,7 +84,7 @@ EOF
 验证 API 注册是否成功，正常情况下可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，则需要修改命令行中 password 参数。
 
 ```bash
-$ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees | jq 
+$ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees 
 {
   "items": [
     {
@@ -124,7 +124,7 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
 
 ```shell
-cd ~/workspace/kubesphere/extensions-frontend/
+cd ~/kubesphere-extensions/extensions-frontend/
 yarn create:ext
 ```
 
@@ -197,7 +197,7 @@ Successfully started server on http://localhost:8000
 便于演示，我们可以将示例仓库中的代码直接复制过来
 
 ```
-cp -r ~/workspace/kubesphere/extension-samples/extensions-frontend/extensions/employee/* ~/workspace/kubesphere/extensions-frontend/extensions/employee
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/extensions-frontend/extensions/employee
 ```
 
 
@@ -237,7 +237,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat << EOF | kubectl apply -f -
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
