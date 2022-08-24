@@ -111,15 +111,15 @@ description: 介绍如何搭建扩展组件开发环境。
    登录开发主机，执行以下命令为开发工具命令设置别名：
 
    ```bash
-   alias yarn='mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v0.0.1 yarn'
+   alias yarn='mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:latest yarn'
    ```
 
    ```bash
-   alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 kubectl'
+   alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest kubectl'
    ```
 
    ```bash
-   alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v0.0.1 ksbuilder'
+   alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest ksbuilder'
    ```
 
    {{% /tab %}}
@@ -132,7 +132,7 @@ description: 介绍如何搭建扩展组件开发环境。
    1. 登录开发主机，执行以下命令创建 `dev-tools` 容器：
 
       ```bash
-      docker run -d --name dev-tools -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v ~/kubesphere-extensions:/kubesphere-extensions -w /kubesphere-extensions -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:v0.0.1
+      docker run -d --name dev-tools -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v ~/kubesphere-extensions:/kubesphere-extensions -w /kubesphere-extensions -p 8000:8000 -p 8001:8001 kubespheredev/dev-tools:latest
       ```
 
    2. 打开 VS Code 并[安装 Remote - Containers 扩展](https://code.visualstudio.com/docs/remote/containers-tutorial)。
