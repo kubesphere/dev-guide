@@ -4,9 +4,9 @@ weight: 7200
 description: KubeSphere 后端扩展机制介绍
 ---
 
-KubeSphere 4.0 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。保留了以下三个核心组件：
+KubeSphere 4.0 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。KubeSphere Core 保留了以下三个核心组件：
 
-* `ks-apiserver` 是一个可拓展的 API 网关，为 KubeSphere 提供统一的 API 认证鉴权、请求的代理转发、API 的聚合能力。
+* `ks-apiserver` 是一个可扩展的 API 网关，为 KubeSphere 提供统一的 API 认证鉴权、请求的代理转发、API 的聚合能力。
 * `ks-controller-manager` 实现了核心资源的控制逻辑。
 * `ks-console` 为 KubeSphere 提供前端 Web 服务。
 
@@ -130,7 +130,7 @@ spec:
 
 ## 扩展组件的开发与打包
 
-在开发过程中，通过创建上述类型的 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](/extension-dev-guide/zh/get-started/deploy-kubesphere-4.0/)中向 `ks-apiserver` 灵活的注册 API、静态资源代理，并通过 JSBundle 前端扩展包，注入新的页面、导航菜单。在此基础之上我们需要使用 Docker、与 Helm 完成扩展组件的编排与打包。
+在开发过程中，通过创建上述类型的 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](/extension-dev-guide/zh/get-started/prepare-development-environment/)中向 `ks-apiserver` 灵活的注册 API、静态资源代理，并通过 JSBundle 前端扩展包，注入新的页面、导航菜单。在此基础之上我们需要使用 Docker、与 Helm 完成扩展组件的编排与打包。
 
 通过开发者工具 [ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 我们可以初始化一个扩展组件仓库项目，扩展组件仓库项目目录结构示例：
 
@@ -253,11 +253,11 @@ ks-controller-manager 会将扩展组件仓库中声明的 Docker Image 作为�
 
 ## 扩展组件的生命周期管理
 
-当我们通过 Repository 声明了需要同步到 KubeSphere 中的扩展组件仓库之后，ks-controller-manager 会从预设 Docker Image 中获取扩展组件包(Chart)的元数据，经过数据校验、转换，同时写入 Extension、ExtensionVersion 对象，用以实现扩展组件发现、版本控制相关的功能。具体的示例如下：
+当我们通过 Repository 声明了需要同步到 KubeSphere 中的扩展组件仓库之后，ks-controller-manager 会从预设 Docker Image 中获取扩展组件包（Chart）的元数据，经过数据校验、转换，同时写入 Extension、ExtensionVersion 对象，用以实现扩展组件发现、版本控制相关的功能。具体的示例如下：
 
 ###  Extension
 
-Extension 声明了从扩展组件包(Chart)中解析出的基础元数据信息，Chart 的 name 会作为 Extension 的 Name.
+Extension 声明了从扩展组件包（Chart）中解析出的基础元数据信息，Chart 的 name 会作为 Extension 的 Name.
 
 > 扩展组件仅被允许注册一次，并且只能被一个 Repository 所管理。如果先后创建的两个 Repository A 和 B 均包含 devops 这个扩展组件，那么只有先创建的 Repository A 被允许管理 devops 这个扩展组件。
 
