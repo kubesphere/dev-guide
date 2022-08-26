@@ -7,7 +7,7 @@ description: KubeSphere 前端扩展机制介绍
 为了使 KubeSphere 灵活可扩展，我们设计了`微内核+扩展组件`的架构。其中`内核`部分仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件中。系统可在运行时动态的安装、卸载、启动、停止扩展组件。架构总体设计如下图：
 
 
-![frontend-extension-arch](images/pluggable-arch/frontend-arch.png)
+![frontend-extension-arch](images/zh/architecture/frontend-arch.png)
 
 ## 设计思想
 

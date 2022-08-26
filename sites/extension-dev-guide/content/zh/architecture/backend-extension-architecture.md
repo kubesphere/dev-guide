@@ -12,7 +12,7 @@ KubeSphere 4.0 后端扩展机制主要包含 API 的动态代理、静态资源
 
 KubeSphere 构建在 Kubernetes 之上，借助 [Kubernetes 提供的扩展能力](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)实现了基本的数据存储、缓存同步等功能。
 
-![backend-extension-arch](images/pluggable-arch/backend-arch.svg)
+![backend-extension-arch](images/zh/architecture/backend-arch.svg)
 
 ## 后端扩展机制原理
 
@@ -46,7 +46,7 @@ spec:
 
 | 字段 | 描述 |
 | --- | ---|
-| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](/extension-dev-guide/zh/references/kubesphere-api/) |
+| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](zh/references/kubesphere-api/) |
 | `spec.nonResourceURLs` | 除了资源型的 API，也可以借助 APIService 注册非资源型的 API |
 | `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify`| 可以为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint，请参考 [Endpoint](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L40-L49) |
 | `spec.service` | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址，请参考 [ServiceReference](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L21-L38) |
@@ -130,9 +130,9 @@ spec:
 
 ## 扩展组件的开发与打包
 
-在开发过程中，通过创建上述类型的 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](/extension-dev-guide/zh/get-started/prepare-development-environment/)中向 `ks-apiserver` 灵活的注册 API、静态资源代理，并通过 JSBundle 前端扩展包，注入新的页面、导航菜单。在此基础之上我们需要使用 Docker、与 Helm 完成扩展组件的编排与打包。
+在开发过程中，通过创建上述类型的 CR，我们可以在[部署完成的 KubeSphere 4.0 开发环境](zh/get-started/prepare-development-environment/)中向 `ks-apiserver` 灵活的注册 API、静态资源代理，并通过 JSBundle 前端扩展包，注入新的页面、导航菜单。在此基础之上我们需要使用 Docker、与 Helm 完成扩展组件的编排与打包。
 
-通过开发者工具 [ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 我们可以初始化一个扩展组件仓库项目，扩展组件仓库项目目录结构示例：
+通过开发者工具 [ksbuilder](zh/references/ksbuilder/) 我们可以初始化一个扩展组件仓库项目，扩展组件仓库项目目录结构示例：
 
 ```bash
 devops/
