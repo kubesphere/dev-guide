@@ -115,7 +115,7 @@ description: 介绍如何搭建扩展组件开发环境。
    ```
 
    ```bash
-   alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -i kubespheredev/dev-tools:latest kubectl'
+   alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest kubectl'
    ```
 
    ```bash
