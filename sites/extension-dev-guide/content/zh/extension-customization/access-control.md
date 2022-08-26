@@ -3,6 +3,7 @@ title: 访问权限控制
 weight: 504
 description: 为您的扩展组件集成 KubeSphere 的访问权限控制
 ---
+
 ## 概述
 KubeSphere 拥有完整的访问权限控制机制，我们为每一个资源都配置了相应的权限项。相应的，当您在开发 KubeSphere 扩展组件时，也可以为您的扩展组件配置权限项。
 

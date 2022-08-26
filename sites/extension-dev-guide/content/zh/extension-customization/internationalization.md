@@ -8,7 +8,7 @@ KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际�
 
 ## 语言包
 
-我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如我们在[Hello World 入门教程](/extension-dev-guide/zh/get-started/hello-world-extension/)里生成下面的目录结构：
+我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如我们在[Hello World 入门教程](zh/get-started/hello-world-extension/)里生成下面的目录结构：
 
 ```shell
 .
