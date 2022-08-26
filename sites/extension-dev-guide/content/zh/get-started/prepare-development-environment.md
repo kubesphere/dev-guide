@@ -8,7 +8,7 @@ description: 介绍如何搭建扩展组件开发环境。
 
 * `kubesphere`：运行 KubeSphere Core，即 KubeSphere 的核心组件，用于为扩展组件提供 API 服务。
 
-* `dev-tools`：提供扩展组件开发工具链，包括 [create-ks-ext](/extension-dev-guide/zh/references/create-ks-ext/)、[ksbuilder](/extension-dev-guide/zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在开发主机上的扩展组件源代码文件将挂载到 `dev-tools` 容器中，并在 `dev-tools` 容器中运行和测试。
+* `dev-tools`：提供扩展组件开发工具链，包括 [create-ks-ext](zh/references/create-ks-ext/)、[ksbuilder](zh/references/ksbuilder/) 等开发工具和 Node.js、Helm 等第三方组件，用于初始化扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包。保存在开发主机上的扩展组件源代码文件将挂载到 `dev-tools` 容器中，并在 `dev-tools` 容器中运行和测试。
 
 ### 前提条件
 
@@ -139,11 +139,11 @@ description: 介绍如何搭建扩展组件开发环境。
 
    3. 打开 VS Code 命令面板，输入 `attach to running container`，在搜索结果中选择 `Remote-Containers: Attach to Running Container`，然后选择 `dev-tools` 容器。
 
-      ![attach-to-running-container.png](images/get-started/attach-to-running-container.png?width=1080px)
+      ![attach-to-running-container.png](images/zh/get-started/attach-to-running-container.png?width=1080px)
 
    4. 打开 VS Code 终端。您可以在 VS Code 终端调用开发工具。
 
-      ![dev-tools.png](images/get-started/dev-tools.png?width=1080px)
+      ![dev-tools.png](images/zh/get-started/dev-tools.png?width=1080px)
 
    {{% /tab %}}
    {{< /tabs >}}
