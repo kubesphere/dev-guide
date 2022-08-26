@@ -4,26 +4,29 @@ weight: 901
 description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
 ---
 
-在[入门指南](/extension-dev-guide/zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](/extension-dev-guide/zh/get-started/hello-world-extension/) 扩展组件项目。
+在[入门指南](zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](zh/get-started/hello-world-extension/) 扩展组件项目。
 
 本章将以开发一个员工管理功能扩展组件为例，带大家熟悉扩展组件的开发、测试流程
 
 ## 需求与设计
 
-假设我们要在 KubeSphere 前端页面中增加员工管理模块，菜单入口在页面的顶部栏。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
+假设我们要在 KubeSphere 前端页面中增加员工管理模块，菜单入口在平台管理（点击顶部导航栏 `平台管理` 打开界面）。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
-1. 员工管理列表页
-   ![Employee Management](images/pluggable-arch/employee-sample-list.png)
+1. 员工管理菜单
+  ![Employee Management Menuemployee-management-menu](images/zh/samples-and-tutorials/sample-employee-menu.png)
 
-2. 新增员工
-   ![Addn New Employee](images/pluggable-arch/employee-sample-form.png)
+2. 员工管理列表页
+   ![Employee Management](images/zh/samples-and-tutorials/sample-employee-list.png)
 
-3. 员工详情页
-   ![Employee Details](images/pluggable-arch/employee-sample-detail.png)
+3. 新增员工
+   ![Addn New Employee](images/zh/samples-and-tutorials/sample-employee-new.png)
+
+4. 员工详情页
+   ![Employee Details](images/zh/samples-and-tutorials/sample-employee-details.png)
 
 ## 后端扩展组件开发
 
-紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/employee-backend)。
+紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee)。
 
 {{% notice note %}}
 借助 [KubeSphere API 扩展机制](zh/architecture/backend-extension-architecture/)，可以动态的将您的 API 注册到 ks-apiserver，扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](zh/references/kubesphere-api/) 接入 KubeSphere 租户体系。
@@ -66,19 +69,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
 
 ```bash
-cat << EOF | kubectl apply -f -
-apiVersion: extensions.kubesphere.io/v1alpha1
-kind: APIService
-metadata:
-  name: v1alpha1.employee.kubesphere.io
-spec:
-  group: employee.kubesphere.io
-  version: v1alpha1                                      
-  nonResourceURLs: []
-  url: http://employee-api.default.svc:8080
-status:
-  state: Available
-EOF
+kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/employee/employee-apiservice.yaml
 ```
 
 验证 API 注册是否成功，正常情况下可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，则需要修改命令行中 password 参数。
@@ -120,12 +111,12 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 
 #### 1. 创建项目脚手架
 
-在[创建 Hello World 扩展组件](/extension-dev-guide/zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
+在[创建 Hello World 扩展组件](zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
 我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
 
 ```shell
-cd ~/kubesphere-extensions/extensions-frontend/
-yarn create:ext
+$ cd ~/kubesphere-extensions/extensions-frontend/
+$ yarn create:ext
 ```
 
 进入交互式命令行界面，按提示输入创建出 `employee` 扩展组件。
@@ -237,35 +228,16 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
 ```bash
-cat << EOF | kubectl apply -f -
-apiVersion: extensions.kubesphere.io/v1alpha1
-kind: JSBundle
-metadata:
-  name: v1alpha1.employee.kubesphere.io
-spec:
-  rawFrom:
-    url: http://employee-frontend.default.svc/dist/employee-frontend/index.js
-status:
-  state: Available
-  link: /dist/employee-frontend/index.js
-EOF
+kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-frontend/extensions/employee/employee-jsbundle.yaml
 ```
 
-可以在本地以 production 模式启动 ks-console，访问 `http://localhost:8000`
+可以在本地以 production 模式启动 ks-console，访问 `http://localhost:8000`；
+或者直接访问 kubesphere 容器的 30880 端口，测试 production 模式下扩展组件是否正确加载。
 
 ```shell
 $ yarn build:prod
 $ yarn start
 ```
-
-或者直接访问 kubesphere 容器的 30880 端口，测试 production 模式下扩展组件是否正确加载。
-
-正常情况下您可以通过以下入口访问到本示例中扩展组件的页面。
-
-![employee-entry](images/get-started/employee-entry.png)
-
-![employee-management](images/get-started/employee-management.png)
-
 
 ## 扩展组件打包
 
