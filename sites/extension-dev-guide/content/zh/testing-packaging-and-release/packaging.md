@@ -77,7 +77,7 @@ The extension charts has been created.
 └── values.yaml
 ```
 
-我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 [APIService](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
+我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 [APIService](zh/examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](zh/examples/employee-management-extension-example/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
 
 ```yaml
 frontend:

@@ -4,7 +4,7 @@ weight: 01
 description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
 ---
 
-在[入门指南](zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](zh/get-started/hello-world-extension/) 扩展组件项目。
+在[入门指南](zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](zh/quickstart/hello-world-extension/) 扩展组件项目。
 
 本章将以开发一个员工管理功能扩展组件为例，带大家熟悉扩展组件的开发、测试流程
 
@@ -29,7 +29,7 @@ description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组�
 紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee)。
 
 {{% notice note %}}
-借助 [KubeSphere API 扩展机制](zh/architecture/backend-extension-architecture/)，可以动态的将您的 API 注册到 ks-apiserver，扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](zh/references/kubesphere-api/) 接入 KubeSphere 租户体系。
+借助 [KubeSphere API 扩展机制](zh/overview/architecture/backend-extension-architecture/)，可以动态的将您的 API 注册到 ks-apiserver，扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](zh/references/kubesphere-api/) 接入 KubeSphere 租户体系。
 {{% /notice %}}
 
 #### 1. 构建镜像
@@ -64,7 +64,7 @@ employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 
 #### 3. 注册后端扩展组件 API 到 ks-apiserver
 
-通过创建 [APIService](zh/architecture/backend-extension-architecture/#apiservice) 资源对象，我们可以将 employee-api 提供的 API 注册到 ks-apiserver 中供前端组件统一集成。
+通过创建 [APIService](zh/overview/architecture/backend-extension-architecture/#apiservice) 资源对象，我们可以将 employee-api 提供的 API 注册到 ks-apiserver 中供前端组件统一集成。
 
 以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
 
@@ -111,7 +111,7 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 
 #### 1. 创建项目脚手架
 
-在[创建 Hello World 扩展组件](zh/get-started/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
+在[创建 Hello World 扩展组件](zh/quickstart/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
 我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
 
 ```shell
@@ -223,7 +223,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. 注册前端扩展组件到 ks-apiserver
 
-与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](zh/overview/architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
@@ -315,7 +315,7 @@ The extension charts has been created.
 └── values.yaml
 ```
 
-我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 [APIService](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
+我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `extensions.yaml` 中补充 [APIService](zh/examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](zh/samples-and-tutorials/ks-native-ext-sample/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
 
 ```yaml
 frontend:
