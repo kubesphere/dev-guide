@@ -126,7 +126,7 @@ export default function App() {
 
 [示例与教程](zh/examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
 
-[测试和发布](zh/testing-packaging-and-release) 该章节介绍如何保证开发高质量 KubeSphere 扩展组件并将其发布到扩展组件中心。
+[测试和发布](zh/packaging-testing-and-release) 该章节介绍如何保证开发高质量 KubeSphere 扩展组件并将其发布到扩展组件中心。
 
 [最佳实践](zh/best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
 

@@ -1,6 +1,6 @@
 ---
 title: 测试扩展组件
-weight: 01
+weight: 02
 description: "将打包完成的扩展组件部署到 KubeSphere 进行测试"
 ---
 
