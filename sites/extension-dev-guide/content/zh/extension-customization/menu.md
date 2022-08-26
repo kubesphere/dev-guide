@@ -9,19 +9,20 @@ description: 设置扩展组件在 KubeSphere 控制台中菜单栏或导航栏�
 扩展组件的入口菜单需要挂载在 KubeSphere 界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
 
 1. 顶部导航栏
-![global menu](images/pluggable-arch/menu1.png)
+![top menu](images/zh/extension-customization/top-menu.png)
 
 2. 平台管理
 
    点击顶部导航栏 `平台管理` 打开界面
-![platform menu](images/pluggable-arch/menu2.png)
+![platform menu](images/zh/extension-customization/platform-menu.png)
 
 3. 左侧菜单
-   ![navigation menu](images/pluggable-arch/menu4.png)
+   ![navigation menu](images/zh/extension-customization/navigation-menu.png)
+   
 4. 工具箱
    
    鼠标移到 KubeSphere 控制台右下角小锤子图标便展示工具箱内容
-![toolbox](images/pluggable-arch/menu3.png)
+![toolbox](images/zh/extension-customization/toolbox-menu.png)
 
 ### 挂载设置
 
