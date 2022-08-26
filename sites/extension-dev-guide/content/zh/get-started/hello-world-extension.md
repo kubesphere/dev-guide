@@ -120,7 +120,7 @@ perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IP
 
    页面左上角将显示 `Hello World` 按钮，点击 `Hello World` 将显示 `Hello World!` 字符串。
 
-   ![demo-plugin-dashboard.png](images/get-started/hello-world-extension-dashboard.png?width=1080px)
+   ![demo-plugin-dashboard.png](images/zh/get-started/hello-world-extension-dashboard.png?width=1080px)
 
 ### 调试扩展组件
 
@@ -128,6 +128,6 @@ Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/extension
 
 例如，您可以将页面显示的字符串修改为 `Test!`，如下图所示：
 
-![coding.png](images/get-started/coding.png?width=1080px)
+![coding.png](images/zh/get-started/coding.png?width=1080px)
 
-![preview.png](images/get-started/preview.png?width=1080px)
+![preview.png](images/zh/get-started/preview.png?width=1080px)
