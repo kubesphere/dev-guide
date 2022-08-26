@@ -1,6 +1,6 @@
 ---
 title: "概述"
-weight: 1000
+weight: 01
 description: 介绍 KubeSphere 4.0 扩展机制的背景和优势
 ---
 

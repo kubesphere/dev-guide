@@ -1,6 +1,6 @@
 ---
-title: Hello World 扩展组件结构解析
-weight: 404
+title: Hello World 扩展组件解析
+weight: 03
 description: 解读 Hello World 扩展组件的工作方式
 ---
 
@@ -39,7 +39,7 @@ extensions/hello-world
 
 ### 定义扩展组件的基础信息
 
-`package.json` 文件中包含了插件的基础信息与 ` Node.js` 元数据。
+`package.json` 文件中包含了扩展组件的基础信息与 ` Node.js` 元数据。
 
 ```json
 {
@@ -58,7 +58,7 @@ extensions/hello-world
 
 ### 扩展组件功能点
 
-通过 `src/index.js` 向 ks-console 注册[导航栏](zh/customize-extensions/menu/)按钮、[多语言](zh/customize-extensions/internationalization/)等配置信息。
+通过 `src/index.js` 向 ks-console 注册[导航栏](zh/feature-customization/menu/)按钮、[多语言](zh/feature-customization/internationalization/)等配置信息。
 
 ```js
 import routes from './routes';
@@ -83,7 +83,7 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);
 ```
 
-通过 `src/routes/index.js` 向 ks-console 注册[页面路由](zh/customize-extensions/route)，访问该路由地址会渲染扩展组件中的功能页面。
+通过 `src/routes/index.js` 向 ks-console 注册[页面路由](zh/feature-customization/route)，访问该路由地址会渲染扩展组件中的功能页面。
 
 ```js
 import React from 'react';
@@ -122,11 +122,11 @@ export default function App() {
 
 [系统架构](zh/architecture) 该章节帮助大家深入了解 KubeSphere 4.0 基于扩展机制的系统架构。
 
-[扩展组件定制](zh/customize-extensions) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
+[扩展组件定制](zh/feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
 
-[示例与教程](zh/samples-and-tutorials) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
+[示例与教程](zh/examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
 
-[测试和发布](zh/testing-and-publishing) 该章节介绍如何保证开发高质量 KubeSphere 扩展组件并将其发布到扩展组件中心。
+[测试和发布](zh/packaging-testing-and-release) 该章节介绍如何保证开发高质量 KubeSphere 扩展组件并将其发布到扩展组件中心。
 
 [最佳实践](zh/best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
 
