@@ -119,7 +119,7 @@ description: 介绍如何搭建扩展组件开发环境。
    ```
 
    ```bash
-   alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -i kubespheredev/dev-tools:latest ksbuilder'
+   alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest ksbuilder'
    ```
 
    {{% /tab %}}
