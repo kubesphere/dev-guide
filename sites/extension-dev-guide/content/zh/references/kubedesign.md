@@ -1,6 +1,6 @@
 ---
 title: KubeDesign
-weight: 903
+weight: 02
 description:  KubeDesign 前端 UI 组件库
 ---
 

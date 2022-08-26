@@ -1,6 +1,6 @@
 ---
 title:  创建 Hello World 扩展组件
-weight: 403
+weight: 02
 description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程。
 ---
 

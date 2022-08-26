@@ -1,6 +1,6 @@
 ---
-title: 开发扩展组件
-weight: 901
+title: 员工管理扩展组件示例
+weight: 01
 description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
 ---
 

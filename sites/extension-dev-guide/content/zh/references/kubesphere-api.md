@@ -1,6 +1,6 @@
 ---
 title: KubeSphere API reference
-weight: 902
+weight: 04
 description:  KubeSphere API
 ---
 

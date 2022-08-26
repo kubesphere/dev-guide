@@ -1,6 +1,6 @@
 ---
 title: 国际化
-weight: 504
+weight: 05
 description: 国际化多语言的支持
 ---
 

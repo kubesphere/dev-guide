@@ -1,6 +1,6 @@
 ---
 title: 前端扩展机制
-weight: 7100
+weight: 01
 description: KubeSphere 前端扩展机制介绍
 ---
 

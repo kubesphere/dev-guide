@@ -1,6 +1,6 @@
 ---
 title: 后端扩展机制
-weight: 7200
+weight: 02
 description: KubeSphere 后端扩展机制介绍
 ---
 

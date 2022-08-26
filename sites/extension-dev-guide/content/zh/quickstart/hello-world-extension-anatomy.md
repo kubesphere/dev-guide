@@ -1,6 +1,6 @@
 ---
-title: Hello World 扩展组件结构解析
-weight: 404
+title: Hello World 扩展组件解析
+weight: 03
 description: 解读 Hello World 扩展组件的工作方式
 ---
 
@@ -39,7 +39,7 @@ extensions/hello-world
 
 ### 定义扩展组件的基础信息
 
-`package.json` 文件中包含了插件的基础信息与 ` Node.js` 元数据。
+`package.json` 文件中包含了扩展组件的基础信息与 ` Node.js` 元数据。
 
 ```json
 {

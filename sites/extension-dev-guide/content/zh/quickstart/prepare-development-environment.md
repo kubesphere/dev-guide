@@ -1,6 +1,6 @@
 ---
 title: 搭建开发环境
-weight: 402
+weight: 01
 description: 介绍如何搭建扩展组件开发环境。
 ---
 
