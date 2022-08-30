@@ -129,7 +129,7 @@ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-t
 
 1. 登录开发主机，安装 Node.js v16.17.0、Yarn v1.22.19、Helm v3.9.3. 和 kubectl v1.23.9。有关更多信息，请访问 [Node.js 官方网站](https://nodejs.org/en/)、[Yarn 官方网站](https://yarnpkg.com)、[Helm 官方网站](https://helm.sh) 和 [Kubernetes 官方网站](https://kubernetes.io/docs/tasks/tools/)。
 
-2. [下载 ksbuilder 最新版本](https://github.com/kubesphere/ksbuilder/releases)并保存到开发主机 `/usr/bin` 目录。
+2. [下载 ksbuilder 最新版本](https://github.com/kubesphere/ksbuilder/releases)并保存到开发主机 `/usr/local/bin` 目录。
 
    {{% /tab %}}
    {{< /tabs >}}
