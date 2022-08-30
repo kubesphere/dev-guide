@@ -1,5 +1,5 @@
 ---
-title: "Ksbuilder Install"
+title: "ksbuilder install"
 ---
 
 ## ksbuilder install

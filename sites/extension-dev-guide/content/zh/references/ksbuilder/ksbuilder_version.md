@@ -1,5 +1,5 @@
 ---
-title: "Ksbuilder Version"
+title: "ksbuilder version"
 ---
 
 ## ksbuilder version

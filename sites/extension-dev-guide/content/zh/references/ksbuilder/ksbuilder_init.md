@@ -1,5 +1,5 @@
 ---
-title: "Ksbuilder Init"
+title: "ksbuilder init"
 ---
 
 ## ksbuilder init
