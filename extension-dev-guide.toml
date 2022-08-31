@@ -9,6 +9,11 @@ themesdir = "themes"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [params]
   description = "A set of development guidelines for KubeSphere Extension developers."
   author = "KubeSphere"
