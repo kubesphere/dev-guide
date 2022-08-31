@@ -1,97 +1,93 @@
 ---
 title: 国际化
 weight: 05
-description: 国际化多语言的支持
+description: 介绍如何实现扩展组件前端国际化。
 ---
 
-KubeSphere 4.0 内核集成了 [i18next](https://www.i18next.com/) 作为国际化组件，扩展组件开发者可以通过自定义语言包的方式在扩展组件前端项目中实现国际化。
+本节介绍如何实现扩展组件前端国际化。
+
+KubeSphere Core 集成了 [i18next](https://www.i18next.com/) 作为国际化组件。您可以通过自定义语言包实现扩展组件前端多语言显示。
 
 ## 语言包
 
-我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 locales 文件夹。如我们在[Hello World 入门教程](zh/quickstart/hello-world-extension/)里生成下面的目录结构：
+扩展组件前端模块目录中的 `src/locales` 目录为扩展组件语言包，其中默认创建了英文语言包 `en` 和简体中文语言包 `zh`。您也可以根据需要手动创建其他语言包。每个语言的词条保存在 JSON 文件中，您可以在语言包中创建多个 JSON 文件。
 
 ```shell
-.
-├── babel.config.js
-├── configs
-│   ├── config.yaml
-│   ├── console.config.js
-│   └── local_config.yaml
-├── extensions
-│   ├── entry.ts
-│   └── hello-world
-│       ├── Dockerfile
-│       ├── README.md
-│       ├── package.json
-│       └── src
-│           ├── App.jsx
-│           ├── index.js
-│           ├── locales
-│           │   ├── en
-│           │   │   ├── base.json
-│           │   │   └── index.js
-│           │   ├── index.js
-│           │   └── zh
-│           │       ├── base.json
-│           │       └── index.js
-│           └── routes
-│               └── index.js
-├── node_modules
-├── package.json
-├── tsconfig.base.json
-├── tsconfig.json
-└── yarn.lock
+kubesphere-extensions
+└── frontend
+    └── extensions
+        └── hello-world
+            └── src
+                └── locales
+                    ├── en
+                    │   ├── base.json
+                    │   └── index.js
+                    ├── index.js
+                    └── zh
+                        ├── base.json
+                        └── index.js
 ```
 
-我们看到在 `hello-world/src/locales` 目录下默认有 zh(中文) en(英文) 两个目录。其中目录内的 index.js 是索引文件，能够自动索引目录内的 JSON 文件。翻译的文本放在目录内的 json 文件里，如 base.json。
-如果想增加语言包，可以参照 `zh` 或 `en` 目录的内容格式，添加新的语言目录。
+## 开发步骤
 
-> 如果翻译的文本条目很多，建议按照模块或者页面将翻译的文本放到不同的 JSON 文件中。
+以下以 [Hello World](zh/quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
 
+1. 在 `src/locales/en/base.json` 文件和 `src/locales/zh/base.json` 文件中分别添加以下词条：
 
-## 使用方法
+   ```json
+   // src/locales/en/base.json
+   {
+     "HELLO_WORLD_DESC": "Hello World! The current language code is {languageCode}."
+   }
+   ```
+    
+   ```json
+   // src/locales/zh/base.json
+   {
+     "HELLO_WORLD_DESC": "你好世界！当前的语言代码为 {languageCode}。"
+   }
+   ```
 
-1. 在 JSON 文件里书写翻译条目，书写方法可参考 [i18next](https://www.i18next.com/) 的使用方法。如：
+2. 在扩展组件的入口文件（例如 `src/index.js` ）中引入语言包：
 
-```json
-{
-  "HELLO_WORLD": "你好世界",
-  "KEY_WITH_COUNT": "{{count}} item"
-}
-```    
-   
+   ```js
+   import routes from './routes';
+   import locales from './locales';  // 引入语言包
 
-2. 在扩展组件的 entry file（如上述扩展组件里指的是 hello-world/src/index.js）中引入翻译文件，如下：
+   onst menu = {
+     parent: 'topbar',
+     name: 'hello-world',
+     link: '/hello-world',
+     title: 'HELLO_WORLD',
+     icon: 'cluster',
+     order: 0,
+     desc: 'HELLO_WORLD_DESC',
+     skipAuth: true,
+   };
 
-```js
-import routes from './routes';
-import locales from './locales';  // 引入翻译文件
+   const extensionConfig = {
+     routes,
+     menus: [menu],
+     locales,
+   };
 
-const menu = {
-  parent: 'topbar',
-  name: 'hello-world',
-  link: '/hello-world',
-  title: 'HELLO_WORLD',
-  icon: 'cluster',
-  order: 0,
-  desc: 'SAY_HELLO_WORLD',
-  skipAuth: true,
-};
+   globals.context.registerExtension(extensionConfig);
+   ```
 
-const extensionConfig = {
-  routes,
-  menus: [menu],
-  locales,
-};
+3. 在扩展组件前端开发过程中，使用全局函数 `t()` 获取词条内容并向变量传入动态值。例如，在 `src/App.jsx` 文件中编写以下代码：
 
-globals.context.registerExtension(extensionConfig);
-```
+   ```jsx
+   export default function App() {
+     return <Wrapper>{t('HELLO_WORLD_DESC', {languageCode: globals.user.lang})}</Wrapper>;
+   }
+   ```
 
-3. 在开发中，我们可以使用全局函数 `t` 来获取翻译内容，例如：
+4. 在 `frontend` 目录下执行 `yarn dev` 命令启动前端环境。
 
-```jsx
-<WelcomeTitle>{t('HELLO_WORLD')}</WelcomeTitle>
-...
+5. 访问 `http://localhost:8000` 并登录，在页面右上角点击当前用户的名称，然后选择`用户设置`切换语言。
 
-<span>{t('KEY_WITH_COUNT', { count: server.count })}</span>
-```
+   在 `English` 和`简体中文`语言环境下点击 `Hello World` 将分别显示以下文字：
+
+   <img src="images/zh/extension-customization/locale-demo-en.png" style="margin: 0px">
+
+   <img src="images/zh/extension-customization/locale-demo-zh.png" style="margin: 20px 0px 0px">
