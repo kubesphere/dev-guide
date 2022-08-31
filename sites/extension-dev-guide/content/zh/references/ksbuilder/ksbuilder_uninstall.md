@@ -1,5 +1,5 @@
 ---
-title: "Ksbuilder Uninstall"
+title: "ksbuilder uninstall"
 ---
 
 ## ksbuilder uninstall

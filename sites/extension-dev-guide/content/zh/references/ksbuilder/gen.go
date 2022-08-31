@@ -9,17 +9,7 @@ import (
 
 	"github.com/kubesphere/ksbuilder/cmd"
 	"github.com/spf13/cobra/doc"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 )
-
-const fmTemplate = `---
-date: %s
-title: "%s"
-slug: %s
-url: %s
----
-`
 
 func main() {
 	ksbuilder := cmd.NewRootCmd("v1.0.0")
@@ -31,7 +21,7 @@ func main() {
 	hdrFunc := func(filename string) string {
 		base := filepath.Base(filename)
 		name := strings.TrimSuffix(base, path.Ext(base))
-		title := cases.Title(language.Und).String(strings.Replace(name, "_", " ", -1))
+		title := strings.Replace(name, "_", " ", -1)
 		return fmt.Sprintf("---\ntitle: \"%s\"\n---\n\n", title)
 	}
 
