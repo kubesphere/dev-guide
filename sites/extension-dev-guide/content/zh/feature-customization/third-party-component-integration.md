@@ -43,7 +43,7 @@ export default function App() {
 后端处理之后的地址路径，一般应在 `/api` 下，前端才能访问。
 {{% /notice %}}
 
-隐藏第三方系统页面头部的示例：
+读取并操作第三方系统页面 `DOM`（隐藏第三方系统页面头部）的示例：
 
 ```jsx
 import React, { useState, useRef } from 'react';
@@ -89,9 +89,9 @@ export default function App() {
 }
 ```
 
-有时，如果第三方系统需要登录，为了更好的用户体验，我们可能会选择将 KubeSphere 和第三方系统的登录认证打通。
+有时，如果第三方系统需要登录，为了更好的用户体验，我们可能会选择将 KubeSphere 和第三方系统的登录认证体系打通。
 
-如果第三方系统采用 `JWT` 之类的认证方式，且其前端将 `token` 信息存储在 `localStorage` 中。
+比如第三方系统采用 `JWT` 之类的认证方式，且其前端将 `token` 信息存储在 `localStorage` 中。
 
 由于二者同源，因此我们可以从后端获取到第三方系统的 `token` 信息后，将其直接存在 `localStorage` 中，具体需根据第三方系统的实际情况而定。
 
