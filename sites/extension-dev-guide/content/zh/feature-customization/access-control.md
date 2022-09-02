@@ -115,7 +115,7 @@ spec:
 
       * `labels`：自定义权限的资源标签。
 
-        * `iam.kubesphere.io/role-template`：自定义权限是否在 KubeSphere 前端界面显示，一般设置为 `true` 即自定义权限在前端界面显示。
+        * `iam.kubesphere.io/role-template`：自定义权限是否在 KubeSphere 前端界面显示，一般设置为 `"true"` 即自定义权限在前端界面显示。
 
       * `annotations`：自定义权限的注解。
 
