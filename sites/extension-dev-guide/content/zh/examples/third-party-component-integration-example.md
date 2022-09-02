@@ -14,7 +14,7 @@ Nacos 是一个更易于构建云原生应用的动态服务发现、配置管�
 
 我们着重来看一下如何将 Nacos 的页面集成进来。
 
-我们将下面的代码复制粘贴到某个前端扩展组件目录下的 `src/App.jsx` 中：
+我们将下面的代码复制粘贴到某个前端扩展组件目录下的 `src/App.jsx` 中，便可以完成集成。
 
 ```jsx
 import React, { useState, useRef } from 'react';
