@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "http://localhost/"
 publishdir = "public/dev-guide"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh"

@@ -17,3 +17,6 @@ dev-guide:
 
 extension-dev-guide:
 	@hugo --config=extension-dev-guide.toml server
+
+generate-ksbuilder:
+	cd sites/extension-dev-guide/content/zh/references/ksbuilder && go run ./gen.go

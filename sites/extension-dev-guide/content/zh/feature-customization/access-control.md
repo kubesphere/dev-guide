@@ -1,289 +1,136 @@
 ---
 title: 访问控制
 weight: 03
-description: 为您的扩展组件集成 KubeSphere 的访问权限控制
+description: 介绍如何控制扩展组件定制资源的访问权限。
 ---
 
-## 概述
-KubeSphere 拥有完整的访问权限控制机制，我们为每一个资源都配置了相应的权限项。相应的，当您在开发 KubeSphere 扩展组件时，也可以为您的扩展组件配置权限项。
+本节介绍如何控制扩展组件定制资源的访问权限。
 
-{{% notice note %}}
-在阅读本章节之前，我们默认您已经熟悉了 KubeSphere 权限控制相关的知识。如果您对此不熟悉，请参考 [KubeSphere 权限控制](https://todo) 。
-{{% /notice %}}
+您可以在扩展组件中[使用定制资源定义（CRD）创建定制资源（CR）](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，并使用本节介绍的 `RoleTemplate` 资源类型创建自定义权限。在 KubeSphere Web 控制台，您可以使用自定义的权限创建角色并将角色授权给用户，从而只允许具有特定角色的用户访问扩展组件定制资源。
 
-## KubeSphere 扩展组件的资源层级
-在 KubeSphere 中，我们尽可能的把所有可操作的资源抽象成了 Kubernetes 自定义资源（Custom Resource），且制定了相应的 API 的规范。对资源进行统一的分组，
-分层，版本控制，权限控制等管理。如果你对此还不熟悉，请参考 [KubeSphere API资源](https://todo) 。
+`RoleTemplate` 是由 KubeSphere 提供的 CRD， 基于 Kubernetes 原生的 RBAC 鉴权机制实现。有关 Kubernetes RBAC 鉴权机制的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example)。
 
-我们约定了每个资源都应该属于某一个层级，资源分层有利于我们在 KubeSphere 多租户系统中为不同租户分配资源权限，为不同资源限定了其可分配的权限边界。
-我们将资源分为以下层级：
-- Global（平台）
-- Cluster（集群）
-- Workspace（企业空间）
-- Project （项目）
-- DevOps Project（DevOps 项目）
+## RoleTemplate 示例
 
-当我们在开发 KubeSphere 扩展组件时，首先需要考虑扩展组件需要包含哪些资源，然后需要确定资源所属的层级。这样 KubeSphere 才能对资源进行权限控制。
+假设扩展组件中定义了 CRD `custom-resource`。以下 YAML 文件创建了 `role-template-custom-resource-viewing` 和 `role-template-custom-resource-creation` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `role-template-custom-resource-creation` 依赖于 `role-template-custom-resource-viewing`。
 
-## KubeSphere 扩展组件的权限模板
-
-### 权限模板
-权限模板（RoleTemplate）是权限项的承载体。我们使用权限模板来定义权限项。权限项是权限定义的最小单元。我们将某一种资源的特定权限定义在一个权限项里。
-
-以下示例是管理 devops 的权限模板：
 ```yaml
 apiVersion: iam.kubesphere.io/v1alpha2
 kind: RoleTemplate
-metadate:
-  name: role-template-create-devops
+metadata:
+  name: role-template-custom-resource-viewing
   labels:
     scope.kubesphere.io/workspace: ""
 spec:
-  templateScope: workspace
   role:
     apiVersion: iam.kubesphere.io/v1alpha2
     kind: WorkspaceRole
     metadata:
-      annotations:
-        iam.kubesphere.io/module: DevOps Management
-        iam.kubesphere.io/role-template-rules: '{"devops": "create"}'
-        kubesphere.io/alias-name: DevOps Create
+      name: role-template-custom-resource-viewing
       labels:
         iam.kubesphere.io/role-template: "true"
-      name: role-template-create-devops
+      annotations:
+        iam.kubesphere.io/module: Custom Permission Group
+        iam.kubesphere.io/role-template-rules: '{"custom-resource": "list"}'
+        kubesphere.io/alias-name: Custom Resource Viewing
     rules:
       - apiGroups:
-          - '*'
+          - custom-api-group
         resources:
-          - 'devops'
-          - 'devopsprojects'
+          - custom-resource
+        verbs:
+          - list
+```
+
+```yaml
+apiVersion: iam.kubesphere.io/v1alpha2
+kind: RoleTemplate
+metadata:
+  name: role-template-custom-resource-creation
+  labels:
+    scope.kubesphere.io/workspace: ""
+spec:
+  role:
+    apiVersion: iam.kubesphere.io/v1alpha2
+    kind: WorkspaceRole
+    metadata:
+      name: role-template-custom-resource-creation
+      labels:
+        iam.kubesphere.io/role-template: "true"
+      annotations:
+        iam.kubesphere.io/module: Custom Permission Group
+        iam.kubesphere.io/role-template-rules: '{"custom-resource": "create"}'
+        kubesphere.io/alias-name: Custom Resource Creation
+        iam.kubesphere.io/dependencies: '["role-template-custom-resource-viewing"]'
+    rules:
+      - apiGroups:
+          - custom-api-group
+        resources:
+          - custom-resource
         verbs:
           - create
-          - watch
 ```
 
-| 字段 | 描述 |
-| --- | --- |
-| metadate.labels scope | 这个 label 用来筛选不同层级的权限项。|
-| spec.templateScope | 权限项的层级，可选参数：global，cluster，workspace，namespace。 |
-| spec.role | 权限项。这个字段是一个完整的角色定义，不同层级的权限项的角色定义不尽相同。|
+### RoleTemplate 参数说明
 
-### 权限项
+以下介绍如何设置自定义权限的参数。
 
-上面的内容中我们简单介绍了关于权限模板比较重要的字段，其中值得我们注意的字段有两个，metadate.labels scope 和
-spec.role。这两个字段分别表示权限项的层级，和权限项的具体权限定义。下面我们来分别讨论它们。
+* `apiVersion`：KubeSphere 访问控制 API 的版本。当前版本为 `iam.kubesphere.io/v1alpha2`。
 
-#### Scope Label
-Scope label 字段可以用来快速筛选不同层级的权限项。有以下几种不同的 label 可选：
-- scope.kubesphere.io/global
-- scope.kubesphere.io/cluster
-- scope.kubesphere.io/workspace 
-- scope.kubesphere.io/namespace
-- scope.kubesphere.io/devops
+* `kind`：自定义权限的资源类型。请将参数值设置为 `RoleTemplate`。
 
-以上五个标签分别对应 平台，集群，企业空间，项目空间，DevOps项目。
+* `metadata`：自定义权限的元数据。
 
-#### Role
-role 字段定义了一个完整的角色。不同层级的权限定义使用不同的类型, 其结构或借鉴或直接引用了 Kubernetes Role。如果您不熟悉 Kubernetes Role，请参考 
-[Role and ClusterRole](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#role-and-clusterole) 。 
-有以下几种不同类型可选：
-- GlobalRole
-- ClusterRole
-- WorkspaceRole
-- ProjectRole
+  * `name`：自定义权限的资源名称。
 
-下面我们将举例不同的层级的权限要如何定义。
+  * `labels`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限，并通过以下标签识别自定义权限的级别：
 
-#### Global Role
+    * `scope.kubesphere.io/global`：平台权限。
 
-| spec.role.apiVersion | spec.role.kind | metadata.labels | spec.templateScope |
-| --- | --- | --- | --- |
-|iam.kubesphere.io/v1alpha2 | GlobalRole | scope.kubesphere.io/global: "" | global |
+    * `scope.kubesphere.io/cluster`：集群权限。
 
-```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
-kind: RoleTemplate
-metadata:
-  name: role-template-manage-clusters
-  labels:
-    scope.kubesphere.io/global: ""
-spec:
-  templateScope: global
-  role:
-    apiVersion: iam.kubesphere.io/v1alpha2
-    kind: GlobalRole
-    metadata:
-      annotations:
-        iam.kubesphere.io/dependencies: '["role-template-view-clusters"]'
-        iam.kubesphere.io/module: Clusters Management
-        iam.kubesphere.io/role-template-rules: '{"clusters": "manage"}'
-        kubesphere.io/alias-name: Clusters Management
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      name: role-template-manage-clusters
-    rules:
-      - apiGroups:
-          - ""
-          - apiextensions.k8s.io
-          - app.k8s.io
-          - apps
-          - autoscaling
-          - batch
-          - config.istio.io
-          - devops.kubesphere.io
-          - devops.kubesphere.io
-          - events.k8s.io
-          - events.kubesphere.io
-          - extensions
-          - istio.kubesphere.io
-          - jaegertracing.io
-          - logging.kubesphere.io
-          - metrics.k8s.io
-          - monitoring.coreos.com
-          - monitoring.kubesphere.io
-          - metering.kubesphere.io
-          - network.kubesphere.io
-          - networking.istio.io
-          - networking.k8s.io
-          - node.k8s.io
-          - rbac.istio.io
-          - scheduling.k8s.io
-          - security.istio.io
-          - servicemesh.kubesphere.io
-          - snapshot.storage.k8s.io
-          - storage.k8s.io
-          - storage.k8s.io
-          - storage.kubesphere.io
-          - resources.kubesphere.io
-          - notification.kubesphere.io
-          - alerting.kubesphere.io
-          - cluster.kubesphere.io
-          - types.kubefed.io
-          - gitops.kubesphere.io
-          - gateway.kubesphere.io
-        resources:
-          - '*'
-        verbs:
-          - '*'
-      - apiGroups:
-          - tenant.kubesphere.io
-        resources:
-          - workspaces
-          - workspacetemplates
-        verbs:
-          - update
-          - patch
-      - apiGroups:
-          - iam.kubesphere.io
-        resources:
-          - clustermembers
-          - clusterroles
-        verbs:
-          - '*'
-      - nonResourceURLs:
-          - '*'
-        verbs:
-          - 'GET'
-```
+    * `scope.kubesphere.io/workspace`：企业空间权限。
 
-#### Cluster Role
+    * `scope.kubesphere.io/project`：项目权限。
 
-| spec.role.apiVersion | spec.role.kind | metadata.labels | spec.templateScope |
-| --- | --- | --- | --- |
-|rbac.authorization.k8s.io/v1 | ClusterRole | scope.kubesphere.io/cluster: "" | cluster |
+* `spec`
 
-```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
-kind: RoleTemplate
-metadata:
-  name: role-template-manage-crds
-  labels:
-    scope.kubesphere.io/cluster: ""
-spec:
-  templateScope: cluster
-  role:
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRole
-    metadata:
-      annotations:
-        iam.kubesphere.io/module: Cluster Resources Management
-        kubesphere.io/alias-name: CRD Management
-        iam.kubesphere.io/role-template-rules: '{"customresources": "manage"}'
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      name: role-template-manage-crds
-    rules: []
-```
+  * `role`
 
-#### Workspace Role
+    * `apiVerion`：KubeSphere 访问控制 API 的版本。当前版本为 `iam.kubesphere.io/v1alpha2`。
 
-| spec.role.apiVersion | spec.role.kind | metadata.labels | spec.templateScope |
-| --- | --- | --- | --- |
-|iam.kubesphere.io/v1alpha2 | WorkspaceRole | scope.kubesphere.io/workspace: "" | workspace |
+    * `kind`：自定义权限的级别，参数值必须与 `metadata:labels` 参数的设置匹配，取值可以为：
 
-```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
-kind: RoleTemplate
-metadata:
-  name: role-template-manage-workspace-settings
-  labels:
-    scope.kubesphere.io/workspace: ""
-spec:
-  templateScope: workspace
-  role:
-    apiVersion: iam.kubesphere.io/v1alpha2
-    kind: WorkspaceRole
-    metadata:
-      annotations:
-        iam.kubesphere.io/module: Workspace Settings
-        iam.kubesphere.io/role-template-rules: '{"workspace-settings": "manage"}'
-        kubesphere.io/alias-name: Workspace Settings Management
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      name: role-template-manage-workspace-settings
-    rules:
-      - apiGroups:
-          - '*'
-        resources:
-          - 'workspaces'
-        verbs:
-          - '*'
-```
+      * `GlobalRole`：平台权限。
 
-#### Project Role
+      * `ClusterRole`：集群权限。
 
-| spec.role.apiVersion | spec.role.kind | metadata.labels | spec.templateScope |
-| --- | --- | --- | --- |
-| rbac.authorization.k8s.io/v1 | Role | scope.kubesphere.io/namespace: "" | namespace |
+      * `WorkspaceRole`：企业空间权限。
 
-```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
-kind: RoleTemplate
-metadata:
-  name: role-template-manage-serviceaccount
-  labels:
-    scope.kubesphere.io/namespace: ""
-spec:
-  templateScope: namespace
-  role:
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: Role
-    metadata:
-      annotations:
-        iam.kubesphere.io/dependencies: '["role-template-view-serviceaccount"]'
-        iam.kubesphere.io/module: Configuration Center
-        iam.kubesphere.io/role-template-rules: '{"serviceaccounts": "manage"}'
-        kubesphere.io/alias-name: ServiceAccount Management
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      name: role-template-manage-serviceaccount
-    rules:
-      - apiGroups:
-          - '*'
-        resources:
-          - 'serviceaccounts'
-        verbs:
-          - '*'
-```
+      * `ProjectRole`：项目权限。
 
+    * `metadata`
 
+      * `name`：自定义权限的名称，参数值必须与 `metadata:name` 参数相同。
+
+      * `labels`：自定义权限的资源标签。
+
+        * `iam.kubesphere.io/role-template`：自定义权限是否在 KubeSphere 前端界面显示，一般设置为 `"true"` 即自定义权限在前端界面显示。
+
+      * `annotations`：自定义权限的注解。
+
+        * `iam.kubesphere.io/module`：自定义权限所属的权限分组。
+
+        * `iam.kubesphere.io/role-template-rules`：自定义权限向用户授权的资源类型和操作，例如 `'{"custom-resource": "create"}'` 表示授权用户创建 `custom-resource` 类型的资源。此参数仅供 KubeSphere 前端获取权限内容，并不对权限内容进行实际定义。例如，KubeSphere 前端可根据此参数返回的值判断是否对特定用户显示扩展组件。权限内容实际由 `spec:role:rules` 参数定义。此参数值必须与 `spec:role:rules` 参数设置匹配以避免前端判断逻辑错误。
+
+        * `kubesphere.io/alias-name`：自定义权限在 KubeSphere 前端显示的名称。
+
+        * `iam.kubesphere.io/dependencies`：当前自定义权限依赖的其他权限的资源名称。
+
+      * `rules`：自定义权限向用户授权的资源和操作。此参数为自定义权限内容的实际定义，区别于 `iam.kubesphere.io/role-template-rules` 参数。
+
+        * `apiGroups`：向用户授权的资源类型所属的 API 组。取值 `'*'` 表示当前权限级别的所有 API 组。
+
+        * `resources`：向用户授权的资源类型，可以为 CRD（例如本节示例中的 `custom-resource`）或 Kubernetes 默认资源类型（例如 `deployment`）。取值 `'*'` 表示当前权限级别的所有资源类型。
+
+        * `verbs`：向用户授权的操作。取值 `'*'` 当前权限级别的所有操作。有关资源操作类型的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/docs/reference/access-authn-authz/authorization/)。

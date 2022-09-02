@@ -1,125 +1,103 @@
 ---
-title: 菜单栏
+title: 挂载位置
 weight: 02
-description: 设置扩展组件在 KubeSphere 控制台中菜单栏或导航栏的位置
+description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
 ---
 
-### 菜单挂载点
+本节介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
 
-扩展组件的入口菜单需要挂载在 KubeSphere 界面上。目前有四种挂载点：顶部导航栏、平台管理、左侧菜单、工具箱。如图
+### 可选挂载位置
 
-1. 顶部导航栏
-![top menu](images/zh/extension-customization/top-menu.png)
+您可以将扩展组件挂载到以下位置：
 
-2. 平台管理
+* 顶部菜单栏
 
-   点击顶部导航栏 `平台管理` 打开界面
-![platform menu](images/zh/extension-customization/platform-menu.png)
+  <img src="images/zh/extension-customization/top-menu.png" style="max-width: 1000px; margin: 0px">
 
-3. 左侧菜单
-   ![navigation menu](images/zh/extension-customization/navigation-menu.png)
-   
-4. 工具箱
-   
-   鼠标移到 KubeSphere 控制台右下角小锤子图标便展示工具箱内容
-![toolbox](images/zh/extension-customization/toolbox-menu.png)
+* 平台管理菜单
 
-### 挂载设置
+  在顶部菜单栏点击`平台管理`打开菜单。
 
-扩展组件的入口菜单放置在何处，是在扩展组件的 entry file 里设置的，如下面代码所示
+  <img src="images/zh/extension-customization/platform-menu.png" style="max-width: 1000px; margin: 0px">
+
+* 工具箱菜单
+
+  将光标悬停在页面右下角的 <img src="images/zh/extension-customization/hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
+
+  <img src="images/zh/extension-customization/toolbox-menu.png" style="max-width: 1000px; margin: 0px">
+
+* 左侧导航栏
+  
+  KubeSphere 在访问控制、集群管理、企业空间管理、项目管理和平台设置页面提供左侧导航栏。例如，集群管理页面的左侧导航栏如下图所示：
+
+  <img src="images/zh/extension-customization/navigation-menu.png" style="max-width: 1000px; margin: 0px">
+
+### 设置挂载位置
+
+您可以在扩展组件前端源代码入口文件（例如 `src/index.js`）中的 `menu` 对象设置挂载位置，例如：
 
 ```javascript
-import routes from './routes';                   // 导入路由
-import locales from './locales';                 // 导入国际化文件
-
-const menu = {                                   // 定义菜单 
-  parent: 'global',                              // 菜单父级
-  name: 'employee',                              // 菜单 name 标识 
-  link: '/employee/list',                        // 入口 url    
-  title: 'EMPLOYEE_MANAGEMENT',                  // 菜单名称，可以国际化  
-  icon: 'cluster',                               // 菜单 icon
-  order: 0,                                      // 菜单排序  
-  desc: 'EMPLOYEE_MANAGEMENT_SYSTEM',            // 菜单描述，可以国际化
-  skipAuth: true,                                // 是否忽略权限检查
+const menu = { 
+  parent: 'global',
+  name: 'hello-world',
+  link: '/hellow-world',
+  title: 'HELLO_WORLD',
+  icon: 'cluster',
+  order: 0,
+  desc: 'HELLO_WORLD_DESC',
+  skipAuth: true,
 };
-
-const extensionConfig = {
-  routes,
-  menus: [menu],
-  locales,
-};
-
-globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
 ```
 
-通过 `menu` 的 `parent` 字段设置挂载点：
-* 当值为 `topbar` 时菜单挂载在顶部导航栏；
-* 当值为 `global` 时菜单挂载在平台管理菜单；
-* 当值为 `toolbox` 时菜单挂载在工具箱。
-* 如果需要挂载在左侧菜单某一个地方，则需要根据系统配置文件 `config.yaml` 的菜单配置里的 name 字段来设置这个 `parent` 字段，通常 `config.yaml` 内容如下：
+<table>
+  <colsgroup>
+    <col style="width: 25%;">
+    <col style="width: 75%;">
+  </colsgroup>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>描述</th>
+    </tr>
+  <thead>
+  <tbody>
+    <tr>
+      <td>parent</td>
+      <td>扩展组件的挂载位置，取值可以为：
+        <ul>
+          <li><strong>topbar</strong>：挂载到顶部菜单栏。</li>
+          <li><strong>global</strong>：挂载到平台管理菜单。</li>
+          <li><strong>toolbox</strong>：挂载到工具箱菜单。</li>
+          <li><strong>access</strong>：挂载到访问控制页面左侧导航栏。</li>
+          <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
+          <li><strong>workspace</strong>：挂载到企业空间管理页面左侧导航栏。</li>
+          <li><strong>project</strong>：挂载到项目管理页面左侧导航栏。</li>
+          <li><strong>platformSettings</strong>：挂载到平台设置页面左侧导航栏。</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>扩展组件在菜单上的位置标识。</td>
+    </tr>
+    <tr>
+      <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
+    </tr>
+    <tr>
+      <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="zh/feature-customization/internationalization">国际化</a>。</td>
+    </tr>
+    <tr>
+      <td>icon</td><td>扩展组件在菜单上显示的图标的名称。</td>
+    </tr>
+    <tr>
+      <td>order</td><td>扩展组件在菜单上的排列位次，取值为 <code>0</code> 或正整数，取值 <code>0</code> 表示扩展组件在菜单首位。</td>
+    </tr>
+    <tr>
+      <td>desc</td><td>扩展组件在菜单上显示的描述文字，目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>toolbox</code> 时有效。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="zh/feature-customization/internationalization">国际化</a>。</td>
+    </tr>
+    <tr>
+      <td>skipAuth</td><td>是否跳过用户权限检查。有关更多信息，请参阅<a href="zh/feature-customization/access-control">访问控制</a>。</td>
+    </tr>
+  </tbody>
+</table>
 
-```yaml
-  clusterNavs:
-    name: cluster
-    children:
-      - name: overview
-        title: OVERVIEW
-        icon: dashboard
-        skipAuth: true
-        showInDisable: true
-      - name: nodes
-        title: NODE_PL
-        icon: nodes
-        children:
-          - { name: nodes, title: CLUSTER_NODE_PL }
-          - { name: edgenodes, title: EDGE_NODE_PL, clusterModule: kubeedge }
-      - { name: components, title: SYSTEM_COMPONENT_PL, icon: components }
-      - { name: projects, title: PROJECT_PL, icon: project }
-      - name: app-workloads
-        title: APPLICATION_WORKLOAD_PL
-        icon: appcenter
-        children:
-          - name: workloads
-            title: WORKLOAD_PL
-            tabs:
-              - { name: deployments, title: DEPLOYMENT_PL }
-              - { name: statefulsets, title: STATEFULSET_PL }
-              - { name: daemonsets, title: DAEMONSET_PL }
-          - name: jobs
-            title: JOB_PL
-            tabs:
-              - { name: jobs, title: JOB_PL }
-              - { name: cronjobs, title: CRONJOB_PL }
-          - { name: pods, title: POD_PL }
-          - { name: services, title: SERVICE_PL }
-          - { name: ingresses, title: ROUTE_PL }
-      - name: config
-        title: CONFIGURATION
-        icon: hammer
-        children:
-          - { name: secrets, title: SECRET_PL }
-          - { name: configmaps, title: CONFIGMAP_PL }
-          - {
-            name: serviceaccounts,
-            title: SERVICE_ACCOUNT_PL,
-            requiredClusterVersion: v3.1.0,
-          }
-      - name: network
-        title: NETWORK
-        icon: earth
-        children:
-          - {
-            name: networkpolicies,
-            title: NETWORK_POLICY_PL,
-            clusterModule: network,
-          }
-          - {
-            name: ippools,
-            title: POD_IP_POOL_PL,
-            clusterModule: "network.ippool",
-          }
- ...
-
-```
-
-假如我们要把扩展组件的入口放到集群管理侧边栏，我们可以把 parent 值设置成 `cluster`。菜单的挂载也支持多级，比如我们想把扩展组件的入口点放到”集群管理-节点管理“下。我们可以把 `parent` 值设置成 `cluster.nodes`。
