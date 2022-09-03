@@ -87,18 +87,11 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ### 安装开发工具
 
-1. 执行以下命令在开发主机上创建开发工具的配置文件夹，将 `kubesphere` 容器中的 kubeconfig 配置文件复制到文件夹中，然后在配置文件中设置 Kubernetes API 服务 `kube-apiserver` 的访问地址：
+1. 执行以下命令在开发主机上创建开发工具的配置文件夹，将 `kubesphere` 容器中的 kubeconfig 配置文件复制到本地文件夹中：
+
 
    ```bash
-   mkdir -p ~/.kubesphere/dev-tools
-   ```
-
-   ```bash
-   docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/.kubesphere/dev-tools/config
-   ```
-
-   ```bash
-   perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/.kubesphere/dev-tools/config
+   mkdir -p ~/.kubesphere/dev-tools && docker cp kubesphere:/etc/rancher/k3s/k3s.yaml ~/.kubesphere/dev-tools/config
    ```
 
 2. 根据您的开发习惯，通过运行容器或安装二进制文件安装开发工具。
@@ -111,10 +104,15 @@ description: 介绍如何搭建扩展组件开发环境。
 登录开发主机，执行以下命令为开发工具命令设置别名：
 
 ```bash
-alias yarn='mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc && docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:latest yarn'
+# 创建本地缓存与配置文件目录
+mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc
+alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:latest yarn'
 ```
 
+
 ```bash
+# 替换 kubeconfig 中 kube-apiserver 的访问地址
+perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/.kubesphere/dev-tools/config
 alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest kubectl'
 ```
 
