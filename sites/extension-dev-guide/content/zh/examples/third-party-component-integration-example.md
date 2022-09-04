@@ -4,17 +4,37 @@ weight: 02
 description: 快速集成已有 Web UI 的第三方工具与系统
 ---
 
-本章以将 Nacos 集成到扩展组件为例，带大家熟悉如何快速集成已有 Web UI 的第三方工具与系统。
+本章以将 Weave Scope 集成到扩展组件为例，带大家熟悉如何快速集成已有 Web UI 的第三方工具与系统。
 
-Nacos 是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+[Weave Scope](https://github.com/weaveworks/scope) 可以自动生成应用程序的映射，使您能够直观地理解、监视和控制基于容器化微服务的应用程序。
 
-## 前端扩展组件开发
+### 部署 Weave Scope
 
-项目的创建、本地开发、构建、部署、注册等流程，除了由于扩展组件的名称导致的不同以外，其他均与[员工管理扩展组件示例](zh/examples/employee-management-extension-example/#前端扩展组件开发)相同。
+您可以参考该文档[部署 Weave Scope](https://www.weave.works/docs/scope/latest/installing)，或通过以下命令在 K8s 集群中一键部署。
 
-我们着重来看一下如何将 Nacos 的页面集成进来。
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/weave-scope/manifests.yaml
+```
 
-我们将下面的代码复制粘贴到某个前端扩展组件目录下的 `src/App.jsx` 中，便可以完成集成。
+### 为 Weave Scope 创建反向代理
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/weave-scope/weave-scope-reverse-proxy.yaml
+```
+
+### 前端扩展组件开发
+
+项目的创建、本地开发、调试流程，与[员工管理扩展组件示例](zh/examples/employee-management-extension-example/#前端扩展组件开发)相同。您可以从 GitHub 上克隆本示例的代码
+
+```bash
+cd  ~/kubesphere-extensions
+git clone https://github.com/kubesphere/extension-samples.git
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/extensions-frontend/extensions
+```
+
+我们着重来看一下如何将 Weave Scope 的页面集成进来。
+
+文件路径： `~/kubesphere-extensions/extensions-frontend/extensions/weave-scope/src/App.jsx` 
 
 ```jsx
 import React, { useState, useRef } from 'react';
@@ -26,23 +46,15 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   const FRAME_URL =
-    '/api/v1/namespaces/nacos-system/services/nacos-cs:http/proxy/nacos/index.html';
-  const TOKEN_INFO = {
-    accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTY1Mjc4ODI2NX0.i5xDBKW8WR_QB8VmHE62SB0TUYvlkK02KprpvSom8rY',
-    tokenTtl: 18000,
-    globalAdmin: true,
-    username: 'nacos',
-  };
-  useLocalStorage({ key: 'token', defaultValue: JSON.stringify(TOKEN_INFO) });
+    '/proxy/weave.works/#!/state/{"topologyId":"pods"}';
 
   const iframeRef = useRef();
 
   const onIframeLoad = () => {
     const iframeDom = get(iframeRef.current, 'contentWindow.document');
     if (iframeDom) {
-      if (iframeDom.querySelector('.header-container')) {
-        iframeDom.querySelector('.header-container').style.display = 'none';
+      if (iframeDom.querySelector('#app > div > div.header > div')) {
+        iframeDom.querySelector('#app > div > div.header > div').style.display = 'none';
       }
     }
     setLoading(false);
@@ -68,18 +80,18 @@ export default function App() {
 }
 ```
 
-以上代码主要做了 3 件事。
+以上代码主要做了 2 件事。
 
-1. 将 Nacos 页面以 `iframe` 的形式嵌入到扩展组件中。`FRAME_URL` 为后端处理过的 Nacos 页面地址，且与 KubeSphere 页面地址**同源**。
+1. 将 Weave Scope 页面以 `iframe` 的形式嵌入到扩展组件中。`FRAME_URL` 为 Weave Scope 的反向代理地址，且与 KubeSphere 页面地址**同源**。
 
 {{% notice note %}}
 由于浏览器的同源策略（Same-Origin Policy），如果第三方系统网页与 KubeSphere 前端网页不同源，我们将无法使用 JavaScript 对第三方系统 iframe 进行读取和操作。 因此，我们通常需要由后端将第三方系统的前端访问地址，处理成和 KubeSphere 前端访问地址同源（**同协议**、**同主机**、**同端口**）的地址。
 {{% /notice %}}
 
-{{% notice note %}}
-`FRAME_URL` 一般应在 /api 下，前端才能访问。
-{{% /notice %}}
 
-2. 将 Nacos 的 `token` 认证信息存到 KubeSphere 页面的 `localStorage` 中。`TOKEN_INFO` 为后端处理过的 Nacos `token` 信息。由于 Nacos 页面地址与 KubeSphere 页面地址同源，因此 Nacos 页面也可以从 `localStorage` 中读取到自身的 `token` 信息，从而登录。
+2. 调整 Weave Scope 页面的样式。同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
 
-3. 调整 Nacos 页面的样式。同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Nacos 页面（`iframe`）的 DOM ，从而调整 Nacos 页面的样式，将其头部隐藏。
+
+通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
+
+![weave-scope-dashboard](images/zh/samples-and-tutorials/sample-weave-scope-dashboard.png)
