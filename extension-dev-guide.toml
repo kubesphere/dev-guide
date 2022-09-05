@@ -20,6 +20,7 @@ defaultContentLanguageInSubdir= true
   disableMermaid = false
   customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
   titleSeparator = "::"
+  themeVariant = "green"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
