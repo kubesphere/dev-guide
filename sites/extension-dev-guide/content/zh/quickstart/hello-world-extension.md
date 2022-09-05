@@ -37,13 +37,13 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
    ```
 
    ```bash
-   yarn create ks-ext extensions-frontend --fast-mode
+   yarn create ks-ext frontend --fast-mode
    ```
 
 2. 执行以下命令创建 Hello World 扩展组件前端模块：
 
    ```bash
-   cd extensions-frontend
+   cd frontend
    ```
 
    ```bash
@@ -65,7 +65,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 
    ```bash
    kubesphere-extensions
-   └── extensions-frontend
+   └── frontend
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
@@ -92,7 +92,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 
    * `kubesphere-extensions`：扩展组件开发目录，可包含前端开发目录和后端开发目录。
 
-     * `extensions-frontend`：扩展组件前端开发目录。
+     * `frontend`：扩展组件前端开发目录。
      
        * `extensions`：扩展组件前端模块目录，可包含多个扩展组件的前端模块。
 
@@ -105,7 +105,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 执行以下命令设置 `ks-apiserver` 的访问地址：
 
 ```sh
-perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/kubesphere-extensions/extensions-frontend/configs/local_config.yaml
+perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/kubesphere-extensions/frontend/configs/local_config.yaml
 ```
 
 ### 运行扩展组件
@@ -124,7 +124,7 @@ perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IP
 
 ### 调试扩展组件
 
-Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/extensions-frontend/extensions/hello-world` 目录中。您可以使用任意编辑器对 Hello World 扩展组件的源代码进行编辑。
+Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/frontend/extensions/hello-world` 目录中。您可以使用任意编辑器对 Hello World 扩展组件的源代码进行编辑。
 
 例如，您可以将页面显示的字符串修改为 `Test!`，如下图所示：
 
