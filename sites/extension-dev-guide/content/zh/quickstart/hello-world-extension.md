@@ -37,7 +37,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
    ```
 
    ```bash
-   yarn create ks-ext extensions-frontend
+   yarn create ks-ext extensions-frontend --fast-mode
    ```
 
 2. 执行以下命令创建 Hello World 扩展组件前端模块：
