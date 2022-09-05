@@ -42,7 +42,7 @@ KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框
 
 #### 定制功能
 
-您可以对扩展组件的主题、菜单栏、访问控制、页面路由、国际化等功能特性进行定制。此外，KubeSphere 提供了 API 扩展接口，您可以将自定义 API 注册到 KubeSphere API 服务中供扩展组件调用。
+您可以对扩展组件的主题、菜单挂载位置、访问控制、页面路由、国际化等功能特性进行定制。此外，KubeSphere 提供了 API 扩展接口，您可以将自定义 API 注册到 KubeSphere API 服务中供扩展组件调用。
 
 #### 打包、测试和发布
 
