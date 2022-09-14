@@ -16,10 +16,10 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ### 安装 KubeSphere Core
 
-1. 登录开发主机，执行以下命令通过运行 `kubesphere` 容器安装 KubeSphere Core，同时暴露前端 Web 控制台服务 `ks-console` 访问端口 30880 和后端 API 服务 `ks-apiserver` 访问端口 30881：
+1. 登录开发主机，执行以下命令通过运行 `kubesphere` 容器安装 KubeSphere Core，同时暴露前端 Web 控制台服务 `ks-console` 访问端口 30880、后端 API 服务 `ks-apiserver` 访问端口 30881 以及 K8s kube-apiserver 的访问端口 6443：
 
     ```
-    docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 kubespheredev/ks-allinone:v4.0.0-alpha.0
+    docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 -p 6443:6443 kubespheredev/ks-allinone:v4.0.0-alpha.0
     ```
 
 2. 容器正常运行并且状态为 `healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
