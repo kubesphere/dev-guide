@@ -29,12 +29,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
-cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/extensions-frontend/extensions
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/frontend/extensions
 ```
 
 我们着重来看一下如何将 Weave Scope 的页面集成进来。
 
-文件路径： `~/kubesphere-extensions/extensions-frontend/extensions/weave-scope/src/App.jsx` 
+文件路径： `~/kubesphere-extensions/frontend/extensions/weave-scope/src/App.jsx`
 
 ```jsx
 import React, { useState, useRef } from 'react';
@@ -88,9 +88,7 @@ export default function App() {
 由于浏览器的同源策略（Same-Origin Policy），如果第三方系统网页与 KubeSphere 前端网页不同源，我们将无法使用 JavaScript 对第三方系统 iframe 进行读取和操作。 因此，我们通常需要由后端将第三方系统的前端访问地址，处理成和 KubeSphere 前端访问地址同源（**同协议**、**同主机**、**同端口**）的地址。
 {{% /notice %}}
 
-
 2. 调整 Weave Scope 页面的样式。同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
-
 
 通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
 
