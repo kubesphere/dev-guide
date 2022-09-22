@@ -103,19 +103,17 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 }
 ```
 
-
 到这里后端的开发与 API 的注册就已经完成了，紧接着我们来看看前端的开发与测试流程。
-
 
 ## 前端扩展组件开发
 
 #### 1. 创建项目脚手架
 
 在[创建 Hello World 扩展组件](zh/quickstart/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。
-我们可以继续在这个前端项目脚手架目录(`~/workspace/kubesphere/extensions-frontend/`)中创建我们的第二个前端扩展组件 employee。
+我们可以继续在这个前端项目脚手架目录（`~/kubesphere-extensions/frontend/`）中创建我们的第二个前端扩展组件 employee。
 
 ```shell
-$ cd ~/kubesphere-extensions/extensions-frontend/
+$ cd ~/kubesphere-extensions/frontend/
 $ yarn create:ext
 ```
 
@@ -178,7 +176,7 @@ Dashboard app running at port 8000
 <i> [webpack-dev-server] Loopback: http://localhost:8001/
 <i> [webpack-dev-server] On Your Network (IPv4): http://192.168.1.133:8001/
 <i> [webpack-dev-server] On Your Network (IPv6): http://[fe80::1]:8001/
-<i> [webpack-dev-server] Content not from webpack is served from '~/workspace/kubesphere/extensions-frontend/dist' directory
+<i> [webpack-dev-server] Content not from webpack is served from '~/kubesphere-extensions/frontend/dist' directory
 <i> [webpack-dev-server] 404s will fallback to '/index.html'
 Successfully started server on http://localhost:8000 
 ```
@@ -187,10 +185,9 @@ Successfully started server on http://localhost:8000
 
 便于演示，我们可以将示例仓库中的代码直接复制过来
 
+```shell
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/frontend/extensions/employee
 ```
-cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/extensions-frontend/extensions/employee
-```
-
 
 #### 2. 构建镜像
 
