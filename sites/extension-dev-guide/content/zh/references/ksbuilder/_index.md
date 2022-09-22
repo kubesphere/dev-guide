@@ -59,7 +59,7 @@ ksbuilder init [flags]
 
 ## ksbuilder install
 
-install a extension
+install an extension
 
 ```
 ksbuilder install [flags]
@@ -76,7 +76,7 @@ ksbuilder install [flags]
 
 ## ksbuilder uninstall
 
-uninstall a extension
+uninstall an extension
 
 ```
 ksbuilder uninstall [flags]
@@ -110,7 +110,7 @@ ksbuilder update [flags]
 
 ## ksbuilder version
 
-Displays version
+Display version
 
 ```
 ksbuilder version [flags]
