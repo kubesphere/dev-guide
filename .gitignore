@@ -7,5 +7,7 @@ node_modules
 .DS_Store
 .idea
 /resources
+.hugo_build.lock
+package-lock.json
 # Local Netlify folder
 .netlify
