@@ -4,7 +4,7 @@ weight: 01
 description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
 ---
 
-在[入门指南](zh/get-started/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](zh/quickstart/hello-world-extension/) 扩展组件项目。
+在[快速入门](zh/quickstart/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](zh/quickstart/hello-world-extension/) 扩展组件项目。
 
 本章将以开发一个员工管理功能扩展组件为例，带大家熟悉扩展组件的开发、测试流程
 
@@ -220,7 +220,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. 注册前端扩展组件到 ks-apiserver
 
-与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](zh/overview/architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](zh/architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
