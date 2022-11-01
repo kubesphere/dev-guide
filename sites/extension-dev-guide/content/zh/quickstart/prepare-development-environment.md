@@ -117,7 +117,7 @@ alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/con
 ```
 
 ```bash
-alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest ksbuilder'
+alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/tmp/kubeconfig -e KUBECONFIG=/tmp/kubeconfig -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest ksbuilder'
 ```
 
    {{% /tab %}}
