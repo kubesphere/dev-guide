@@ -57,53 +57,18 @@ ksbuilder init [flags]
 
 ------
 
-## ksbuilder install
+## ksbuilder publish
 
-install an extension
-
-```
-ksbuilder install [flags]
-```
-
-### 可选项
+Publish an extension into the market
 
 ```
-  -h, --help               help for install
-  -n, --namespace string   namespace (default "extension-default")
-```
-
-------
-
-## ksbuilder uninstall
-
-uninstall an extension
-
-```
-ksbuilder uninstall [flags]
+ksbuilder publish [flags]
 ```
 
 ### 可选项
 
 ```
-  -h, --help               help for uninstall
-  -n, --namespace string   namespace (default "extension-default")
-```
-
-------
-
-## ksbuilder update
-
-update a extension
-
-```
-ksbuilder update [flags]
-```
-
-### 可选项
-
-```
-  -h, --help               help for update
-  -n, --namespace string   namespace (default "extension-default")
+  -h, --help   help for publish
 ```
 
 ------
