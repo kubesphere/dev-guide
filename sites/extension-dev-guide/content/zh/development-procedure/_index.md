@@ -46,4 +46,4 @@ KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框
 
 #### 打包发布
 
-您需要将扩展组件的前后端源代码构建成容器镜像，并使用 KubeSphere 团队提供的打包工具 ksbuilder 将扩展组件打包成 Helm Chart。您还需要将 Helm Chart 安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。打包生成的 Helm Chart 可作为扩展组件的最终发布件，您也可以进一步将 Helm Chart 和 Helm 仓库打包到容器镜像中，将容器镜像作为最终发布件。
+您需要将扩展组件的前后端源代码构建成容器镜像，并使用 KubeSphere 团队提供的开发工具 ksbuilder 将扩展组件上架到本地的扩展组件商店中。您还需要通过扩展组件商店安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。
