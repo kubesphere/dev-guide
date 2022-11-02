@@ -37,14 +37,14 @@ After you install Hugo, run the following command:
 
 ```bash
 # Launch KubeSphere extension development guide
-hugo server --config extension-dev-guide.toml
+make extension-dev-guide
 ```
 
 or
 
 ```bash
 # Launch KubeSphere development guide
-hugo server --config dev-guide.toml
+make dev-guide
 ```
 
 Now you can preview the website in your browser at `http://localhost:1313/`.

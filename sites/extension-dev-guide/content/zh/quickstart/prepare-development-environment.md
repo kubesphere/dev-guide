@@ -19,7 +19,7 @@ description: 介绍如何搭建扩展组件开发环境。
 1. 登录开发主机，执行以下命令通过运行 `kubesphere` 容器安装 KubeSphere Core，同时暴露前端 Web 控制台服务 `ks-console` 访问端口 30880、后端 API 服务 `ks-apiserver` 访问端口 30881 以及 K8s kube-apiserver 的访问端口 6443：
 
     ```
-    docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 -p 6443:6443 kubespheredev/ks-allinone:v4.0.0-alpha.0
+    docker run -d --name kubesphere --privileged=true --restart=always -p 30881:30881 -p 30880:30880 -p 6443:6443 kubespheredev/ksc-allinone:v4.0.0-alpha.1
     ```
 
 2. 容器正常运行并且状态为 `healthy` 之后，执行以下命令检查 `ks-apiserver` 是否运行正常：
@@ -106,18 +106,18 @@ description: 介绍如何搭建扩展组件开发环境。
 ```bash
 # 创建本地缓存与配置文件目录
 mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc
-alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:latest yarn'
+alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v4.0.0-alpha.1 yarn'
 ```
 
 
 ```bash
 # 替换 kubeconfig 中 kube-apiserver 的访问地址
 perl -pi -e "s/127.0.0.1/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`/g" ~/.kubesphere/dev-tools/config
-alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest kubectl'
+alias kubectl='docker run --rm -v ~/.kubesphere/dev-tools/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 kubectl'
 ```
 
 ```bash
-alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/tmp/kubeconfig -e KUBECONFIG=/tmp/kubeconfig -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:latest ksbuilder'
+alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kubesphere/dev-tools/config:/tmp/kubeconfig -e KUBECONFIG=/tmp/kubeconfig -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 ksbuilder'
 ```
 
    {{% /tab %}}
