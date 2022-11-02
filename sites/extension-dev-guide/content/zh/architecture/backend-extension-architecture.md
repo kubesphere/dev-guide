@@ -4,7 +4,7 @@ weight: 02
 description: KubeSphere 后端扩展机制介绍
 ---
 
-KubeSphere 4.0 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。KubeSphere Core 保留了以下三个核心组件：
+KubeSphere LuBan 4.0 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。KubeSphere Core 保留了以下三个核心组件：
 
 * `ks-apiserver` 是一个可扩展的 API 网关，为 KubeSphere 提供统一的 API 认证鉴权、请求的代理转发、API 的聚合能力。
 * `ks-controller-manager` 实现了核心资源的控制逻辑。

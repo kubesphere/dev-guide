@@ -1,10 +1,10 @@
 ---
 title: "概述"
 weight: 01
-description: 介绍 KubeSphere 4.0 扩展机制的背景和优势
+description: 介绍 KubeSphere LuBan 4.0 扩展机制的背景和优势
 ---
 
-## 为什么在 KubeSphere 4.0 引入扩展机制
+## 为什么在 KubeSphere LuBan 4.0 引入扩展机制
 
 KubeSphere 混合多云容器管理平台自 2018 年诞生到现在已经发布过包括 3 个大版本在内的十几个版本。为了满足用户需求，KubeSphere 集成了众多企业级功能如多租户管理，多集群管理，DevOps，GitOps，服务网格，微服务，可观测（包括监控、告警、日志、审计、事件、通知等)，应用商店，边缘计算，网络与存储管理等。
 
@@ -35,7 +35,7 @@ KubeSphere 通常会选择一种实现优先支持，但用户经常会有支持
 - 此外，提了 PR 后得等 KubeSphere 发布新版本才能用
 - 由于发版周期长导致大量的用户会基于 KubeSphere 定制化自己的需求，会渐进脱离社区，违背了开源社区 upstream first 的理念，长期来说，无法享受到上游越来越多的能力。
 
-## KubeSphere 4.0 扩展机制简介
+## KubeSphere LuBan 4.0 扩展机制简介
 
 为了解决上述各种问题，KubeSphere 社区决定基于微内核架构，在 4.0 引入扩展机制：
 
@@ -46,11 +46,11 @@ KubeSphere 通常会选择一种实现优先支持，但用户经常会有支持
 - 通过 KubeSphere Extension 扩展组件管理平台统一管理各扩展组件
 - 未来将引入 KubeSphere Extension Store 来丰富 KubeSphere 扩展组件生态。用户可以将自己开发的扩展组件上架 KubeSphere Extension Store 供其他用户使用甚至获利
 
-## KubeSphere 4.0 扩展机制的优势
+## KubeSphere LuBan 4.0 扩展机制的优势
 
-KubeSphere 4.0 扩展机制的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
+KubeSphere LuBan 4.0 扩展机制的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
 
-- 对于 KubeSphere 维护者来说，KubeSphere 4.0 扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 ks-core 更加轻量，版本发布节奏也可以加快。对于其他功能来说，因为采用了扩展组件来实现，可使得这些组件能够独立进行迭代，更及时的满足用户的需求
+- 对于 KubeSphere 维护者来说，KubeSphere LuBan 4.0 扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 ks-core 更加轻量，版本发布节奏也可以加快。对于其他功能来说，因为采用了扩展组件来实现，可使得这些组件能够独立进行迭代，更及时的满足用户的需求
 - 对于 KubeSphere·贡献者来说，因为扩展机制的引入使得 ks-core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手
-- 对于云原生应用开发商（ISV）或其他开源项目来说，KubeSphere 4.0 扩展机制使得众多 ISV 或其他开源项目可以用很小的代价就可以把产品或开源项目无缝融入到 KubeSphere 体系中来。比如 Karmada/KubeEdge 的开发人员可以基于这套扩展机制基于 KubeSphere 开发 Karmada/KubeEdge 自己的控制台
+- 对于云原生应用开发商（ISV）或其他开源项目来说，KubeSphere LuBan 4.0 扩展机制使得众多 ISV 或其他开源项目可以用很小的代价就可以把产品或开源项目无缝融入到 KubeSphere 体系中来。比如 Karmada/KubeEdge 的开发人员可以基于这套扩展机制基于 KubeSphere 开发 Karmada/KubeEdge 自己的控制台
 - 对于 KubeSphere 用户来说可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere Extension Store 中自由选择更丰富的产品和服务，最终达到容器管理平台的千人千面的效果
