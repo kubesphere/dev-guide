@@ -6,29 +6,12 @@ description: "在测试与发布之前首先您需要将扩展组件进行打包
 
 当我们准备好前后端扩展组件的镜像，以及扩展资源声明后，就可以借助 ksbuilder、Helm 对我们的扩展组件进行打包与测试了。
 
-### 初始化扩展组件管理工程
-
-前后端扩展组件都开发完成后，我们需要使用 `ksbuilder` 创建一个扩展组件的管理工程，该工程可以帮助我们管理需要打包的前后端扩展组件。基于该工程我们还可以构建一个可以对外发布的扩展组件仓库镜像。
-
-通过 `ksbuilder init <directory>` 初始化工程目录
-
-```shell
-ksbuilder init extension-repo
-```
-执行完成后，可以看到如下信息，表示项目初始化成功：
-```shell
-$ ksbuilder init extension-repo
-Directory: ~/workspace/kubesphere/extension-repo
-
-The project has been created.
-```
-
 ### 初始化 employee 扩展组件包目录
 
-工程初始化成功后，我们进入到工程目录中，通过交互式命令创建出扩展组件包的目录。
+前后端扩展组件都开发完成后，我们需要使用 `ksbuilder` 的交互式命令创建出扩展组件包的目录，该目录可以帮助我们管理需要打包的前后端扩展组件。。
 
 ```shell
-$ cd extension-repo
+$ cd kubesphere-extensions
 $ ksbuilder create
 Please input extension name:  employee
 Input: employee
@@ -41,7 +24,7 @@ Please input extension author:  ks
 Input: ks
 Please input Email:  ks@kubesphere.io
 Input: ks@kubesphere.io
-Directory: ~/workspace/kubesphere/extension-repo/employee
+Directory: ~/workspace/kubesphere-extensions/employee
 
 The extension charts has been created.
 ```
