@@ -8,7 +8,7 @@ description: "将扩展组件上架到 KubeSphere 扩展组件商店中进行测
 
 ## 扩展组件上架
 
-在扩展组件管理工程根目录（`~/workspace/kubesphere/extension-repo/`）执行下述命令，将扩展组件上架到 KubeSphere 扩展组件商店中。
+在扩展组件管理工程根目录（`~/workspace/kubesphere-extensions/`）执行下述命令，将扩展组件上架到 KubeSphere 扩展组件商店中。
 
 ```shell
 ksbuilder publish employee
