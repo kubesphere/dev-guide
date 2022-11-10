@@ -58,7 +58,7 @@ extensions/hello-world
 
 ### 扩展组件功能点
 
-通过 `src/index.js` 向 ks-console 注册[导航栏](/zh/feature-customization/menu/)按钮、[多语言](/zh/feature-customization/internationalization/)等配置信息。
+通过 `src/index.js` 向 ks-console 注册[导航栏](../../feature-customization/menu/)按钮、[多语言](../../feature-customization/internationalization/)等配置信息。
 
 ```js
 import routes from './routes';
@@ -83,7 +83,7 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);
 ```
 
-通过 `src/routes/index.js` 向 ks-console 注册[页面路由](/zh/feature-customization/route)，访问该路由地址会渲染扩展组件中的功能页面。
+通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件中的功能页面。
 
 ```js
 import React from 'react';
@@ -120,13 +120,13 @@ export default function App() {
 
 在这个快速入门中，我们学习了如何在本地创建、运行和调试一个简单扩展组件的前端部分。一个完整的、具备实际业务能力的扩展组件应包含前后端，甚至需要通过 API 与外部系统或工具进行集成；同时，还需要将扩展组件打包和部署。也可以发布到扩展组件中心，与他人分享您开发的扩展组件。下面是一些建议的学习路线来进一步提高您开发 KubeSphere 扩展组件的技能：
 
-[系统架构](/zh/architecture) 该章节帮助大家深入了解 KubeSphere LuBan 4.0 基于扩展机制的系统架构。
+[系统架构](../../architecture) 该章节帮助大家深入了解 KubeSphere LuBan 4.0 基于扩展机制的系统架构。
 
-[扩展组件定制](/zh/feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
+[扩展组件定制](../../feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
 
-[示例与教程](/zh/examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
+[示例与教程](../../examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
 
-[打包发布](/zh/packaging-and-release) 该章节介绍如何利用工具 ksbuilder 打包扩展组件并进行测试，最后如何将其发布到扩展组件中心。
+[打包发布](../../packaging-and-release) 该章节介绍如何利用工具 ksbuilder 打包扩展组件并进行测试，最后如何将其发布到扩展组件中心。
 
-[最佳实践](/zh/best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
+[最佳实践](../../best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
 

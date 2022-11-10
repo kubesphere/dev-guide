@@ -89,7 +89,7 @@ dependencies:
 icon: ./favicon.svg
 ```
 
-我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `charts/backend/templates/extensions.yaml` 和 `charts/frontend/templates/extensions.yaml` 中补充 [APIService](/zh/examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](/zh/examples/employee-management-extension-example/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
+我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `charts/backend/templates/extensions.yaml` 和 `charts/frontend/templates/extensions.yaml` 中补充 [APIService](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](../../examples/employee-management-extension-example/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
 
 ```yaml
 frontend:

@@ -30,7 +30,7 @@ kubesphere-extensions
 
 ## 开发步骤
 
-以下以 [Hello World](/zh/quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
+以下以 [Hello World](../../quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
 
 1. 在 `src/locales/en/base.json` 文件和 `src/locales/zh/base.json` 文件中分别添加以下词条：
 
@@ -88,6 +88,6 @@ kubesphere-extensions
 
    在 `English` 和`简体中文`语言环境下点击 `Hello World` 将分别显示以下文字：
 
-   <img src="/images/zh/extension-customization/locale-demo-en.png" style="margin: 0px">
+   <img src="./locale-demo-en.png" style="margin: 0px">
 
-   <img src="/images/zh/extension-customization/locale-demo-zh.png" style="margin: 20px 0px 0px">
+   <img src="./locale-demo-zh.png" style="margin: 20px 0px 0px">

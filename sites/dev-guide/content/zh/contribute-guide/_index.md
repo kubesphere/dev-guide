@@ -16,6 +16,6 @@ KubeSphere 社区拒绝任何对社区或社区成员有害的行为。每个人
 
 TBD
 
-本章节将引导您向 KubeSphere 贡献代码，请先阅读[开始](/zh/get-started/)章节，提前搭建好本地开发环境。
+本章节将引导您向 KubeSphere 贡献代码，请先阅读[开始](../get-started/)章节，提前搭建好本地开发环境。
 
 {{%children description="true" %}}
