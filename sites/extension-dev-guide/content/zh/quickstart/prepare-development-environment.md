@@ -6,15 +6,48 @@ description: 介绍如何搭建扩展组件开发环境。
 
 本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
 
-* KubeSphere Core：KubeSphere 的核心组件，为扩展组件提供 API 服务。KubeSphere 团队已将 KubeSphere Core 构建成容器镜像，您可以通过运行容器快速安装 KubeSphere Core。
+* KubeSphere Core：KubeSphere 的核心组件，为扩展组件提供 API 服务。KubeSphere 团队已将 KubeSphere Core 构建成容器镜像，您可以通过运行容器快速安装 KubeSphere Core 或者 在 K8s 集群中安装 KubeSphere Core。
 
 * 开发工具：您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-ext 和 ksbuiler 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及打包发布扩展组件。为简化工具安装，KubeSphere 团队已将上述工具构建成容器镜像，您可以通过运行容器快速安装工具。同时，如果您的开发主机上已经安装部分第三方工具，您也可以在开发主机上以安装二进制文件的方式安装工具。
 
-### 前提条件
+## 安装 KubeSphere Core
+
+下面介绍两种方式来安装 KubeSphere Core：
+
+- [使用 Helm](#helm) 在 K8s 集群安装 KubeSphere Core，适用于对 K8s 有一定经验的用户
+- [使用 Docker](#docker) 在开发主机中安装 KubeSphere Core，适用于想要快速体验的用户
+
+### 使用 Helm 在 K8s 集群安装 KubeSphere Core {#helm}
+
+1. 登录可以访问 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere Core：
+
+   ```
+   helm repo add test https://charts.kubesphere.io/test
+   helm repo update test
+   helm install -n kubesphere-system --create-namespace ks-core test/ks-core
+   ```
+
+2. 检查 Pod 状态是否为 `Running`：
+
+   ```
+   kubectl get pod -n kubesphere-system
+   ```
+
+3. 当 Pod 状态都为 `Running` 时，可以通过 NodePort (IP:30880) 使用默认帐户和密码 (admin/P@88w0rd) 访问 Web 控制台。
+
+   {{%expand "如果 ks-apiserver 未正常运行，您可以展开当前内容，执行以下命令查看日志进行排查。" %}}
+
+   * 执行以下命令查看 `ks-apiserver` pod 日志：
+
+      ```
+      kubectl -n kubesphere-system logs deploy/ks-apiserver
+      ```
+
+   {{% /expand%}}
+
+### 使用 Docker 在开发主机中安装 KubeSphere Core {#docker}
 
 您需要提前在开发主机上安装 Docker。有关更多信息，请参阅 [Docker 官方文档](https://docs.docker.com/engine/install/)。
-
-### 安装 KubeSphere Core
 
 1. 登录开发主机，执行以下命令通过运行 `kubesphere` 容器安装 KubeSphere Core，同时暴露前端 Web 控制台服务 `ks-console` 访问端口 30880、后端 API 服务 `ks-apiserver` 访问端口 30881 以及 K8s kube-apiserver 的访问端口 6443：
 
@@ -58,34 +91,34 @@ description: 介绍如何搭建扩展组件开发环境。
 
    * 执行以下命令查看 K3s 日志：
 
-     ```bash
-     docker logs -f kubesphere
-     ```
+      ```bash
+      docker logs -f kubesphere
+      ```
 
    * 执行以下命令查看 KubeSphere 安装日志：
 
-     ```bash
-     docker exec kubesphere tail -f -n +1 nohup.out
-     ```
+      ```bash
+      docker exec kubesphere tail -f -n +1 nohup.out
+      ```
 
    * 执行以下命令查看 pod 运行状态：
 
-     ```
-     docker exec kubesphere kubectl get po -A
-     ```
+      ```
+      docker exec kubesphere kubectl get po -A
+      ```
 
    * 执行以下命令查看 `ks-apiserver` pod 日志：
 
-     ```
-     docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
-     ```
+      ```
+      docker exec kubesphere kubectl -n kubesphere-system logs deploy/ks-apiserver
+      ```
 
    如果您无法解决发现的问题，[请向 KubeSphere 开源社区提交 issue](https://github.com/kubesphere/kubesphere/issues/new?assignees=&labels=kind%2Fbug&template=bug_report.md)。
 
-{{% /expand%}}
+   {{% /expand%}}
 
 
-### 安装开发工具
+## 安装开发工具
 
 1. 执行以下命令在开发主机上创建开发工具的配置文件夹，将 `kubesphere` 容器中的 kubeconfig 配置文件复制到本地文件夹中：
 
