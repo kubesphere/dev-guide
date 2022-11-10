@@ -33,7 +33,7 @@ KubeSphere 在安装完成后提供了内置的管理员用户 `admin`，此内�
 {{% /notice %}}
 
 除此之外，我们也支持自定义角色，自定义的角色可根据内置的权限模板自由定制角色。
-![custom-role](images/access-control/costom-role.png)
+![custom-role](/images/access-control/costom-role.png)
 
 ### RBAC 在 KubeSphere 权限控制中的实践
 
@@ -143,7 +143,7 @@ role-template-view-workspaces            24d
 
 在上文中我们详细介绍了 KubeSphere 通过 RBAC 基于角色来实现不同角色和用户的绑定，角色又基于不同的权限项组成。
 为了实现细粒度的访问控制，我们将角色划分为不同层级，相应的，角色对应的权限模板也被划分为不同层级。
-![role](images/access-control/role.png)
+![role](/images/access-control/role.png)
 
 从图中可以看出，蓝色实线框内，我们将角色划分为以下四个层级
 - Global Role

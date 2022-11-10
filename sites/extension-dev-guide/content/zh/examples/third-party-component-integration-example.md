@@ -24,7 +24,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 
 ### 前端扩展组件开发
 
-项目的创建、本地开发、调试流程，与[员工管理扩展组件示例](zh/examples/employee-management-extension-example/#前端扩展组件开发)相同。您可以从 GitHub 上克隆本示例的代码
+项目的创建、本地开发、调试流程，与[员工管理扩展组件示例](/zh/examples/employee-management-extension-example/#前端扩展组件开发)相同。您可以从 GitHub 上克隆本示例的代码
 
 ```bash
 cd  ~/kubesphere-extensions
@@ -92,4 +92,4 @@ export default function App() {
 
 通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
 
-![weave-scope-dashboard](images/zh/samples-and-tutorials/sample-weave-scope-dashboard.png)
+![weave-scope-dashboard](/images/zh/samples-and-tutorials/sample-weave-scope-dashboard.png)

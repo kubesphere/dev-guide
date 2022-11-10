@@ -12,25 +12,25 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 * 顶部菜单栏
 
-  <img src="images/zh/extension-customization/top-menu.png" style="max-width: 1000px; margin: 0px">
+  <img src="/images/zh/extension-customization/top-menu.png" style="max-width: 1000px; margin: 0px">
 
 * 平台管理菜单
 
   在顶部菜单栏点击`平台管理`打开菜单。
 
-  <img src="images/zh/extension-customization/platform-menu.png" style="max-width: 1000px; margin: 0px">
+  <img src="/images/zh/extension-customization/platform-menu.png" style="max-width: 1000px; margin: 0px">
 
 * 工具箱菜单
 
-  将光标悬停在页面右下角的 <img src="images/zh/extension-customization/hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
+  将光标悬停在页面右下角的 <img src="/images/zh/extension-customization/hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
 
-  <img src="images/zh/extension-customization/toolbox-menu.png" style="max-width: 1000px; margin: 0px">
+  <img src="/images/zh/extension-customization/toolbox-menu.png" style="max-width: 1000px; margin: 0px">
 
 * 左侧导航栏
   
   KubeSphere 在访问控制、集群管理、企业空间管理、项目管理和平台设置页面提供左侧导航栏。例如，集群管理页面的左侧导航栏如下图所示：
 
-  <img src="images/zh/extension-customization/navigation-menu.png" style="max-width: 1000px; margin: 0px">
+  <img src="/images/zh/extension-customization/navigation-menu.png" style="max-width: 1000px; margin: 0px">
 
 ### 设置挂载位置
 
