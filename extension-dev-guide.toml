@@ -2,12 +2,13 @@ baseURL = "http://localhost/"
 publishdir = "public/extension-dev-guide"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh"
-staticDir = "static/extension-dev-guide"
+staticDir = "static"
 title = "KubeSphere Extension Development Guide"
 theme = "hugo-theme-learn"
 themesdir = "themes"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir = true
+uglyURLs = true
 
 [markup]
   [markup.goldmark]

@@ -18,11 +18,11 @@ description: 演示如何创建示例扩展组件 Hello World，帮助您快速�
 
 KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
 
-本节介绍的 Hello World 扩展组件仅包含前端模块。有关扩展组件前后端开发的完整示例，请参阅[示例与教程](/zh/examples/)。
+本节介绍的 Hello World 扩展组件仅包含前端模块。有关扩展组件前后端开发的完整示例，请参阅[示例与教程](../../examples/)。
 
 ### 前提条件
 
-您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](/zh/quickstart/prepare-development-environment/)。
+您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
 
 ### 初始化扩展组件开发项目
 
@@ -120,7 +120,7 @@ perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IP
 
    页面左上角将显示 `Hello World` 按钮，点击 `Hello World` 将显示 `Hello World!` 字符串。
 
-   ![demo-plugin-dashboard.png](/images/zh/get-started/hello-world-extension-dashboard.png?width=1080px)
+   ![demo-plugin-dashboard.png](./hello-world-extension-dashboard.png?width=1080px)
 
 ### 调试扩展组件
 
@@ -128,6 +128,6 @@ Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/frontend/
 
 例如，您可以将页面显示的字符串修改为 `Test!`，如下图所示：
 
-![coding.png](/images/zh/get-started/coding.png?width=1080px)
+![coding.png](./coding.png?width=1080px)
 
-![preview.png](/images/zh/get-started/preview.png?width=1080px)
+![preview.png](./preview.png?width=1080px)
