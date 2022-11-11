@@ -84,7 +84,7 @@ const menu = {
       <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
     </tr>
     <tr>
-      <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="zh/feature-customization/internationalization">国际化</a>。</td>
+      <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>
     </tr>
     <tr>
       <td>icon</td><td>扩展组件在菜单上显示的图标的名称。</td>
@@ -93,10 +93,10 @@ const menu = {
       <td>order</td><td>扩展组件在菜单上的排列位次，取值为 <code>0</code> 或正整数，取值 <code>0</code> 表示扩展组件在菜单首位。</td>
     </tr>
     <tr>
-      <td>desc</td><td>扩展组件在菜单上显示的描述文字，目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>toolbox</code> 时有效。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="zh/feature-customization/internationalization">国际化</a>。</td>
+      <td>desc</td><td>扩展组件在菜单上显示的描述文字，目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>toolbox</code> 时有效。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>
     </tr>
     <tr>
-      <td>skipAuth</td><td>是否跳过用户权限检查。有关更多信息，请参阅<a href="zh/feature-customization/access-control">访问控制</a>。</td>
+      <td>skipAuth</td><td>是否跳过用户权限检查。有关更多信息，请参阅<a href="../access-control">访问控制</a>。</td>
     </tr>
   </tbody>
 </table>
