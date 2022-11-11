@@ -8,7 +8,7 @@ theme = "hugo-theme-learn"
 themesdir = "themes"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir = true
-uglyURLs = true
+# uglyURLs = true
 
 [markup]
   [markup.goldmark]

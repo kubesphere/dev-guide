@@ -18,7 +18,7 @@ description: 演示如何创建示例扩展组件 Hello World，帮助您快速�
 
 KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
 
-本节介绍的 Hello World 扩展组件仅包含前端模块。有关扩展组件前后端开发的完整示例，请参阅[示例与教程](../../examples/)。
+本节介绍的 Hello World 扩展组件仅包含前端模块。有关扩展组件前后端开发的完整示例，请参阅[示例与教程](../../examples)。
 
 ### 前提条件
 

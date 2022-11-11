@@ -7,7 +7,7 @@ title = "KubeSphere Development Guide"
 theme = "hugo-theme-learn"
 themesdir = "themes"
 metaDataFormat = "yaml"
-uglyURLs = true
+# uglyURLs = true
 defaultContentLanguageInSubdir= true
 
 [params]
