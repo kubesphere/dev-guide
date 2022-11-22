@@ -89,6 +89,21 @@ dependencies:
 icon: ./favicon.svg
 ```
 
+`extension.yaml` 是扩展组件必须的文件，它包含以下字段：
+
+1. `apiVersion`: 扩展组件的 API 版本（必填项，可选值：v1）
+1. `name`: 扩展组件的名称（必填项）
+1. `version`: 扩展组件的版本，须符合 语义化版本 规范（必填项）
+1. `displayName`: 扩展组件展示时使用的名称，对于不同的语言环境，使用不同的多语言处理（必填项）
+1. `description`: 扩展组件展示时使用的描述，对于不同的语言环境，使用不同的多语言处理（必填项）
+1. `keywords`: 关于扩展组件特性的一些关键字（可选项）
+1. `home`: 项目 home 页面的 URL（可选项）
+1. `sources`: 项目源码的 URL 列表（可选项）
+1. `kubeVersion`: 扩展组件兼容的 Kubernetes 语义化版本（可选项）
+1. `ksVersion`: 扩展组件兼容的 KubeSphere 语义化版本（可选项）
+1. `dependencies`: 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
+1. `icon`: 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+
 我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `charts/backend/templates/extensions.yaml` 和 `charts/frontend/templates/extensions.yaml` 中补充 [APIService](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](../../examples/employee-management-extension-example/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
 
 ```yaml
