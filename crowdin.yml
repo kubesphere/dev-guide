@@ -1,0 +1,3 @@
+files:
+  - source: /sites/extension-dev-guide/content/zh/**/*
+    translation: /sites/extension-dev-guide/content/%two_letters_code%/**/%original_file_name%
