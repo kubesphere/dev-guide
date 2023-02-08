@@ -121,4 +121,78 @@ backend:
 ```
 
 
+### 第三方系统扩展组件打包示例
+
+使用 ksbuilder create 创建grafana-ext扩展组件包的目录后，借助Helm Chart 进行编排，您可以从 GitHub 上克隆本示例的代码。
+
+```bash
+cd  ~/kubesphere-extensions
+git clone https://github.com/kubesphere/extension-samples.git
+cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-extensions/grafana-ext
+```
+
+grafana-ext扩展组件主要由以下部分组成：
+1. grafana的部署文件: grafana-ext/charts/backend/templates/grafana.yaml
+1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
+1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
+
+```yaml
+apiVersion: extensions.kubesphere.io/v1alpha1
+kind: ReverseProxy
+metadata:
+  name: grafana
+spec:
+  directives:
+    headerUp:
+      - -Authorization
+    stripPathPrefix: /proxy/grafana
+  matcher:
+    method: '*'
+    path: /proxy/grafana/*
+  upstream:
+    url: http://grafana.monitoring.svc
+status:
+  state: Available
+```
+
+grafana-ext编排完成后，上架扩展组件
+
+```shell
+cd  ~/kubesphere-extensions
+ksbuilder publish grafana-ext
+```
+
+打开 ks-console 页面，进行安装，或者使用subscription安装扩展组件
+
+```yaml
+apiVersion: kubesphere.io/v1alpha1
+kind: Subscription
+metadata:
+  name: grafana-ext-q
+spec:
+  enabled: true
+  extension:
+    name: grafana-ext
+    version: 0.1.0
+```
+
+当前KubeSphere LuBan 4.0 安装扩展组件前，需要给安装扩展组件默认的namespace extension-grafana-ext的default账号授权，后续会开放此部分配置功能，可以参考下述权限进行测试安装
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-ext
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: extension-grafana-ext
+```
+
+安装完成后可以在ks-console 页面查看扩展组件安装状态，安装失败可以在默认的namespace extension-grafana-ext查看日志。
+
+验证grafana插件安装后功能：访问http://localhost:30880/proxy/grafana/login
 
