@@ -1,10 +1,10 @@
 ---
 title: "Overview"
 weight: 1
-description: 介绍 KubeSphere LuBan 4.0 扩展机制的背景和优势
+description: Describes why KubeSphere LuBan 4.0 adopts an extension machanism and how developers can benefit from it.
 ---
 
-## 为什么在 KubeSphere LuBan 4.0 引入扩展机制
+## Why KubeSphere LuBan 4.0 adopts an extension mechanism
 
 KubeSphere 混合多云容器管理平台自 2018 年诞生到现在已经发布过包括 3 个大版本在内的十几个版本。为了满足用户需求，KubeSphere 集成了众多企业级功能如多租户管理，多集群管理，DevOps，GitOps，服务网格，微服务，可观测（包括监控、告警、日志、审计、事件、通知等)，应用商店，边缘计算，网络与存储管理等。
 
