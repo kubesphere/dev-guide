@@ -6,12 +6,12 @@ description: Describes why KubeSphere LuBan 4.0 adopts an extension machanism an
 
 ## Why KubeSphere LuBan 4.0 adopts an extension mechanism
 
-KubeSphere 混合多云容器管理平台自 2018 年诞生到现在已经发布过包括 3 个大版本在内的十几个版本。为了满足用户需求，KubeSphere 集成了众多企业级功能如多租户管理，多集群管理，DevOps，GitOps，服务网格，微服务，可观测（包括监控、告警、日志、审计、事件、通知等)，应用商店，边缘计算，网络与存储管理等。
+Since 2018, KubeSphere, a container management platform for hybrid clouds, has been iterated with three major versions and a dozen of minor versions. To meet different business requirements, KubeSphere enables diverse enterprise-grade features, from multi-tenancy, multi-cluster management, DevOps, GitOps, service mesh, microservices, observability, app store, edge computing, to networking and storage.
 
-首先，如此众多的功能虽然满足了用户对容器管理平台的基本需求，但也带来了一些问题，比如：
+The diversity of product features meets business requirements of different users for container management, but some issues can also occur:
 
-- 版本发布周期过长。每次发布版本，得等到所有组件均开发、测试完成并进行集成测试后才能发布
-- 各个组件无法单独进行迭代。KubeSphere 发布后，各组件陆续会收到社区及用户的各种反馈，但对这些反馈的处理都得等到 KubeSphere 发布新版本才能一并交付给用户，对用户的反馈不够及时
+- The release life cycle of KubeSphere is long. A new version can be rolled out only after all components are developed and tested.
+- Each component cannot be iterated independently.KubeSphere 发布后，各组件陆续会收到社区及用户的各种反馈，但对这些反馈的处理都得等到 KubeSphere 发布新版本才能一并交付给用户，对用户的反馈不够及时
 - 虽然目前已经可以做到单独启用/禁用某些组件，但是这些组件的前后端代码都是耦合在一起，容易互相影响，架构上也不够优雅
 - 某些组件默认启用，对某些没有这方面需求的用户来说，占用了过多的资源
 
