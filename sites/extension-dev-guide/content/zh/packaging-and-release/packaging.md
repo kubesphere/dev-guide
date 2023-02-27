@@ -4,11 +4,14 @@ weight: 01
 description: "在测试与发布之前首先您需要将扩展组件进行打包"
 ---
 
-当我们准备好前后端扩展组件的镜像，以及扩展资源声明后，就可以借助 ksbuilder、Helm 对我们的扩展组件进行打包与测试了。
+
+在[开发示例](../../examples/)的章节中我们完成了前后端扩展组件开发，前后端源代码构建成容器镜像，准备好了APIService、JSBundle 等扩展声明，接下来您可以参考本节内容借助 ksbuilder、Helm 打包您的扩展组件。
+
+您可以参考以下内容将[员工扩展组件示例](../../examples/employee-management-extension-example)打包成扩展组件安装包
 
 ### 初始化 employee 扩展组件包目录
 
-前后端扩展组件都开发完成后，我们需要使用 `ksbuilder` 的交互式命令创建出扩展组件包的目录，该目录可以帮助我们管理需要打包的前后端扩展组件。。
+前后端扩展组件都开发完成后，我们需要使用 `ksbuilder` 的交互式命令创建出扩展组件包的目录，该目录可以帮助我们管理需要打包的前后端扩展组件。
 
 ```shell
 $ cd kubesphere-extensions
@@ -60,6 +63,7 @@ The extension charts has been created.
 │       └── values.yaml
 ├── extension.yaml
 ├── favicon.svg
+├── permission.yaml
 └── values.yaml
 ```
 
@@ -104,24 +108,30 @@ icon: ./favicon.svg
 1. `dependencies`: 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
 1. `icon`: 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
 
-我们需要在 `values.yaml` 中指定默认的前后端镜像，在 `charts/backend/templates/extensions.yaml` 和 `charts/frontend/templates/extensions.yaml` 中补充 [APIService](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)、[JSBundle](../../examples/employee-management-extension-example/#3-注册前端扩展组件到-ks-apiserver) 等扩展声明。
+`permission.yaml` 是扩展组件非必须的文件，扩展组件安装默认授权层级为 `namespace` ，如果您的扩展组件安装需要创建集群级别资源，请您根据插件安装所需要权限修改`permission.yaml`文件中的`rules`。
 
-```yaml
-frontend:
-  enabled: true
-  image:
-    repository:  <YOUR_REPO>/employee-frontend
-    tag: latest
 
-backend:
-  enabled: true
-  image:
-    repository: <YOUR_REPO>/employee-api
-    tag: latest
+### 打包员工管理扩展组件包
+
+在[员工管理扩展组件示例](../../examples/employee-management-extension-example)中， 我们将完成了扩展组件开发，接下来我们可以按照以下步骤编排扩展组件安装包
+1. 在`charts/backend` 和 `charts/frontend/`修改员工管理扩展组件前后端服务部署资源声明
+2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)  修改 `charts/backend/templates/extensions.yaml` [APIService](../../architecture/backend-extension-architecture/#apiservice)声明
+3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)  修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle)声明
+
+
+您可以从 GitHub 上克隆员工管理扩展组件安装包，查看其组成部分
+```bash
+cd  ~/kubesphere-extensions
+git clone https://github.com/kubesphere/extension-samples.git
+cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
+接下来您可以参考[测试扩展组件](./testing)将进行员工管理扩展组件上架到 KubeSphere 扩展组件商店中进行安装测试
 
 ### 第三方系统扩展组件打包示例
+
+我们在[第三方系统集成示例](../../examples/third-party-component-integration-example)熟悉了集成已有 Web UI 的第三方工具与系统的开发，接下来可以参考以下内容将其打包成扩展组件安装包
+
 
 使用 ksbuilder create 创建grafana-ext扩展组件包的目录后，借助Helm Chart 进行编排，您可以从 GitHub 上克隆本示例的代码。
 
@@ -131,7 +141,7 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-extensions/grafana-ext
 ```
 
-grafana-ext扩展组件主要由以下部分组成：
+grafana扩展组件主要由以下部分组成：
 1. grafana的部署文件: grafana-ext/charts/backend/templates/grafana.yaml
 1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
 1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
@@ -155,44 +165,12 @@ status:
   state: Available
 ```
 
-grafana-ext编排完成后，上架扩展组件
+grafana扩展组件编排完成后，上架扩展组件
 
 ```shell
 cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-打开 ks-console 页面，进行安装，或者使用subscription安装扩展组件
-
-```yaml
-apiVersion: kubesphere.io/v1alpha1
-kind: Subscription
-metadata:
-  name: grafana-ext-q
-spec:
-  enabled: true
-  extension:
-    name: grafana-ext
-    version: 0.1.0
-```
-
-当前KubeSphere LuBan 4.0 安装扩展组件前，需要给安装扩展组件默认的namespace extension-grafana-ext的default账号授权，后续会开放此部分配置功能，可以参考下述权限进行测试安装
-
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: grafana-ext
-roleRef:
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: extension-grafana-ext
-```
-
-安装完成后可以在ks-console 页面查看扩展组件安装状态，安装失败可以在默认的namespace extension-grafana-ext查看日志。
-
-验证grafana插件安装后功能：访问http://localhost:30880/proxy/grafana/login
+在扩展组件应用商店安装grafana扩展组件， 验证grafana插件安装后功能：访问http://localhost:30880/proxy/grafana/login
 
