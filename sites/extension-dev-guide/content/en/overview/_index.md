@@ -28,25 +28,25 @@ In a specific scenario, KubeSphere tends to select a solution for implementation
 
 When you use KubeSphere, you may encounter the following issues:
 
-- After your application gets released on KubeSphere, the application management page cannot be integrated into the KubeSphere console.通常需要用户自己给应用的 Service 配置好 Nodeport 或者 LB 之后，才能在一个新的窗口打开应用自己的界面，无法统一地在 KubeSphere 中管理自己的应用。
-- 因无法融入 KubeSphere 控制台，用户的应用也就无法利用 KubeSphere 提供的认证鉴权、多租户管理等平台级的能力，安全性上大打折扣。
-- 用户的需求通常多种多样，不同用户对同一功能的需求差异很大甚至互相冲突，原有的架构因耦合式的组件集成方式无法满足用户千人千面的需求。
-- 如果用户要通过给 KubeSphere 提 PR 的方式满足自己的需求，通常要熟悉完整的 KubeSphere 开发流程。因涉及到前后端开发调试、安装部署与配置等一系列问题，门槛较高。
-- 此外，提了 PR 后得等 KubeSphere 发布新版本才能用
-- 由于发版周期长导致大量的用户会基于 KubeSphere 定制化自己的需求，会渐进脱离社区，违背了开源社区 upstream first 的理念，长期来说，无法享受到上游越来越多的能力。
+- After your application gets released on KubeSphere, the application management page cannot be integrated into the KubeSphere console. In this case, you need to configure a NodePort or LoadBalancer service for your application and open the application management page in a new window. This indicates that you cannot manage your application in a centralized manner.
+- If the application management page cannot be integrated into the KubeSphere console, platform-level security features provided by KubeSphere such as authorization and authentication and multi-tenancy will not be available for your application.
+- User requirements are diverse, and the requirements for the same feature may also be different or even conflicting. The legacy architecture cannot meet the requirements of thousands of users because each component is tightly coupled with each other.
+- If you want to create pull requests to meet specific requirements, you must be familiar with the development workflows of KubeSphere. This involves frontend and backend testing and debugging, installation, deployment, and configuration, which puts high requirements on users' technical expertise.
+- The changes you have made in pull requests can be applied only after a next version gets released.
+- Due to the long release cycle, a large number of users will customize their own needs on top of KubeSphere and then gradually leave the community. This goes against the Upstream First policy. In the long run, users cannot enjoy the capabilities of the upstream community.
 
-## KubeSphere LuBan 4.0 扩展机制简介
+## Overview
 
-为了解决上述各种问题，KubeSphere 社区决定基于微内核架构，在 4.0 引入扩展机制：
+To resolve the preceding issues, the KubeSphere community introduces an extension mechanism in 4.0 by adopting a microkernel architecture.
 
-- 扩展机制包括前端扩展机制与后端扩展机制
-- KubeSphere 的核心组件精简为 ks-core，从而使得 KubeSphere 的默认安装可以非常轻量
-- KubeSphere 目前已有的众多组件都会被拆分为单独的 KubeSphere 扩展组件，这些扩展组件可单独迭代，用户可以自己选择安装哪些扩展组件来打造自己的 KubeSphere 容器管理平台
-- 用户可以通过相对简单的扩展组件开发指南，开发自己的扩展组件扩展 KubeSphere 的功能
-- 通过 KubeSphere Extension 扩展组件管理平台统一管理各扩展组件
-- 未来将引入 KubeSphere Extension Store 来丰富 KubeSphere 扩展组件生态。用户可以将自己开发的扩展组件上架 KubeSphere Extension Store 供其他用户使用甚至获利
+- The extension mechanism includes frontend and backend extensions.
+- The critical components of KubeSphere are encapsulated into ks-core. This way, you can install KubeSphere in lightweight mode.
+- Various existing components of KubeSphere will be decoupled into separate extensions, and each extension can be iterated independently. You can choose which extensions to install and customize the KubeSphere console.
+- You can develop extensions to extend the functionality of KubeSphere based on the extension development guide.
+- You can manage extensions in the unified KubeSphere extension management platform.
+- The KubeSphere extension center will be introduced to enrich the KubeSphere extension ecosystem. You can roll out self-developed extensions on the KubeSphere extension center for other users to use and even make profits.
 
-## KubeSphere LuBan 4.0 扩展机制的优势
+## Benefits
 
 KubeSphere LuBan 4.0 扩展机制的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
 
