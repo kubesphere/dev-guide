@@ -48,7 +48,7 @@ To resolve the preceding issues, the KubeSphere community introduces an extensio
 
 ## Benefits
 
-KubeSphere LuBan 4.0 扩展机制的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
+The extension mechanism of KubeSphere LuBan 4.0 can benefit KubeSphere maintainers, contributors, users, independent software vendors (ISVs), and other open source projects.
 
 - 对于 KubeSphere 维护者来说，KubeSphere LuBan 4.0 扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 ks-core 更加轻量，版本发布节奏也可以加快。对于其他功能来说，因为采用了扩展组件来实现，可使得这些组件能够独立进行迭代，更及时的满足用户的需求
 - 对于 KubeSphere·贡献者来说，因为扩展机制的引入使得 ks-core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手
