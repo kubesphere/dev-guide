@@ -15,20 +15,20 @@ The diversity of product features meets business requirements of different users
 - Although you can enable or disable some components individually, the front-end code and backend code of these components are coupled. These components are prone to be affected by each other, and the architecture is not graceful.
 - If you do not need to use a feature that is enabled by default, this may cause excessive resource consumption.
 
-Innovation in cloud native communities is active.通常同一个领域会有多种选择，比如：
+Innovation in cloud native communities is active.Therefore, several solutions can be available for a specific scenario. For example:
 
-- GitOps 用户可以选择 ArgoCD 或 FluxCD
-- 服务网格用户可以选择 Istio 或 Linkerd 或其他实现
-- 联邦集群管理可以选择 Karmada, OCM 或 Clusternet
-- 日志管理可以选择 Elasticsearch 或 Loki
-- 边缘计算框架可以选择 KubeEdge, OpenYurt 或 SuperEdge
-- 存储和网络也有非常多的选择
+- Use ArgoCD or FluxCD for GitOps.
+- Use Istio or Linkerd for service meshes.
+- Use Karmada, OpenShift Cluster Manager (OCM), or Clusternet for cluster federation.
+- Use Elasticsearch or Loki for log management.
+- Use KubeEdge, OpenYurt, or SuperEdge for edge computing.
+- Use different solutions for storage and networking.
 
-KubeSphere 通常会选择一种实现优先支持，但用户经常会有支持另一种实现的需求。
+In a specific scenario, KubeSphere tends to select a solution for implementation. However, you may require the implementation of another solution.
 
-此外，用户在使用 KubeSphere 的过程中，通常会面临如下问题：
+When you use KubeSphere, you may encounter the following issues:
 
-- 用户发布自己的应用到 KubeSphere 后，应用的管理界面无法融入 KubeSphere 控制台。通常需要用户自己给应用的 Service 配置好 Nodeport 或者 LB 之后，才能在一个新的窗口打开应用自己的界面，无法统一地在 KubeSphere 中管理自己的应用。
+- After your application gets released on KubeSphere, the application management page cannot be integrated into the KubeSphere console.通常需要用户自己给应用的 Service 配置好 Nodeport 或者 LB 之后，才能在一个新的窗口打开应用自己的界面，无法统一地在 KubeSphere 中管理自己的应用。
 - 因无法融入 KubeSphere 控制台，用户的应用也就无法利用 KubeSphere 提供的认证鉴权、多租户管理等平台级的能力，安全性上大打折扣。
 - 用户的需求通常多种多样，不同用户对同一功能的需求差异很大甚至互相冲突，原有的架构因耦合式的组件集成方式无法满足用户千人千面的需求。
 - 如果用户要通过给 KubeSphere 提 PR 的方式满足自己的需求，通常要熟悉完整的 KubeSphere 开发流程。因涉及到前后端开发调试、安装部署与配置等一系列问题，门槛较高。
