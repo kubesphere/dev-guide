@@ -12,10 +12,10 @@ The diversity of product features meets business requirements of different users
 
 - The release life cycle of KubeSphere is long. A new version can be rolled out only after all components are developed and tested.
 - Each component cannot be iterated independently. Each time a new version of KubeSphere is released, we can receive feedback from community members. The only time we can respond to and resolve these issues is the time when the next version gets released. This causes slow customer response.
-- 虽然目前已经可以做到单独启用/禁用某些组件，但是这些组件的前后端代码都是耦合在一起，容易互相影响，架构上也不够优雅
-- 某些组件默认启用，对某些没有这方面需求的用户来说，占用了过多的资源
+- Although you can enable or disable some components individually, the front-end code and backend code of these components are coupled. These components are prone to be affected by each other, and the architecture is not graceful.
+- If you do not need to use a feature that is enabled by default, this may cause excessive resource consumption.
 
-其次，云原生社区的创新非常活跃。通常同一个领域会有多种选择，比如：
+Innovation in cloud native communities is active.通常同一个领域会有多种选择，比如：
 
 - GitOps 用户可以选择 ArgoCD 或 FluxCD
 - 服务网格用户可以选择 Istio 或 Linkerd 或其他实现
