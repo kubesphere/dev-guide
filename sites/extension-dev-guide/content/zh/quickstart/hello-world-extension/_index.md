@@ -37,13 +37,13 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
    ```
 
    ```bash
-   yarn create ks-ext ks-app --fast-mode
+   yarn create ks-ext ks-console --fast-mode
    ```
 
 2. 执行以下命令创建 Hello World 扩展组件前端模块：
 
    ```bash
-   cd ks-app
+   cd ks-console
    ```
 
    ```bash
@@ -65,7 +65,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 
    ```bash
    kubesphere-extensions            # 扩展组件开发目录，可包含前端开发目录和后端开发目录。
-   └── ks-app                       # 扩展组件前端开发目录。
+   └── ks-console                       # 扩展组件前端开发目录。
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
@@ -96,7 +96,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 您可以根据NodePort (IP:30881) ， 参考以下命令设置 `ks-apiserver` 的访问地址：
 
 ```sh
-perl -pi -e  "s/apiserver.local/localhost:30881/g" ~/kubesphere-extensions/ks-app/configs/local_config.yaml
+perl -pi -e  "s/apiserver.local/localhost:30881/g" ~/kubesphere-extensions/ks-console/configs/local_config.yaml
 ```
 
 

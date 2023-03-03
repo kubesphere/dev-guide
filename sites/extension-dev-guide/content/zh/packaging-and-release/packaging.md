@@ -63,7 +63,7 @@ The extension charts has been created.
 │       └── values.yaml
 ├── extension.yaml
 ├── favicon.svg
-├── permission.yaml
+├── permissions.yaml
 └── values.yaml
 ```
 
@@ -108,7 +108,7 @@ icon: ./favicon.svg
 1. `dependencies`: 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
 1. `icon`: 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
 
-`permission.yaml` 是扩展组件非必须的文件，扩展组件安装默认授权层级为 `namespace` ，如果您的扩展组件安装需要创建集群级别资源，请您根据插件安装所需要权限修改`permission.yaml`文件中的`rules`。
+`permissions.yaml` 是扩展组件非必须的文件，扩展组件安装默认授权层级为 `namespace` ，如果您的扩展组件安装需要创建集群级别资源，请您根据插件安装所需要权限修改`permissions.yaml`文件中的`rules`。
 
 
 ### 打包员工管理扩展组件包
