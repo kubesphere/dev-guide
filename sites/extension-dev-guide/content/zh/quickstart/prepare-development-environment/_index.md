@@ -44,9 +44,9 @@ description: 介绍如何搭建扩展组件开发环境。
 
 ## 安装开发工具
 
-为简化工具安装，KubeSphere 团队已将上述工具构建成容器镜像，您可以通过运行容器快速安装工具。如果您的开发主机上已经安装部分第三方工具，您也可以在开发主机上运行KubeSphere 团队提供的工具容器或者以安装二进制文件的方式安装其他工具。
+为简化工具安装，KubeSphere 团队已将上述工具构建成容器镜像，您可以通过运行容器快速安装工具。如果您的开发主机上已经安装部分第三方工具，您也可以在开发主机上运行 KubeSphere 团队提供的工具容器或者以安装二进制文件的方式安装其他工具。
 
-1. 复制 K8s 集群 master 节点的 kubeconfig 配置文件到开发主机上，您可以登录master节点执行以下命令：
+1. 复制集群的 kubeconfig 配置文件到开发主机上，您可以登录 master 节点执行以下命令：
 
    ```bash
    mkdir -p ~/.kubesphere/dev-tools && cp /etc/kubernetes/admin.conf ~/.kubesphere/dev-tools/config

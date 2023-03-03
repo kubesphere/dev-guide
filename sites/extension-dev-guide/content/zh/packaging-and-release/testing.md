@@ -16,7 +16,7 @@ ksbuilder publish employee
 
 命令执行成功后，我们可以直接访问 kubesphere 容器 30880 端口打开 ks-console 页面并登录，查看扩展组件商店中上架的组件，并进行安装测试。
 
-安装完成后可以在ks-console 页面查看扩展组件安装状态，安装失败可以在默认的namespace extension-employee查看日志。
+安装完成后可以在 ks-console 页面查看扩展组件安装状态，安装失败可以在默认的 namespace extension-employee 查看日志。
 
 
 

@@ -93,7 +93,7 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
 
 为使扩展组件前端模块可以访问在[搭建开发环境](../quickstart/prepare-development-environment/)中安装的 KubeSphere 后端 API 服务 `ks-apiserver`，您需要在 `local_config.yaml` 文件中设置 `ks-apiserver` 的访问地址。
 
-您可以根据NodePort (IP:30881) ， 参考以下命令设置 `ks-apiserver` 的访问地址：
+您可以根据 NodePort (IP:30881) ， 参考以下命令设置 `ks-apiserver` 的访问地址：
 
 ```sh
 perl -pi -e  "s/apiserver.local/localhost:30881/g" ~/kubesphere-extensions/ks-console/configs/local_config.yaml

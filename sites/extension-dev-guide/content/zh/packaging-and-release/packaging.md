@@ -133,7 +133,7 @@ cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-ext
 我们在[第三方系统集成示例](../../examples/third-party-component-integration-example)熟悉了集成已有 Web UI 的第三方工具与系统的开发，接下来可以参考以下内容将其打包成扩展组件安装包
 
 
-使用 ksbuilder create 创建grafana-ext扩展组件包的目录后，借助Helm Chart 进行编排，您可以从 GitHub 上克隆本示例的代码。
+使用 ksbuilder create 创建 grafana-ext 扩展组件包的目录后，借助 Helm Chart 进行编排，您可以从 GitHub 上克隆本示例的代码。
 
 ```bash
 cd  ~/kubesphere-extensions
@@ -165,14 +165,14 @@ status:
   state: Available
 ```
 
-grafana扩展组件编排完成后，上架扩展组件
+grafana 扩展组件编排完成后，上架扩展组件
 
 ```shell
 cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装grafana扩展组件， 验证安装后功能：访问http://localhost:30880/proxy/grafana/login
+在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问http://localhost:30880/proxy/grafana/login
 
 
 
