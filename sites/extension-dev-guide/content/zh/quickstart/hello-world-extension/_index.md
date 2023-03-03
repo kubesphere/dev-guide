@@ -10,9 +10,9 @@ description: 演示如何创建示例扩展组件 Hello World，帮助您快速�
 
 * 如何初始化扩展组件开发项目。
 
-* 如何在扩展组件前端模块中设置后端 API 服务的访问地址。
+* 如何在扩展组件前端模块中设置后端 API 服务 `ks-apiserver` 的访问地址。
 
-* 如何在 `dev-tools` 容器中运行扩展组件。
+* 如何运行包含扩展组件的 KubeSphere Web 控制台。
 
 * 如何对扩展组件进行调试。
 
@@ -37,13 +37,13 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
    ```
 
    ```bash
-   yarn create ks-ext frontend --fast-mode
+   yarn create ks-ext ks-console --fast-mode
    ```
 
 2. 执行以下命令创建 Hello World 扩展组件前端模块：
 
    ```bash
-   cd frontend
+   cd ks-console
    ```
 
    ```bash
@@ -64,16 +64,16 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
    以上命令执行完成后将生成如下目录结构：
 
    ```bash
-   kubesphere-extensions
-   └── frontend
+   kubesphere-extensions            # 扩展组件开发目录，可包含前端开发目录和后端开发目录。
+   └── ks-console                       # 扩展组件前端开发目录。
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
        │   └── local_config.yaml
-       ├── extensions
+       ├── extensions               # 扩展组件前端模块目录，可包含多个扩展组件的前端模块。
        │   ├── entry.ts
-       │   └── hello-world
+       │   └── hello-world          # Hello World 扩展组件的前端模块
        │       ├── Dockerfile
        │       ├── README.md
        │       ├── package.json
@@ -88,25 +88,17 @@ KubeSphere 扩展组件前端需要使用 React 框架进行开发。有关更�
        └── yarn.lock
    ```
 
-   部分目录的功能如下：
-
-   * `kubesphere-extensions`：扩展组件开发目录，可包含前端开发目录和后端开发目录。
-
-     * `frontend`：扩展组件前端开发目录。
-     
-       * `extensions`：扩展组件前端模块目录，可包含多个扩展组件的前端模块。
-
-         * `hello-world`：Hello World 扩展组件的前端模块。
 
 ### 设置 API 服务的访问地址
 
-为使扩展组件前端模块可以访问 KubeSphere 后端 API 服务 `ks-apiserver`，您需要在 `local_config.yaml` 文件中设置 `ks-apiserver` 的访问地址。
+为使扩展组件前端模块可以访问在[搭建开发环境](../quickstart/prepare-development-environment/)中安装的 KubeSphere 后端 API 服务 `ks-apiserver`，您需要在 `local_config.yaml` 文件中设置 `ks-apiserver` 的访问地址。
 
-执行以下命令设置 `ks-apiserver` 的访问地址：
+您可以根据 NodePort (IP:30881) ， 参考以下命令设置 `ks-apiserver` 的访问地址：
 
 ```sh
-perl -pi -e  "s/apiserver.local/`docker inspect --format '{{ .NetworkSettings.IPAddress }}' kubesphere`:30881/g" ~/kubesphere-extensions/frontend/configs/local_config.yaml
+perl -pi -e  "s/apiserver.local/localhost:30881/g" ~/kubesphere-extensions/ks-console/configs/local_config.yaml
 ```
+
 
 ### 运行扩展组件
 
