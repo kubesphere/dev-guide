@@ -229,3 +229,5 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 $ yarn build:prod
 $ yarn start
 ```
+
+接下来您可以参阅[打包扩展组件](../../packaging-and-release/packaging)，将本示例编打包扩展组件安装包。
