@@ -141,8 +141,8 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-extensions/grafana-ext
 ```
 
-grafana扩展组件主要由以下部分组成：
-1. grafana的部署文件: grafana-ext/charts/backend/templates/grafana.yaml
+grafana 扩展组件主要由以下部分组成：
+1. grafana 部署文件: grafana-ext/charts/backend/templates/grafana.yaml
 1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
 1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
 
@@ -172,5 +172,8 @@ cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装grafana扩展组件， 验证grafana插件安装后功能：访问http://localhost:30880/proxy/grafana/login
+在扩展组件应用商店安装grafana扩展组件， 验证安装后功能：访问http://localhost:30880/proxy/grafana/login
+
+
+
 
