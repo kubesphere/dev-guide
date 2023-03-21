@@ -67,48 +67,73 @@ The extension charts has been created.
 └── values.yaml
 ```
 
-在 `extension.yaml` 中编辑扩展组件的元数据：
+`extension.yaml` 文件中包含了扩展组件的元数据：
+
 ```yaml
 apiVersion: v1
-name: employee
-version: 0.1.0
-displayName:
-  zh: 示例扩展组件
+name: employee # 扩展组件的名称（必填项）
+version: 0.1.0 # 扩展组件的版本，须符合语义化版本规范（必填项）
+displayName:   # 扩展组件展示时使用的名称（必填项），Language Code 基于 ISO 639-1
+  zh: 示例扩展组件 
   en: Sample Extension
-description:
+description:   # 扩展组件展示时使用的描述（必填项）
   zh: 这是一个示例扩展组件，这是它的描述
   en: This is a sample extension, and this is its description
-keywords:
+keywords:      # 关于扩展组件特性的一些关键字（可选项）
   - Performance
-home: https://kubesphere.io
-sources:
+home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
+sources:       # 项目源码的 URL 列表（可选项）
   - https://github.com/kubesphere
-kubeVersion: ">=1.19.0"
-ksVersion: ">=3.0.0"
-dependencies:
+kubeVersion: ">=1.19.0" #  扩展组件兼容的 Kubernetes 版本限制（可选项）
+ksVersion: ">=3.0.0"    #  扩展组件兼容的 KubeSphere 版本限制（可选项
+dependencies:           #  扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
   - name: frontend
     condition: frontend.enabled
   - name: backend
     condition: backend.enabled
-icon: ./favicon.svg
+icon: ./favicon.svg     # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
 ```
 
-`extension.yaml` 是扩展组件必须的文件，它包含以下字段：
+`permissions.yaml` 定义了扩展组件安装时所需要的资源授权：
 
-1. `apiVersion`: 扩展组件的 API 版本（必填项，可选值：v1）
-1. `name`: 扩展组件的名称（必填项）
-1. `version`: 扩展组件的版本，须符合 语义化版本 规范（必填项）
-1. `displayName`: 扩展组件展示时使用的名称，对于不同的语言环境，使用不同的多语言处理（必填项）
-1. `description`: 扩展组件展示时使用的描述，对于不同的语言环境，使用不同的多语言处理（必填项）
-1. `keywords`: 关于扩展组件特性的一些关键字（可选项）
-1. `home`: 项目 home 页面的 URL（可选项）
-1. `sources`: 项目源码的 URL 列表（可选项）
-1. `kubeVersion`: 扩展组件兼容的 Kubernetes 语义化版本（可选项）
-1. `ksVersion`: 扩展组件兼容的 KubeSphere 语义化版本（可选项）
-1. `dependencies`: 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
-1. `icon`: 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+```yaml
+kind: ClusterRole  
+rules:  # 如果你的扩展组件需要创建、变更 Cluster 级别的资源，你需要编辑此授权规则
+  - verbs:
+      - 'create'
+      - 'patch'
+      - 'update'
+    apiGroups:
+      - 'extensions.kubesphere.io'
+    resources:
+      - '*'
 
-`permissions.yaml` 是扩展组件非必须的文件，扩展组件安装默认授权层级为 `namespace` ，如果您的扩展组件安装需要创建集群级别资源，请您根据插件安装所需要权限修改`permissions.yaml`文件中的`rules`。
+---
+kind: Role
+rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资源，你需要编辑此授权规则
+  - verbs:
+      - '*'
+    apiGroups:
+      - ''
+      - 'apps'
+      - 'batch'
+      - 'app.k8s.io'
+      - 'autoscaling'
+    resources:
+      - '*'
+  - verbs:
+      - '*'
+    apiGroups:
+      - 'networking.k8s.io'
+    resources:
+      - 'ingresses'
+      - 'networkpolicies'
+```
+
+相关文档：
+
+1. https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+2. https://helm.sh/docs/topics/rbac/
 
 
 ### 打包员工管理扩展组件包
