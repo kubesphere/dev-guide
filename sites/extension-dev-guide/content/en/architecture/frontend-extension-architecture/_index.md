@@ -19,7 +19,7 @@ To enable extensibility, KubeSphere LuBan 4.0 aims to implement `micro frontends
 The core components provide the following main features:
 1. Extension management
 
-   扩展组件的管理很重要的两点是在运行时完成扩展组件 js bundle 的加载及扩展组件的注册。在 4.0 的架构中我们采用 systemjs 实现对扩展组件 js bundle 的加载。同时约定扩展组件的入口规范，从而使其可以连接到核心系统中运行。
+   Two steps are important for extension management: load JavaScript bundles in the runtime and authorize and authenticate extensions. KubeSphere LuBan 4.0 uses SystemJS to load JavaScript bundles for extensions, 同时约定扩展组件的入口规范，从而使其可以连接到核心系统中运行。
 2. 通讯机制
 
    内核中我们内置了EventBus(pub/sub), 可以方便的在内核和扩展组件之间、扩展组件与扩展组件之间进行通信。
