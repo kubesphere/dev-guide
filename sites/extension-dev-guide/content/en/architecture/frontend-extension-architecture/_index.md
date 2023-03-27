@@ -1,21 +1,21 @@
 ---
-title: 前端扩展机制
+title: Frontend extensions
 weight: 1
-description: KubeSphere 前端扩展机制介绍
+description: Describes KubeSphere frontend extensions.
 ---
 
-为了使 KubeSphere 灵活可扩展，我们设计了`微内核+扩展组件`的架构。其中`内核`部分仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件中。系统可在运行时动态的安装、卸载、启动、停止扩展组件。架构总体设计如下图：
+To enable flexibility and scalability, KubeSphere adopts an architecture that consists of a `microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. You can dynamically install, uninstall, start, or stop extension components during system running. The following figure shows the architecture:
 
 
 ![frontend-extension-arch](./frontend-arch.png)
 
-## 设计思想
+## Principles
 
-谈到解耦巨石应用、谈到动态扩展，我们必然会想到近年来流行的`微前端`方案。知名的`微前端`实现比如 qiankun, micro-app 为了解决子应用技术栈无关、样式侵入问题在 JS 沙箱、样式隔离上做了很多工作。而隔离往往是为了解决某些技术债问题或者团队配合问题而做的妥协。一套前端系统里如果融合了 react, Vue, angular, 那么 ui 体验的一致性则会很难保证，前端 bundle 的大小也会大大提高。而且各个子应用隔离在自己独立的运行时，与主应用融合度也不够紧密。
+When it comes to decoupling megalithic applications and dynamic extensions, the buzzword `micro frontends` in recent years must pop into our mind. Well-known implementations of `micro frontends` such as qiankun and micro-app have done a lot of work on JavaScript sandboxes and styling isolation, so as to prevent the styles of sub-applications in a micro-frontend framework inadvertently affect the styles of other sub-applications. Styling isolation is often a compromise to solve specific technical debt or team coordination problems. If a front-end system integrates React, Vue, and Angular, it will be difficult to ensure UI consistency, and the size of the front-end bundle will also be significantly increased. Moreover, if each sub-application is isolated in its own runtime, and its integration with the main application is not tight enough.
 
-在 KubeSphere LuBan 4.0 可扩展的需求背景下，我们希望弱化隔离的要求实现一种更轻量的`微前端`，或者我们可以称之为`微模块`。在`微模块`的架构里子应用和主应用技术栈一致、可以共享运行时。这样可以做到更好的体验一致性、更高的融合度、更方便实现依赖共享，进而达到更高的运行效率。如上面架构图所示，扩展组件的开发依赖通用的 KubeDesign、@ks-console/shared 等库。然后通过脚手架、cli 等工具打包发布。在 Core（基座）的部分实现扩展组件的注册运行。
+To enable extensibility, KubeSphere LuBan 4.0 aims to implement `micro frontends` or `micro modules`, which are more lightweight and have less demand for styling isolation. In a `micro module` architecture, sub-applications can share the tech stack and runtime with the main application. This can achieve experience consistency, high integration, and easy dependency sharing, thereby improving operation efficiency. As shown in the preceding architecture, the development of extension components relies on common dependencies such as kube-design and @ks-console/shared. Then, extensions can be packaged and released by using scaffolding CLI tools. In the Core module, you can sign up for and run extension components.
 
-## 内核
+## Core components
 如上面架构图，内核的功能主要包括：
 1. 扩展组件的管理
 
