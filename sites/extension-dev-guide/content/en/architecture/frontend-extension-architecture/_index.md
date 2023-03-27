@@ -19,29 +19,29 @@ To enable extensibility, KubeSphere LuBan 4.0 aims to implement `micro frontends
 The core components provide the following main features:
 1. Extension management
 
-   Two steps are important for extension management: load JavaScript bundles in the runtime and authorize and authenticate extensions. KubeSphere LuBan 4.0 uses SystemJS to load JavaScript bundles for extensions, 同时约定扩展组件的入口规范，从而使其可以连接到核心系统中运行。
-2. 通讯机制
+   Two steps are important for extension management: load JavaScript bundles in the runtime and authorize and authenticate extensions. KubeSphere LuBan 4.0 uses SystemJS to load JavaScript bundles for extensions and defines standard specifications for extension integration with the Core module.
+2. Communications
 
-   内核中我们内置了EventBus(pub/sub), 可以方便的在内核和扩展组件之间、扩展组件与扩展组件之间进行通信。
-3. 路由管理
+   EventBus is built in the Core module to facilitate communication between the Core module and extensions.
+3. Routing management
 
-   基于 react-router，扩展组件定义的路由会在扩展组件注册时统一到内核中进行管理。
-4. 国际化
+   Based on React Router, the routes defined in the extensions will be integrated into the Core module for unified management when the extensions are authorized and authenticated.
+4. Internationalization
 
-   基于 i18next 实现了国际化。开发者可以在扩展组件里按 i18next 的格式去定义翻译文件，然后按约定注册到内核中。
-5. 扩展组件商店
+   Based on i18next, KubeSphere LuBan 4.0 implements internationalization.  For extensions, developers can define translation files based on the format in i18next, and then authorize and authenticate the extensions in the Core module.
+5. Extension Center
 
-   类似 chrome 浏览器的扩展程序，我们也有一个可视化的扩展组件管理模块，方便用户在页面上实现对扩展组件的安装、卸载、启动、停止等操作。
+   Similar to the extension mechanism of Google Chrome, KubeSphere LuBan 4.0 also provides a module for visualized management of extensions, which is convenient for users to install, uninstall, start, or stop extensions in the web console.
 
-6. 基础页面
+6. Basic pages
 
-   系统运行起来的一些必备的 UI 元素，包括登录页面、页面 layout 等。
-7. BFF
+   The Core module provides necessary UI elements for system running, including the login page and page layout.
+7. Backend for frontend (BFF)
 
-   基于 koa 实现的 BFF 层。主要负责首页渲染、请求转发、数据转换及一些轻量的后端任务。
+   Use Koa to implement the BFF architecture. The Core module is responsible for home page rendering, request forwarding, data conversion, and lightweight backend task processing.
 
 
-## 扩展组件
+## Extensions
 
 如上面架构图，扩展组件分为`In-Tree 扩展组件`和`Out-of-Tree 扩展组件`。区别是：
 * `In-Tree 扩展组件`基本上是系统必备或者常用的功能组件，它们会和`core`在编译时打包在一块。`In-Tree 扩展组件` 目前包括：
