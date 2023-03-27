@@ -43,18 +43,18 @@ The core components provide the following main features:
 
 ## Extensions
 
-如上面架构图，扩展组件分为`In-Tree 扩展组件`和`Out-of-Tree 扩展组件`。区别是：
-* `In-Tree 扩展组件`基本上是系统必备或者常用的功能组件，它们会和`core`在编译时打包在一块。`In-Tree 扩展组件` 目前包括：
-1. Cluster 集群管理
-2. Access 访问控制
-3. Workspaces 工作空间
-4. Projects 项目管理
-5. Apps 应用商店
-6. Settings 平台设置
+The extensions can be divided into the following types: `in-tree extensions` and `out-of-tree extensions`. In-tree extensions are different from out-of-tree extensions in the following aspects:
+* `In-tree extensions` are functional modules required by the system, which are packaged with the `Core` module during compilation. `In-tree extensions` can enable the following features:
+1. Cluster management
+2. Access control
+3. Workspace management
+4. Project management
+5. App Store
+6. Platform settings
 
-* `Out-of-Tree 扩展组件`是开发者在自己的代码仓库里开发的扩展组件，独立编译打包。它们会发布在`扩展组件商店`上。用户安装后，内核会远程加载扩展组件的 `js bundle` 并注册到内核中。
+* `Out-of-tree extensions` are extensions developed by developers in their own repos, which can be compiled and packaged independently. These extensions can be rolled out on `Extension Center`. If a user installs an extension, the Core module will load the `JavaScript bundle` of the extension and authorize and authenticate the extension.
 
-`Out-of-Tree 扩展组件`的前端部分统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
+The frontend components of `out-of-tree extensions` use [create-ks-ext](https://github.com/kubesphere/create-ks-ext) for initialization. The directory after initialization is as follows:
 
 ```bash
 .
@@ -89,20 +89,20 @@ The core components provide the following main features:
 └── yarn.lock
 ```
 
-可以看出这和普通的 react app 基本一样。不同的点在于对 entry 的定义。示例如下：
+It can be seen that this is basically the same as a regular React app. The difference lies in the definition of the entry. Examples are as follows:
 ```javascript
-import routes from './routes';                   // 导入路由
-import locales from './locales';                 // 导入国际化文件
+import routes from './routes';                   // Import routes
+import locales from './locales';                 // Import locale files
 
-const menu = {                                   // 定义菜单 
-  parent: 'topbar',                              // 菜单父级
-  name: 'hello-world',                           // 菜单 name 标识 
-  link: '/hello-world',                          // 入口 url    
-  title: 'Hello World',                          // 菜单名称  
-  icon: 'cluster',                               // 菜单 icon
-  order: 0,                                      // 菜单排序  
-  desc: 'This is hello-world extension',         // 菜单描述
-  skipAuth: true,                                // 是否忽略权限检查
+const menu = {                                   // Declare a menu item
+  parent: 'topbar',                              // Specify a parent item for the menu item
+  name: 'hello-world',                           // Specify an identifier for the menu item
+  link: '/hello-world',                          // Specify the URL that the menu item should link to
+  title: 'Hello World',                          // Specify a name for the menu item
+  icon: 'cluster',                               // Specify the icon that should be displayed next to the menu item
+  order: 0,                                      // Specify the order in which the menu item should appear
+  desc: 'This is hello-world extension',         // Specify the description for the menu item
+  skipAuth: true,                                // Specify whether to skip authentication
 };
 
 const extensionConfig = {
@@ -111,13 +111,13 @@ const extensionConfig = {
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
+globals.context.registerExtension(extensionConfig);    // Globally register an extension
 ```
-如上，扩展组件使用脚手架初始化后，定义入口文件。业务代码开发模式和普通前端项目无异。开发完成后打包发布。扩展组件有自己独立的仓库，代码层面对内核部分没有任何侵入。
+As shown in the preceding code, the extension is intialized by using a scaffolding tool and an entry file is generated. The development of business code is different from that of regular frontend projects. After the development is completed, the extension will be packaged and released. The extension code is stored in its own repo, which will not affect the styling of the Core module.
 
-## 开发赋能
-为方便开发者更高效的开发扩展组件，同时也为了系统体验一致性的约束及运行效率的考虑，我们提供了一些通用的组件、工具等库。
-1. 通用组件库 [KubeDesign](https://github.com/kubesphere/kube-design)
-2. 前端脚手架工具 [create-ks-ext](https://github.com/kubesphere/create-ks-ext)
-3. 轻量的状态管理库 @ks-console/stook
-4. 通用 util 库 @ks-console/shared
+## Development empowerment
+KubeSphere provides some common components, tools, and libraries to help developers develop extensions efficiently, taking into account experience consistency and operation efficiency.
+1. Common extension library [KubeDesign](https://github.com/kubesphere/kube-design)
+2. Frontend scaffolding tool [create-ks-ext](https://github.com/kubesphere/create-ks-ext)
+3. Lightweight status management library @ks-console/stook
+4. General utility library @ks-console/shared
