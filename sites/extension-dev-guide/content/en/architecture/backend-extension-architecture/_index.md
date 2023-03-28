@@ -4,11 +4,11 @@ weight: 2
 description: Describes KubeSphere backend extensions.
 ---
 
-In KubeSphere LuBan 4.0, the mechanism for backend extensions includes API dynamic proxies, static proxies, and extension lifecycle management. The Core module of KubeSphere retains the following three major components:
+KubeSphere LuBan 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。The Core module of KubeSphere retains the following three major components:
 
-* `ks-apiserver`: an extensible API gateway that provides KubeSphere with unified API authentication, proxy forwarding of requests, and API aggregation capabilities.
-* `ks-controller-manager`: implements control logic of core resources.
-* `ks-console`: provides frontend web services for KubeSphere.
+* `ks-apiserver` KubeSphere API Server 是一个可扩展的 API 网关，为 KubeSphere 提供统一的 API 认证鉴权、请求的代理转发、API 的聚合能力。
+* `ks-controller-manager` KubeSphere Controller Manager 实现了核心资源的控制逻辑。
+* `ks-console` KubeSphere Console 为 KubeSphere 提供 Web UI。
 
 Built on top of Kubernetes, KubeSphere enables data storage, caching, and synchronization based on custom resources. For more information, see [Custom resources in Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
