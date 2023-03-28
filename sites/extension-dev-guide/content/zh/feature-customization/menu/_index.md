@@ -4,7 +4,7 @@ weight: 02
 description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
 ---
 
-本节介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
+本章节介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
 
 ### 可选挂载位置
 
