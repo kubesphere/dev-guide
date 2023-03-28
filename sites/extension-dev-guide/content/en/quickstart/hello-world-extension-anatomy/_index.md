@@ -4,7 +4,7 @@ weight: 3
 description: 解读 Hello World 扩展组件的工作方式.
 ---
 
-在上一个章节中，您已经可以在本地运行 ks-console 并正确加载扩展组件，下面我们来看看它是如何工作的。
+在上一个章节中，您已经可以在本地运行 KubeSphere Console 并正确加载扩展组件，下面我们来看看它是如何工作的。
 
 Hello World 扩展组件做了 3 件事情：
 
@@ -120,7 +120,7 @@ export default function App() {
 
 在这个快速入门中，我们学习了如何在本地创建、运行和调试一个简单扩展组件的前端部分。一个完整的、具备实际业务能力的扩展组件应包含前后端，甚至需要通过 API 与外部系统或工具进行集成；同时，还需要将扩展组件打包和部署。也可以发布到扩展组件中心，与他人分享您开发的扩展组件。下面是一些建议的学习路线来进一步提高您开发 KubeSphere 扩展组件的技能：
 
-[系统架构](../../architecture) 该章节帮助大家深入了解 KubeSphere LuBan 4.0 基于扩展机制的系统架构。
+[系统架构](../../architecture) 该章节帮助大家深入了解 KubeSphere LuBan 基于扩展机制的系统架构。
 
 [扩展组件定制](../../feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
 
