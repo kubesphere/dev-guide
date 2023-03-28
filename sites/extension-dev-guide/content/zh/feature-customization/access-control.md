@@ -4,9 +4,9 @@ weight: 03
 description: 介绍如何控制扩展组件定制资源的访问权限。
 ---
 
-本节介绍如何控制扩展组件定制资源的访问权限。
+本章节介绍如何控制扩展组件定制资源的访问权限。
 
-您可以在扩展组件中[使用定制资源定义（CRD）创建定制资源（CR）](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，并使用本节介绍的 `RoleTemplate` 资源类型创建自定义权限。在 KubeSphere Web 控制台，您可以使用自定义的权限创建角色并将角色授权给用户，从而只允许具有特定角色的用户访问扩展组件定制资源。
+您可以在扩展组件中[使用定制资源定义（CRD）创建定制资源（CR）](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，并使用本节介绍的 `RoleTemplate` 资源类型创建自定义权限。在 KubeSphere Console，您可以使用自定义的权限创建角色并将角色授权给用户，从而只允许具有特定角色的用户访问扩展组件定制资源。
 
 `RoleTemplate` 是由 KubeSphere 提供的 CRD， 基于 Kubernetes 原生的 RBAC 鉴权机制实现。有关 Kubernetes RBAC 鉴权机制的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example)。
 
