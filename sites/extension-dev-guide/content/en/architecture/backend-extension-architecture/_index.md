@@ -14,7 +14,7 @@ Built on top of Kubernetes, KubeSphere enables data storage, caching, and synchr
 
 ![backend-extension-arch](./backend-arch.svg)
 
-## 后端扩展机制原理
+## Principles
 
 用户可以通过定义以下 CRD 向 KubeSphere 注册 API、前端扩展、动态资源代理，进而扩展 KubeSphere 的功能：
 
