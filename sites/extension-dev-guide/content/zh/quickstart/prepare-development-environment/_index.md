@@ -8,7 +8,7 @@ description: 介绍如何搭建扩展组件开发环境。
 
 * KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
 
-* 开发工具：您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-ext 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。 开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。
+* 开发工具：您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。 开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。
 
 
 ## 安装 KubeSphere Core

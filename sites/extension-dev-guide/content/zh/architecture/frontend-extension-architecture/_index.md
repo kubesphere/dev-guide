@@ -54,7 +54,7 @@ description: KubeSphere 前端扩展机制介绍
 
 * `Out-of-Tree 扩展组件`是开发者在自己的代码仓库里开发的扩展组件，独立编译打包。它们会发布在`扩展组件商店`上。用户安装后，内核会远程加载扩展组件的 `js bundle` 并注册到内核中。
 
-`Out-of-Tree 扩展组件`的前端部分统一使用 [create-ks-ext](https://github.com/kubesphere/create-ks-ext) 脚手架工具初始化。初始化后目录如下:
+`Out-of-Tree 扩展组件`的前端部分统一使用 [create-ks-project](https://github.com/kubesphere/create-ks-project) 脚手架工具初始化。初始化后目录如下:
 
 ```bash
 .
@@ -118,6 +118,6 @@ globals.context.registerExtension(extensionConfig);    // 通过全局对象注�
 ## 开发赋能
 为方便开发者更高效的开发扩展组件，同时也为了系统体验一致性的约束及运行效率的考虑，我们提供了一些通用的组件、工具等库。
 1. 通用组件库 [KubeDesign](https://github.com/kubesphere/kube-design)
-2. 前端脚手架工具 [create-ks-ext](https://github.com/kubesphere/create-ks-ext)
+2. 前端脚手架工具 [create-ks-project](https://github.com/kubesphere/create-ks-project)
 3. 轻量的状态管理库 @ks-console/stook
 4. 通用 util 库 @ks-console/shared
