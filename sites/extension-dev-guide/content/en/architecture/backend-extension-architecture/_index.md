@@ -4,11 +4,11 @@ weight: 2
 description: Describes KubeSphere backend extensions.
 ---
 
-KubeSphere LuBan 后端扩展机制主要包含 API 的动态代理、静态资源的代理、扩展组件的生命周期管理三个部分。The Core module of KubeSphere retains the following three major components:
+In KubeSphere LuBan, the mechanism for backend extensions includes API dynamic proxies, static proxies, and extension lifecycle management. The Core module of KubeSphere retains the following three major components:
 
-* `ks-apiserver` KubeSphere API Server 是一个可扩展的 API 网关，为 KubeSphere 提供统一的 API 认证鉴权、请求的代理转发、API 的聚合能力。
-* `ks-controller-manager` KubeSphere Controller Manager 实现了核心资源的控制逻辑。
-* `ks-console` KubeSphere Console 为 KubeSphere 提供 Web UI。
+* `ks-apiserver`: an extensible API gateway that provides KubeSphere with unified API authentication, proxy forwarding of requests, and API aggregation capabilities.
+* `ks-controller-manager`: implements the logic for critical resource management.
+* `ks-console`: provides a web UI for KubeSphere.
 
 Built on top of Kubernetes, KubeSphere enables data storage, caching, and synchronization based on custom resources. For more information, see [Custom resources in Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
@@ -16,13 +16,13 @@ Built on top of Kubernetes, KubeSphere enables data storage, caching, and synchr
 
 ## Principles
 
-用户可以通过定义以下 CRD 向 KubeSphere 注册 API、前端扩展、动态资源代理，进而扩展 KubeSphere 的功能：
+You can use the following custom resource definitions (CRDs) to register APIs, extend frontend functionalities, and configure dynamic agents.
 
 ### APIService
 
-KubeSphere 提供了一种与 [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) 类似的 API 拓展机制，提供声明式的 API 注册机制。
+KubeSphere provides a declarative API registration mechanism similar to [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/).
 
-示例与字段说明：
+Sample code:
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -42,9 +42,9 @@ spec:
 ```
 
 
-| 字段                                                      | Description                                                                                                                                                                                           |
+| Parameter                                               | Description                                                                                                                                                                                           |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `spec.group`、`spec.version`                             | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](../../references/kubesphere-api/)                                       |
+| `spec.group`, `spec.version`                            | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version，请参考 [API 概念](../../references/kubesphere-api/)                                       |
 | `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify` | 可以为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint，请参考 [Endpoint](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L49-L58)      |
 | `spec.service`                                          | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址，请参考 [ServiceReference](https://github.com/kubesphere/kubesphere/blob/feature-pluggable/staging/src/kubesphere.io/api/extensions/v1alpha1/types.go#L30-L47) |
 
