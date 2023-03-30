@@ -20,7 +20,7 @@ You can use the following custom resource definitions (CRDs) to register APIs, e
 
 ### APIService
 
-KubeSphere provides a declarative API registration mechanism similar to [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/).
+Provides a declarative API registration mechanism similar to [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/).
 
 Sample code:
 
@@ -51,7 +51,7 @@ spec:
 
 ### JSBundle
 
-JSBundle defines the extension bundle that needs to be injected into the front-end framework. `ks-console` will automatically load such resources to extend the functionality.
+Defines the extension bundle that needs to be injected into the front-end framework. `ks-console` will automatically load such resources to extend the functionality.
 
 Sample code:
 
@@ -76,17 +76,17 @@ spec:
   #   namespace: kubesphere-system
 ```
 
-| Parameter                                                               | Description                                                                                                                      |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `spec.raw`, `spec.rawFrom.configMapKeyRef`, `spec.rawFrom.secretKeyRef` | For development, JavaScript files in small sizes can be directly defined in custom resources or embedded in ConfigMap or Secret. |
-| `spec.rawFrom.url`                                                      | 体积较大的 js 文件则需要通过额外的后端服务来提供，扩展组件被启用之后，`ks-console` 会自动注入该扩展包                                                                      |
+| Parameter                                                               | Description                                                                                                                                                    |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `spec.raw`, `spec.rawFrom.configMapKeyRef`, `spec.rawFrom.secretKeyRef` | For development, JavaScript files in small sizes can be directly defined in custom resources or embedded in ConfigMap or Secret.                               |
+| `spec.rawFrom.url`                                                      | For JavaScript files in large sizes, additional backend services are required. If an extension is enabled, `ks-console` will automatically inject the package. |
 
 
 ### ReverseProxy
 
-提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等高级配置。
+Provides flexible API reverse proxies, which supports advanced configurations such as rewrite, redirect, request header injection, circuit breaking, and flow control.
 
-示例与字段说明：
+Sample code:
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -113,15 +113,15 @@ spec:
     - 'Content-Type image/jpeg'
 ```
 
-| 字段                | Description            |
-| ----------------- | ---------------------- |
-| `spec.matcher`    | API 的匹配规则，可以用来拦截特定的请求  |
-| `spec.upstream`   | 定义具体的服务后端，支持健康检查、TLS配置 |
-| `spec.directives` | 可以向请求链注入不同的指令          |
+| Parameter         | Description                                                                            |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| `spec.matcher`    | API matching rules, which can be used to intercept specific requests.                  |
+| `spec.upstream`   | Defines a specific service backend, which supports health check and TLS configuration. |
+| `spec.directives` | Injects different directives into requests.                                            |
 
 #### Directives
 
-1. `method` 修改 HTTP 请求方法
+1. `method`: modifies the HTTP request method.
 
 ```yaml
 spec:
@@ -129,7 +129,7 @@ spec:
     method: 'POST'
 ```
 
-2. `stripPathPrefix` 移除请求路径中的前缀
+2. `stripPathPrefix`: removes prefixes from request paths.
 
 ```yaml
 spec:
@@ -137,7 +137,7 @@ spec:
     stripPathPrefix: '/path/prefix'
 ```
 
-3. `stripPathSuffix` 移除请求路径中的后缀
+3. `stripPathSuffix`: removes suffixes from request paths.
 
 ```yaml
 spec:
@@ -145,7 +145,7 @@ spec:
     stripPathSuffix: '.html'
 ```
 
-4. `headerUp` 为发送到上游的请求增加、删除或替换请求头
+4. `headerUp`: adds, removes, or replaces request headers for upstream requests.
 
 ```yaml
 spec:
@@ -155,7 +155,7 @@ spec:
     - 'Foo bar'
 ```
 
-5. `headerDown` 为上游返回的响应增加、删除或替换响应头
+5. `headerDown`: adds, removes, or replaces response headers from upstream.
 
 ```yaml
 spec:
