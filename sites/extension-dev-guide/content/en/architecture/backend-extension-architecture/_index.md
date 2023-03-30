@@ -51,9 +51,9 @@ spec:
 
 ### JSBundle
 
-JSBundle 定义了需要注入到前端框架中的扩展包。`ks-console` 会自动加载此类资源，实现功能动态扩展。
+JSBundle defines the extension bundle that needs to be injected into the front-end framework. `ks-console` will automatically load such resources to extend the functionality.
 
-示例与字段说明：
+Sample code:
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -76,10 +76,10 @@ spec:
   #   namespace: kubesphere-system
 ```
 
-| 字段                                                                    | Description                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `spec.raw`、`spec.rawFrom.configMapKeyRef`、`spec.rawFrom.secretKeyRef` | 为了便于开发，体积较小的 js 文件可以直接在 CR 中进行定义或者直接嵌入到 ConfigMap 或 Secret 中 |
-| `spec.rawFrom.url`                                                    | 体积较大的 js 文件则需要通过额外的后端服务来提供，扩展组件被启用之后，`ks-console` 会自动注入该扩展包  |
+| Parameter                                                               | Description                                                                                                                      |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `spec.raw`, `spec.rawFrom.configMapKeyRef`, `spec.rawFrom.secretKeyRef` | For development, JavaScript files in small sizes can be directly defined in custom resources or embedded in ConfigMap or Secret. |
+| `spec.rawFrom.url`                                                      | 体积较大的 js 文件则需要通过额外的后端服务来提供，扩展组件被启用之后，`ks-console` 会自动注入该扩展包                                                                      |
 
 
 ### ReverseProxy
