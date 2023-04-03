@@ -1,14 +1,14 @@
 ---
-title: 员工管理扩展组件示例
+title: Manage extensions
 weight: 1
-description: 一个从零开始包含完整的前后端的 KubeSphere 扩展组件开发过程示例
+description: Describes how to develop frontend and backend extensions from scratch.
 ---
 
-在[快速入门](../../quickstart/)的章节中我们已经准备好了开发环境并且创建了一个简单的 [Hello World](../../quickstart/hello-world-extension/) 扩展组件项目。
+Before you get started, make sure a development environment is set up and a project named [Hello World](../../quickstart/hello-world-extension/) is created for developing extensions. For information about how to set up an environment and create a project, see [Quick start](../../quickstart/).
 
-本章将以开发一个员工管理功能扩展组件为例，带大家熟悉扩展组件的开发、测试流程
+This topic describes how to develop and test extensions by developing an extension for employee management.
 
-## 需求与设计
+## Requirements and design
 
 假设我们要在 KubeSphere 前端页面中增加员工管理模块，菜单入口在平台管理（点击顶部导航栏 `平台管理` 打开界面）。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
 
