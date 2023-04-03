@@ -12,15 +12,15 @@ The development environment for KubeSphere extensions includes KubeSphere Core a
 
 * KubeSphere Core: the minimal core component for KubeSphere, which provides a runtime for extension development.
 
-* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. 您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-ext 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
+* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. On your server, you need to install development tools such as create-ks-ext and ksbuilder, and third-party tools such as Node.js, Helm, and kubectl.
 
-您可以参考[搭建开发环境](../quickstart/prepare-development-environment/)章节安装 KubeSphere Core 和开发工具。
+For information about how to install KubeSphere Core and development tools, see [Set up a development environment](../quickstart/prepare-development-environment/).
 
-#### 创建开发项目
+#### Create a project
 
-开发环境搭建完成后，您可以参阅[初始化扩展组件开发项目](../quickstart/hello-world-extension)快速体验 KubeSphere 扩展机制。
+To quickly get started with the extension mechanism of KubeSphere, see [Initialize a project](../quickstart/hello-world-extension).
 
-KubeSphere 扩展组件开发目录基本结构如下：
+Developing extensions for KubeSphere follows this structure:
 
 ```bash
    kubesphere-extensions
@@ -30,15 +30,15 @@ KubeSphere 扩展组件开发目录基本结构如下：
    └── backend
 ```
 
-* `kubesphere-extensions`：扩展组件开发目录，您可以自定义开发目录的名称。
+* `kubesphere-extensions`: the directory for developing extensions. You can specify a custom value.
 
-  * `frontend`：扩展组件前端开发目录，包含前端依赖和扩展组件前端模块。
+  * ` frontend`: the directory for developing frontend extensions, including frontend dependencies and extensions.
 
-    * `extensions`：扩展组件前端模块目录。您可以将多个扩展组件的前端模块保存在 `extensions` 目录下以共用依赖。
+    * `extensions`: the directory for frontend extensions. You can store the frontend modules of multiple extensions in the `extensions` directory to share the resources.
 
-       * `hello-world`：扩展组件的前端模块，目录名称 `hello-world` 仅为示例，您可以自定义目录的名称。
+       * `hello-world`: the frontend module for extensions. `hello-world` is an example, and you can specify a custom directory name.
 
-* `backend`：扩展组件后端开发目录。为便于集中管理，建议您将扩展组件后端源代码保存在 `backend` 目录中。您也可以根据需要将扩展组件后端源代码保存在其他位置。
+* `backend`: the directory for developing backend extensions. We recommended that you store the source code of backend extensions in the `backend` directory for centralized management. 您也可以根据需要将扩展组件后端源代码保存在其他位置。
 
 KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框架，后端不限制开发语言。
 
