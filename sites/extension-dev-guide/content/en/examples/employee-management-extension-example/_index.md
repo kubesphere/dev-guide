@@ -10,7 +10,7 @@ This topic describes how to develop and test extensions by developing an extensi
 
 ## Requirements and design
 
-假设我们要在 KubeSphere 前端页面中增加员工管理模块，菜单入口在平台管理（点击顶部导航栏 `平台管理` 打开界面）。在这个模块里我们可以查看、新增、修改、删除员工信息。设计图如下：
+Assume that you want to add a feature for employee management to the frontend of KubeSphere, and the module can be accessed by clicking `Platform` in the upper left corner of the top navigation pane. In this module, you can view, add, modify, and delete employee information. The following figures show the design of this module:
 
 1. 员工管理菜单 ![Employee Management Menuemployee-management-menu](./sample-employee-menu.png)
 
