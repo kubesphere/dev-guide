@@ -38,21 +38,21 @@ Developing extensions for KubeSphere follows this structure:
 
        * `hello-world`: the frontend module for extensions. `hello-world` is an example, and you can specify a custom directory name.
 
-* `backend`: the directory for developing backend extensions. We recommended that you store the source code of backend extensions in the `backend` directory for centralized management. 您也可以根据需要将扩展组件后端源代码保存在其他位置。
+* `backend`: the directory for developing backend extensions. We recommended that you store the source code of backend extensions in the `backend` directory for centralized management. You can also save the source code in other directories as needed.
 
-KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框架，后端不限制开发语言。
+To develop frontend extensions, use the [React](https://reactjs.org) framework. The development of backend extensions has no requirements for languages.
 
-#### 定制功能
+#### Customize features
 
-您可以对扩展组件的主题、菜单挂载位置、访问控制、页面路由、国际化等功能特性进行定制。此外，KubeSphere 提供了 API 扩展接口，您可以将自定义 API 注册到 KubeSphere API 服务中供扩展组件调用。
+You can configure custom settings,  such as the theme, mount point for menus, access control, routing, and internationalization. KubeSphere provides an API that can integrate with extensions. You can register custom APIs to the KubeSphere API to implement remote calls.
 
-开发扩展组件前后端请参阅[示例与教程](../examples)
+For more information about developing frontend and backend extensions, see [Examples](../examples).
 
-#### 打包发布
+#### Package and release extensions
 
-您需要将扩展组件的前后端源代码构建成容器镜像，打包扩展组件安装包，将扩展组件安装包上架到本地的扩展组件商店。您可以通过扩展组件商店安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。可以参考以下步骤：
+You need to build the source code of frontend and backend extensions into container images, package installation packages, and upload the installation packages to the local Extension Center. Then, you can install extensions in the Extension Center and test whether they can work as expected. Take the following steps:
 
-1. 参考[示例与教程](../examples/employee-management-extension-example/#员工管理扩展组件示例)构建镜像部分，将扩展组件的前后端源代码构建成容器镜像
-2. 参考[打包扩展组件](../packaging-and-release/packaging)，将扩展组件前后端部署声明和 APIService、JSBundle 等扩展声明打包成扩展组件安装包
-3. 参考[测试扩展组件](../packaging-and-release/testing)将扩展组件上架到本地的扩展组件商店中，安装扩展组件并测试使用扩展组件功能
+1. Build the source code of frontend and backend extensions into container images. For more information, see "Build an image" in [Examples](../examples/employee-management-extension-example/#Manage extensions).
+2. Package the declarations of frontend and backend extensions into installation packages, including APIService and JSBundle. For more information, see [Package extensions](../packaging-and-release/packaging).
+3. Release extensions in the local Extension Center, and install and test the extension features. For more information, see [Test extensions](../packaging-and-release/testing).
    
