@@ -18,9 +18,9 @@ Assume that you want to add a feature for employee management to the frontend of
 
 3. Dialog box for adding an employee![Addn New Employee](./sample-employee-new.png)
 
-4. 员工详情页 ![Employee Details](./sample-employee-details.png)
+4. Details page of an employee![Employee Details](./sample-employee-details.png)
 
-## 后端扩展组件开发
+## Develop backend extensions
 
 紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee)。
 
