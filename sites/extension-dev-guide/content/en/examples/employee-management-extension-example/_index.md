@@ -12,11 +12,11 @@ This topic describes how to develop and test extensions by developing an extensi
 
 Assume that you want to add a feature for employee management to the frontend of KubeSphere, and the module can be accessed by clicking `Platform` in the upper left corner of the top navigation pane. In this module, you can view, add, modify, and delete employee information. The following figures show the design of this module:
 
-1. 员工管理菜单 ![Employee Management Menuemployee-management-menu](./sample-employee-menu.png)
+1. Menu for employee management![Employee Management Menuemployee-management-menu](./sample-employee-menu.png)
 
-2. 员工管理列表页 ![Employee Management](./sample-employee-list.png)
+2. Employee management page![Employee Management](./sample-employee-list.png)
 
-3. 新增员工 ![Addn New Employee](./sample-employee-new.png)
+3. Dialog box for adding an employee![Addn New Employee](./sample-employee-new.png)
 
 4. 员工详情页 ![Employee Details](./sample-employee-details.png)
 
