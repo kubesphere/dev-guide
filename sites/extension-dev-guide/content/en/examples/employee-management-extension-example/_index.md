@@ -58,17 +58,17 @@ NAME                            READY   STATUS    RESTARTS   AGE
 employee-api-6dc7df84d8-5sr7g   1/1     Running   0          6m41s
 ```
 
-#### 3. 注册后端扩展组件 API 到 ks-apiserver
+#### 3. Register the API of the backend extension to ks-apiserver
 
-通过创建 [APIService](../../architecture/backend-extension-architecture/#apiservice) 资源对象，我们可以将 employee-api 提供的 API 注册到 ks-apiserver 中供前端组件统一集成。
+By creating an [APIService](../../architecture/backend-extension-architecture/#apiservice) object, you can register the API provided by employee-api to ks-apiserver for frontend integration.
 
-以下的资源示例将向 ks-apiserver 注册路径为 `/kapis/employee.kubesphere.io/v1alpha1` 的 API：
+The following sample command is used to register the API to ks-apiserver with the path `/kapis/employee.kubesphere.io/v1alpha1`:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/employee/employee-apiservice.yaml
 ```
 
-验证 API 注册是否成功，正常情况下可以通过 ks-apiserver 获取到由 employee-api 提供的 employees 数据。注意如果您修改了 admin 用户的默认密码，则需要修改命令行中 password 参数。
+Verify that API registration is successful. In normal circumstances, the employees data provided by employee-api can be obtained through ks-apiserver. Note that if you change the default password of the admin user, you need to modify the password parameter in the command line.
 
 ```bash
 $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees 
@@ -99,20 +99,20 @@ $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/
 }
 ```
 
-到这里后端的开发与 API 的注册就已经完成了，紧接着我们来看看前端的开发与测试流程。
+Then, let's take a look at the development and testing process of frontend extensions.
 
-## 前端扩展组件开发
+## Develop frontend extensions
 
-#### 1. 创建项目脚手架
+#### 1. Scaffold a project
 
-在[创建 Hello World 扩展组件](../../quickstart/hello-world-extension/)的章节中，我们已经创建了一个简单的 hello world 扩展组件。 我们可以继续在这个前端项目脚手架目录（`~/kubesphere-extensions/frontend/`）中创建我们的第二个前端扩展组件 employee。
+In [Create a Hello World extension](../../quickstart/hello-world-extension/), you have created a simple extension. You can continue to create your second frontend extension named employee in the directory `~/kubesphere-extensions/frontend/`.
 
 ```shell
 $ cd ~/kubesphere-extensions/frontend/
 $ yarn create:ext
 ```
 
-进入交互式命令行界面，按提示输入创建出 `employee` 扩展组件。
+Go to the command line interface and follow the prompts to create the `employee` extension.
 
 ```
 $ yarn create:ext
@@ -127,7 +127,7 @@ $ ksc create:ext
 ✨  Done in 35.99s.
 ```
 
-这样，扩展组件的前端目录就创建出来了。目录结构如下：
+In this way, the frontend directory of the extension is created. The directory structure is as follows:
 
 ```bash
 $ tree -I 'node_modules' -L 4
@@ -154,7 +154,7 @@ $ tree -I 'node_modules' -L 4
 └── yarn.lock
 ```
 
-现在我们可以执行以下命令运行本地开发环境
+Execute the following command to run the local development environment:
 
 ```
 $ yarn dev
@@ -176,20 +176,20 @@ Dashboard app running at port 8000
 Successfully started server on http://localhost:8000 
 ```
 
-开发环境启动后，我们就可以在本地环境中进行业务代码开发。开发方式与普通 react app 基本一致，本示例前端部分源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)
+After the development environment is started, you can develop business code in the local environment. The development method is similar to that of a regular React application. For information about the source code, see [Extension samples](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee).
 
-便于演示，我们可以将示例仓库中的代码直接复制过来
+For demonstration, you can directly copy the code from the sample repository.
 
 ```shell
 cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/frontend/extensions/employee
 ```
 
-#### 2. 构建镜像
+#### 2. Build an image
 
-前端开发完成后，我们同样需要将前端代码编译、打包成 docker 镜像，也可以直接使用官方提供的镜像 `kubespheredev/employee-frontend:latest`。
+After the frontend development is complete, you also need to compile and package the frontend code into a docker image, or directly use the official image `kubespheredev/employee-frontend:latest`.
 
 ```shell
-$ yarn build:ext employee # 编译前端代码
+$ yarn build:ext employee # Compile the frontend code
 $ pushd extensions/employee/
 $ docker build -t <YOUR_REPO>/employee-frontend:latest .
 $ docker push <YOUR_REPO>/employee-frontend:latest
