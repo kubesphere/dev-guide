@@ -30,7 +30,7 @@ With the help of [Backend extensions](../../architecture/backend-extension-archi
 
 #### 1. Build an image
 
-当完成后端的 API 开发之后，需要将组件后端部分通过容器进行构建，以下为开发环境中构建镜像的示例，您也可以直接使用官方提供的镜像 kubespheredev/employee-api:latest。
+After you complete the backend API development, the backend part of the extension needs to be containerized. The following is an example of building an image in the development environment. You can also use the official image kubespheredev/employee-api:latest.
 
 ```shell
 $ cd  ~/kubesphere-extensions
@@ -41,16 +41,16 @@ $ docker push <YOUR_REPO>/employee-api:latest
 $ popd
 ```
 
-#### 2. 部署后端服务
+#### 2. Deploy a backend service
 
-当后端容器镜像构建完成后，可以借助 (alias 或者 dev-tools 中提供的) kubectl 将 employee-api 部署到 KubeSphere 环境中。
+After the image is built, employee-api can be deployed to KubeSphere by kubectl (provided in alias or dev-tools).
 
 ```bash
 $ kubectl create deployment employee-api --image=kubespheredev/employee-api:latest # 可以使用官方已经构建好的镜像直接部署
 $ kubectl expose deployment employee-api --type=ClusterIP --name=employee-api --port=8080
 ```
 
-验证部署是否成功，pod 是否处于 Running 状态
+Verify that the deployment was successful and the pod is in the Running state:
 
 ```bash
 $ kubectl get po
