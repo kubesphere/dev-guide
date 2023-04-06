@@ -22,13 +22,13 @@ Assume that you want to add a feature for employee management to the frontend of
 
 ## Develop backend extensions
 
-紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由的选择自己擅长的语言和框架进行开发。在本示例中我们采用 `go`、`gin`、`gorm`、`sqlite` 提供了具体的功能实现，源代码请参考 [GitHub - employee: A demo app build with go gin, gorm and sqlite](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee)。
+Then, you need to design APIs related to frontend and backend interactions and provide specific functional implementations. Backend development is not subject to the technology stack, and developers can choose their own language and framework for development. In this example, we use `go`, `gin`, `gorm`, and `sqlite` to implement features. For more information about the source code, see [Extension samples](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee).
 
 {{% notice note %}}
-借助 [KubeSphere API 扩展机制](../../architecture/backend-extension-architecture/)，可以动态的将您的 API 注册到 ks-apiserver，扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](../../references/kubesphere-api/) 接入 KubeSphere 租户体系。
+With the help of [Backend extensions](../../architecture/backend-extension-architecture/), you can dynamically register your API with ks-apiserver, and frontend extensions use ks-apiserver as a unified gateway to achieve unified API authentication and access control. You can also use the [API](../../references/kubesphere-api/) provided by ks-core to integrate with the KubeSphere tenant system.
 {{% /notice %}}
 
-#### 1. 构建镜像
+#### 1. Build an image
 
 当完成后端的 API 开发之后，需要将组件后端部分通过容器进行构建，以下为开发环境中构建镜像的示例，您也可以直接使用官方提供的镜像 kubespheredev/employee-api:latest。
 
