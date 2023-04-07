@@ -12,7 +12,7 @@ KubeSphere 扩展组件开发环境包括 KubeSphere Core 和开发工具两部�
 
 * KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
 
-* 开发工具：开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-ext 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
+* 开发工具：开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
 
 您可以参考[搭建开发环境](../quickstart/prepare-development-environment/)章节安装 KubeSphere Core 和开发工具。
 
@@ -55,4 +55,3 @@ KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框
 1. 参考[示例与教程](../examples/employee-management-extension-example/#员工管理扩展组件示例)构建镜像部分，将扩展组件的前后端源代码构建成容器镜像
 2. 参考[打包扩展组件](../packaging-and-release/packaging)，将扩展组件前后端部署声明和 APIService、JSBundle 等扩展声明打包成扩展组件安装包
 3. 参考[测试扩展组件](../packaging-and-release/testing)将扩展组件上架到本地的扩展组件商店中，安装扩展组件并测试使用扩展组件功能
-   

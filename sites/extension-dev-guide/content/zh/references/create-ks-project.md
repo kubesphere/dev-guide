@@ -1,17 +1,17 @@
 ---
-title: create-ks-ext CLI reference
+title: create-ks-project CLI reference
 weight: 03
 description:  介绍 KubeSphere 前端开发脚手架工具
 ---
 
-## create-ks-ext
+## create-ks-project
 
 KubeSphere 前端开发脚手架工具，执行后将会在指定目录下创建一个前端脚手架文件夹并且安装相应前端依赖。
 
 使用方式：
 
 ```text
-yarn create ks-ext [project-name]
+yarn create ks-project [project-name]
 ```
 
 可选参数：
