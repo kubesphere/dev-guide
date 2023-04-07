@@ -12,7 +12,7 @@ The development environment for KubeSphere extensions includes KubeSphere Core a
 
 * KubeSphere Core: the minimal core component for KubeSphere, which provides a runtime for extension development.
 
-* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. On your server, you need to install development tools such as create-ks-ext and ksbuilder, and third-party tools such as Node.js, Helm, and kubectl.
+* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. 您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
 
 For information about how to install KubeSphere Core and development tools, see [Set up a development environment](../quickstart/prepare-development-environment/).
 
@@ -55,4 +55,3 @@ You need to build the source code of frontend and backend extensions into contai
 1. Build the source code of frontend and backend extensions into container images. For more information, see "Build an image" in [Examples](../examples/employee-management-extension-example/#Manage extensions).
 2. Package the declarations of frontend and backend extensions into installation packages, including APIService and JSBundle. For more information, see [Package extensions](../packaging-and-release/packaging).
 3. Release extensions in the local Extension Center, and install and test the extension features. For more information, see [Test extensions](../packaging-and-release/testing).
-   
