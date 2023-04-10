@@ -90,6 +90,6 @@ Due to the Same-Origin Policy, if the third-party system webpage has a different
 
 2. Adjust the webpage style of Weave Scope. Due to the same origin, the extension can read and operate on the Document Object Model (DOM) of the Weave Scope page (`iframe`) by using `React` `ref`. This way, you can adjust the style and hidden the effect caused by the selector.
 
-通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
+Run `yarn dev` to launch a local environment, and then you can access the webpage through the extension:
 
 ![weave-scope-dashboard](./sample-weave-scope-dashboard.png)
