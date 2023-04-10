@@ -88,7 +88,7 @@ The preceding code block completes the following tasks:
 Due to the Same-Origin Policy, if the third-party system webpage has a different origin from the KubeSphere frontend, KubeSphere cannot use JavaScript to read and operate on the third-party system iframe. Therefore, it requires the backend to process the frontend address of the third-party system as the same source as the KubeSphere frontend (**same protocol**, **host**, and **port**).
 {{% /notice %}}
 
-2. Adjust the webpage style of Weave Scope. 同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
+2. Adjust the webpage style of Weave Scope. Due to the same origin, the extension can read and operate on the Document Object Model (DOM) of the Weave Scope page (`iframe`) by using `React` `ref`. This way, you can adjust the style and hidden the effect caused by the selector.
 
 通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
 
