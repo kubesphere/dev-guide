@@ -215,19 +215,19 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. Register the API of the frontend extension to ks-apiserver
 
-In production mode, ks-console will dynamically discover and load the extension through the API, which is different from locally loading extensions in development mode. 当前端服务部署完成后，通过创建 [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+In production mode, ks-console will dynamically discover and load the extension through the API, which is different from locally loading extensions in development mode. After the frontend service is deployed, by creating a [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) object, the package of the frontend extension provided by employee-frontend can be registered in ks-apiserver, and ks-console will dynamically load the frontend extension to the kernel.
 
-以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
+The following sample command registers the frontend employee extension package with ks-apiserver, and ks-console will automatically load the frontend extension package:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-frontend/extensions/employee/employee-jsbundle.yaml
 ```
 
-可以在本地以 production 模式启动 ks-console，访问 `http://localhost:8000`； 或者直接访问 kubesphere 容器的 30880 端口，测试 production 模式下扩展组件是否正确加载。
+You can start ks-console locally in production mode and visit `http://localhost:8000`. Alternatively, you can directly access port 30880 on the container to test whether the extension is loaded properly in production mode.
 
 ```shell
 $ yarn build:prod
 $ yarn start
 ```
 
-接下来您可以参阅[打包扩展组件](../../packaging-and-release/packaging)，将本示例编打包扩展组件安装包。
+For information about how to compile the installation package of the extension, see [Package extensions](../../packaging-and-release/packaging).
