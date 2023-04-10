@@ -1,5 +1,5 @@
 ---
-title: Manage extensions
+title: Develop an extension for employee management
 weight: 1
 description: Describes how to develop frontend and backend extensions from scratch.
 ---
