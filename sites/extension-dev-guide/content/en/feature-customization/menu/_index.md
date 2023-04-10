@@ -1,40 +1,40 @@
 ---
-title: 挂载位置
+title: Mount point
 weight: 2
-description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
+description: Describes how to configure the mount point of an extension in the KubeSphere web console.
 ---
 
-本章节介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
+This section describes how to configure the mount point of an extension in the KubeSphere web console.
 
-### 可选挂载位置
+### Available mount points
 
-您可以将扩展组件挂载到以下位置：
+You can mount extensions to the following points:
 
-* 顶部菜单栏
+* Top navigation bar
 
   <img src="./top-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* 平台管理菜单
+* Platform management menu
 
-  在顶部菜单栏点击`平台管理`打开菜单。
+  In the top navigation bar, click `Platform` to open the menu.
 
   <img src="./platform-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* 工具箱菜单
+* Toolbox menu
 
-  将光标悬停在页面右下角的 <img src="" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top" /> 图标打开菜单。
+  Hover over the <img src="" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top" /> icon in the bottom right corner of the page to open the menu.
 
   <img src="./toolbox-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* 左侧导航栏
+* Left-side navigation pane
 
-  KubeSphere 在访问控制、集群管理、企业空间管理、项目管理和平台设置页面提供左侧导航栏。例如，集群管理页面的左侧导航栏如下图所示：
+  KubeSphere provides a left-side navigation pane for each of the following module: access control, cluster management, workspace management, project management, and platform settings. Example:
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px" />
 
-### 设置挂载位置
+### Configure a mount point
 
-您可以在扩展组件前端源代码入口文件（例如 `src/index.js`）中的 `menu` 对象设置挂载位置，例如：
+You can set the mount point in the `menu` object of `src/index.js`. For example:
 
 ```javascript
 const menu = { 
@@ -63,16 +63,16 @@ const menu = {
   <tbody>
     <tr>
       <td>parent</td>
-      <td>扩展组件的挂载位置，取值可以为：
+      <td>The mount point of the extension. Valid values:
         <ul>
-          <li><strong>topbar</strong>：挂载到顶部菜单栏。</li>
-          <li><strong>global</strong>：挂载到平台管理菜单。</li>
-          <li><strong>toolbox</strong>：挂载到工具箱菜单。</li>
-          <li><strong>access</strong>：挂载到访问控制页面左侧导航栏。</li>
-          <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
-          <li><strong>workspace</strong>：挂载到企业空间管理页面左侧导航栏。</li>
-          <li><strong>project</strong>：挂载到项目管理页面左侧导航栏。</li>
-          <li><strong>platformSettings</strong>：挂载到平台设置页面左侧导航栏。</li>
+          <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
+          <li><strong>global</strong>: mounts to the platform management menu.</li>
+          <li><strong>toolbox</strong>: mounts to the toolbox menu.</li>
+          <li><strong>access</strong>: mounts to the left-side navigation pane on the Access Control page.</li>
+          <li><strong>cluster</strong>: mounts the left-side navigation pane on the Cluster Management page.</li>
+          <li><strong>workspace</strong>: mounts the left-side navigation pane on the Workspace Management page.</li>
+          <li><strong>project</strong>: mounts the left-side navigation pane on the Project Management page.</li>
+          <li><strong>platformSettings</strong>: mounts the left-side navigation pane on the Platform Settings page.</li>
         </ul>
       </td>
     </tr>
