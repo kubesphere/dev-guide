@@ -1,30 +1,30 @@
 ---
-title: 第三方系统集成示例
+title: Integrate with third-party systems
 weight: 2
-description: 快速集成已有 Web UI 的第三方工具与系统
+description: Integrate with third-party tools and systems that have existing web UIs
 ---
 
-本章以将 Weave Scope 集成到扩展组件为例，带大家熟悉如何快速集成已有 Web UI 的第三方工具与系统。
+This section provides an example of integrating Weave Scope into extensions to help you familiarize how to quickly integrate third-party tools and systems with existing web UIs.
 
-[Weave Scope](https://github.com/weaveworks/scope) 可以自动生成应用程序的映射，使您能够直观地理解、监视和控制基于容器化微服务的应用程序。
+[Weave Scope](https://github.com/weaveworks/scope) automatically generates a map of your application, enabling you to intuitively understand, monitor, and control your containerized, microservices-based application.
 
-### 部署 Weave Scope
+### Deploy Weave Scope
 
-您可以参考该文档[部署 Weave Scope](https://www.weave.works/docs/scope/latest/installing)，或通过以下命令在 K8s 集群中一键部署。
+To deploy Weave Scope, view related description in [Deploy Weave Scope](https://www.weave.works/docs/scope/latest/installing). You can also run the following command to deploy it to a Kubernetes cluster:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/weave-scope/manifests.yaml
 ```
 
-### 为 Weave Scope 创建反向代理
+### Create a reverse proxy for Weave Scope
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/weave-scope/weave-scope-reverse-proxy.yaml
 ```
 
-### 前端扩展组件开发
+### Develop frontend extensions
 
-项目的创建、本地开发、调试流程，与[员工管理扩展组件示例](../employee-management-extension-example/#前端扩展组件开发)相同。您可以从 GitHub 上克隆本示例的代码
+The process for project creation, local development, and debugging is the same as that in [Develop an extension for employee management](../employee-management-extension-example/#Develop an extension for employee management). You can clone the GitHub repo:
 
 ```bash
 cd  ~/kubesphere-extensions
@@ -32,9 +32,9 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/frontend/extensions
 ```
 
-我们着重来看一下如何将 Weave Scope 的页面集成进来。
+The following code block shows how to integrate Weave Scope:
 
-文件路径： `~/kubesphere-extensions/frontend/extensions/weave-scope/src/App.jsx`
+File path: `~/kubesphere-extensions/frontend/extensions/weave-scope/src/App.jsx`
 
 ```jsx
 import React, { useState, useRef } from 'react';
@@ -80,15 +80,15 @@ export default function App() {
 }
 ```
 
-以上代码主要做了 2 件事。
+The preceding code block completes the following tasks:
 
-1. 将 Weave Scope 页面以 `iframe` 的形式嵌入到扩展组件中。`FRAME_URL` 为 Weave Scope 的反向代理地址，且与 KubeSphere 页面地址**同源**。
+1. Use `iframe` to integrate Weave Scope. `FRAME_URL` is the reverse proxy of Weave Scope, which shares the **origin** with the KubeSphere web console.
 
 {{% notice note %}}
-由于浏览器的同源策略（Same-Origin Policy），如果第三方系统网页与 KubeSphere 前端网页不同源，我们将无法使用 JavaScript 对第三方系统 iframe 进行读取和操作。 因此，我们通常需要由后端将第三方系统的前端访问地址，处理成和 KubeSphere 前端访问地址同源（**同协议**、**同主机**、**同端口**）的地址。
+Due to the Same-Origin Policy, if the third-party system webpage has a different origin from the KubeSphere frontend, KubeSphere cannot use JavaScript to read and operate on the third-party system iframe. Therefore, it requires the backend to process the frontend address of the third-party system as the same source as the KubeSphere frontend (**same protocol**, **host**, and **port**).
 {{% /notice %}}
 
-2. 调整 Weave Scope 页面的样式。同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
+2. Adjust the webpage style of Weave Scope. 同样由于是同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
 
 通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面
 
