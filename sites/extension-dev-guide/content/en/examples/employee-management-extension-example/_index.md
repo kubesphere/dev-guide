@@ -215,7 +215,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. Register the API of the frontend extension to ks-apiserver
 
-与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
+In production mode, ks-console will dynamically discover and load the extension through the API, which is different from locally loading extensions in development mode. 当前端服务部署完成后，通过创建 [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
 以下的资源示例将向 ks-apiserver 注册前端 employee 扩展组件包，ks-console 会自动加载这些前端扩展组件包。
 
