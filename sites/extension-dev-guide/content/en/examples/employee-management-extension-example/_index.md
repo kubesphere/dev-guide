@@ -196,16 +196,16 @@ $ docker push <YOUR_REPO>/employee-frontend:latest
 $ popd
 ```
 
-#### 3. 部署前端服务
+#### 3. Deploy a frontend service
 
-可以使用官方已经构建好的镜像直接部署
+You can use an official image to deploy a service:
 
 ```bash
 $ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest 
 $ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=80
 ```
 
-验证部署是否成功，pod 是否处于 Running 状态
+Verify that the deployment was successful and the pod is in the Running state:
 
 ```bash
 $ kubectl get po
@@ -213,7 +213,7 @@ NAME                            READY   STATUS    RESTARTS   AGE
 employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 ```
 
-#### 4. 注册前端扩展组件到 ks-apiserver
+#### 4. Register the API of the frontend extension to ks-apiserver
 
 与开发模式从本地加载扩展组件不同，production 模式下 ks-console 将通过 API 动态发现扩展组件并进行加载。当前端服务部署完成后，通过创建 [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态的将这些前端扩展加载到内核中。
 
