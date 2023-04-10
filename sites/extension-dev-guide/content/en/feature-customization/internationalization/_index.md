@@ -1,16 +1,16 @@
 ---
-title: 国际化
+title: Internationalization
 weight: 5
-description: 介绍如何实现扩展组件前端国际化。
+description: Describes how to internationalize frontend extensions.
 ---
 
-本章节介绍如何实现扩展组件前端国际化。
+This section describes how to internationalize frontend extensions.
 
-KubeSphere Core 集成了 [i18next](https://www.i18next.com/) 作为国际化组件。您可以通过自定义语言包实现扩展组件前端多语言显示。
+KubeSphere Core integrates [i18next](https://www.i18next.com/) as an internationalization component. You can use custom language packages to enable multi-language extensions.
 
-## 语言包
+## Language packages
 
-扩展组件前端模块目录中的 `src/locales` 目录为扩展组件语言包，其中默认创建了英文语言包 `en` 和简体中文语言包 `zh`。您也可以根据需要手动创建其他语言包。每个语言的词条保存在 JSON 文件中，您可以在语言包中创建多个 JSON 文件。
+KubeSphere provides language packages for frontend extensions in directory `src/locales`. By default, language packages `en` and `zh` are created. You can also create other language packages as needed. The UI text for each language is stored in JSON files. You can create multiple JSON files in language packages.
 
 ```shell
 kubesphere-extensions
@@ -28,11 +28,11 @@ kubesphere-extensions
                         └── index.js
 ```
 
-## 开发步骤
+## Development process
 
-以下以 [Hello World](../../quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
+The following takes the [Hello World](../../quickstart/hello-world-extension/) extension as an example to demonstrate how to display `Hello World! The current language code is {languageCode}.` in English and `你好世界！当前的语言代码为 {languageCode}。Also, this example shows how to replace <code>{languageCode}` with the language code of a local environment.
 
-1. 在 `src/locales/en/base.json` 文件和 `src/locales/zh/base.json` 文件中分别添加以下词条：
+1. In `src/locales/en/base.json` and `src/locales/zh/base.json`, add the following text:
 
    ```json
    // src/locales/en/base.json
@@ -48,11 +48,11 @@ kubesphere-extensions
    }
    ```
 
-2. 在扩展组件的入口文件（例如 `src/index.js` ）中引入语言包：
+2. Import the language package in `src/index.js`:
 
    ```js
    import routes from './routes';
-   import locales from './locales';  // 引入语言包
+   import locales from './locales';  // Import the language package
 
    onst menu = {
      parent: 'topbar',
@@ -74,7 +74,7 @@ kubesphere-extensions
    globals.context.registerExtension(extensionConfig);
    ```
 
-3. 在扩展组件前端开发过程中，使用全局函数 `t()` 获取词条内容并向变量传入动态值。例如，在 `src/App.jsx` 文件中编写以下代码：
+3. In the development of the frontend extension, use the global function `t()` to obtain the text content and pass the value to the variable. For example, use the following code in the `src/App.jsx` file:
 
    ```jsx
    export default function App() {
@@ -82,11 +82,11 @@ kubesphere-extensions
    }
    ```
 
-4. 在 `frontend` 目录下执行 `yarn dev` 命令启动前端环境。
+4. Run the `yarn dev` command in the `frontend` directory to launch the frontend environment.
 
-5. 访问 `http://localhost:8000` 并登录，在页面右上角点击当前用户的名称，然后选择`用户设置`切换语言。
+5. Visit and log in to `http://localhost:8000`, click the current user's name in the upper right corner of the page, and then select `User Settings` to switch the language.
 
-   在 `English` 和`简体中文`语言环境下点击 `Hello World` 将分别显示以下文字：
+   Clicking `Hello World` in the `English` and `Simplified Chinese` language environments will display the following text respectively:
 
    <img src="./locale-demo-en.png" style="margin: 0px" />
 
