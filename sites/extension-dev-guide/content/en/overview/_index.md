@@ -1,56 +1,56 @@
 ---
 title: "Overview"
 weight: 1
-description: 介绍 KubeSphere 4.0 扩展机制的背景和优势
+description: Describes why KubeSphere LuBan 4.0 adopts an extension machanism and how developers can benefit from it.
 ---
 
-## 为什么在 KubeSphere 4.0 引入扩展机制
+## Why KubeSphere 4.0 adopts an extension mechanism
 
 Since 2018, KubeSphere, a container management platform for hybrid clouds, has been iterated with three major versions and a dozen of minor versions. To meet different business requirements, KubeSphere enables diverse enterprise-grade features, from multi-tenancy, multi-cluster management, DevOps, GitOps, service meshes, microservices, observability, app store, edge computing, to networking and storage.
 
-首先，尽管众多功能满足了用户在容器管理平台方面的基本需求，但也引发了一些挑战，例如：
+The following challenges are still faced by KubeSphere:
 
-- 版本发布周期较长，因为在发布新版本时，需要等待所有组件完成开发、测试并通过集成测试；
-- 由于各组件无法单独迭代，KubeSphere 发布后，社区和用户对各组件的反馈会逐渐增多。然而，这些反馈的处理需要等待 KubeSphere 发布新版本后才能一并交付给用户，这使得对用户反馈的响应缺乏及时性；
-- 尽管目前已能实现单独启用/禁用特定组件，但这些组件的前后端代码仍然耦合在一起，容易互相影响，架构上不够优雅；
-- 部分组件默认启用，对于没有相关需求的用户来说，可能会占用过多的系统资源；
+- The release cycle is long. Before a new version gets released, you need to to wait for all components to complete development and pass the integration test.
+- After KubeSphere is released, we can gradually gather feedback from the community and users on each component. However, each component cannot be iterated independently. To cope with the feedback, we need to iterate a new version of KubeSphere. This makes the response slow.
+- Although you can enable or disable some components separately, the frontend code and backend code of these components are coupled. These components are prone to be affected by each other, and the architecture is not graceful.
+- Some components are enabled by default, which may consume excess system resources for users who do not have relevant requirements.
 
-其次，云原生领域的创新非常活跃。Therefore, several solutions can be available for a specific scenario. For example:
+Innovation in cloud native communities is active. Therefore, several solutions can be available for a specific scenario. For example:
 
-- GitOps 用户可以选择 ArgoCD 或 FluxCD；
-- 服务网格用户可以选择 Istio 或 Linkerd 或其他实现；
-- 联邦集群管理可以选择 Karmada, OCM 或 Clusternet；
-- 日志管理可以选择 Elasticsearch 或 Loki；
-- 边缘计算框架可以选择 KubeEdge, OpenYurt 或 SuperEdge；
-- 存储和网络也有非常多的选择；
+- Use ArgoCD or FluxCD for GitOps.
+- Use Istio or Linkerd for service meshes.
+- Use Karmada, OpenShift Cluster Manager (OCM), or Clusternet for cluster federation.
+- Use Elasticsearch or Loki for log management.
+- Use KubeEdge, OpenYurt, or SuperEdge for edge computing.
+- Use different solutions for storage and networking.
 
 For business requirements in a specific scenario, KubeSphere tends to select a solution for implementation. However, you may require the implementation of another solution.
 
 When you use KubeSphere, you may encounter the following issues:
 
-- After your application gets released on KubeSphere, the application management page cannot be integrated into the KubeSphere console.通常需要用户自己给应用的 Service 配置好 Nodeport 或者 LB 之后，才能在一个新的窗口打开应用自己的界面，无法统一地在 KubeSphere 中管理自己的应用；
-- 因无法融入 KubeSphere 控制台，用户的应用也就无法利用 KubeSphere 提供的认证鉴权、多租户管理等平台级的能力，安全性上大打折扣；
-- 用户的需求通常多种多样，不同用户对同一功能的需求差异很大甚至互相冲突，原有的架构因耦合式的组件集成方式无法满足用户千人千面的需求；
-- If you want to create pull requests to meet specific requirements, you must be familiar with the development workflows of KubeSphere.因涉及到前后端开发调试、安装部署与配置等一系列问题，门槛较高；
-- 此外，提了 PR 后得等 KubeSphere 发布新版本才能用；
-- 由于发版周期长导致大量的用户会基于 KubeSphere 定制化自己的需求，会渐进脱离社区，违背了开源社区 upstream first 的理念，长期来说，无法享受到上游越来越多的能力；
+- After your application gets released on KubeSphere, the application management page cannot be integrated into the KubeSphere console. In this case, you need to configure a NodePort or LoadBalancer service for your application and open the application management page in a new window. This indicates that you cannot manage your application in a centralized manner.
+- If the application management page cannot be integrated into the KubeSphere console, platform-level security features provided by KubeSphere such as authorization and authentication and multi-tenancy will not be available for your application.
+- User requirements are diverse, and the requirements for the same feature may also be different or even conflicting. The legacy architecture cannot meet the requirements of thousands of users because each component is tightly coupled with each other.
+- If you want to create pull requests to meet specific requirements, you must be familiar with the development workflows of KubeSphere. This involves frontend and backend testing and debugging, installation, deployment, and configuration, which puts high requirements on users' technical expertise.
+- The changes you have made in pull requests can be applied only after a next version gets released.
+- Due to the long release cycle, a large number of users will customize their own needs on top of KubeSphere and then gradually leave the community. This goes against the Upstream First policy. In the long run, users cannot enjoy the capabilities of the upstream community.
 
-## KubeSphere 4.0 扩展机制简介
+## Overview
 
-为了解决上述各种问题，KubeSphere 将在 4.0 将采用全新的微内核架构（代号 LuBan）：
+To resolve the preceding issues, KubeSphere 4.0 introduces a next-generation micro-kernel architecture named LuBan:
 
-- 借助 LuBan 可以实现前后端功能的动态扩展；
-- KubeSphere 的核心组件精简为 ks-core，从而使得 KubeSphere 的默认安装可以非常轻量；
-- KubeSphere 目前已有的众多组件都会被拆分为单独的 KubeSphere 扩展组件，这些扩展组件可单独迭代，用户可以自己选择安装哪些扩展组件来打造自己的 KubeSphere 容器管理平台；
-- 用户可以通过相对简单的扩展组件开发指南，开发自己的扩展组件扩展 KubeSphere 的功能；
-- 通过 KubeSphere Extension 扩展组件管理平台统一管理各扩展组件；
-- The KubeSphere extension center will be introduced to enrich the KubeSphere extension ecosystem.用户可以将自己开发的扩展组件上架 KubeSphere Extension Store 供其他用户使用甚至获利；
+- KubeSphere LuBan extends the functionality of frontend and backend extensions.
+- The critical components of KubeSphere are encapsulated into ks-core. This way, you can install KubeSphere in lightweight mode.
+- Various existing components of KubeSphere will be decoupled into separate extensions, and each extension can be iterated independently. You can choose which extensions to install and customize the KubeSphere console.
+- You can develop extensions to extend the functionality of KubeSphere based on this guide.
+- You can manage extensions in the unified KubeSphere extension management platform.
+- The KubeSphere extension center will be introduced to enrich the KubeSphere extension ecosystem. You can roll out self-developed extensions on KubeSphere for other users to use and even make profits.
 
-## KubeSphere LuBan 架构的的优势
+## Benefits
 
-KubeSphere LuBan 架构的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
+The extension mechanism of KubeSphere LuBan  can benefit KubeSphere maintainers, contributors, users, independent software vendors (ISVs), and other open source projects.
 
-- 对于 KubeSphere 维护者来说，KubeSphere LuBan 带来的扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 ks-core 更加轻量，版本发布节奏也可以加快。对于其他功能来说，因为采用了扩展组件来实现，可使得这些组件能够独立进行迭代，更及时的满足用户的需求；
-- 对于 KubeSphere·贡献者来说，因为扩展机制的引入使得 ks-core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手；
-- 对于云原生应用开发商（ISV）或其他开源项目来说，KubeSphere LuBan 的扩展机制使得众多 ISV 或其他开源项目可以用很小的代价就可以把产品或开源项目无缝融入到 KubeSphere 体系中来。比如 Karmada/KubeEdge 的开发人员可以基于这套扩展机制基于 KubeSphere 开发 Karmada/KubeEdge 自己的控制台；
-- For KubeSphere users, you can determine whether to enable an extension based on your business requirements. You can also integrate your application into the KubeSphere console.此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere Extension Store 中自由选择更丰富的产品和服务，最终达到容器管理平台的千人千面的效果；
+- For KubeSphere maintainers, the extension mechanism allows you to focus more on the development of KubeSphere critical features, and can make ks-core more lightweight. This accelerates the release cycles. For other features, the extension mechanism allows you to develop components independently to meet your business needs in a more timely manner.
+- For KubeSphere contributors, the extension mechanism makes ks-core and other KubeSphere components loosely coupled, so that you can get started with development at ease.
+- For ISVs, the extension mechanism allows you to integrate services or other open source projects into KubeSphere at a low cost. For example, Karmada or KubeEdge developers can customize the KubeSphere console based on this extension mechanism.
+- For KubeSphere users, you can determine whether to enable an extension based on your business requirements. You can also integrate your application into the KubeSphere console. As the extensions go diversified, we can offer users a wider range of services to choose from, helping them build a container platform tailored for custom requirements.
