@@ -115,22 +115,22 @@ The following content describes how to configure parameters for custom permissio
 
       * `labels`: the labels for the custom permission.
 
-        * `iam.kubesphere.io/role-template`：自定义权限是否在 KubeSphere 前端界面显示，一般设置为 `"true"` 即自定义权限在前端界面显示。
+        * `iam.kubesphere.io/role-template`: whether to display the custom permission at the KubeSphere frontend. Value `true` indicates that the custom permission appears at the KubeSphere frontend.
 
-      * `annotations`：自定义权限的注解。
+      * `annotations`: the annotations of the custom permission.
 
-        * `iam.kubesphere.io/module`：自定义权限所属的权限分组。
+        * `iam.kubesphere.io/module`: the group to which the custom permission belongs.
 
-        * `iam.kubesphere.io/role-template-rules`：自定义权限向用户授权的资源类型和操作，例如 `'{"custom-resource": "create"}'` 表示授权用户创建 `custom-resource` 类型的资源。此参数仅供 KubeSphere 前端获取权限内容，并不对权限内容进行实际定义。例如，KubeSphere 前端可根据此参数返回的值判断是否对特定用户显示扩展组件。权限内容实际由 `spec:role:rules` 参数定义。此参数值必须与 `spec:role:rules` 参数设置匹配以避免前端判断逻辑错误。
+        * `iam.kubesphere.io/role-template-rules`: the resource types and operations granted by the custom permission. For example, `'{"custom-resource": "create"}'</ 0> indicates the permission to create resources of the <code>custom-resource` type. This parameter is only for the KubeSphere frontend to obtain the permission content, and does not define the permission. For example, the KubeSphere frontend can determine whether to display extensions for a specific user based on the value returned by this parameter. Permissions are defined by `spec:role:rules`. This parameter value must match the `spec:role:rules` parameter setting to prevent frontend logic errors.
 
-        * `kubesphere.io/alias-name`：自定义权限在 KubeSphere 前端显示的名称。
+        * `kubesphere.io/alias-name`: the name of the custom permission displayed on the front end of KubeSphere.
 
-        * `iam.kubesphere.io/dependencies`：当前自定义权限依赖的其他权限的资源名称。
+        * `iam.kubesphere.io/dependencies`: the resource name of other permissions that the custom permission depends on.
 
-      * `rules`：自定义权限向用户授权的资源和操作。此参数为自定义权限内容的实际定义，区别于 `iam.kubesphere.io/role-template-rules` 参数。
+      * `rules`: the resources and operations allowed by the custom permission. This parameter defines the custom permission content, which is different from `iam.kubesphere.io/role-template-rules`.
 
-        * `apiGroups`：向用户授权的资源类型所属的 API 组。取值 `'*'` 表示当前权限级别的所有 API 组。
+        * `apiGroups`: the API group to which the resource type belongs. Value `*` indicates all API groups.
 
-        * `resources`：向用户授权的资源类型，可以为 CRD（例如本节示例中的 `custom-resource`）或 Kubernetes 默认资源类型（例如 `deployment`）。取值 `'*'` 表示当前权限级别的所有资源类型。
+        * `resources`: the resource type authorized to the user, which can be CRD (such as `custom-resource` in the example) or Kubernetes default resource type (such as `deployment</ 0>). Value <code>*` indicates all resource types.
 
-        * `verbs`：向用户授权的操作。取值 `'*'` 当前权限级别的所有操作。有关资源操作类型的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/docs/reference/access-authn-authz/authorization/)。
+        * `verbs`: the operations authorized to the user. Value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
