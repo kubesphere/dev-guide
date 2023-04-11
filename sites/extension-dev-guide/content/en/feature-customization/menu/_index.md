@@ -81,22 +81,22 @@ const menu = {
       <td>The identifier of the extension on the menu.</td>
     </tr>
     <tr>
-      <td>link</td><td>The link to the extension. 目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
+      <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>.</td>
     </tr>
     <tr>
-      <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>
+      <td>title</td><td>The extension name displayed on the menu. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, see <a href="../internationalization">Internationalization</a>.</td>
     </tr>
     <tr>
-      <td>icon</td><td>扩展组件在菜单上显示的图标的名称。</td>
+      <td>icon</td><td>The icon name of the extension displayed on the menu. </td>
     </tr>
     <tr>
-      <td>order</td><td>扩展组件在菜单上的排列位次，取值为 <code>0</code> 或正整数，取值 <code>0</code> 表示扩展组件在菜单首位。</td>
+      <td>order</td><td>The sequence of the extension on the menu. Valid values: <code>0</code> or a positive integer. Value <code>0</code> indicates that the extension is at the top of the menu.</td>
     </tr>
     <tr>
-      <td>desc</td><td>扩展组件在菜单上显示的描述文字，目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>toolbox</code> 时有效。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>
+      <td>desc</td><td>The description of the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, see <a href="../internationalization">Internationalization</a>.</td>
     </tr>
     <tr>
-      <td>skipAuth</td><td>是否跳过用户权限检查。有关更多信息，请参阅<a href="../access-control">访问控制</a>。</td>
+      <td>skipAuth</td><td>Whether to skip user permission check. For more information, see <a href="../access-control">Access control</a>.</td>
     </tr>
   </tbody>
 </table>
