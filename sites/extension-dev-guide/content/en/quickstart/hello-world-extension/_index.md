@@ -1,30 +1,30 @@
 ---
-title: 创建 Hello World 扩展组件
+title: Create a Hello World extension
 weight: 2
-description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程。
+description: Describes how to create a Hello World example to help you understand the development process of extensions.
 ---
 
-本章节介绍如何创建一个简单的 Hello World 扩展组件：在 KubeSphere Console 添加一个独立的功能页面。
+This section describes how to create a Hello World extension and add a separate page in the KubeSphere web console.
 
-帮助您快速了解：
+After reading this topic, you can get to know:
 
-* 如何初始化扩展组件开发项目。
+* how to initialize a project for extension development.
 
-* 如在本地运行 KubeSphere Console。
+* how to launch the KubeSphere web console in your local environment.
 
-* 如何对扩展组件进行调试。
+* how to debug an extension.
 
-KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
+KubeSphere adopts React for the development of frontend extensions. For more information, visit [React official website](https://reactjs.org).
 
-Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[示例与教程](../../examples)。
+This tutorial guides you through how to develop the frontend of the Hello World extension. For information about the complete tutorial, see [Examples](../../examples).
 
 ### Prerequisites
 
-您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
+A development environment is ready. For more information, see [Build a development environment](../../quickstart/prepare-development-environment/).
 
-### 初始化扩展组件开发项目
+### Initialize a project for extension development
 
-1. 执行以下命令初始化扩展组件开发项目：
+1. Initialize a project for extension development:
 
    ```bash
    mkdir -p ~/kubesphere-extensions
@@ -32,16 +32,16 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    yarn create ks-project ks-console --fast-mode
    ```
 
-   KubeSphere 扩展组件开发项目中包含了一个可以在本地运行 KubeSphere Console。
+   The project contains a KubeSphere web console that can run locally.
 
-2. 执行以下命令创建 Hello World 扩展组件：
+2. Create a Hello World extension:
 
    ```bash
    cd ks-console
    yarn create:ext
    ```
 
-   根据命令提示设置扩展组件的名称、显示名称、描述、作者和语言等基础信息，完成扩展组件创建。
+   Configure basic information, for example, the extension name, alias, description, author, and language.
 
    ```bash
    Extension Name hello-world
@@ -52,19 +52,19 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    Create extension [hello-world]? Yes
    ```
 
-   以上命令执行完成后将生成如下目录结构：
+   The following directory is generated:
 
    ```bash
    kubesphere-extensions          
-   └── ks-console                   # 扩展组件前端开发项目目录
+   └── ks-console                   # Project directory for the frontend extension
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
-       │   └── local_config.yaml    # KubeSphere Console 配置文件
-       ├── extensions               # 扩展组件源代码目录
+       │   └── local_config.yaml    # Configuration file of the KubeSphere web console
+       ├── extensions               # Source code directory for the frontend extension
        │   ├── entry.ts
-       │   └── hello-world          # Hello World 扩展组件的源代码目录
+       │   └── hello-world          # Source code directory for the Hello World extension
        │       ├── Dockerfile
        │       ├── README.md
        │       ├── package.json
@@ -80,9 +80,9 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    ```
 
 
-### 配置 KubeSphere Console
+### Configure the KubeSphere web console
 
-为使 KubeSphere Console 可以在本地运行，你需要先[搭建开发环境](../prepare-development-environment/)，获取KubeSphere API Server 的访问地址，并在 `local_config.yaml` 文件中进行配置。
+To make the KubeSphere web console run locally, you need to [build a development environment](../prepare-development-environment/), obtain the address of the KubeSphere API server, and then configure the `local_config .yaml` file.
 
 ```yaml
 server:
@@ -92,25 +92,25 @@ server:
 ```
 
 
-### 本地运行 KubeSphere Console 加载扩展组件
+### Launch the KubeSphere web console in your local environment
 
-1. 执行以下命令运行 KubeSphere Console：
+1. Launch the KubeSphere web console in your local environment:
 
    ```bash
    yarn dev
    ```
 
-2. 打开浏览器，访问 `http://localhost:8000`，并使用默认用户名 `admin` 和密码 `P@88w0rd` 登录 KubeSphere Console。
+2. Open a browser, visit `http://localhost:880` and use default username `admin` and password `P@88w0` to log in to the KubeSphere web console.
 
-   页面顶部导航栏将出现 `Hello World` 扩展组件的访问入口，点击 `Hello World` 将打开 Hello World 扩展组件的页面。
+   The access point to `Hello World` appears on the top navigation bar. Click `Hello World` to open the page.
 
    ![demo-plugin-dashboard.png](./hello-world-extension-dashboard.png?width=1080px)
 
-### 调试扩展组件
+### Debug the extension
 
-Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/frontend/extensions/hello-world` 目录中。
+The source code of the Hello World extension is stored in `~/kubesphere-extensions/frontend/extensions/hello-world`.
 
-您可以将页面显示的字符串修改为 `Test!`，如下图所示：
+You can change the string displayed on the page to `Test!`, as shown in the following figure:
 
 ![coding.png](./coding.png?width=1080px)
 
