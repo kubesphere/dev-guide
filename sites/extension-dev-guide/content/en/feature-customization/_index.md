@@ -1,9 +1,9 @@
 ---
-title: 功能定制
+title: Custom features
 weight: 5
-description: "KubeSphere 提供了非常多的定制方法，供扩展组件扩展 KubeSphere 本身的能力"
+description: "KubeSphere provides various methods for custom extensions to extend its capabilities."
 ---
 
-KubeSphere 提供了非常多且灵活的定制方法，供扩展组件扩展 KubeSphere 本身的能力。
+KubeSphere provides various methods for custom extensions to extend its capabilities.
 
 {{%children description="true" %}}
