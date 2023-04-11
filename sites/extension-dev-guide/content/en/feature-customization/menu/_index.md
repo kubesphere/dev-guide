@@ -78,10 +78,10 @@ const menu = {
     </tr>
     <tr>
       <td>name</td>
-      <td>扩展组件在菜单上的位置标识。</td>
+      <td>The identifier of the extension on the menu.</td>
     </tr>
     <tr>
-      <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
+      <td>link</td><td>The link to the extension. 目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
     </tr>
     <tr>
       <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>
