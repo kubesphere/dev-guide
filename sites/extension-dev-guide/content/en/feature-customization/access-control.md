@@ -1,18 +1,18 @@
 ---
 title: Access Control
 weight: 3
-description: 介绍如何控制扩展组件定制资源的访问权限。
+description: Describes how to enable access control for custom extension resources.
 ---
 
-本章节介绍如何控制扩展组件定制资源的访问权限。
+This section describes how to enable access control for custom extension resources.
 
-您可以在扩展组件中[使用定制资源定义（CRD）创建定制资源（CR）](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，并使用本节介绍的 `RoleTemplate` 资源类型创建自定义权限。在 KubeSphere Console，您可以使用自定义的权限创建角色并将角色授权给用户，从而只允许具有特定角色的用户访问扩展组件定制资源。
+You can [use a custom resource definition (CRD) to create a custom resource (CR)](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/) in an extension, and use the `RoleTemplate` resource type introduced in this section to customize access control. In the KubeSphere web console, you can customize access control to create roles and grant roles to users, so that only users with specific roles are allowed to access custom resources of extensions.
 
-`RoleTemplate` 是由 KubeSphere 提供的 CRD， 基于 Kubernetes 原生的 RBAC 鉴权机制实现。有关 Kubernetes RBAC 鉴权机制的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example)。
+`RoleTemplate` is a CRD provided by KubeSphere, built on top of Kubernetes-native role-based access control (RBAC) authentication mechanism. For more information about the Kubernetes RBAC authentication mechanism, see [Kubernetes official documentation](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example).
 
-## RoleTemplate 示例
+## RoleTemate examples
 
-假设扩展组件中定义了 CRD `custom-resource`。以下 YAML 文件创建了 `role-template-custom-resource-viewing` 和 `role-template-custom-resource-creation` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `role-template-custom-resource-creation` 依赖于 `role-template-custom-resource-viewing`。
+Assume that CRD `custom-resource` is defined in the extension. The following YAML file creates two custom permissions, `role-template-custom-resource-viewing` and `role-template-custom-resource-creation`, which authorize users to view and create resources of the `custom-resource` type. The permission `role-template-custom-resource-creation` is on top of `role-template-custom-resource-viewing`.
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1alpha2
@@ -71,49 +71,49 @@ spec:
           - create
 ```
 
-### RoleTemplate 参数说明
+### Parameters
 
-以下介绍如何设置自定义权限的参数。
+The following content describes how to configure parameters for custom permissions.
 
-* `apiVersion`：KubeSphere 访问控制 API 的版本。当前版本为 `iam.kubesphere.io/v1alpha2`。
+* `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1alpha2`.
 
-* `kind`：自定义权限的资源类型。请将参数值设置为 `RoleTemplate`。
+* `kind`: the resource type of the custom permission. Set the value to `RoleTemplate`.
 
-* `metadata`：自定义权限的元数据。
+* `metadata`: the metadata for the custom permission.
 
-  * `name`：自定义权限的资源名称。
+  * `name`: the resource name of the custom permission.
 
-  * `labels`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限，并通过以下标签识别自定义权限的级别：
+  * `labels`: the labels for the custom permission. KubeSphere provides permissions at different levels: platform, cluster, workspace, and project. It identifies the level of custom permissions based on the following labels:
 
-    * `scope.kubesphere.io/global`：平台权限。
+    * `scope.kubesphere.io/global`: platform-level.
 
-    * `scope.kubesphere.io/cluster`：集群权限。
+    * `scope.kubesphere.io/cluster`: cluster-level.
 
-    * `scope.kubesphere.io/workspace`：企业空间权限。
+    * `scope.kubesphere.io/workspace`: workspace-level.
 
-    * `scope.kubesphere.io/project`：项目权限。
+    * `scope.kubesphere.io/project`: project-level.
 
 * `spec`
 
   * `role`
 
-    * `apiVerion`：KubeSphere 访问控制 API 的版本。当前版本为 `iam.kubesphere.io/v1alpha2`。
+    * `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1alpha2`.
 
-    * `kind`：自定义权限的级别，参数值必须与 `metadata:labels` 参数的设置匹配，取值可以为：
+    * `kind`: the level of the custom permission. The parameter value must match the setting of the `metadata:labels` parameter. Valid values:
 
-      * `GlobalRole`：平台权限。
+      * `GlobalRole`: platform-level.
 
-      * `ClusterRole`：集群权限。
+      * `ClusterRole`: cluster-level.
 
-      * `WorkspaceRole`：企业空间权限。
+      * `WorkspaceRole`: workspace-level.
 
-      * `ProjectRole`：项目权限。
+      * `ProjectRole`: project-level.
 
     * `metadata`
 
-      * `name`：自定义权限的名称，参数值必须与 `metadata:name` 参数相同。
+      * `name`: the name of the custom permission. The parameter value must match the setting of the `metadata:name` parameter.
 
-      * `labels`：自定义权限的资源标签。
+      * `labels`: the labels for the custom permission.
 
         * `iam.kubesphere.io/role-template`：自定义权限是否在 KubeSphere 前端界面显示，一般设置为 `"true"` 即自定义权限在前端界面显示。
 
