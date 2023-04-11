@@ -1,5 +1,5 @@
 ---
-title: 打包扩展组件
+title: Package extensions
 weight: 1
 description: "在测试与发布之前首先您需要将扩展组件进行打包"
 ---
