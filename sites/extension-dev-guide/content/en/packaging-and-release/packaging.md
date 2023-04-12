@@ -168,7 +168,7 @@ cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-
 
 The Grafana extension consists of the following parts:
 1. Deployment file: grafana-ext/charts/backend/templates/grafana.yaml
-1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
+1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml. For code logic, see [Integrate third-party systems](../../examples/third-party-component-integration-example#前端扩展组件开发).
 1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
 
 ```yaml
@@ -190,14 +190,14 @@ status:
   state: Available
 ```
 
-grafana 扩展组件编排完成后，上架扩展组件
+After the Grafana extension is compiled, release the extension:
 
 ```shell
 cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问http://localhost:30880/proxy/grafana/login
+Test the features: http://localhost:30880/proxy/grafana/login
 
 
 
