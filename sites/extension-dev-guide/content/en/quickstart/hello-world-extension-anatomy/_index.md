@@ -1,7 +1,7 @@
 ---
-title: Deep dive into Hello World
+title: Anatomy of a Hello World extension
 weight: 3
-description: Describes how the Hello World extension works.
+description: Describes how a Hello World extension works.
 ---
 
 在上一个章节中，您已经可以在本地运行 KubeSphere Console 并正确加载扩展组件，下面我们来看看它是如何工作的。
