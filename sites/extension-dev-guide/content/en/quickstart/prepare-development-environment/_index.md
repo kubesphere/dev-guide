@@ -59,10 +59,10 @@ Install development tools on the development host
    {{% /tab %}}
 {{% tab name="Run containers" %}}
 
-您可以在容器中运行扩展组件开发所需的开发工具，执行以下命令为开发工具命令设置别名：
+You can run the development tools required for extension development in containers, and execute the following command to set an alias for the development tools:
 
 ```bash
-# 创建本地缓存与配置文件目录
+# Create a local cache and configuration file directory
 mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc
 alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v4.0.0-alpha.1 yarn'
 ```
@@ -79,7 +79,7 @@ alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kube/config:/tmp
    {{% /tab %}}
    {{< /tabs >}}
 
-2. 复制 K8s 集群的 [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 配置文件到开发主机上，确保使用 kubectl 可以正常访问到 K8s 集群。
+2. Copy the [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) configuration file of the Kubernetes cluster to the development host to ensure that the cluster can be accessed by using kubectl.
 
 
    ```bash
