@@ -1,20 +1,20 @@
 ---
-title: Anatomy of a Hello World extension
+title: How the Hello World extension works
 weight: 3
-description: Describes how a Hello World extension works.
+description: Describes how the Hello World extension works.
 ---
 
-在上一个章节中，您已经可以在本地运行 KubeSphere Console 并正确加载扩展组件，下面我们来看看它是如何工作的。
+In the previous section, the KubeSphere web console runs locally and the extension is loaded properly. This topic describes how the extension works.
 
-Hello World 扩展组件做了 3 件事情：
+The Hello World extension provides the following features:
 
-1. 在顶部导航栏注册菜单按钮，便于快速访问扩展组件的页面。
-2. 添加独立的页面路由，当用户访问 `http://localhost:8000/hello-world` 路径时可以正确的渲染扩展组件页面。
-3. 实现扩展组件页面。
+1. Register a menu button on the top navigation bar for quick access to the pages of the extension.
+2. Add an independent page route. When a user visits `http://localhost:8000/hello-world`, an extension page can be rendered correctly.
+3. Implement the extension pages.
 
-这三个步骤对于开发 KubeSphere 扩展组件来说至关重要，我们再仔细看看 Hello World 扩展组件的文件结构和源代码，进一步了解这些功能是如何实现的。
+These three features are crucial for developing a KubeSphere extension. Let's take a closer look at the file structure and source code of the Hello World extension to learn more about how these features are implemented.
 
-**扩展组件的目录结构**
+**Directory for the extension**
 
 ```bash
 $ tree extensions/hello-world 
@@ -37,9 +37,9 @@ extensions/hello-world
         └── index.js
 ```
 
-### 定义扩展组件的基础信息
+### Configure basic information for the extension
 
-`package.json` 文件中包含了扩展组件的基础信息与 `Node.js` 元数据。
+The `package.json` file contains the basic information about the extension and `Node.js` metadata.
 
 ```json
 {
@@ -56,9 +56,9 @@ extensions/hello-world
 }
 ```
 
-### 扩展组件功能点
+### Features
 
-通过 `src/index.js` 向 ks-console 注册[导航栏](../../feature-customization/menu/)按钮、[多语言](../../feature-customization/internationalization/)等配置信息。
+Use `src/index.js` to register [navigation bars](../../feature-customization/menu/) and [internationalization modules](../../feature-customization/internationalization/) to ks-console.
 
 ```js
 import routes from './routes';
@@ -83,7 +83,7 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);
 ```
 
-通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件中的功能页面。
+Use `src/routes/index.js` to register [page routes](../../feature-customization/route) to ks-console, and extension pages can be rendered correctly when you access the pages.
 
 ```js
 import React from 'react';
@@ -98,9 +98,9 @@ export default [
 
 ```
 
-### 扩展组件功能实现
+### Implementation
 
-`src/App.jsx` 实现了具体的功能，展示 `Hello World!` 字样。
+`src/App.jsx` implements specific features and displays `Hello World!`.
 
 ```jsx
 import React from 'react';
@@ -118,15 +118,15 @@ export default function App() {
 
 ### Learn More
 
-在这个快速入门中，我们学习了如何在本地创建、运行和调试一个简单扩展组件的前端部分。一个完整的、具备实际业务能力的扩展组件应包含前后端，甚至需要通过 API 与外部系统或工具进行集成；同时，还需要将扩展组件打包和部署。也可以发布到扩展组件中心，与他人分享您开发的扩展组件。下面是一些建议的学习路线来进一步提高您开发 KubeSphere 扩展组件的技能：
+In this quickstart, you get to know how to create, run, and debug the frontend of a simple extension. A complete extension should include frontend and backend capabilities, and even need to integrate with external systems or tools through APIs. At the same time, the extension also needs to be packaged and deployed. You can also publish to the Extension Center to share the extension with others. Here are some suggested learning paths to further improve your skills in developing KubeSphere extensions:
 
-[系统架构](../../architecture) 该章节帮助大家深入了解 KubeSphere LuBan 基于扩展机制的系统架构。
+[System architecture](../../architecture) This section describes the system architecture of KubeSphere LuBan and its extension mechanism.
 
-[扩展组件定制](../../feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
+[Custom features](../../feature-customization) In this section, we divide the KubeSphere API and extensions into several categories according to their functionality, and each category has a short description about what features your extension can achieve. You can learn about KubeSphere's extensibility capabilities by looking at the KubeSphere API.
 
-[示例与教程](../../examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
+[Examples](../../examples) This section describes a large number of examples or video tutorials, including some guides to interpreting the source code in detail. You can find all samples and guides in [extension-samples](https://github.com/kubesphere/extension-samples).
 
-[打包发布](../../packaging-and-release) 该章节介绍如何利用工具 ksbuilder 打包扩展组件并进行测试，最后如何将其发布到扩展组件中心。
+[Package and release](../../packaging-and-release) This section describes how to use the tool ksbuilder to package and test extensions, and how to release them to the Extension Center.
 
-[最佳实践](../../best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
+[Best practices](../../best-practices) This section introduces a number of best practices for creating extension UIs to help your extensions fit seamlessly into the KubeSphere web console.
 
