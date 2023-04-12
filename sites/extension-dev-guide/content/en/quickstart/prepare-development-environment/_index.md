@@ -1,20 +1,20 @@
 ---
-title: 搭建开发环境
+title: Build a development environment
 weight: 1
-description: 介绍如何搭建扩展组件开发环境。
+description: Describes how to build a development environment for extensions.
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
+This section describes how to build a development environment for extensions. Before you start, make sure KubeSphere Core and related development tools are installed.
 
-* KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
+* KubeSphere Core: the minimal core component of KubeSphere, which provides a basic runtime for extension development.
 
-* 开发工具：您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。 开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。
-
-
-## 安装 KubeSphere Core
+* Development tools: On your server, you need to install development tools such as create-ks-project and ksbuilder, and third-party tools such as Node.js, Helm, and kubectl. These tools are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions.
 
 
-1. 登录到 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere Core：
+## Install KubeSphere Core
+
+
+1. Log in to a server on which Kubernetes is installed, and run the following commands to install KubeSphere Core by using `Helm`:
 
    ```
    helm repo add test https://charts.kubesphere.io/test
@@ -22,7 +22,7 @@ description: 介绍如何搭建扩展组件开发环境。
    helm install -n kubesphere-system --create-namespace ks-core test/ks-core --set apiserver.nodePort=30881
    ```
 
-   {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群" %}}
+   {{%expand "If you don't have a Kubernetes cluster available, you can expand the current content and quickly create a cluster in the following way" %}}
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
@@ -32,16 +32,16 @@ description: 介绍如何搭建扩展组件开发环境。
    {{% /expand%}}
 
 
-2. 执行以下命令检查 Pod 状态，当 Pod 状态都为 `Running` 时，您可以通过 NodePort (IP:30880) 使用默认帐户和密码 (admin/P@88w0rd) 访问 KubeSphere Console，还可以通过 NodePort (IP:30881) 访问 KubeSphere API Server。
+2. Run the following command to check the pod status. When the pod status is `Running`, you can use the default account and password (admin/P@88w0rd) to access the KubeSphere web console through NodePort (IP:30880). You can also access KubeSphere API Server through NodePort (IP:30881).
 
    ```
    kubectl get pod -n kubesphere-system
    ```
 
-   如果 Pod 无法正常运行，您无法定位问题，欢迎[提交 issue](https://github.com/kubesphere/kubesphere/issues) 或[论坛发帖](https://kubesphere.io/forum/)进行反馈，我们很乐意协助您！
+   If the pod is not running properly and you cannot locate the problem, [submit an issue](https://github.com/kubesphere/kubesphere/issues) or [post the issue in the forum](https://kubesphere. io/forum/).
 
 
-## 安装开发工具
+## Install development tools
 
 1. 您可以自行安装相关的开发工具，或者使用 KubeSphere 团队提供的工具容器快速体验。
 
