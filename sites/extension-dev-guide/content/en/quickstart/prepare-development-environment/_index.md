@@ -43,21 +43,21 @@ This section describes how to build a development environment for extensions. Be
 
 ## Install development tools
 
-1. 您可以自行安装相关的开发工具，或者使用 KubeSphere 团队提供的工具容器快速体验。
+1. You can install development tools on your own, or quickly get started with the tool provided by KubeSphere.
 
    {{< tabs >}}
-   {{% tab name="安装二进制文件" %}}
+   {{% tab name="Install binary files" %}}
 
-执行以下步骤在开发主机上安装开发工具：
+Install development tools on the development host
 
-1. 安装 [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ 和 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+。
+1. Install [Node.js](https://nodejs.org/en/download/package-manager) v16.17 or later and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22 or later.
 
-2. 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+ 和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
+2. Install [Helm](https://helm.sh/docs/intro/install/) v3.8 or later and [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23 or later.
 
-2. 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到 `/usr/local/bin` 目录。
+2. Download [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) to `/usr/local/bin`.
 
    {{% /tab %}}
-{{% tab name="使用容器" %}}
+{{% tab name="Run containers" %}}
 
 您可以在容器中运行扩展组件开发所需的开发工具，执行以下命令为开发工具命令设置别名：
 
