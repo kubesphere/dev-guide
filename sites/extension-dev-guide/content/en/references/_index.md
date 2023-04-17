@@ -1,7 +1,7 @@
 ---
 title: "References"
 weight: 9
-description: "CLI工具、API参考资料"
+description: "CLI and API reference"
 ---
 
 {{%children description="true" %}}
