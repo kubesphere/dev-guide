@@ -27,7 +27,7 @@ func main() {
 	f.WriteString(`---
 title: ksbuilder CLI reference
 weight: 01
-description:  ksbuilder 扩展组件打包、发布工具
+description:  ksbuilder
 ---
 
 {{< table_of_contents >}}
@@ -67,7 +67,7 @@ func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 	buf.WriteString("## " + name + "\n\n")
 	buf.WriteString(cmd.Short + "\n\n")
 	if len(cmd.Long) > 0 {
-		buf.WriteString("### 简介\n\n")
+		buf.WriteString("### overview\n\n")
 		buf.WriteString(cmd.Long + "\n\n")
 	}
 
@@ -76,7 +76,7 @@ func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string)
 	}
 
 	if len(cmd.Example) > 0 {
-		buf.WriteString("### 示例\n\n")
+		buf.WriteString("### example\n\n")
 		buf.WriteString(fmt.Sprintf("```\n%s\n```\n\n", cmd.Example))
 	}
 
@@ -91,7 +91,7 @@ func printOptions(buf *bytes.Buffer, cmd *cobra.Command, name string) error {
 	flags := cmd.NonInheritedFlags()
 	flags.SetOutput(buf)
 	if flags.HasAvailableFlags() {
-		buf.WriteString("### 可选项\n\n```\n")
+		buf.WriteString("### option\n\n```\n")
 		flags.PrintDefaults()
 		buf.WriteString("```\n\n")
 	}
@@ -99,7 +99,7 @@ func printOptions(buf *bytes.Buffer, cmd *cobra.Command, name string) error {
 	parentFlags := cmd.InheritedFlags()
 	parentFlags.SetOutput(buf)
 	if parentFlags.HasAvailableFlags() {
-		buf.WriteString("### 从父命令继承的可选项\n\n```\n")
+		buf.WriteString("### option inherited from the parent\n\n```\n")
 		parentFlags.PrintDefaults()
 		buf.WriteString("```\n\n")
 	}
