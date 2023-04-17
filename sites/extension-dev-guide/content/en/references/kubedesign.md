@@ -1,9 +1,9 @@
 ---
-title: KubeDesign
+title: Kube Design
 weight: 2
-description: KubeDesign 前端 UI 组件库
+description: Kube Design
 ---
 
-Kube Design 是一套为 KubeSphere 控制台创建的 React 组件库。
+Kube Design is a set of React component libraries created for the KubeSphere console.
 
-在[这里](https://design.kubesphere.io/)可以找到它们的示例及相应的代码。
+To obtain more information, click [here](https://design.kubesphere.io/).
