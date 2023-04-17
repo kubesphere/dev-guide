@@ -1,24 +1,24 @@
 ---
 title: create-ks-project CLI reference
 weight: 3
-description: 介绍 KubeSphere 前端开发脚手架工具
+description: Describes the frontend scaffolding tool of KubeSphere.
 ---
 
 ## create-ks-project
 
-KubeSphere 前端开发脚手架工具，执行后将会在指定目录下创建一个前端脚手架文件夹并且安装相应前端依赖。
+The frontend scaffolding tool of KubeSphere can help you create a directory for frontend scaffolding and install the corresponding frontend dependencies.
 
-使用方式：
+How to use:
 
 ```text
 yarn create ks-project [project-name]
 ```
 
-可选参数：
+Options
 
 ```text
-  -V, --version    打印版本号
-  -f, --fast-mode  直接使用打包好的依赖压缩包进行安装
+  -V, --version    Print the version number
+  -f, --fast-mode  Use the packaged dependencies to install
 
-  -h, --help       打印帮助信息
+  -h, --help       Print help information
 ```
