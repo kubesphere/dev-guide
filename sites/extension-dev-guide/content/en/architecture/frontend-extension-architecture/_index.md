@@ -54,7 +54,7 @@ The extensions can be divided into the following types: `in-tree extensions` and
 
 * `Out-of-tree extensions` are extensions developed by developers in their own repos, which can be compiled and packaged independently. These extensions can be rolled out on `Extension Center`. If a user installs an extension, the Core module will load the `JavaScript bundle` of the extension and authorize and authenticate the extension.
 
-`Out-of-Tree 扩展组件`的前端部分统一使用 [create-ks-project](https://github.com/kubesphere/create-ks-project) 脚手架工具初始化。The directory after initialization is as follows:
+The frontend components of `out-of-tree extensions` use [create-ks-ext](https://github.com/kubesphere/create-ks-project) for initialization. The directory after initialization is as follows:
 
 ```bash
 .
