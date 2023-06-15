@@ -40,19 +40,18 @@ ksbuilder create [flags]
 
 ------
 
-## ksbuilder init
+## ksbuilder package
 
-Init a new KubeSphere extension project
+package an extension
 
 ```
-ksbuilder init [flags]
+ksbuilder package [flags]
 ```
 
 ### Options
 
 ```
-  -d, --directory string   directory
-  -h, --help               help for init
+  -h, --help   help for package
 ```
 
 ------
@@ -68,7 +67,8 @@ ksbuilder publish [flags]
 ### Options
 
 ```
-  -h, --help   help for publish
+  -h, --help                help for publish
+      --kubeconfig string   kubeconfig file path of the target cluster
 ```
 
 ------
