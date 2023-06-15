@@ -4,8 +4,7 @@ weight: 1
 description: "Describes how to package extensions before test and release."
 ---
 
-
-In [Examples](../../examples/), we have completed the development of the frontend and backend extensions. The frontend and backend source code is built into container images. Declarations such as the API service and JSBundle are ready. This topic describes how to package extensions with ksbuilder and Helm.
+在[开发示例](../../examples/)的章节中我们完成了前后端扩展组件开发，前后端源代码构建成容器镜像，准备好了 APIService、JSBundle 等扩展声明，接下来您可以参考本节内容借助 ksbuilder、Helm 打包您的扩展组件。
 
 For information about how to build installation packages, see [Develop an extension for employee management](../../examples/employee-management-extension-example).
 
@@ -13,28 +12,22 @@ For information about how to build installation packages, see [Develop an extens
 
 After the frontend and backend extensions are developed, we need to use `ksbuilder` to create an extension package directory, which can help us manage the frontend and backend extensions that need to be packaged.
 
-```shell
+```text
 $ cd kubesphere-extensions
 $ ksbuilder create
-Please input extension name:  employee
-Input: employee
-Please input extension description: this is employee extension
-Input: this is employee extension
-Other: app
-✔ Monitoring
-Input: Monitoring
-Please input extension author:  ks
-Input: ks
-Please input Email:  ks@kubesphere.io
-Input: ks@kubesphere.io
+Please input extension name: employee
+✔ Others
+Please input extension author: ks
+Please input Email (optional): ks@kubesphere.io
+Please input author's URL (optional): https://www.kubesphere.io
 Directory: ~/workspace/kubesphere-extensions/employee
 
 The extension charts has been created.
 ```
 
-If you see the preceding information, it indicates that the directory `employee` of the extension package is successfully created, which is similar to [ Helm Chart](https://helm.sh/zh/docs/topics/charts/) project directory (we use Helm Chart to organize our extensions). The directory structure is as follows:
+当看到上面提示信息时表示扩展组件包的目录 `employee` 创建成功，它类似于 [Helm Chart](https://helm.sh/zh/docs/topics/charts/) 工程目录（我们借助 Helm Chart 对我们的扩展组件进行编排），目录结构如下：
 
-```shell
+```text
 .
 ├── README.md
 ├── README_zh.md
@@ -71,34 +64,48 @@ If you see the preceding information, it indicates that the directory `employee`
 
 ```yaml
 apiVersion: v1
-name: employee # The name of the extension (required)
-version: 0.1.0 # The extension version that conforms to the semantic version specification (required)
-displayName:   # The name used when the extension is displayed (required). The language code must be based on ISO 639-1.
-  zh: 示例扩展组件 
+name: employee               # 扩展组件的名称（必填项）
+version: 0.1.0               # 扩展组件的版本，须符合语义化版本规范（必填项）
+displayName:                 # 扩展组件展示时使用的名称（必填项），Language Code 基于 ISO 639-1
+  zh: 示例扩展组件
   en: Sample Extension
-description:   # 扩展组件展示时使用的描述（必填项）
+description:                 # 扩展组件展示时使用的描述（必填项）
   zh: 这是一个示例扩展组件，这是它的描述
   en: This is a sample extension, and this is its description
-keywords:      # Keywords about the extension (optional)
-  - Performance
-home: https://kubesphere.io  # The URL of the project's home page (optional)
-sources:       # The list of URLs to source code (optional)
+keywords:                    # 关于扩展组件特性的一些关键字（可选项）
+  - Others
+home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
+sources:                     # 项目源码的 URL 列表（可选项）
   - https://github.com/kubesphere
-kubeVersion: ">=1.19.0" #  Compatible Kubernetes versions for the extension (optional)
-ksVersion: ">=3.0.0"    #  Compatible KubeSphere versions for the extension
-dependencies:           #  The Helm Chart that the extension depends on (optional)
+kubeVersion: ">=1.19.0"      # 扩展组件兼容的 Kubernetes 版本限制（可选项）
+ksVersion: ">=3.0.0"         # 扩展组件兼容的 KubeSphere 版本限制（可选项）
+vendor:                      # 扩展组件提供商（可选项）
+  name: "ks"
+  email: "ks@kubesphere.io"
+  url: "https://www.kubesphere.io"
+icon: ./favicon.svg          # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
   - name: frontend
     condition: frontend.enabled
   - name: backend
     condition: backend.enabled
-icon: ./favicon.svg     # The icon used when the extension is displayed, which can be specified as a local relative path (required)
+# external dependencies example
+#externalDependencies:       # 对其它扩展组件的依赖（可选项）
+#  - name: a
+#    type: extension
+#    version: ">= 2.6.0"
+#    required: true
+#  - name: b
+#    type: extension
+#    version: ">= 2.2.0"
+#    required: true
 ```
 
 `permissions.yaml` defines the resource authorization required for extension installation:
 
 ```yaml
-kind: ClusterRole  
-rules:  # If your extension needs to create and change resources at the cluster level, you need to edit this authorization rule
+kind: ClusterRole
+rules:  # 如果你的扩展组件需要创建、变更 Cluster 级别的资源，你需要编辑此授权规则
   - verbs:
       - 'create'
       - 'patch'
@@ -110,7 +117,7 @@ rules:  # If your extension needs to create and change resources at the cluster 
 
 ---
 kind: Role
-rules:  # If your extension needs to create and change resources at the namespace level, you need to edit this authorization rule
+rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资源，你需要编辑此授权规则
   - verbs:
       - '*'
     apiGroups:
@@ -139,9 +146,9 @@ Reference
 ### Package the employee management extension
 
 In [Develop an extension for employee management](../../examples/employee-management-extension-example), you have complete the development of the extension, and then you can package the extension based on the following steps:
-1. In `charts/backend` and `charts/frontend/`, modify the frontend and backend declaration of the extension.
-2. Modify [APIService](../../architecture/backend-extension-architecture/#apiservice) based on the description in [Register a backend extension](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver).
-3. Modify [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) based on the description in [Register a frontend extension](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver).
+1. 在 `charts/backend` 和 `charts/frontend` 修改员工管理扩展组件前后端服务部署资源声明
+2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../architecture/backend-extension-architecture/#apiservice) 声明
+3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 声明
 
 
 You can clone the employee management extension package from GitHub to view details:
@@ -151,7 +158,7 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-Then, you can release the extension to KubeSphere Extension Center to install and test. For more information, see [Test extensions](./testing).
+接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展组件商店中进行安装测试。
 
 ### Examples
 
@@ -197,8 +204,4 @@ cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-Test the features: http://localhost:30880/proxy/grafana/login
-
-
-
-
+在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问 http://localhost:30880/proxy/grafana/login
