@@ -55,8 +55,11 @@ The extension charts has been created.
 │       │       └── test-connection.yaml
 │       └── values.yaml
 ├── extension.yaml
-├── favicon.svg
 ├── permissions.yaml
+├── static
+│   ├── favicon.svg
+│   └── screenshots
+│       └── screenshot.png
 └── values.yaml
 ```
 
@@ -72,18 +75,31 @@ displayName:                 # 扩展组件展示时使用的名称（必填项�
 description:                 # 扩展组件展示时使用的描述（必填项）
   zh: 这是一个示例扩展组件，这是它的描述
   en: This is a sample extension, and this is its description
+category: devops             # 扩展组件的分类（必填项）
 keywords:                    # 关于扩展组件特性的一些关键字（可选项）
-  - Others
+  - others
 home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
 sources:                     # 项目源码的 URL 列表（可选项）
   - https://github.com/kubesphere
 kubeVersion: ">=1.19.0"      # 扩展组件兼容的 Kubernetes 版本限制（可选项）
 ksVersion: ">=3.0.0"         # 扩展组件兼容的 KubeSphere 版本限制（可选项）
-vendor:                      # 扩展组件提供商（可选项）
-  name: "ks"
-  email: "ks@kubesphere.io"
-  url: "https://www.kubesphere.io"
-icon: ./favicon.svg          # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+maintainers:                 # 扩展组件维护者（可选项）
+  - name: "ks"
+    email: "ks@kubesphere.io"
+    url: "https://www.kubesphere.io"
+provider:                    # 扩展组件提供商（必填项）
+  zh:
+    name: "青云科技"
+    email: "ks@kubesphere.io"
+    url: "https://www.qingcloud.com"
+  en:
+    name: "QingCloud"
+    email: "ks@kubesphere.io"
+    url: "https://www.qingcloud.com"
+staticFileDirectory: static  # 扩展组件静态文件存放目录，图标和 README 引用的静态文件等需存放到该目录（必填项）
+icon: ./static/favicon.svg   # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+screenshots:                 # 扩展组件截图（可选项）
+  - ./static/screenshots/screenshot.png
 dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
   - name: frontend
     condition: frontend.enabled
