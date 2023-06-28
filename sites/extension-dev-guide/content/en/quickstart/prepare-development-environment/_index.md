@@ -16,10 +16,9 @@ This section describes how to build a development environment for extensions. Be
 
 1. Log in to a server on which Kubernetes is installed, and run the following commands to install KubeSphere Core by using `Helm`:
 
-   ```
-   helm repo add test https://charts.kubesphere.io/test
-   helm repo update test
-   helm install -n kubesphere-system --create-namespace ks-core test/ks-core --set apiserver.nodePort=30881
+   ```bash
+   git clone https://github.com/kubesphere/helm-charts.git
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core ./helm-charts/src/test/ks-core --set apiserver.nodePort=30881 --set global.tag=ksc --set apiserver.image.pullPolicy=Always --set console.image.pullPolicy=Always  --set controller.image.pullPolicy=Always  --debug
    ```
 
    {{%expand "If you don't have a Kubernetes cluster available, you can expand the current content and quickly create a cluster in the following way" %}}
