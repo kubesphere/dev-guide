@@ -1,7 +1,7 @@
 ---
-title: KubeSphere API 概念
+title: KubeSphere APIs
 weight: 5
-description: KubeSphere API 概念
+description: KubeSphere APIs
 ---
 
 KubeSphere API 是 K8s API 的超集，沿用了 K8s API 的设计，通过 HTTP 提供了基于资源 (RESTful) 的编程接口。 它支持通过标准 HTTP 动词（POST、PUT、PATCH、DELETE、GET）检索、创建、更新和删除主要资源。
