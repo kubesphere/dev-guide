@@ -1,7 +1,7 @@
 ---
-title: API 扩展
+title: API Extension
 weight: 6
-description: 介绍如何扩展 API
+description: Describes how to extend the API
 ---
 
 TBD
