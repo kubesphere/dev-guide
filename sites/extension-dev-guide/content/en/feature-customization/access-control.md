@@ -14,9 +14,9 @@ For more information about the Kubernetes RBAC authentication mechanism, see [Ku
 
 In the Kubesphere user interface, users usually want to obtain other resources associated with the resource they get. So the permissions of a set of densely associated resources have been set in a RoleTemplate to meet user needs in the user interface.
 
-## RoleTemate examples
+## RoleTemplate examples
 
-Assume that CRD `custom-resource` `custom-resource-version` is defined in the extension. 我们期望 KubeSphere 用户在用户界面查看 custom-resource 时能够同时返回 custom-resource-version, 以下 YAML 文件创建了 `global-custom-resource-viewing` 和 `global-custom-resource-creation` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `global-custom-resource-creation` 依赖于 `global-custom-resource-viewing`。
+Assume that CRD `custom-resource` `custom-resource-version` is defined in the extension. We expect that it returns custom-resource-version when KubeSphere users view custom-resource in the user interface. The following YAML files create two custom permissions: `global-custom-resource-viewing` and `global-custom-resource- creation`, respectively authorizing users to view and create resources in the `custom-resource` type, where `global-custom-resource-creation ` depends on `global-custom-resource-viewing`.
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
@@ -64,45 +64,45 @@ spec:
         - *
 ```
 
-### Parameters
+### RoleTemplate parameters
 
 The following content describes how to configure parameters for custom permissions.
 
-* `apiVersion`: the API version for KubeSphere access control. 当前版本为 `iam.kubesphere.io/v1beta1`。
+* `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1beta1`.
 
 * `kind`: the resource type of the custom permission. Set the value to `RoleTemplate`.
 
-* `metadata`: the metadata for the custom permission.
+* `metadata`: the metadata of the custom permission.
 
   * `name`: the resource name of the custom permission.
-  * `annotations`：
+  * `annotations`:
 
-     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项
+     * `iam.kubesphere.io/dependencies`: It will be displayed as a dependency in the Console. When this permission item is selected, the dependent permission item will be automatically selected.
 
-  * `labels`：
+  * `labels`:
 
-    * `scope.kubesphere.io/global`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限。取值 `global` 表示当前权限为平台级别的权限。可选的值有 `global`、`cluster`、`workspace` 和 `namespace`。
-    * `iam.kubespere.io/category: custom-resource-management`：标记权限项所属的类别。
+    * `scope.kubesphere.io/global`: the resource label of custom permissions. KubeSphere divides permissions into platforms, clusters, workspaces and project permissions. `global` indicates that the current permission is at the platform level. The value can be `global`, `cluster`, `workspace` and `namespace`.
+    * `iam.kubespere.io/category: custom-resource-management`: Mark the category of the permission item.
 * `spec`
 
-  * `displayName`：自定义权限的显示名称。KubeSphere Console 将显示此名称。
+  * `displayName`: the display name of the custom permission. KubeSphere Console will be displayed with this name.
 
-    * `en`：英文显示名称。
+    * `en`: display name in English.
 
-    * `zh`：中文显示名称。
+    * `zh`: display name in Chinese.
 
-  * `rules`: the resources and operations allowed by the custom permission. 此参数为自定义权限内容的实际定义。
+  * `rules`: the resources and operations allowed by the custom permission. This parameter is the actual definition of the content of custom permissions.
 
-    * `apiGroups`: the API group to which the resource type belongs. Value `*` indicates all API groups.
+    * `apiGroups`: the API group to which the resource type belongs. The value `*` indicates all API groups.
 
-    * `resources`：向用户授权的资源类型，可以为 CRD（例如本节示例中的 `custom-resource`，`custom-resource-version`）或 Kubernetes 默认资源类型（例如 `deployment`）。Value `*` indicates all resource types.
+    * `resources`: the resource type authorized to users, which can be CRD (for instance, `custom-resource`, `custom-resource-version` in the examples in this section) or a Kubernetes default resource type (such as `deployment`). The value `*` indicates all resource types.
 
-    * `verbs`: the operations authorized to the user. Value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
+    * `verbs`: the operations authorized to the user. The value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
 
 
 ## Category
 
-Category 用于标记 RoleTemplate 所属的类别。KubeSphere Console 将根据权限项的类别将权限项分组显示。对应R oleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。
+Category is used to mark the category of RoleTemplate. KubeSphere Console displays permission items in groups according to their categories. It corresponds to the label `iam.kubesphere.io/category: custom-resource-manage` of RoleTemplate.
 
 ```yaml
 ---
@@ -118,28 +118,28 @@ spec:
     en: Custom Resource Management
 ```
 
-### Category 参数说明
- * `apiVersion`: the API version for KubeSphere access control. 当前版本为 `iam.kubesphere.io/v1beta1`。
+### Category parameters
+ * `apiVersion`: the API version for KubeSphere access control.  The current version is `iam.kubesphere.io/v1beta1`.
 
- * `kind`: the resource type of the custom permission. 请将参数值设置为 `Category`。
+ * `kind`: the resource type of the custom permission.  Set the parameter value to `Category`.
 
  * `metadata`: the metadata for the custom permission.
 
    * `name`: the resource name of the custom permission.
 
-   * `labels`：
+   * `labels`:
 
-     * `scope.kubesphere.io/global`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限。取值 `global` 表示当前权限为平台级别的权限。可选的值有 `global`、`cluster`、`workspace` 和 `namespace`。
+     * `scope.kubesphere.io/global`: the resource label of custom permissions. KubeSphere divides permissions into platforms, clusters, workspaces and project permissions. `global` indicates that the current permission is at the platform level. The value can be `global`, `cluster`, `workspace` and `namespace`.
 
-     * `scope.iam.kubesphere.io/workspace`：此类资源包含了多了层级的权限，所以同时指定了 global 和 workspace 标签。
+     * `scope.iam.kubesphere.io/workspace`: This type of resource contains multiple levels of permissions, so both the "global" and "workspace" labels are specified.
 
     * `spec`
 
-      * `displayName`：自定义权限的显示名称。KubeSphere Console 将显示此名称。
+      * `displayName`: the display name of the custom permission. KubeSphere Console will be displayed with this name.
 
-        * `en`：英文显示名称。
+        * `en`: display name in English.
 
-        * `zh`：中文显示名称。
+        * `zh`: display name in Chinese.
 
 
 ## Best Practices
