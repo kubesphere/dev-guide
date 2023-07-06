@@ -4,7 +4,7 @@ weight: 1
 description: "Describes how to package extensions before test and release."
 ---
 
-在[开发示例](../../examples/)的章节中我们完成了前后端扩展组件开发，前后端源代码构建成容器镜像，准备好了 APIService、JSBundle 等扩展声明，接下来您可以参考本节内容借助 ksbuilder、Helm 打包您的扩展组件。
+In the [Development Example](../../examples/) section, we have introduced how to develop frontend and backend extensions, build images, and prepare APIService and JSBundle. In the following, we will show you how to package your extensions using ksbuilder and Helm.
 
 For information about how to build installation packages, see [Develop an extension for employee management](../../examples/employee-management-extension-example).
 
@@ -25,7 +25,7 @@ Directory: ~/workspace/kubesphere-extensions/employee
 The extension charts has been created.
 ```
 
-当看到上面提示信息时表示扩展组件包的目录 `employee` 创建成功，它类似于 [Helm Chart](https://helm.sh/zh/docs/topics/charts/) 工程目录（我们借助 Helm Chart 对我们的扩展组件进行编排），目录结构如下：
+If you see the preceding information, it indicates that the directory `employee` of the extension package is successfully created, which is similar to [ Helm Chart](https://helm.sh/zh/docs/topics/charts/) project directory (we use Helm Chart to orchestrate our extensions). The directory structure is as follows:
 
 ```text
 .
@@ -67,46 +67,40 @@ The extension charts has been created.
 
 ```yaml
 apiVersion: v1
-name: employee               # 扩展组件的名称（必填项）
-version: 0.1.0               # 扩展组件的版本，须符合语义化版本规范（必填项）
-displayName:                 # 扩展组件展示时使用的名称（必填项），Language Code 基于 ISO 639-1
-  zh: 示例扩展组件
+name: employee               # Extension name (required)
+version: 0.1.0               # Extension version, which must comply with semantic versioning (required)
+displayName:                 # Name used for the display of the extension (required), and the Language Code must be based on ISO 639-1
   en: Sample Extension
-description:                 # 扩展组件展示时使用的描述（必填项）
-  zh: 这是一个示例扩展组件，这是它的描述
+description:                 # Extension description (required)
   en: This is a sample extension, and this is its description
-category: devops             # 扩展组件的分类（必填项）
-keywords:                    # 关于扩展组件特性的一些关键字（可选项）
+category: devops             # Extension category (required)
+keywords:                    # Keywords that describe extention features (optional)
   - others
-home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
-sources:                     # 项目源码的 URL 列表（可选项）
+home: https://kubesphere.io  # URL of the project homepage (optional)
+sources:                     # URL list of the source code of the project (optional)
   - https://github.com/kubesphere
-kubeVersion: ">=1.19.0"      # 扩展组件兼容的 Kubernetes 版本限制（可选项）
-ksVersion: ">=3.0.0"         # 扩展组件兼容的 KubeSphere 版本限制（可选项）
-maintainers:                 # 扩展组件维护者（可选项）
+kubeVersion: ">=1.19.0"      # Compatible Kubernetes versions (optional)
+ksVersion: ">=3.0.0"         # Compatible KubeSphere versions (optional)
+maintainers:                 # Maintainer of the extension (optional)
   - name: "ks"
     email: "ks@kubesphere.io"
     url: "https://www.kubesphere.io"
-provider:                    # 扩展组件提供商（必填项）
-  zh:
-    name: "青云科技"
-    email: "ks@kubesphere.io"
-    url: "https://www.qingcloud.com"
+provider:                    # Provider of the extension (optional)
   en:
     name: "QingCloud"
     email: "ks@kubesphere.io"
     url: "https://www.qingcloud.com"
-staticFileDirectory: static  # 扩展组件静态文件存放目录，图标和 README 引用的静态文件等需存放到该目录（必填项）
-icon: ./static/favicon.svg   # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
-screenshots:                 # 扩展组件截图（可选项）
+staticFileDirectory: static  # Directory for storing static files such as icons and README of the extension (required)
+icon: ./static/favicon.svg   # Icon used for the display of the extension, which can be defined as a relative path to a local file (required)
+screenshots:                 # Extension snapshots (optional)
   - ./static/screenshots/screenshot.png
-dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
+dependencies:                # Helm Chart that the extension relies on, and the syntax must be compatible with that of the dependencies in Helm's Chart.yaml (optional)
   - name: frontend
     condition: frontend.enabled
   - name: backend
     condition: backend.enabled
 # external dependencies example
-#externalDependencies:       # 对其它扩展组件的依赖（可选项）
+#externalDependencies:       # Dependencies of the extension (optional)
 #  - name: a
 #    type: extension
 #    version: ">= 2.6.0"
@@ -121,7 +115,7 @@ dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm
 
 ```yaml
 kind: ClusterRole
-rules:  # 如果你的扩展组件需要创建、变更 Cluster 级别的资源，你需要编辑此授权规则
+rules:  # Edit this rule if your extension needs to create and change cluster resources.
   - verbs:
       - 'create'
       - 'patch'
@@ -133,7 +127,7 @@ rules:  # 如果你的扩展组件需要创建、变更 Cluster 级别的资源�
 
 ---
 kind: Role
-rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资源，你需要编辑此授权规则
+rules:  # Edit this rule if your extension needs to create and change namespace resources.
   - verbs:
       - '*'
     apiGroups:
