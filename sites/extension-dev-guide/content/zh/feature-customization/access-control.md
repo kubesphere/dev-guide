@@ -8,7 +8,7 @@ description: 介绍如何控制扩展组件定制资源的访问权限。
 
 您可以在扩展组件中[使用定制资源定义（CRD）创建定制资源（CR）](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，并使用本节介绍的 `RoleTemplate` 资源类型创建自定义权限。在 KubeSphere Console，您可以使用自定义的权限创建角色并将角色授权给用户，从而只允许具有特定角色的用户访问扩展组件定制资源。
 
-`RoleTemplate` 是由 KubeSphere 提供的 CRD， 基于 Kubernetes 原生的 RBAC 鉴权机制实现。以此来提供一个权限项。权限项是权限控制的最小单元，我们用这个类型来定义对一个功能的操作权限。然后聚合多个权限项以此形成一个角色。基于权限项，我们可能自由的创建定制角色的能力。
+`RoleTemplate` 是由 KubeSphere 提供的 CRD， 基于 Kubernetes 原生的 RBAC 鉴权机制实现。以此来提供一个权限项。权限项是权限控制的最小单元，我们用这个类型来定义对一个功能的操作权限。然后聚合多个权限项以此形成一个角色。基于权限项，我们可以自由地创建定制角色。
 
 有关 Kubernetes RBAC 鉴权机制的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example)。
 
@@ -72,7 +72,7 @@ spec:
 
 * `kind`：自定义权限的资源类型。请将参数值设置为 `RoleTemplate`。
 
-* `metadata`：自定义权限的元数据。
+* `metadata`：自定义权限的元数据。 
 
   * `name`：自定义权限的资源名称。
   * `annotations`：
@@ -102,7 +102,7 @@ spec:
   
 ## Category
 
-Category 用于标记 RoleTemplate 所属的类别。KubeSphere Console 将根据权限项的类别将权限项分组显示。对应R oleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。 
+Category 用于标记 RoleTemplate 所属的类别。KubeSphere Console 将根据权限项的类别将权限项分组显示。对应 RoleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。 
 
 ```yaml
 ---
@@ -131,7 +131,7 @@ spec:
  
      * `scope.kubesphere.io/global`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限。取值 `global` 表示当前权限为平台级别的权限。可选的值有 `global`、`cluster`、`workspace` 和 `namespace`。
      
-     * `scope.iam.kubesphere.io/workspace`：此类资源包含了多了层级的权限，所以同时指定了 global 和 workspace 标签。
+     * `scope.iam.kubesphere.io/workspace`：此类资源包含了多个层级的权限，所以同时指定了 global 和 workspace 标签。
      
     * `spec`
 
