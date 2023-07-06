@@ -1,7 +1,7 @@
 ---
-title: 发布扩展组件
+title: Publish an extension
 weight: 3
-description: "发布您的扩展组件与他人共享"
+description: "Publish your extensions to share with others"
 ---
 
 TBD
