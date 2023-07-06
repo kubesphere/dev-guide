@@ -147,7 +147,7 @@ rules:  # Edit this rule if your extension needs to create and change namespace 
       - 'networkpolicies'
 ```
 
-Reference
+Reference:
 
 1. https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 2. https://helm.sh/docs/topics/rbac/
@@ -156,9 +156,9 @@ Reference
 ### Package the employee management extension
 
 In [Develop an extension for employee management](../../examples/employee-management-extension-example), you have complete the development of the extension, and then you can package the extension based on the following steps:
-1. 在 `charts/backend` 和 `charts/frontend` 修改员工管理扩展组件前后端服务部署资源声明
-2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../architecture/backend-extension-architecture/#apiservice) 声明
-3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 声明
+1. In `charts/backend` and `charts/frontend`, modify the frontend and backend declaration of the extension.
+2. Modify the [APIService](../../architecture/backend-extension-architecture/#apiservice) declaration in `charts/backend/templates/extensions.yaml` according to [Regoster a backend extension](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver).
+3. Modify the [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) declaration in `charts/frontend/templates/extensions.yaml` according to [Register a frontent extension](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver).
 
 
 You can clone the employee management extension package from GitHub to view details:
@@ -168,7 +168,7 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展组件商店中进行安装测试。
+Then, you can release the extension to KubeSphere Extension Marketplace to install and test. For more information, see [Test extensions](../testing).
 
 ### Examples
 
@@ -214,4 +214,4 @@ cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问 http://localhost:30880/proxy/grafana/login
+Test the features: http://localhost:30880/proxy/grafana/login.
