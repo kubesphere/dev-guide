@@ -4,7 +4,7 @@ weight: 2
 description: Describes KubeSphere backend extensions.
 ---
 
-KubeSphere LuBan 构建在 K8s 之上，和 K8s 一样是高度可配置和可扩展的，除了可以借助 [K8s 的扩展机制](https://kubernetes.io/docs/concepts/extend-kubernetes/)来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式，您可以创建以下几种类型的 [CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API、扩展前端 UI或者创建动态资源代理。
+KubeSphere LuBan is built on K8s, which is highly configurable and extensible like K8s. Except using the [K8s extension mechanism ](https://kubernetes.io/docs/concepts/extend-kubernetes/) to extend the platform capabilities of KubeSphere, KubeSphere also provides a more flexible way for extension, you can create the following types of [CR](https://kubernetes.io/docs/concepts/extend -kubernetes/api-extension/custom-resources/) to register API with KubeSphere, extend frontend UI or create dynamic resource proxy.
 
 ## APIService
 
@@ -30,16 +30,16 @@ spec:
 ```
 
 
-| Parameter                                                 | Description                                                                                                      |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `spec.group`, `spec.version`                              | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version |
-| `spec.url`, `spec.caBundle`, `spec.insecureSkipTLSVerify` | 可以为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint                                                                    |
-| `spec.service`                                            | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址                                                                       |
+| Parameter                                                 | Description                                                                                                                                                                                                                          |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `spec.group`, `spec.version`                              | When you create a custom resource of the APIService type, KubeSphere automatically registers the API with ks-apiserver, in which `spec.group` and `spec.version` represent the API Group and API Version in the registered API path. |
+| `spec.url`, `spec.caBundle`, `spec.insecureSkipTLSVerify` | Specify an external service for APIService to proxy API requests to the specified endpoint                                                                                                                                           |
+| `spec.service`                                            | Similar to `spec.url`, specify the service reference address inside the K8s cluster for the API                                                                                                                                      |
 
 
 ### JSBundle
 
-Defines the extension bundle that needs to be injected into the front-end framework. `ks-console` 会自动加载此类资源，实现 UI 的动态扩展。
+Defines the extension bundle that needs to be injected into the front-end framework. `ks-console` will automatically load such resources to implement the UI dynamic extension.
 
 Sample code:
 
