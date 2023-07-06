@@ -118,6 +118,6 @@ As shown in the preceding code, the extension is intialized by using a scaffoldi
 ## Development empowerment
 KubeSphere provides some common components, tools, and libraries to help developers develop extensions efficiently, taking into account experience consistency and operation efficiency.
 1. Common extension library [KubeDesign](https://github.com/kubesphere/kube-design)
-2. Frontend scaffolding tool [create-ks-ext](https://github.com/kubesphere/create-ks-project)
+2. Frontend scaffolding tool [create-ks-project](https://github.com/kubesphere/create-ks-project)
 3. Lightweight status management library @ks-console/stook
 4. General utility library @ks-console/shared
