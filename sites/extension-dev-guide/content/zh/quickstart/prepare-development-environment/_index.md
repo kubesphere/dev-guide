@@ -4,17 +4,17 @@ weight: 01
 description: 介绍如何搭建扩展组件开发环境。
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
+本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere LuBan 和开发工具。
 
-* KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
+* KubeSphere LuBan：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
 
 * 开发工具：您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。 开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。
 
 
-## 安装 KubeSphere Core
+## 安装 KubeSphere LuBan
 
 
-1. 登录到 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere Core：
+1. 登录到 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere LuBan：
 
    ```bash
    git clone https://github.com/kubesphere/helm-charts.git
