@@ -6,7 +6,7 @@ description: 介绍如何实现扩展组件前端国际化
 
 本章节介绍如何实现扩展组件前端国际化。
 
-KubeSphere Core 集成了 [i18next](https://www.i18next.com/) 作为国际化组件。您可以通过自定义语言包实现扩展组件前端多语言显示。
+KubeSphere LuBan 集成了 [i18next](https://www.i18next.com/) 作为国际化组件。您可以通过自定义语言包实现扩展组件前端多语言显示。
 
 ## 语言包
 
