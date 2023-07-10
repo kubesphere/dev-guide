@@ -8,13 +8,13 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 
 #### 搭建开发环境
 
-KubeSphere 扩展组件开发环境包括 KubeSphere LuBan 和开发工具两部分。
+KubeSphere 扩展组件开发环境包括 KubeSphere Core 和开发工具两部分。
 
-* KubeSphere LuBan：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
+* KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
 
 * 开发工具：开发工具用于创建扩展组件开发项目、安装依赖、为扩展组件提供运行环境以及对扩展组件进行打包发布。您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
 
-您可以参考[搭建开发环境](../quickstart/prepare-development-environment/)章节安装 KubeSphere LuBan 和开发工具。
+您可以参考[搭建开发环境](../quickstart/prepare-development-environment/)章节安装 KubeSphere Core 和开发工具。
 
 #### 创建开发项目
 
