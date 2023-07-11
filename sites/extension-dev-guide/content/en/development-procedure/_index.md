@@ -50,8 +50,8 @@ For more information about developing frontend and backend extensions, see [Exam
 
 #### Package and release extensions
 
-You need to build the source code of frontend and backend extensions into container images, package installation packages, and upload the installation packages to the local Extension Center. Then, you can install extensions in the Extension Center and test whether they can work as expected. Take the following steps:
+您需要将扩展组件的前后端源代码构建成容器镜像，打包扩展组件安装包，将扩展组件安装包上架到本地的扩展市场。您可以通过扩展市场安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。Take the following steps:
 
 1. Build the source code of frontend and backend extensions into container images. For more information, see "Build an image" in [Examples](../examples/employee-management-extension-example/#Manage extensions).
 2. Package the declarations of frontend and backend extensions into installation packages, including APIService and JSBundle. For more information, see [Package extensions](../packaging-and-release/packaging).
-3. Release extensions in the local Extension Center, and install and test the extension features. For more information, see [Test extensions](../packaging-and-release/testing).
+3. 参考[测试扩展组件](../packaging-and-release/testing)将扩展组件上架到本地的扩展市场中，安装扩展组件并测试使用扩展组件功能
