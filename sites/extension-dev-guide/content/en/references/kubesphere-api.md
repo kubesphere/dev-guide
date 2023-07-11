@@ -4,4 +4,4 @@ weight: 4
 description: KubeSphere API
 ---
 
-When developing extensions, if you need to make API calls in KubeSphere Core, you can check it in [KubeSphere API Docs](https://kubesphere.io/api/kubesphere/).
+在开发扩展组件时，如果需要调用 KubeSphere LuBan 中的 API，可以在 [KubeSphere API Docs](https://kubesphere.io/api/kubesphere/) 中查看。
