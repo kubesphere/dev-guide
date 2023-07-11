@@ -1,24 +1,22 @@
 ---
 title: Test extensions
 weight: 2
-description: "Describe how to publish an extension to the Extension Marketplace and test the extension."
+description: "将扩展组件上架到 KubeSphere 扩展市场中进行测试"
 ---
 
 Previously, we have learnt how to develop and package extensions. In this section, we will learn how to test published extensions.
 
 ## Publish extensions
 
-In the root directory `~/workspace/kubesphere-extensions/` of the extension, run the following command to publish the extension.
+在扩展组件管理工程根目录（`~/workspace/kubesphere-extensions/`）执行下述命令，将扩展组件上架到 KubeSphere 扩展市场中。
 
 ```shell
 ksbuilder publish employee
 ```
 
-Then you can log in to the ks-console via port 30880 and install and test the published extension.
+命令执行成功后，我们可以直接访问 KubeSphere 容器 30880 端口打开 ks-console 页面并登录，查看扩展市场中上架的组件，并进行安装测试。如果安装失败，您可以在 Console 上查看报错日志。
 
 ![](./kubesphere-extensions.png)
-
-安装完成后可以在 ks-console 页面查看扩展组件安装状态，安装失败可以在默认的 namespace extension-employee 查看日志。
 
 By default, the extension will be published on the cluster specified in the system's default kubeconfig file (`~/.kube/config`). If you want to publish the extension to a specified cluster, you can use `--kubeconfig` parameter to specify the path of the kubeconfig file.
 
