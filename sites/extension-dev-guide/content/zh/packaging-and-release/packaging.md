@@ -167,14 +167,15 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
 3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 声明
 
 
-您可以从 GitHub 上克隆员工管理扩展组件安装包，查看其组成部分
+您可以从 GitHub 上克隆员工管理扩展组件安装包，查看其组成部分。
+
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展组件商店中进行安装测试。
+接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
 
 ### 第三方系统扩展组件打包示例
 
@@ -189,8 +190,8 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-extensions/grafana-ext
 ```
 
-grafana 扩展组件主要由以下部分组成：
-1. grafana 部署文件: grafana-ext/charts/backend/templates/grafana.yaml
+Grafana 扩展组件主要由以下部分组成：
+1. Grafana 部署文件: grafana-ext/charts/backend/templates/grafana.yaml
 1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
 1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
 
@@ -213,11 +214,11 @@ status:
   state: Available
 ```
 
-grafana 扩展组件编排完成后，上架扩展组件
+Grafana 扩展组件编排完成后，上架扩展组件。
 
 ```shell
 cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问 http://localhost:30880/proxy/grafana/login
+在组件市场安装 Grafana 扩展组件，访问 http://localhost:30880/proxy/grafana/login 验证组件。
