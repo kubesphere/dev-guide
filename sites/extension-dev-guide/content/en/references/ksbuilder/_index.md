@@ -10,7 +10,7 @@ description: ksbuilder is an extension packaging and release tool
 
 ## ksbuilder
 
-ksbuilder 是 KubeSphere 扩展组件的命令行接口。
+ksbuilder is the command line interface for the KubeSphere extension.
 
 ```
 ksbuilder [flags]
