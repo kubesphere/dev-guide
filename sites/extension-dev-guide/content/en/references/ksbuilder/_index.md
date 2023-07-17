@@ -1,5 +1,5 @@
 ---
-title: ksbuilder CLI 参考
+title: ksbuilder CLI Reference
 weight: 1
 description: ksbuilder is an extension packaging and release tool
 ---
@@ -26,7 +26,7 @@ ksbuilder [flags]
 
 ## ksbuilder create
 
-执行以下命令创建新的 KubeSphere 组件。
+Run the following command to create a new KubeSphere extension.
 
 ```
 ksbuilder create [flags]
@@ -42,7 +42,7 @@ ksbuilder create [flags]
 
 ## ksbuilder package
 
-执行以下命令打包组件。
+Run the following command to pack the extension.
 
 ```
 ksbuilder package [flags]
