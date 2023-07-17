@@ -29,7 +29,7 @@ The core components provide the following main features:
 4. Internationalization
 
    Based on i18next, KubeSphere LuBan 4.0 implements internationalization.  For extensions, developers can define translation files based on the format in i18next, and then authorize and authenticate the extensions in the Core module.
-5. 扩展市场
+5. Extension Marketplace
 
    Similar to the extension mechanism of Google Chrome, KubeSphere LuBan 4.0 also provides a module for visualized management of extensions, which is convenient for users to install, uninstall, start, or stop extensions in the web console.
 
@@ -52,7 +52,7 @@ The extensions can be divided into the following types: `in-tree extensions` and
 5. App Store
 6. Platform settings
 
-* `Out-of-tree extensions` are extensions developed by developers in their own repos, which can be compiled and packaged independently. 它们会发布在`扩展市场`上。If a user installs an extension, the Core module will load the `JavaScript bundle` of the extension and authorize and authenticate the extension.
+* `Out-of-tree extensions` are extensions developed by developers in their own repos, which can be compiled and packaged independently. They are rolled out on `Extension Marketplace`. If a user installs an extension, the Core module will load the `JavaScript bundle` of the extension and authorize and authenticate the extension.
 
 The frontend components of `out-of-tree extensions` use [create-ks-ext](https://github.com/kubesphere/create-ks-project) for initialization. The directory after initialization is as follows:
 
