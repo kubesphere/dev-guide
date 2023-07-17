@@ -58,7 +58,7 @@ ksbuilder package [flags]
 
 ## ksbuilder publish
 
-执行以下命令将组件发布到扩展市场。
+Run the following command to publish the extension.
 
 ```
 ksbuilder publish [flags]
@@ -75,7 +75,7 @@ ksbuilder publish [flags]
 
 ## ksbuilder version
 
-执行以下命令查看组件版本。
+Run the following command to check the version of the extension.
 
 ```
 ksbuilder version [flags]
