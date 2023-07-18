@@ -1,5 +1,5 @@
 ---
-title: Backend extensions
+title: Backend Extensions
 weight: 2
 description: Describes KubeSphere backend extensions.
 ---
