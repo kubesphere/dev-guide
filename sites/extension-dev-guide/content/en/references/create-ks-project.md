@@ -1,5 +1,5 @@
 ---
-title: create-ks-project CLI reference
+title: create-ks-project CLI Reference
 weight: 3
 description: Describes the frontend scaffolding tool of KubeSphere.
 ---
