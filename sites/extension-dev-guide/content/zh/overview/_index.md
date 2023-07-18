@@ -44,13 +44,13 @@ KubeSphere 通常会选择一种实现优先支持，但用户经常会有支持
 - KubeSphere 目前已有的众多组件都会被拆分为单独的 KubeSphere 扩展组件，这些扩展组件可单独迭代，用户可以自己选择安装哪些扩展组件来打造自己的 KubeSphere 容器管理平台；
 - 用户可以通过相对简单的扩展组件开发指南，开发自己的扩展组件扩展 KubeSphere 的功能；
 - 通过 KubeSphere Extension 扩展组件管理平台统一管理各扩展组件；
-- 未来将引入 KubeSphere Extension Store 来丰富 KubeSphere 扩展组件生态。用户可以将自己开发的扩展组件上架 KubeSphere Extension Store 供其他用户使用甚至获利；
+- 未来将引入 KubeSphere 组件市场来丰富 KubeSphere 扩展组件生态。用户可以将自己开发的扩展组件上架 KubeSphere 组件市场供其他用户使用甚至获利；
 
-## KubeSphere LuBan 架构的的优势
+## KubeSphere LuBan 架构的优势
 
 KubeSphere LuBan 架构的优势我们可以从 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）或其他开源项目、KubeSphere 用户几个角度来分析。
 
 - 对于 KubeSphere 维护者来说，KubeSphere LuBan 带来的扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 ks-core 更加轻量，版本发布节奏也可以加快。对于其他功能来说，因为采用了扩展组件来实现，可使得这些组件能够独立进行迭代，更及时的满足用户的需求；
 - 对于 KubeSphere·贡献者来说，因为扩展机制的引入使得 ks-core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手；
 - 对于云原生应用开发商（ISV）或其他开源项目来说，KubeSphere LuBan 的扩展机制使得众多 ISV 或其他开源项目可以用很小的代价就可以把产品或开源项目无缝融入到 KubeSphere 体系中来。比如 Karmada/KubeEdge 的开发人员可以基于这套扩展机制基于 KubeSphere 开发 Karmada/KubeEdge 自己的控制台；
-- 对于 KubeSphere 用户来说可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere Extension Store 中自由选择更丰富的产品和服务，最终达到容器管理平台的千人千面的效果；
+- 对于 KubeSphere 用户来说可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终达到容器管理平台的千人千面的效果；
