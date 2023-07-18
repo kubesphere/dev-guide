@@ -1,5 +1,5 @@
 ---
-title: How the Hello World extension works
+title: How the Hello World Extension Works
 weight: 3
 description: Describes how the Hello World extension works.
 ---
