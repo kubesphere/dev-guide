@@ -44,13 +44,13 @@ To resolve the preceding issues, KubeSphere 4.0 introduces a next-generation mic
 - Various existing components of KubeSphere will be decoupled into separate extensions, and each extension can be iterated independently. You can choose which extensions to install and customize the KubeSphere console.
 - You can develop extensions to extend the functionality of KubeSphere based on this guide.
 - You can manage extensions in the unified KubeSphere extension management platform.
-- The KubeSphere extension center will be introduced to enrich the KubeSphere extension ecosystem. You can roll out self-developed extensions on KubeSphere for other users to use and even make profits.
+- 未来将引入 KubeSphere 组件市场来丰富 KubeSphere 扩展组件生态。用户可以将自己开发的扩展组件上架 KubeSphere 组件市场供其他用户使用甚至获利；
 
-## Benefits
+## KubeSphere LuBan 架构的优势
 
 The extension mechanism of KubeSphere LuBan  can benefit KubeSphere maintainers, contributors, users, independent software vendors (ISVs), and other open source projects.
 
 - For KubeSphere maintainers, the extension mechanism allows you to focus more on the development of KubeSphere critical features, and can make ks-core more lightweight. This accelerates the release cycles. For other features, the extension mechanism allows you to develop components independently to meet your business needs in a more timely manner.
 - For KubeSphere contributors, the extension mechanism makes ks-core and other KubeSphere components loosely coupled, so that you can get started with development at ease.
 - For ISVs, the extension mechanism allows you to integrate services or other open source projects into KubeSphere at a low cost. For example, Karmada or KubeEdge developers can customize the KubeSphere console based on this extension mechanism.
-- For KubeSphere users, you can determine whether to enable an extension based on your business requirements. You can also integrate your application into the KubeSphere console. As the extensions go diversified, we can offer users a wider range of services to choose from, helping them build a container platform tailored for custom requirements.
+- For KubeSphere users, you can determine whether to enable an extension based on your business requirements. You can also integrate your application into the KubeSphere console.此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终达到容器管理平台的千人千面的效果；
