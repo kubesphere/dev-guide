@@ -1,5 +1,5 @@
 ---
-title: Frontend extensions
+title: Frontend Extensions
 weight: 1
 description: Describes KubeSphere frontend extensions.
 ---
