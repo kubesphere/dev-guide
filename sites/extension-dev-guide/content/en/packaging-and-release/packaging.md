@@ -1,5 +1,5 @@
 ---
-title: Package extensions
+title: Package Extensions
 weight: 1
 description: "Describes how to package extensions before test and release."
 ---
