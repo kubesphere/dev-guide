@@ -1,5 +1,5 @@
 ---
-title: Page routes
+title: Page Routes
 weight: 4
 description: "Describes how to create a feature page and configure route settings."
 ---
