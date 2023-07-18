@@ -1,5 +1,5 @@
 ---
-title: Mount point
+title: Mount Point
 weight: 2
 description: Describes how to configure the mount point of an extension in the KubeSphere web console.
 ---
