@@ -1,5 +1,5 @@
 ---
-title: Create a Hello World extension
+title: Create a Hello World Extension
 weight: 2
 description: Describes how to create a Hello World example to help you understand the development process of extensions.
 ---
