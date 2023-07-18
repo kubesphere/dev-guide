@@ -1,5 +1,5 @@
 ---
-title: Integrate with third-party systems
+title: Integrate with Third-Party Systems
 weight: 2
 description: Integrate with third-party tools and systems that have existing web UIs
 ---
