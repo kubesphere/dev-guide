@@ -55,8 +55,11 @@ The extension charts has been created.
 │       │       └── test-connection.yaml
 │       └── values.yaml
 ├── extension.yaml
-├── favicon.svg
 ├── permissions.yaml
+├── static
+│   ├── favicon.svg
+│   └── screenshots
+│       └── screenshot.png
 └── values.yaml
 ```
 
@@ -72,18 +75,31 @@ displayName:                 # 扩展组件展示时使用的名称（必填项�
 description:                 # 扩展组件展示时使用的描述（必填项）
   zh: 这是一个示例扩展组件，这是它的描述
   en: This is a sample extension, and this is its description
+category: devops             # 扩展组件的分类（必填项）
 keywords:                    # 关于扩展组件特性的一些关键字（可选项）
-  - Others
+  - others
 home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
 sources:                     # 项目源码的 URL 列表（可选项）
   - https://github.com/kubesphere
 kubeVersion: ">=1.19.0"      # 扩展组件兼容的 Kubernetes 版本限制（可选项）
 ksVersion: ">=3.0.0"         # 扩展组件兼容的 KubeSphere 版本限制（可选项）
-vendor:                      # 扩展组件提供商（可选项）
-  name: "ks"
-  email: "ks@kubesphere.io"
-  url: "https://www.kubesphere.io"
-icon: ./favicon.svg          # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+maintainers:                 # 扩展组件维护者（可选项）
+  - name: "ks"
+    email: "ks@kubesphere.io"
+    url: "https://www.kubesphere.io"
+provider:                    # 扩展组件提供商（必填项）
+  zh:
+    name: "青云科技"
+    email: "ks@kubesphere.io"
+    url: "https://www.qingcloud.com"
+  en:
+    name: "QingCloud"
+    email: "ks@kubesphere.io"
+    url: "https://www.qingcloud.com"
+staticFileDirectory: static  # 扩展组件静态文件存放目录，图标和 README 引用的静态文件等需存放到该目录（必填项）
+icon: ./static/favicon.svg   # 扩展组件展示时使用的图标，可以定义为本地的相对路径（必填项）
+screenshots:                 # 扩展组件截图（可选项）
+  - ./static/screenshots/screenshot.png
 dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
   - name: frontend
     condition: frontend.enabled
@@ -151,14 +167,15 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
 3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 声明
 
 
-您可以从 GitHub 上克隆员工管理扩展组件安装包，查看其组成部分
+您可以从 GitHub 上克隆员工管理扩展组件安装包，查看其组成部分。
+
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展组件商店中进行安装测试。
+接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
 
 ### 第三方系统扩展组件打包示例
 
@@ -173,8 +190,8 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/grafana-ext ~/kubesphere-extensions/grafana-ext
 ```
 
-grafana 扩展组件主要由以下部分组成：
-1. grafana 部署文件: grafana-ext/charts/backend/templates/grafana.yaml
+Grafana 扩展组件主要由以下部分组成：
+1. Grafana 部署文件: grafana-ext/charts/backend/templates/grafana.yaml
 1. grafana-frontend deployment: grafana-ext/charts/frontend/templates/deployment.yaml，代码逻辑参考[第三方系统集成示例](../../examples/third-party-component-integration-example#前端扩展组件开发)
 1. ReverseProxy: grafana-ext/charts/frontend/templates/extensions.yaml
 
@@ -197,11 +214,11 @@ status:
   state: Available
 ```
 
-grafana 扩展组件编排完成后，上架扩展组件
+Grafana 扩展组件编排完成后，上架扩展组件。
 
 ```shell
 cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在扩展组件应用商店安装 grafana 扩展组件， 验证安装后功能：访问 http://localhost:30880/proxy/grafana/login
+在组件市场安装 Grafana 扩展组件，访问 http://localhost:30880/proxy/grafana/login 验证组件。
