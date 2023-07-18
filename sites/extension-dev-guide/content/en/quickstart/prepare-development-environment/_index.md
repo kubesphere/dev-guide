@@ -1,5 +1,5 @@
 ---
-title: Build a development environment
+title: Build a Development Environment
 weight: 1
 description: Describes how to build a development environment for extensions.
 ---
