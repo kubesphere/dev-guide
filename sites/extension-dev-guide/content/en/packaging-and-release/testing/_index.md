@@ -1,5 +1,5 @@
 ---
-title: Test extensions
+title: Test Extensions
 weight: 2
 description: "Describe how to publish an extension to the Extension Marketplace and test the extension."
 ---
