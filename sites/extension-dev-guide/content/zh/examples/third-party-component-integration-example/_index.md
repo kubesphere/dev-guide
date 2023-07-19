@@ -29,12 +29,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
-cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/frontend/extensions
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/weave-scope ~/kubesphere-extensions/ks-console/extensions
 ```
 
 我们着重来看一下如何将 Weave Scope 的页面集成进来。
 
-文件路径： `~/kubesphere-extensions/frontend/extensions/weave-scope/src/App.jsx`
+文件路径： `~/kubesphere-extensions/ks-console/extensions/weave-scope/src/App.jsx`
 
 ```jsx
 import React, { useState, useRef } from 'react';

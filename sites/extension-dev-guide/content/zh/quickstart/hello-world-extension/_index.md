@@ -108,7 +108,7 @@ server:
 
 ### 调试扩展组件
 
-Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/frontend/extensions/hello-world` 目录中。
+Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-console/extensions/hello-word/src` 目录中。
 
 您可以将页面显示的字符串修改为 `Test!`，如下图所示：
 
