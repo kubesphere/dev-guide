@@ -1,7 +1,7 @@
 ---
 title:  创建 Hello World 扩展组件
 weight: 02
-description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程。
+description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程
 ---
 
 本章节介绍如何创建一个简单的 Hello World 扩展组件：在 KubeSphere Console 添加一个独立的功能页面。
@@ -10,7 +10,7 @@ description: 演示如何创建示例扩展组件 Hello World，帮助您快速�
 
 * 如何初始化扩展组件开发项目。
 
-* 如在本地运行 KubeSphere Console。
+* 如何在本地运行 KubeSphere Console。
 
 * 如何对扩展组件进行调试。
 
@@ -32,7 +32,7 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    yarn create ks-project ks-console --fast-mode
    ```
 
-   KubeSphere 扩展组件开发项目中包含了一个可以在本地运行 KubeSphere Console。
+   KubeSphere 扩展组件开发项目中包含了一个可以在本地运行的 KubeSphere Console。
 
 2. 执行以下命令创建 Hello World 扩展组件：
 
@@ -41,7 +41,7 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    yarn create:ext
    ```
 
-   根据命令提示设置扩展组件的名称、显示名称、描述、作者和语言等基础信息，完成扩展组件创建。
+   根据命令提示，设置扩展组件的名称、显示名称、描述、作者和语言等基础信息，完成扩展组件创建。
 
    ```bash
    Extension Name hello-world

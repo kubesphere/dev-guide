@@ -1,7 +1,7 @@
 ---
 title: 搭建开发环境
 weight: 01
-description: 介绍如何搭建扩展组件开发环境。
+description: 介绍如何搭建扩展组件的开发环境
 ---
 
 本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
@@ -20,7 +20,7 @@ description: 介绍如何搭建扩展组件开发环境。
    helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/test/ks-core-0.3.1.tgz --set apiserver.nodePort=30881 --set global.tag=v4.0.0-beta.1 --debug --wait
    ```
 
-   {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群" %}}
+   {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群。" %}}
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
@@ -57,7 +57,7 @@ description: 介绍如何搭建扩展组件开发环境。
    {{% /tab %}}
 {{% tab name="使用容器" %}}
 
-您可以在容器中运行扩展组件开发所需的开发工具，执行以下命令为开发工具命令设置别名：
+您可以在容器中运行开发扩展组件所需的开发工具，执行以下命令为开发工具命令设置别名：
 
 ```bash
 # 创建本地缓存与配置文件目录

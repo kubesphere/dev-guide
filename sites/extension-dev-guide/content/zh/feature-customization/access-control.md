@@ -1,7 +1,7 @@
 ---
 title: 访问控制
 weight: 03
-description: 介绍如何控制扩展组件定制资源的访问权限。
+description: 介绍如何控制扩展组件定制资源的访问权限
 ---
 
 本章节介绍如何控制扩展组件定制资源的访问权限。
@@ -12,7 +12,7 @@ description: 介绍如何控制扩展组件定制资源的访问权限。
 
 有关 Kubernetes RBAC 鉴权机制的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example)。
 
-在Kubesphere用户界面中，我们通常在获得一个资源时，同时也希望获得这个资源相关联的其他资源。我们把一组关联密集的资源的权限放在一个RoleTemplate中，以满足在用户界面上的使用需求。
+在Kubesphere用户界面中，我们通常在获得一个资源时，同时也希望获得这个资源相关联的其他资源。我们把一组关联密集的资源的权限放在一个 RoleTemplate 中，以满足在用户界面上的使用需求。
 
 ## RoleTemplate 示例
 
@@ -77,7 +77,7 @@ spec:
   * `name`：自定义权限的资源名称。
   * `annotations`：
   
-     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项
+     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
 
   * `labels`：
 
