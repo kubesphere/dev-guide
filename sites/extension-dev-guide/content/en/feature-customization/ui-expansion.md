@@ -33,6 +33,6 @@ spec:
 # raw: ""
 ```
 
-对于一些 js 体积较大的文件就需要制作成镜像，部署成应用负载和服务的方式来扩展，在这儿 `spec.rawFrom.url` 中指向服务中对应的 index.js 文件。
+对于一些 js 体积较大的文件就需要制作成镜像，部署成应用负载和服务的方式来扩展，这里 `spec.rawFrom.url` 指向服务中对应的 index.js 文件。
 
-对于那些体积比较小的 js 文件可以直接写在这个 CR 中或 ConfigMap 或 Secret 中，更多配置方式见 [JSBundle](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#jsbundle)。
+对于那些体积比较小的 js 文件，可以直接写在这个 CR 中，或 ConfigMap 或 Secret 中，更多配置方式见 [JSBundle](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#jsbundle)。
