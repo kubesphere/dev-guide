@@ -1,12 +1,12 @@
 ---
 title: 打包扩展组件
 weight: 01
-description: "在测试与发布之前首先您需要将扩展组件进行打包"
+description: "在测试与发布之前，您需要先打包扩展组件"
 ---
 
 在[开发示例](../../examples/)的章节中我们完成了前后端扩展组件开发，前后端源代码构建成容器镜像，准备好了 APIService、JSBundle 等扩展声明，接下来您可以参考本节内容借助 ksbuilder、Helm 打包您的扩展组件。
 
-您可以参考以下内容将[员工扩展组件示例](../../examples/employee-management-extension-example)打包成扩展组件安装包
+您可以参考以下内容将[员工管理扩展组件示例](../../examples/employee-management-extension-example)打包成扩展组件安装包。
 
 ### 初始化 employee 扩展组件包目录
 
@@ -161,7 +161,7 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
 
 ### 打包员工管理扩展组件包
 
-在[员工管理扩展组件示例](../../examples/employee-management-extension-example)中， 我们将完成了扩展组件开发，接下来我们可以按照以下步骤编排扩展组件安装包
+在[员工管理扩展组件示例](../../examples/employee-management-extension-example)中， 我们已完成了扩展组件开发，接下来我们可以按照以下步骤编排扩展组件安装包。
 1. 在 `charts/backend` 和 `charts/frontend` 修改员工管理扩展组件前后端服务部署资源声明
 2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../architecture/backend-extension-architecture/#apiservice) 声明
 3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 声明
@@ -175,12 +175,11 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-接下来您可以参考[测试扩展组件](../testing)将进行员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
+接下来您可以参考[测试扩展组件](../testing)，将员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
 
 ### 第三方系统扩展组件打包示例
 
-我们在[第三方系统集成示例](../../examples/third-party-component-integration-example)熟悉了集成已有 Web UI 的第三方工具与系统的开发，接下来可以参考以下内容将其打包成扩展组件安装包
-
+我们在[第三方系统集成示例](../../examples/third-party-component-integration-example)熟悉了集成已有 Web UI 的第三方工具与系统的开发，接下来可以参考以下内容将其打包成扩展组件安装包。
 
 使用 ksbuilder create 创建 grafana-ext 扩展组件包的目录后，借助 Helm Chart 进行编排，您可以从 GitHub 上克隆本示例的代码。
 
@@ -221,4 +220,4 @@ cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-在组件市场安装 Grafana 扩展组件，访问 http://localhost:30880/proxy/grafana/login 验证组件。
+在 KubeSphere 扩展市场安装 Grafana 扩展组件，访问 http://localhost:30880/proxy/grafana/login 验证组件。

@@ -1,7 +1,7 @@
 ---
 title: "开发流程"
 weight: 03
-description: 介绍 KubeSphere 扩展组件开发流程。
+description: 介绍 KubeSphere 扩展组件的开发流程
 ---
 
 本章节介绍 KubeSphere 扩展组件开发的基本流程。KubeSphere 扩展组件开发包括搭建开发环境、创建开发项目、定制功能以及打包发布几个步骤。
@@ -46,7 +46,7 @@ KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框
 
 您可以对扩展组件的主题、菜单挂载位置、访问控制、页面路由、国际化等功能特性进行定制。此外，KubeSphere 提供了 API 扩展接口，您可以将自定义 API 注册到 KubeSphere API 服务中供扩展组件调用。
 
-开发扩展组件前后端请参阅[示例与教程](../examples)
+开发扩展组件前后端请参阅[示例与教程](../examples)。
 
 #### 打包发布
 

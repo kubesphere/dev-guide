@@ -4,12 +4,12 @@ weight: 04
 description: "创建新的功能页面并设置路由"
 ---
 
-在基于 `React` 的开发中，如果我们的应用包含多个页面，那必然需要为应用设置路由。简单理解路由是访问路径与 React 组件的映射关系。
+在基于 `React` 的开发中，如果我们的应用包含多个页面，那必然需要为应用设置路由。简单理解，路由是访问路径与 React 组件的映射关系。
 在我们的扩展组件开发中，路由的使用方法如下：
 
 ## 路由定义
 
-KubeSphere4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便的实现路由注册，我们使用了 `Route Object` 的方式书写路由。
+KubeSphere4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便地实现路由注册，我们使用了 `Route Object` 的方式书写路由。
 形如：
 ```javascript
 let routes = [
@@ -75,7 +75,7 @@ export default [
 
 ## 路由注册
 
-我们使用 `yarn create:ext` 初始化扩展组件目录后。默认会生成 routes 文件夹。如下面目录结构：
+使用 `yarn create:ext` 初始化扩展组件目录后，默认会生成 routes 文件夹，如下面目录结构：
 
 ```shell
 └── hello-world
