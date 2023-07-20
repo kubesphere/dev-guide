@@ -1,12 +1,12 @@
 ---
 title: Package Extensions
 weight: 1
-description: "Describes how to package extensions before test and release."
+description: "在测试与发布之前，您需要先打包扩展组件"
 ---
 
 In the [Development Example](../../examples/) section, we have introduced how to develop frontend and backend extensions, build images, and prepare APIService and JSBundle. In the following, we will show you how to package your extensions using ksbuilder and Helm.
 
-For information about how to build installation packages, see [Develop an extension for employee management](../../examples/employee-management-extension-example).
+您可以参考以下内容将[员工管理扩展组件示例](../../examples/employee-management-extension-example)打包成扩展组件安装包。
 
 ### Create a directory for the employee management extension
 
@@ -155,7 +155,7 @@ Reference:
 
 ### Package the employee management extension
 
-In [Develop an extension for employee management](../../examples/employee-management-extension-example), you have complete the development of the extension, and then you can package the extension based on the following steps:
+在[员工管理扩展组件示例](../../examples/employee-management-extension-example)中， 我们已完成了扩展组件开发，接下来我们可以按照以下步骤编排扩展组件安装包。
 1. In `charts/backend` and `charts/frontend`, modify the frontend and backend declaration of the extension.
 2. Modify the [APIService](../../architecture/backend-extension-architecture/#apiservice) declaration in `charts/backend/templates/extensions.yaml` according to [Regoster a backend extension](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver).
 3. Modify the [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) declaration in `charts/frontend/templates/extensions.yaml` according to [Register a frontent extension](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver).
@@ -169,12 +169,11 @@ git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
 ```
 
-Then, you can release the extension to KubeSphere Extension Marketplace to install and test. For more information, see [Test extensions](../testing).
+接下来您可以参考[测试扩展组件](../testing)，将员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
 
 ### Examples
 
-We are familiar with the development of third-party tools and systems that can integrate into existing KubeSphere web console in [Integrate third-party systems](../../examples/third-party-component-integration-example). In this section, you can get to know how to compile it into an installation package.
-
+我们在[第三方系统集成示例](../../examples/third-party-component-integration-example)熟悉了集成已有 Web UI 的第三方工具与系统的开发，接下来可以参考以下内容将其打包成扩展组件安装包。
 
 After using ksbuilder create to create a directory for the grafana-ext extension package, you can clone the code from GitHub using Helm Chart for orchestration.
 
@@ -215,4 +214,4 @@ cd  ~/kubesphere-extensions
 ksbuilder publish grafana-ext
 ```
 
-Test the features: http://localhost:30880/proxy/grafana/login.
+在 KubeSphere 扩展市场安装 Grafana 扩展组件，访问 http://localhost:30880/proxy/grafana/login 验证组件。
