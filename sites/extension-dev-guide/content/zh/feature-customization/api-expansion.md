@@ -67,6 +67,6 @@ spec:
 #     port: 443
 ```
 
-此配置会将所有 `/proxy/weave.works/*` 请求路径前缀的 URL 的所有方法经过它处理，并且会移除请求头中 Authorization，然后把 `/proxy/weave.works` 请求路径前缀移除，将处理后的请求路由到 spec.upstream.url 对应的 `http://weave-scope-app.weave.svc` url 中处理。
+此配置表示将所有请求路径前缀为 `/proxy/weave.works`  的请求转发到指定的上游服务: `http://weave-scope-app.weave.svc`，并移除请求头中的 Authorization 字段和请求路径中的前缀 `/proxy/weave.works`。
 
 除此之外支持 rewrite、redirect、请求头注入、熔断、限流等高级配置，更多配置方式见[ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#reverseproxy)。
