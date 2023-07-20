@@ -1,15 +1,15 @@
 ---
-title: How the Hello World Extension Works
+title: 解析 Hello World 扩展组件
 weight: 3
-description: Describes how the Hello World extension works.
+description: 解读 Hello World 扩展组件的工作方式
 ---
 
 In the previous section, the KubeSphere web console runs locally and the extension is loaded properly. This topic describes how the extension works.
 
-The Hello World extension provides the following features:
+Hello World 扩展组件执行了 3 件事情：
 
 1. Register a menu button on the top navigation bar for quick access to the pages of the extension.
-2. Add an independent page route. When a user visits `http://localhost:8000/hello-world`, an extension page can be rendered correctly.
+2. 添加独立的页面路由，当用户访问 `http://localhost:8000/hello-world` 路径时可以正确地渲染扩展组件页面。
 3. Implement the extension pages.
 
 These three features are crucial for developing a KubeSphere extension. Let's take a closer look at the file structure and source code of the Hello World extension to learn more about how these features are implemented.
@@ -118,15 +118,15 @@ export default function App() {
 
 ### Learn More
 
-In this quickstart, you get to know how to create, run, and debug the frontend of a simple extension. A complete extension should include frontend and backend capabilities, and even need to integrate with external systems or tools through APIs. At the same time, the extension also needs to be packaged and deployed. You can also publish to the Extension Center to share the extension with others. Here are some suggested learning paths to further improve your skills in developing KubeSphere extensions:
+In this quickstart, you get to know how to create, run, and debug the frontend of a simple extension. A complete extension should include frontend and backend capabilities, and even need to integrate with external systems or tools through APIs. At the same time, the extension also needs to be packaged and deployed. 也可以发布到扩展组件市场，与他人分享您开发的扩展组件。下面是一些建议的学习路线，来进一步提高您开发 KubeSphere 扩展组件的技能：
 
 [System architecture](../../architecture) This section describes the system architecture of KubeSphere LuBan and its extension mechanism.
 
-[Custom features](../../feature-customization) In this section, we divide the KubeSphere API and extensions into several categories according to their functionality, and each category has a short description about what features your extension can achieve. You can learn about KubeSphere's extensibility capabilities by looking at the KubeSphere API.
+[功能定制](../../feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。You can learn about KubeSphere's extensibility capabilities by looking at the KubeSphere API.
 
 [Examples](../../examples) This section describes a large number of examples or video tutorials, including some guides to interpreting the source code in detail. You can find all samples and guides in [extension-samples](https://github.com/kubesphere/extension-samples).
 
-[Package and release](../../packaging-and-release) This section describes how to use the tool ksbuilder to package and test extensions, and how to release them to the Extension Center.
+[打包发布](../../packaging-and-release) 该章节介绍如何利用工具 ksbuilder 打包扩展组件并进行测试，以及如何将其发布到扩展组件市场。
 
 [Best practices](../../best-practices) This section introduces a number of best practices for creating extension UIs to help your extensions fit seamlessly into the KubeSphere web console.
 
