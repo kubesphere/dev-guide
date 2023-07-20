@@ -1,18 +1,18 @@
 ---
 title: Access Control
 weight: 3
-description: Describes how to enable access control for custom extension resources.
+description: 介绍如何控制扩展组件定制资源的访问权限
 ---
 
 This section describes how to enable access control for custom extension resources.
 
 You can [use a custom resource definition (CRD) to create a custom resource (CR)](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/) in an extension, and use the `RoleTemplate` resource type introduced in this section to customize access control. In the KubeSphere web console, you can customize access control to create roles and grant roles to users, so that only users with specific roles are allowed to access custom resources of extensions.
 
-`RoleTemplate` is a CRD provided by KubeSphere, built on top of Kubernetes-native role-based access control (RBAC) authentication mechanism. It is used to provide a permission item. A permission item is the smallest unit of permission control, which can be used to define permissions for a function. With multiple permission items, a role can be formed. Based on permissions items, we can freely create custom roles.
+`RoleTemplate` is a CRD provided by KubeSphere, built on top of Kubernetes-native role-based access control (RBAC) authentication mechanism. It is used to provide a permission item. A permission item is the smallest unit of permission control, which can be used to define permissions for a function. With multiple permission items, a role can be formed. 基于权限项，我们可以自由地创建定制角色。
 
 For more information about the Kubernetes RBAC authentication mechanism, see [Kubernetes official documentation](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example).
 
-In the Kubesphere user interface, users usually want to obtain other resources associated with the resource they get. So the permissions of a set of densely associated resources have been set in a RoleTemplate to meet user needs in the user interface.
+In the Kubesphere user interface, users usually want to obtain other resources associated with the resource they get. 我们把一组关联密集的资源的权限放在一个 RoleTemplate 中，以满足在用户界面上的使用需求。
 
 ## RoleTemplate examples
 
@@ -77,7 +77,7 @@ The following content describes how to configure parameters for custom permissio
   * `name`: the resource name of the custom permission.
   * `annotations`:
 
-     * `iam.kubesphere.io/dependencies`: It will be displayed as a dependency in the Console. When this permission item is selected, the dependent permission item will be automatically selected.
+     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
 
   * `labels`:
 
@@ -102,7 +102,7 @@ The following content describes how to configure parameters for custom permissio
 
 ## Category
 
-Category is used to mark the category of RoleTemplate. KubeSphere Console displays permission items in groups according to their categories. It corresponds to the label `iam.kubesphere.io/category: custom-resource-manage` of RoleTemplate.
+Category is used to mark the category of RoleTemplate. KubeSphere Console displays permission items in groups according to their categories. 对应 RoleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。
 
 ```yaml
 ---
@@ -131,7 +131,7 @@ spec:
 
      * `scope.kubesphere.io/global`: the resource label of custom permissions. KubeSphere divides permissions into platforms, clusters, workspaces and project permissions. `global` indicates that the current permission is at the platform level. The value can be `global`, `cluster`, `workspace` and `namespace`.
 
-     * `scope.iam.kubesphere.io/workspace`: This type of resource contains multiple levels of permissions, so both the "global" and "workspace" labels are specified.
+     * `scope.iam.kubesphere.io/workspace`：此类资源包含了多个层级的权限，所以同时指定了 global 和 workspace 标签。
 
     * `spec`
 
