@@ -1,19 +1,19 @@
 ---
 title: Frontend Extensions
 weight: 1
-description: Describes KubeSphere frontend extensions.
+description: 介绍 KubeSphere 前端扩展机制
 ---
 
-To enable flexibility and scalability, KubeSphere adopts an architecture that consists of a `microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. You can dynamically install, uninstall, start, or stop extension components during system running. The following figure shows the architecture:
+To enable flexibility and scalability, KubeSphere adopts an architecture that consists of a `microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. 系统可在运行时动态地安装、卸载、启用、禁用扩展组件。The following figure shows the architecture:
 
 
 ![frontend-extension-arch](./frontend-arch.png)
 
 ## Principles
 
-When it comes to decoupling megalithic applications and dynamic extensions, the buzzword `micro frontends` in recent years must pop into our mind. Well-known implementations of `micro frontends` such as qiankun and micro-app have done a lot of work on JavaScript sandboxes and styling isolation, so as to prevent the styles of sub-applications in a micro-frontend framework inadvertently affect the styles of other sub-applications. Styling isolation is often a compromise to solve specific technical debt or team coordination problems. If a front-end system integrates React, Vue, and Angular, it will be difficult to ensure UI consistency, and the size of the front-end bundle will also be significantly increased. Moreover, if each sub-application is isolated in its own runtime, and its integration with the main application is not tight enough.
+When it comes to decoupling megalithic applications and dynamic extensions, the buzzword `micro frontends` in recent years must pop into our mind. 知名的`微前端`实现比如 qiankun, micro-app，为了解决子应用技术栈无关、样式侵入问题，在 JS 沙箱、样式隔离上做了很多工作。而隔离往往是为了解决某些技术栈问题或者团队配合问题而做的妥协。If a front-end system integrates React, Vue, and Angular, it will be difficult to ensure UI consistency, and the size of the front-end bundle will also be significantly increased. Moreover, if each sub-application is isolated in its own runtime, and its integration with the main application is not tight enough.
 
-To enable extensibility, KubeSphere LuBan 4.0 aims to implement `micro frontends` or `micro modules`, which are more lightweight and have less demand for styling isolation. In a `micro module` architecture, sub-applications can share the tech stack and runtime with the main application. This can achieve experience consistency, high integration, and easy dependency sharing, thereby improving operation efficiency. As shown in the preceding architecture, the development of extension components relies on common dependencies such as kube-design and @ks-console/shared. Then, extensions can be packaged and released by using CLI tools. In the Core module, you can sign up for and run extension components.
+在 KubeSphere LuBan 4.0 可扩展的需求背景下，我们希望弱化隔离的要求，实现一种更轻量的`微前端`，或者我们可以称之为`微模块`。In a `micro module` architecture, sub-applications can share the tech stack and runtime with the main application. This can achieve experience consistency, high integration, and easy dependency sharing, thereby improving operation efficiency. As shown in the preceding architecture, the development of extension components relies on common dependencies such as kube-design and @ks-console/shared. Then, extensions can be packaged and released by using CLI tools. In the Core module, you can sign up for and run extension components.
 
 ## Core components
 The core components provide the following main features:
@@ -22,7 +22,7 @@ The core components provide the following main features:
    Two steps are important for extension management: load JavaScript bundles in the runtime and authorize and authenticate extensions. KubeSphere LuBan 4.0 uses SystemJS to load JavaScript bundles for extensions and defines standard specifications for extension integration with the Core module.
 2. Communications
 
-   EventBus is built in the Core module to facilitate communication between the Core module and extensions.
+   内核中我们内置了EventBus(pub/sub), 可以方便地在内核和扩展组件之间、扩展组件与扩展组件之间进行通信。
 3. Routing management
 
    Based on React Router, the routes defined in the extensions will be integrated into the Core module for unified management when the extensions are authorized and authenticated.
@@ -31,11 +31,11 @@ The core components provide the following main features:
    Based on i18next, KubeSphere LuBan 4.0 implements internationalization.  For extensions, developers can define translation files based on the format in i18next, and then authorize and authenticate the extensions in the Core module.
 5. Extension Marketplace
 
-   Similar to the extension mechanism of Google Chrome, KubeSphere LuBan 4.0 also provides a module for visualized management of extensions, which is convenient for users to install, uninstall, start, or stop extensions in the web console.
+   类似 chrome 浏览器的扩展程序，我们也有一个可视化的扩展组件管理模块，方便用户在页面上实现对扩展组件的安装、卸载、启用、禁用等操作。
 
 6. Basic pages
 
-   The Core module provides necessary UI elements for system running, including the login page and page layout.
+   系统运行的一些必备的 UI 元素，包括登录页面、页面 layout 等。
 7. Backend for frontend (BFF)
 
    Use Koa to implement the BFF architecture. The Core module is responsible for home page rendering, request forwarding, data conversion, and lightweight backend task processing.
@@ -116,7 +116,7 @@ globals.context.registerExtension(extensionConfig);    // Globally register an e
 As shown in the preceding code, the extension is intialized by using a scaffolding tool and an entry file is generated. The development of business code is different from that of regular frontend projects. After the development is completed, the extension will be packaged and released. The extension code is stored in its own repo, which will not affect the styling of the Core module.
 
 ## Development empowerment
-KubeSphere provides some common components, tools, and libraries to help developers develop extensions efficiently, taking into account experience consistency and operation efficiency.
+为方便开发者更高效地开发扩展组件，同时也为了系统体验一致性的约束及运行效率的考虑，我们提供了一些通用的组件、工具等库。
 1. Common extension library [KubeDesign](https://github.com/kubesphere/kube-design)
 2. Frontend scaffolding tool [create-ks-project](https://github.com/kubesphere/create-ks-project)
 3. Lightweight status management library @ks-console/stook
