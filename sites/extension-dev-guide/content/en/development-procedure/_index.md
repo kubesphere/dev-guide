@@ -1,7 +1,7 @@
 ---
 title: "Procedure"
 weight: 3
-description: Describes a structured process to develop KubeSphere extensions.
+description: 介绍 KubeSphere 扩展组件的开发流程
 ---
 
 This topic describes a structured process for developing KubeSphere extensions. Developing KubeSphere extensions includes setting up a development environment, creating a project, customizing features, and packaging and releasing extensions.
@@ -46,7 +46,7 @@ To develop frontend extensions, use the [React](https://reactjs.org) framework. 
 
 You can configure custom settings,  such as the theme, mount point for menus, access control, routing, and internationalization. KubeSphere provides an API that can integrate with extensions. You can register custom APIs to the KubeSphere API to implement remote calls.
 
-For more information about developing frontend and backend extensions, see [Examples](../examples).
+开发扩展组件前后端请参阅[示例与教程](../examples)。
 
 #### Package and release extensions
 
