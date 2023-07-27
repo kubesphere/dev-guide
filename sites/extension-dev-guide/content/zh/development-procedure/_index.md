@@ -1,7 +1,7 @@
 ---
 title: "开发流程"
 weight: 03
-description: 介绍 KubeSphere 扩展组件开发流程。
+description: 介绍 KubeSphere 扩展组件的开发流程
 ---
 
 本章节介绍 KubeSphere 扩展组件开发的基本流程。KubeSphere 扩展组件开发包括搭建开发环境、创建开发项目、定制功能以及打包发布几个步骤。
@@ -46,12 +46,12 @@ KubeSphere 扩展组件前端开发需要使用 [React](https://reactjs.org) 框
 
 您可以对扩展组件的主题、菜单挂载位置、访问控制、页面路由、国际化等功能特性进行定制。此外，KubeSphere 提供了 API 扩展接口，您可以将自定义 API 注册到 KubeSphere API 服务中供扩展组件调用。
 
-开发扩展组件前后端请参阅[示例与教程](../examples)
+开发扩展组件前后端请参阅[示例与教程](../examples)。
 
 #### 打包发布
 
-您需要将扩展组件的前后端源代码构建成容器镜像，打包扩展组件安装包，将扩展组件安装包上架到本地的扩展组件商店。您可以通过扩展组件商店安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。可以参考以下步骤：
+您需要将扩展组件的前后端源代码构建成容器镜像，打包扩展组件安装包，将扩展组件安装包上架到本地的扩展市场。您可以通过扩展市场安装到 KubeSphere 环境中，以测试扩展组件的功能是否符合预期。可以参考以下步骤：
 
 1. 参考[示例与教程](../examples/employee-management-extension-example/#员工管理扩展组件示例)构建镜像部分，将扩展组件的前后端源代码构建成容器镜像
 2. 参考[打包扩展组件](../packaging-and-release/packaging)，将扩展组件前后端部署声明和 APIService、JSBundle 等扩展声明打包成扩展组件安装包
-3. 参考[测试扩展组件](../packaging-and-release/testing)将扩展组件上架到本地的扩展组件商店中，安装扩展组件并测试使用扩展组件功能
+3. 参考[测试扩展组件](../packaging-and-release/testing)将扩展组件上架到本地的扩展市场中，安装扩展组件并测试使用扩展组件功能

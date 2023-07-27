@@ -1,5 +1,5 @@
 ---
-title: ksbuilder CLI reference
+title: ksbuilder CLI 参考
 weight: 01
 description:  ksbuilder 扩展组件打包、发布工具
 ---
@@ -10,7 +10,7 @@ description:  ksbuilder 扩展组件打包、发布工具
 
 ## ksbuilder
 
-ksbuilder is a command line interface for KubeSphere extension system
+ksbuilder 是 KubeSphere 扩展组件的命令行接口。
 
 ```
 ksbuilder [flags]
@@ -26,7 +26,7 @@ ksbuilder [flags]
 
 ## ksbuilder create
 
-Create a new KubeSphere extension
+执行以下命令创建新的 KubeSphere 组件。
 
 ```
 ksbuilder create [flags]
@@ -40,26 +40,25 @@ ksbuilder create [flags]
 
 ------
 
-## ksbuilder init
+## ksbuilder package
 
-Init a new KubeSphere extension project
+执行以下命令打包组件。
 
 ```
-ksbuilder init [flags]
+ksbuilder package [flags]
 ```
 
 ### 可选项
 
 ```
-  -d, --directory string   directory
-  -h, --help               help for init
+  -h, --help   help for package
 ```
 
 ------
 
 ## ksbuilder publish
 
-Publish an extension into the market
+执行以下命令将组件发布到扩展市场。
 
 ```
 ksbuilder publish [flags]
@@ -68,14 +67,15 @@ ksbuilder publish [flags]
 ### 可选项
 
 ```
-  -h, --help   help for publish
+  -h, --help                help for publish
+      --kubeconfig string   kubeconfig file path of the target cluster
 ```
 
 ------
 
 ## ksbuilder version
 
-Display version
+执行以下命令查看组件版本。
 
 ```
 ksbuilder version [flags]

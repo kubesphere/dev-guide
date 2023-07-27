@@ -1,7 +1,7 @@
 ---
 title: 挂载位置
 weight: 02
-description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
+description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置
 ---
 
 本章节介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置。
@@ -22,7 +22,7 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 * 工具箱菜单
 
-  将光标悬停在页面右下角的 <img src="" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
+  将光标悬停在页面右下角的 <img src="./hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
 
   <img src="./toolbox-menu.png" style="max-width: 1000px; margin: 0px">
 

@@ -1,72 +1,72 @@
 ---
-title: API Extension
-weight: 6
+title: API Extensions
+weight: 06
 description: Describes how to extend the API
 ---
 
-## API Extension
+## API Extensions
 
-后端完成 API 开发后，需要将 API 注册到 KS API 扩展中由 KS 统一对外暴露和处理，这样就不用单独处理鉴权等通用操作。另外我们在访问各个扩展的服务时，不可能单独为每个服务都配置各自 Endpoint 去访问，这样会太过于繁琐且不便于管理。于是就可以通过在 API 扩展中管理这些配置。可以将 KS API 扩展模块理解为一个 API 网关，扩展的 API 只需关注各自的业务逻辑，然后通过 API 扩展接入到 KS 平台。
+After the API backend development completes, the API should be registered in the KubeSphere API extension, and be exposed and processed by KubeSphere uniformly, so that there is no need to deal with common operations such as authentication any more. In addition, when you access services of extensions, it is impossible to configure Endpoints for each service, which will be too cumbersome and inconvenient to manage. These configurations can then be managed in API extensions. The KubeSphere API extension module can be seem as an API gateway. The extended API only needs to focus on its own business logic, and then access the KubeSphere platform through the API extension.
 
-API 扩展主要有两种方式，分别有不同的使用场景：
+There are two main methods for API extension, each with different usage scenarios:
 
 ### APIService
 
-这种方式常见于**自定义开发的扩展组件**，将扩展组件的 API 接入平台。
+This method is commonly used for **custom-developed extensions**, which connects the extension API to the platform.
 
-比如开发了 employee 后端 API 后，后端 API 前缀为 `/kapis/employee.kubesphere.io/v1alpha1` ，部署的服务的 Endpoint 为 `http://employee-api.default.svc:8080`，我们可以进行如下配置：
+For example, after developing the backend API of the employee extension, the prefix of the backend API is `/kapis/employee.kubesphere.io/v1alpha1`, and the endpoint of the deployed service is `http://employee-api.default.svc:8080`. The following configurations can be made:
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
-  name: v1alpha1.employee.kubesphere.io
+   name: v1alpha1.employee.kubesphere.io
 spec:
-  group: employee.kubesphere.io
-  version: v1alpha1                                      
-  url: http://employee-api.default.svc:8080
+   group: employee.kubesphere.io
+   version: v1alpha1
+   url: http://employee-api.default.svc:8080
 
 # caBundle: <Base64EncodedData>
-# insecureSkipTLSVerify: false
+#insecureSkipTLSVerify: false
 
 # service:
-#   namespace: example-system
-#   name: apiserver
-#   port: 80
+# namespace: example-system
+# name: apiserver
+# port: 80
 ```
 
-路由处理时会将请求： `/kapi/{spec.group}/{spec.version}` 路由到这个配置中 `{spec.url}` 上。就是将 `/kapis/employee.kubesphere.io/v1alpha1` 前缀的请求路由到 `http://employee-api.default.svc:8080` 服务上处理。
+During routing processing, the request: `/kapi/{spec.group}/{spec.version}` will be routed to the configuration `{spec.url}`. It is to route the request prefixed with `/kapis/employee.kubesphere.io/v1alpha1` to the `http://employee-api.default.svc:8080` service.
 
-指定路由的服务时也可以配置成 spec.service。若是 https 协议还需进行证书的相关配置，更多配置方式见 [APIService](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice)。
+It can also be configured as spec.service when specifying the route service. If the https protocol needs certificate configurations, see [APIService](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice for more configuration methods).
 
 ### ReverseProxy
 
-这种方式常见于**接入三方组件**，考虑到安全性、需要对请求及 URL 进行特殊的处理等因素，可以用反向代理的方式将扩展组件 API 接入平台。
+This method is commonly used for **accessing three-party components**. Considering factors such as security and the need for special processing of requests and URLs, you can use a reverse proxy to connect the extension API to the platform.
 
-如下接入 weave-scope 三方系统的配置：
+The configuration of accessing the weave-scope system is as follows:
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: ReverseProxy
 metadata:
-  name: weave-scope
+   name: weave-scope
 spec:
-  directives:
-    headerUp:
-    - -Authorization
-    stripPathPrefix: /proxy/weave.works
-  matcher:
-    method: '*'
-    path: /proxy/weave.works/*
-  upstream:
-    url: http://weave-scope-app.weave.svc
+   directives:
+     headerUp:
+     - -Authorization
+     stripPathPrefix: /proxy/weave.worKubeSphere
+   matcher:
+     method: '*'
+     path: /proxy/weave.worKubeSphere/*
+   upstream:
+     url: http://weave-scope-app.weave.svc
 
-#   service:
-#     namespace: example-system
-#     name: apiserver
-#     port: 443
+# service:
+# namespace: example-system
+# name: apiserver
+# port: 443
 ```
 
-此配置表示将所有请求路径前缀为 `/proxy/weave.works`  的请求转发到指定的上游服务: `http://weave-scope-app.weave.svc`，并移除请求头中的 Authorization 字段和请求路径中的前缀 `/proxy/weave.works`。
+This configuration means that all requests with a path prefix of `/proxy/weave.works` are forwarded to the specified upstream service: `http://weave-scope-app.weave.svc`, and the Authorization field in the request header and the prefix `/proxy/weave. works` in the request path are removed.
 
-除此之外支持 rewrite、redirect、请求头注入、熔断、限流等高级配置，更多配置方式见[ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#reverseproxy)。
+In addition, it supports advanced configurations such as rewrite, redirect, request header injection, circuit breaking, and traffic limiting. For more configuration methods, see [ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/zh/ architecture/backend-extension-architecture/#reverseproxy).
