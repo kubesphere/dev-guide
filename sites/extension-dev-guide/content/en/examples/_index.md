@@ -1,7 +1,7 @@
 ---
-title: 开发示例
+title: Development Examples
 weight: 6
-description: "本章节包含了一些更典型、更高阶的扩展组件开发示例教程"
+description: "Contains some more typical and advanced development examples of extensions"
 ---
 
 {{%children description="true" %}}

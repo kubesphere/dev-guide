@@ -1,136 +1,147 @@
 ---
 title: Access Control
 weight: 3
-description: Describes how to enable access control for custom extension resources.
+description: 介绍如何控制扩展组件定制资源的访问权限
 ---
 
 This section describes how to enable access control for custom extension resources.
 
 You can [use a custom resource definition (CRD) to create a custom resource (CR)](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/) in an extension, and use the `RoleTemplate` resource type introduced in this section to customize access control. In the KubeSphere web console, you can customize access control to create roles and grant roles to users, so that only users with specific roles are allowed to access custom resources of extensions.
 
-`RoleTemplate` is a CRD provided by KubeSphere, built on top of Kubernetes-native role-based access control (RBAC) authentication mechanism. For more information about the Kubernetes RBAC authentication mechanism, see [Kubernetes official documentation](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example).
+`RoleTemplate` is a CRD provided by KubeSphere, built on top of Kubernetes-native role-based access control (RBAC) authentication mechanism. It is used to provide a permission item. A permission item is the smallest unit of permission control, which can be used to define permissions for a function. With multiple permission items, a role can be formed. 基于权限项，我们可以自由地创建定制角色。
 
-## RoleTemate examples
+For more information about the Kubernetes RBAC authentication mechanism, see [Kubernetes official documentation](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/#clusterrole-example).
 
-Assume that CRD `custom-resource` is defined in the extension. The following YAML file creates two custom permissions, `role-template-custom-resource-viewing` and `role-template-custom-resource-creation`, which authorize users to view and create resources of the `custom-resource` type. The permission `role-template-custom-resource-creation` is on top of `role-template-custom-resource-viewing`.
+In the Kubesphere user interface, users usually want to obtain other resources associated with the resource they get. 我们把一组关联密集的资源的权限放在一个 RoleTemplate 中，以满足在用户界面上的使用需求。
+
+## RoleTemplate examples
+
+Assume that CRD `custom-resource` `custom-resource-version` is defined in the extension. We expect that it returns custom-resource-version when KubeSphere users view custom-resource in the user interface. The following YAML files create two custom permissions: `global-custom-resource-viewing` and `global-custom-resource- creation`, respectively authorizing users to view and create resources in the `custom-resource` type, where `global-custom-resource-creation ` depends on `global-custom-resource-viewing`.
 
 ```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
+apiVersion: iam.kubesphere.io/v1beta1
 kind: RoleTemplate
 metadata:
-  name: role-template-custom-resource-viewing
+  name: global-custom-resource-view
   labels:
+    iam.kubesphere.io/category: custom-resource-management
     scope.kubesphere.io/workspace: ""
-spec:
-  role:
-    apiVersion: iam.kubesphere.io/v1alpha2
-    kind: WorkspaceRole
-    metadata:
-      name: role-template-custom-resource-viewing
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      annotations:
-        iam.kubesphere.io/module: Custom Permission Group
-        iam.kubesphere.io/role-template-rules: '{"custom-resource": "list"}'
-        kubesphere.io/alias-name: Custom Resource Viewing
-    rules:
-      - apiGroups:
-          - custom-api-group
-        resources:
-          - custom-resource
-        verbs:
-          - list
+spec: 
+  displayName: 
+    en: Custom Resource Viewing
+  rules:
+    - apiGroups:
+        - custom-api-group
+      resources:
+        - custom-resource
+        - custom-resource-version
+      verbs:
+        - list
+        - get
+        - watch
 ```
 
 ```yaml
-apiVersion: iam.kubesphere.io/v1alpha2
+apiVersion: iam.kubesphere.io/v1beta1
 kind: RoleTemplate
 metadata:
-  name: role-template-custom-resource-creation
+  name: global-custom-resource-manage
+  annotations:
+    iam.kubesphere.io/dependencies: global-custom-resource-view
   labels:
+    iam.kubesphere.io/category: custom-resource-management
     scope.kubesphere.io/workspace: ""
 spec:
-  role:
-    apiVersion: iam.kubesphere.io/v1alpha2
-    kind: WorkspaceRole
-    metadata:
-      name: role-template-custom-resource-creation
-      labels:
-        iam.kubesphere.io/role-template: "true"
-      annotations:
-        iam.kubesphere.io/module: Custom Permission Group
-        iam.kubesphere.io/role-template-rules: '{"custom-resource": "create"}'
-        kubesphere.io/alias-name: Custom Resource Creation
-        iam.kubesphere.io/dependencies: '["role-template-custom-resource-viewing"]'
-    rules:
-      - apiGroups:
-          - custom-api-group
-        resources:
-          - custom-resource
-        verbs:
-          - create
+  displayName:
+    en: Custom Resource Viewing
+  rules:
+    - apiGroups:
+        - custom-api-group
+      resources:
+        - custom-resource
+        - custom-resource-version
+      verbs:
+        - *
 ```
 
-### Parameters
+### RoleTemplate parameters
 
 The following content describes how to configure parameters for custom permissions.
 
-* `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1alpha2`.
+* `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1beta1`.
 
 * `kind`: the resource type of the custom permission. Set the value to `RoleTemplate`.
 
-* `metadata`: the metadata for the custom permission.
+* `metadata`: the metadata of the custom permission.
 
   * `name`: the resource name of the custom permission.
+  * `annotations`:
 
-  * `labels`: the labels for the custom permission. KubeSphere provides permissions at different levels: platform, cluster, workspace, and project. It identifies the level of custom permissions based on the following labels:
+     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
 
-    * `scope.kubesphere.io/global`: platform-level.
+  * `labels`:
 
-    * `scope.kubesphere.io/cluster`: cluster-level.
-
-    * `scope.kubesphere.io/workspace`: workspace-level.
-
-    * `scope.kubesphere.io/project`: project-level.
-
+    * `scope.kubesphere.io/global`: the resource label of custom permissions. KubeSphere divides permissions into platforms, clusters, workspaces and project permissions. `global` indicates that the current permission is at the platform level. The value can be `global`, `cluster`, `workspace` and `namespace`.
+    * `iam.kubespere.io/category: custom-resource-management`: Mark the category of the permission item.
 * `spec`
 
-  * `role`
+  * `displayName`: the display name of the custom permission. KubeSphere Console will be displayed with this name.
 
-    * `apiVersion`: the API version for KubeSphere access control. The current version is `iam.kubesphere.io/v1alpha2`.
+    * `en`: display name in English.
 
-    * `kind`: the level of the custom permission. The parameter value must match the setting of the `metadata:labels` parameter. Valid values:
+    * `zh`: display name in Chinese.
 
-      * `GlobalRole`: platform-level.
+  * `rules`: the resources and operations allowed by the custom permission. This parameter is the actual definition of the content of custom permissions.
 
-      * `ClusterRole`: cluster-level.
+    * `apiGroups`: the API group to which the resource type belongs. The value `*` indicates all API groups.
 
-      * `WorkspaceRole`: workspace-level.
+    * `resources`: the resource type authorized to users, which can be CRD (for instance, `custom-resource`, `custom-resource-version` in the examples in this section) or a Kubernetes default resource type (such as `deployment`). The value `*` indicates all resource types.
 
-      * `ProjectRole`: project-level.
+    * `verbs`: the operations authorized to the user. The value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
 
-    * `metadata`
 
-      * `name`: the name of the custom permission. The parameter value must match the setting of the `metadata:name` parameter.
+## Category
 
-      * `labels`: the labels for the custom permission.
+Category is used to mark the category of RoleTemplate. KubeSphere Console displays permission items in groups according to their categories. 对应 RoleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。
 
-        * `iam.kubesphere.io/role-template`: whether to display the custom permission at the KubeSphere frontend. Value `true` indicates that the custom permission appears at the KubeSphere frontend.
+```yaml
+---
+apiVersion: iam.kubesphere.io/v1beta1
+kind: Category
+metadata:
+  name: custom-resource-management
+  labels:
+    scope.iam.kubesphere.io/global: ""
+    scope.iam.kubesphere.io/workspace: ""
+spec:
+  displayName:
+    en: Custom Resource Management
+```
 
-      * `annotations`: the annotations of the custom permission.
+### Category parameters
+ * `apiVersion`: the API version for KubeSphere access control.  The current version is `iam.kubesphere.io/v1beta1`.
 
-        * `iam.kubesphere.io/module`: the group to which the custom permission belongs.
+ * `kind`: the resource type of the custom permission.  Set the parameter value to `Category`.
 
-        * `iam.kubesphere.io/role-template-rules`: the resource types and operations granted by the custom permission. For example, `'{"custom-resource": "create"}'</ 0> indicates the permission to create resources of the <code>custom-resource` type. This parameter is only for the KubeSphere frontend to obtain the permission content, and does not define the permission. For example, the KubeSphere frontend can determine whether to display extensions for a specific user based on the value returned by this parameter. Permissions are defined by `spec:role:rules`. This parameter value must match the `spec:role:rules` parameter setting to prevent frontend logic errors.
+ * `metadata`: the metadata for the custom permission.
 
-        * `kubesphere.io/alias-name`: the name of the custom permission displayed on the front end of KubeSphere.
+   * `name`: the resource name of the custom permission.
 
-        * `iam.kubesphere.io/dependencies`: the resource name of other permissions that the custom permission depends on.
+   * `labels`:
 
-      * `rules`: the resources and operations allowed by the custom permission. This parameter defines the custom permission content, which is different from `iam.kubesphere.io/role-template-rules`.
+     * `scope.kubesphere.io/global`: the resource label of custom permissions. KubeSphere divides permissions into platforms, clusters, workspaces and project permissions. `global` indicates that the current permission is at the platform level. The value can be `global`, `cluster`, `workspace` and `namespace`.
 
-        * `apiGroups`: the API group to which the resource type belongs. Value `*` indicates all API groups.
+     * `scope.iam.kubesphere.io/workspace`：此类资源包含了多个层级的权限，所以同时指定了 global 和 workspace 标签。
 
-        * `resources`: the resource type authorized to the user, which can be CRD (such as `custom-resource` in the example) or Kubernetes default resource type (such as `deployment</ 0>). Value <code>*` indicates all resource types.
+    * `spec`
 
-        * `verbs`: the operations authorized to the user. Value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
+      * `displayName`: the display name of the custom permission. KubeSphere Console will be displayed with this name.
+
+        * `en`: display name in English.
+
+        * `zh`: display name in Chinese.
+
+
+## Best Practices
+
+TODO

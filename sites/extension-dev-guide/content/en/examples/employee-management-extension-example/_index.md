@@ -1,12 +1,12 @@
 ---
-title: Develop an extension for employee management
+title: Develop an Extension for Employee Management
 weight: 1
 description: Describes how to develop frontend and backend extensions from scratch.
 ---
 
-Before you get started, make sure a development environment is set up and a project named [Hello World](../../quickstart/hello-world-extension/) is created for developing extensions. For information about how to set up an environment and create a project, see [Quick start](../../quickstart/).
+在[快速入门](../../quickstart/)的章节中，我们已经准备好了开发环境并且创建了一个简单的 [Hello World](../../quickstart/hello-world-extension/) 扩展组件项目。
 
-This topic describes how to develop and test extensions by developing an extension for employee management.
+本章将以开发一个员工管理功能扩展组件为例，带大家熟悉扩展组件的开发、测试流程。
 
 ## Requirements and design
 
@@ -22,15 +22,15 @@ Assume that you want to add a feature for employee management to the frontend of
 
 ## Develop backend extensions
 
-Then, you need to design APIs related to frontend and backend interactions and provide specific functional implementations. Backend development is not subject to the technology stack, and developers can choose their own language and framework for development. In this example, we use `go`, `gin`, `gorm`, and `sqlite` to implement features. For more information about the source code, see [Extension samples](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee).
+紧接着，我们需要设计前后端交互所涉及的 API 并提供具体的功能实现，后端开发不限制技术栈，开发者可以自由地选择自己擅长的语言和框架进行开发。In this example, we use `go`, `gin`, `gorm`, and `sqlite` to implement features. For more information about the source code, see [Extension samples](https://github.com/kubesphere/extension-samples/tree/master/extensions-backend/employee).
 
 {{% notice note %}}
-With the help of [Backend extensions](../../architecture/backend-extension-architecture/), you can dynamically register your API with ks-apiserver, and frontend extensions use ks-apiserver as a unified gateway to achieve unified API authentication and access control. You can also use the [API](../../references/kubesphere-api/) provided by ks-core to integrate with the KubeSphere tenant system.
+借助 [KubeSphere API 扩展机制](../../architecture/backend-extension-architecture/)，可以动态地将您的 API 注册到 ks-apiserver。扩展组件的前端将 ks-apiserver 作为统一的网关入口，以实现统一的 API 认证、访问权限控制，您还可以通过 ks-core 提供的 [API](../../references/kubesphere-api/) 接入 KubeSphere 租户体系。
 {{% /notice %}}
 
 #### 1. Build an image
 
-After you complete the backend API development, the backend part of the extension needs to be containerized. The following is an example of building an image in the development environment. You can also use the official image kubespheredev/employee-api:latest.
+当完成后端的 API 开发之后，需要将组件后端部分通过容器进行构建。以下为开发环境中构建镜像的示例，您也可以直接使用官方提供的镜像 kubespheredev/employee-api:latest。
 
 ```shell
 $ cd  ~/kubesphere-extensions
@@ -50,7 +50,7 @@ $ kubectl create deployment employee-api --image=kubespheredev/employee-api:late
 $ kubectl expose deployment employee-api --type=ClusterIP --name=employee-api --port=8080
 ```
 
-Verify that the deployment was successful and the pod is in the Running state:
+验证部署是否成功，pod 是否处于 Running 状态。
 
 ```bash
 $ kubectl get po
@@ -68,7 +68,7 @@ The following sample command is used to register the API to ks-apiserver with th
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/employee/employee-apiservice.yaml
 ```
 
-Verify that API registration is successful. In normal circumstances, the employees data provided by employee-api can be obtained through ks-apiserver. Note that if you change the default password of the admin user, you need to modify the password parameter in the command line.
+Verify that API registration is successful. In normal circumstances, the employees data provided by employee-api can be obtained through ks-apiserver. 注意如果您修改了 admin 用户的默认密码，则需要修改命令行中的 password 参数。
 
 ```bash
 $ curl -s -u admin:P@88w0rd http://localhost:30881/kapis/employee.kubesphere.io/v1alpha1/employees 
@@ -105,10 +105,10 @@ Then, let's take a look at the development and testing process of frontend exten
 
 #### 1. Scaffold a project
 
-In [Create a Hello World extension](../../quickstart/hello-world-extension/), you have created a simple extension. You can continue to create your second frontend extension named employee in the directory `~/kubesphere-extensions/frontend/`.
+In [Create a Hello World extension](../../quickstart/hello-world-extension/), you have created a simple extension. 我们可以继续在这个前端项目脚手架目录（`~/kubesphere-extensions/ks-console/`）中创建我们的第二个前端扩展组件 employee。
 
 ```shell
-$ cd ~/kubesphere-extensions/frontend/
+$ cd ~/kubesphere-extensions/ks-console/
 $ yarn create:ext
 ```
 
@@ -154,7 +154,7 @@ $ tree -I 'node_modules' -L 4
 └── yarn.lock
 ```
 
-Execute the following command to run the local development environment:
+现在我们可以执行以下命令运行本地开发环境。
 
 ```
 $ yarn dev
@@ -171,17 +171,17 @@ Dashboard app running at port 8000
 <i> [webpack-dev-server] Loopback: http://localhost:8001/
 <i> [webpack-dev-server] On Your Network (IPv4): http://192.168.1.133:8001/
 <i> [webpack-dev-server] On Your Network (IPv6): http://[fe80::1]:8001/
-<i> [webpack-dev-server] Content not from webpack is served from '~/kubesphere-extensions/frontend/dist' directory
+<i> [webpack-dev-server] Content not from webpack is served from '~/kubesphere-extensions/ks-console/dist' directory
 <i> [webpack-dev-server] 404s will fallback to '/index.html'
 Successfully started server on http://localhost:8000 
 ```
 
-After the development environment is started, you can develop business code in the local environment. The development method is similar to that of a regular React application. For information about the source code, see [Extension samples](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee).
+After the development environment is started, you can develop business code in the local environment. 开发方式与普通 react app 基本一致，本示例前端部分源码参见：[GitHub - employee-frontend](https://github.com/kubesphere/extension-samples/tree/master/extensions-frontend/extensions/employee)。
 
-For demonstration, you can directly copy the code from the sample repository.
+便于演示，我们可以将示例仓库中的代码直接复制过来。
 
 ```shell
-cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/frontend/extensions/employee
+cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/employee/* ~/kubesphere-extensions/ks-console/extensions/employee
 ```
 
 #### 2. Build an image
@@ -198,14 +198,14 @@ $ popd
 
 #### 3. Deploy a frontend service
 
-You can use an official image to deploy a service:
+可以使用官方已经构建好的镜像直接部署。
 
 ```bash
 $ kubectl create deployment employee-frontend --image=kubespheredev/employee-frontend:latest 
 $ kubectl expose deployment employee-frontend --type=ClusterIP --name=employee-frontend --port=80
 ```
 
-Verify that the deployment was successful and the pod is in the Running state:
+验证部署是否成功，pod 是否处于 Running 状态。
 
 ```bash
 $ kubectl get po
@@ -215,7 +215,7 @@ employee-frontend-7dc7df84d8-5sr7g   1/1     Running   0          5m31s
 
 #### 4. Register the API of the frontend extension to ks-apiserver
 
-In production mode, ks-console will dynamically discover and load the extension through the API, which is different from locally loading extensions in development mode. After the frontend service is deployed, by creating a [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) object, the package of the frontend extension provided by employee-frontend can be registered in ks-apiserver, and ks-console will dynamically load the frontend extension to the kernel.
+In production mode, ks-console will dynamically discover and load the extension through the API, which is different from locally loading extensions in development mode. 当前端服务部署完成后，通过创建 [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) 资源对象，可以将 employee-frontend 提供的前端扩展包注册到 ks-apiserver 中，ks-console 会动态地将这些前端扩展加载到内核中。
 
 The following sample command registers the frontend employee extension package with ks-apiserver, and ks-console will automatically load the frontend extension package:
 
@@ -230,4 +230,4 @@ $ yarn build:prod
 $ yarn start
 ```
 
-For information about how to compile the installation package of the extension, see [Package extensions](../../packaging-and-release/packaging).
+接下来您可以参阅[打包扩展组件](../../packaging-and-release/packaging)，将本示例编译打包扩展组件安装包。

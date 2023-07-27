@@ -3,7 +3,7 @@ module ksbuilder-gen-docs
 go 1.18
 
 require (
-	github.com/kubesphere/ksbuilder v0.1.4
+	github.com/kubesphere/ksbuilder v0.1.9-0.20230602073206-f2a6a3f0802d
 	github.com/spf13/cobra v1.5.0
 )
 

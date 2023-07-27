@@ -1,5 +1,5 @@
 ---
-title: Custom features
+title: Custom Features
 weight: 5
 description: "KubeSphere provides various methods for custom extensions to extend its capabilities."
 ---

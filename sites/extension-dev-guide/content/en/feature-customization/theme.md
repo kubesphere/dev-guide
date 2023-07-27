@@ -1,7 +1,7 @@
 ---
-title: 主题
+title: Themes
 weight: 1
-description: "设置 KubeSphere 的主题与配色"
+description: "Set KubeSphere themes and colors"
 ---
 
 TBD
