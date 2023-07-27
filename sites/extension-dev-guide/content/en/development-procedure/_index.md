@@ -1,7 +1,7 @@
 ---
 title: "Procedure"
 weight: 3
-description: Describes a structured process to develop KubeSphere extensions.
+description: 介绍 KubeSphere 扩展组件的开发流程
 ---
 
 This topic describes a structured process for developing KubeSphere extensions. Developing KubeSphere extensions includes setting up a development environment, creating a project, customizing features, and packaging and releasing extensions.
@@ -12,7 +12,7 @@ The development environment for KubeSphere extensions includes KubeSphere Core a
 
 * KubeSphere Core: the minimal core component for KubeSphere, which provides a runtime for extension development.
 
-* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. 您需要在开发主机上安装 KubeSphere 团队提供的 create-ks-project 和 ksbuilder 等开发工具，以及 Node.js、Helm、kubectl 等第三方工具。
+* Development tools: the tools that are used to create a project, install dependencies, provide a runtime environment for extensions, and package and release extensions. On your server, you need to install development tools such as create-ks-project and ksbuilder, and third-party tools such as Node.js, Helm, and kubectl.
 
 For information about how to install KubeSphere Core and development tools, see [Set up a development environment](../quickstart/prepare-development-environment/).
 
@@ -46,12 +46,12 @@ To develop frontend extensions, use the [React](https://reactjs.org) framework. 
 
 You can configure custom settings,  such as the theme, mount point for menus, access control, routing, and internationalization. KubeSphere provides an API that can integrate with extensions. You can register custom APIs to the KubeSphere API to implement remote calls.
 
-For more information about developing frontend and backend extensions, see [Examples](../examples).
+开发扩展组件前后端请参阅[示例与教程](../examples)。
 
 #### Package and release extensions
 
-You need to build the source code of frontend and backend extensions into container images, package installation packages, and upload the installation packages to the local Extension Center. Then, you can install extensions in the Extension Center and test whether they can work as expected. Take the following steps:
+You need to build the source code of frontend and backend extensions into container images, package installation packages, and upload the installation packages to the local Extension Marketplace. Then, you can install extensions in the Extension Marketplace and test whether they can work as expected. Take the following steps:
 
 1. Build the source code of frontend and backend extensions into container images. For more information, see "Build an image" in [Examples](../examples/employee-management-extension-example/#Manage extensions).
 2. Package the declarations of frontend and backend extensions into installation packages, including APIService and JSBundle. For more information, see [Package extensions](../packaging-and-release/packaging).
-3. Release extensions in the local Extension Center, and install and test the extension features. For more information, see [Test extensions](../packaging-and-release/testing).
+3. Release extensions in the local Extension Marketplace, and install and test the extension features. For more information, see [Test extensions](../packaging-and-release/testing).

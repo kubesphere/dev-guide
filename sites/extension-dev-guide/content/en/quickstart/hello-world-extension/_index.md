@@ -1,7 +1,7 @@
 ---
-title: Create a Hello World extension
+title: Create a Hello World Extension
 weight: 2
-description: Describes how to create a Hello World example to help you understand the development process of extensions.
+description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程
 ---
 
 This section describes how to create a Hello World extension and add a separate page in the KubeSphere web console.
@@ -10,7 +10,7 @@ After reading this topic, you can get to know:
 
 * how to initialize a project for extension development.
 
-* how to launch the KubeSphere web console in your local environment.
+* 如何在本地运行 KubeSphere Console。
 
 * how to debug an extension.
 
@@ -32,7 +32,7 @@ A development environment is ready. For more information, see [Build a developme
    yarn create ks-project ks-console --fast-mode
    ```
 
-   The project contains a KubeSphere web console that can run locally.
+   KubeSphere 扩展组件开发项目中包含了一个可以在本地运行的 KubeSphere Console。
 
 2. Create a Hello World extension:
 
@@ -41,7 +41,7 @@ A development environment is ready. For more information, see [Build a developme
    yarn create:ext
    ```
 
-   Configure basic information, for example, the extension name, alias, description, author, and language.
+   根据命令提示，设置扩展组件的名称、显示名称、描述、作者和语言等基础信息，完成扩展组件创建。
 
    ```bash
    Extension Name hello-world
@@ -108,7 +108,7 @@ server:
 
 ### Debug the extension
 
-The source code of the Hello World extension is stored in `~/kubesphere-extensions/frontend/extensions/hello-world`.
+Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-console/extensions/hello-word/src` 目录中。
 
 You can change the string displayed on the page to `Test!`, as shown in the following figure:
 

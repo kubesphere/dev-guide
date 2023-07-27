@@ -1,7 +1,7 @@
 ---
-title: ksbuilder CLI reference
+title: ksbuilder CLI Reference
 weight: 1
-description: ksbuilder extension packaging and release tools
+description: ksbuilder is an extension packaging and release tool
 ---
 
 {{< table_of_contents >}}
@@ -10,7 +10,7 @@ description: ksbuilder extension packaging and release tools
 
 ## ksbuilder
 
-ksbuilder is a command line interface for KubeSphere extension system
+ksbuilder is the command line interface for the KubeSphere extension.
 
 ```
 ksbuilder [flags]
@@ -26,7 +26,7 @@ ksbuilder [flags]
 
 ## ksbuilder create
 
-Create a new KubeSphere extension
+Run the following command to create a new KubeSphere extension.
 
 ```
 ksbuilder create [flags]
@@ -40,26 +40,25 @@ ksbuilder create [flags]
 
 ------
 
-## ksbuilder init
+## ksbuilder package
 
-Init a new KubeSphere extension project
+Run the following command to pack the extension.
 
 ```
-ksbuilder init [flags]
+ksbuilder package [flags]
 ```
 
 ### Options
 
 ```
-  -d, --directory string   directory
-  -h, --help               help for init
+  -h, --help   help for package
 ```
 
 ------
 
 ## ksbuilder publish
 
-Publish an extension into the market
+Run the following command to publish the extension.
 
 ```
 ksbuilder publish [flags]
@@ -68,14 +67,15 @@ ksbuilder publish [flags]
 ### Options
 
 ```
-  -h, --help   help for publish
+  -h, --help                help for publish
+      --kubeconfig string   kubeconfig file path of the target cluster
 ```
 
 ------
 
 ## ksbuilder version
 
-Display version
+Run the following command to check the version of the extension.
 
 ```
 ksbuilder version [flags]
