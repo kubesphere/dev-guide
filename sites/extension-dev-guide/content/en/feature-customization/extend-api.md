@@ -139,7 +139,7 @@ body: CustomResource, 必须
 
 PUT /kapis/{group}/{version}/{resources}
 
-#### 参数
+#### Parameter
 
 body: CustomResource, 必须
 
@@ -155,7 +155,7 @@ body: CustomResource, 必须
 
 PATCH /kapis/{group}/{version}/{resources}
 
-#### 参数
+#### Parameter
 
 body: CustomResource, 必须
 
@@ -171,7 +171,7 @@ body: CustomResource, 必须
 
 DELETE /kapis/{group}/{version}/{resources}/{name}
 
-#### 参数
+#### Parameter
 
 **name** （**路径参数**）：string，必需，CR 的名称
 
