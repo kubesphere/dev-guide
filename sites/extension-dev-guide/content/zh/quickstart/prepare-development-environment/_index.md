@@ -17,7 +17,7 @@ description: 介绍如何搭建扩展组件的开发环境
 1. 登录到 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere Core：
 
    ```bash
-   helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/test/ks-core-0.3.1.tgz --set apiserver.nodePort=30881 --set global.tag=v4.0.0-beta.1 --debug --wait
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/test/ks-core-0.3.2.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
    {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群。" %}}
