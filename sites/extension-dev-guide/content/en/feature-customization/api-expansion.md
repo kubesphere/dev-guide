@@ -4,7 +4,7 @@ weight: 6
 description: Describes how to extend the API
 ---
 
-## API 扩展
+## API Extension
 
 后端完成 API 开发后，需要将 API 注册到 KS API 扩展中由 KS 统一对外暴露和处理，这样就不用单独处理鉴权等通用操作。另外我们在访问各个扩展的服务时，不可能单独为每个服务都配置各自 Endpoint 去访问，这样会太过于繁琐且不便于管理。于是就可以通过在 API 扩展中管理这些配置。可以将 KS API 扩展模块理解为一个 API 网关，扩展的 API 只需关注各自的业务逻辑，然后通过 API 扩展接入到 KS 平台。
 
@@ -87,14 +87,14 @@ spec:
 
 `/kapis/clusters/{cluster}/{group}/{version}/workspaces/{workspace}/namespaces/{namespace}/{resources}`
 
-| 参数        | 类型     | 含义     | 是否必须 | 备注                                                     |
+| Parameter | Type   | 含义     | 是否必须 | Description                                            |
 | --------- | ------ | ------ | ---- | ------------------------------------------------------ |
-| group     | string | API 分组 | 是    |                                                        |
-| version   | string | API 版本 | 是    |                                                        |
-| resources | string | API 资源 | 是    | API 资源的复数形式                                            |
-| cluster   | string | 集群名    | 是    | 操作指定集群上的资源需要设置此值，4.0 默认多集群模式，默认用到该参数                   |
-| workspace | string | 企业空间名  | 否    | 操作 workspace 级别的资源需要设置此值，在创建资源时为该资源设置上 workspace label |
-| namespace | string | 命名空间名  | 否    | 操作 namespace 级别的资源需要设置此值                               |
+| group     | string | API 分组 | Yes  |                                                        |
+| version   | string | API 版本 | Yes  |                                                        |
+| resources | string | API 资源 | Yes  | API 资源的复数形式                                            |
+| cluster   | string | 集群名    | Yes  | 操作指定集群上的资源需要设置此值，4.0 默认多集群模式，默认用到该参数                   |
+| workspace | string | 企业空间名  | No   | 操作 workspace 级别的资源需要设置此值，在创建资源时为该资源设置上 workspace label |
+| namespace | string | 命名空间名  | No   | 操作 namespace 级别的资源需要设置此值                               |
 
 操作不同级别的资源时，设置对应参数需要和该级别的前缀共存。比如，
 
@@ -124,7 +124,7 @@ spec:
 
 GET /kapis/{group}/{version}/{resources}/{name}
 
-##### 参数
+##### Parameter
 
 **name** （**路径参数**）：string，必需，CR 的名称
 
@@ -140,26 +140,26 @@ GET /kapis/{group}/{version}/{resources}/{name}
 
 GET /kapis/{group}/{version}/{resources}
 
-##### 参数
+##### Parameter
 
 查询参数：
 
-| 参数             | 类型     | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                           |
+| Parameter      | Type   | Description                                    | 是否必须 | 默认值               | Description                                                                                                                  |
 | -------------- | ------ | ---------------------------------------------- | ---- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| page           | int    | 页码                                             | 否    | 1                 |                                                                                                                              |
-| limit          | int    | 页宽                                             | 否    | -1                |                                                                                                                              |
-| sortBy         | string | 排序字段，支持 name, createTime,creationTimestamp     | 否    | creationTimestamp |                                                                                                                              |
-| ascending      | bool   | 升序                                             | 否    | false             |                                                                                                                              |
-| name           | string | 资源名                                            | 否    |                   |                                                                                                                              |
-| names          | string | 资源名集合，多个用英文逗号分开                                | 否    |                   |                                                                                                                              |
-| uid            | string | 资源 uid                                         | 否    |                   |                                                                                                                              |
-| namespace      | string | namespace                                      | 否    |                   |                                                                                                                              |
-| ownerReference | string | ownerReference                                 | 否    |                   |                                                                                                                              |
-| ownerKind      | string | ownerKind                                      | 否    |                   |                                                                                                                              |
-| annotation     | string | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | 否    |                   | annotation=ab=ok或annotation=ab                                                                                               |
-| label          | string | 标签，支持‘=’, '!='，单个label，键值对或单个键                 | 否    |                   | label=kubesphere.io/workspace=system-workspace 或 label=kubesphere.io/workspace                                               |
-| labelSelector  | string | 标签选择器                                          | 否    |                   | 与 K8s 中 labelSeletor 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
-| fieldSelector  | string | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔。从根开始查询所有路径属性 | 否    |                   | fieldSelector={field path}={field name}。fieldSelector=spec.ab=true,spec.bc!=ok                                               |
+| page           | int    | 页码                                             | No   | 1                 |                                                                                                                              |
+| limit          | int    | 页宽                                             | No   | -1                |                                                                                                                              |
+| sortBy         | string | 排序字段，支持 name, createTime,creationTimestamp     | No   | creationTimestamp |                                                                                                                              |
+| ascending      | bool   | 升序                                             | No   | false             |                                                                                                                              |
+| name           | string | 资源名                                            | No   |                   |                                                                                                                              |
+| names          | string | 资源名集合，多个用英文逗号分开                                | No   |                   |                                                                                                                              |
+| uid            | string | 资源 uid                                         | No   |                   |                                                                                                                              |
+| namespace      | string | namespace                                      | No   |                   |                                                                                                                              |
+| ownerReference | string | ownerReference                                 | No   |                   |                                                                                                                              |
+| ownerKind      | string | ownerKind                                      | No   |                   |                                                                                                                              |
+| annotation     | string | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | No   |                   | annotation=ab=ok或annotation=ab                                                                                               |
+| label          | string | 标签，支持‘=’, '!='，单个label，键值对或单个键                 | No   |                   | label=kubesphere.io/workspace=system-workspace 或 label=kubesphere.io/workspace                                               |
+| labelSelector  | string | 标签选择器                                          | No   |                   | 与 K8s 中 labelSeletor 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
+| fieldSelector  | string | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔。从根开始查询所有路径属性 | No   |                   | fieldSelector={field path}={field name}。fieldSelector=spec.ab=true,spec.bc!=ok                                               |
 
 ##### 响应
 
@@ -190,7 +190,7 @@ GET /kapis/{group}/{version}/{resources}
 
 POST /kapis/{group}/{version}/{resources}
 
-##### 参数
+##### Parameter
 
 body: CustomResource, 必须
 
@@ -208,7 +208,7 @@ body: CustomResource, 必须
 
 PUT /kapis/{group}/{version}/{resources}
 
-##### 参数
+##### Parameter
 
 body: CustomResource, 必须
 
@@ -224,7 +224,7 @@ body: CustomResource, 必须
 
 PATCH /kapis/{group}/{version}/{resources}
 
-##### 参数
+##### Parameter
 
 body: CustomResource, 必须
 
@@ -240,7 +240,7 @@ body: CustomResource, 必须
 
 DELETE /kapis/{group}/{version}/{resources}/{name}
 
-##### 参数
+##### Parameter
 
 **name** （**路径参数**）：string，必需，CR 的名称
 
