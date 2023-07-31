@@ -1,14 +1,14 @@
 ---
-title: Extend UI components
-weight: 07
-description: Describe how to extend UI components.
+title: UI 扩展
+weight: 7
+description: 介绍如何扩展 UI
 ---
 
-This section describes how to extend UI components.
+## UI 扩展
 
-After you have developed front-end functionalities, you can configure **JSBundle** to extend the UI components to KubeSphere, and then `ks-console` will automatically inject the extension package.
+完成前端功能开发后可通过配置 **JSBundle** 这种方式将页面扩展到 KS 平台中，`ks-console` 会根据 JSBundle 中的配置自动注入该扩展包。
 
-For example, in the default namespace, you deploy the employee-frontend, and then you can refer to the following to extend UI components to KubeSphere.
+如下：在 default namespace 中部署了 employee-frontend 前端服务后，通过如下配置可以将该服务中的前端资源扩展到 KS 平台中。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -33,6 +33,6 @@ spec:
 # raw: ""
 ```
 
-For some large-size JavaScript files, you can pack them as images and deploy them as a workload or service. In the example, the value of `spec.rawFrom.url` should be the path where **index.js** resides.
+对于一些 js 体积较大的文件就需要制作成镜像，部署成应用负载和服务的方式来扩展，这里 `spec.rawFrom.url` 指向服务中对应的 index.js 文件。
 
-For some small-size JavaScript files, you can configure then in CR, ConfigMap, or Secret. For more information, refer to [JSBundle](https://dev-guide.kubesphere.io/extension-dev-guide/en/architecture/backend-extension-architecture/).
+对于那些体积比较小的 js 文件，可以直接写在这个 CR 中，或 ConfigMap 或 Secret 中，更多配置方式见 [JSBundle](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#jsbundle)。
