@@ -1,5 +1,5 @@
 ---
-title: Quick Start
+title: Quick start
 weight: 4
 description: "Create and run your first KubeSphere extension"
 ---
