@@ -1,7 +1,7 @@
 ---
 title: Integrate with Third-Party Systems
 weight: 2
-description: Integrate with third-party tools and systems that have existing web UIs
+description: Integrate with third-party tools and systems that have existing web UIs.
 ---
 
 This section provides an example of integrating Weave Scope into extensions to help you familiarize how to quickly integrate third-party tools and systems with existing web UIs.
@@ -24,7 +24,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 
 ### Develop frontend extensions
 
-The process for project creation, local development, and debugging is the same as that in [Develop an extension for employee management](../employee-management-extension-example/#Develop an extension for employee management). 您可以从 GitHub 上克隆本示例的代码。
+The process for project creation, local development, and debugging is the same as that in [Develop an extension for employee management](../employee-management-extension-example/#Develop an extension for employee management). You can clone the GitHub repo:
 
 ```bash
 cd  ~/kubesphere-extensions
@@ -34,7 +34,7 @@ cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/w
 
 The following code block shows how to integrate Weave Scope:
 
-文件路径： `~/kubesphere-extensions/ks-console/extensions/weave-scope/src/App.jsx`
+File path: `~/kubesphere-extensions/ks-console/extensions/weave-scope/src/App.jsx`
 
 ```jsx
 import React, { useState, useRef } from 'react';
@@ -80,7 +80,7 @@ export default function App() {
 }
 ```
 
-以上代码主要执行了 2 件事情。
+The preceding code block completes the following tasks:
 
 1. Use `iframe` to integrate Weave Scope. `FRAME_URL` is the reverse proxy of Weave Scope, which shares the **origin** with the KubeSphere web console.
 
@@ -90,6 +90,6 @@ Due to the Same-Origin Policy, if the third-party system webpage has a different
 
 2. Adjust the webpage style of Weave Scope. Due to the same origin, the extension can read and operate on the Document Object Model (DOM) of the Weave Scope page (`iframe`) by using `React` `ref`. This way, you can adjust the style and hidden the effect caused by the selector.
 
-通过 `yarn dev` 启动本地预览环境，您可以通过扩展组件入口访问到以下页面。
+Run `yarn dev` to launch a local environment, and then you can access the webpage through the extension:
 
 ![weave-scope-dashboard](./sample-weave-scope-dashboard.png)

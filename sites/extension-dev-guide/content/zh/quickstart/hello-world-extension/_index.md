@@ -29,7 +29,8 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
    ```bash
    mkdir -p ~/kubesphere-extensions
    cd ~/kubesphere-extensions
-   yarn create ks-project ks-console --fast-mode
+   yarn add global create-ks-project
+   yarn create ks-project ks-console
    ```
 
    KubeSphere 扩展组件开发项目中包含了一个可以在本地运行的 KubeSphere Console。

@@ -1,7 +1,7 @@
 ---
 title: Mount Point
 weight: 2
-description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置
+description: Describes how to configure the mount point of an extension in the KubeSphere web console.
 ---
 
 This section describes how to configure the mount point of an extension in the KubeSphere web console.
@@ -14,15 +14,15 @@ You can mount extensions to the following points:
 
   <img src="./top-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* Platform management menu
+* Extensions menu
 
-  In the top navigation bar, click `Platform` to open the menu.
+  In the top navigation bar, click <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> to open the menu.
 
   <img src="./platform-menu.png" style="max-width: 1000px; margin: 0px" />
 
 * Toolbox menu
 
-  将光标悬停在页面右下角的 <img src="./hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top" /> 图标打开菜单。
+  Hover over the <img src="./hammer.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top" /> icon in the bottom right corner of the page to open the menu.
 
   <img src="./toolbox-menu.png" style="max-width: 1000px; margin: 0px" />
 
@@ -66,7 +66,7 @@ const menu = {
       <td>The mount point of the extension. Valid values:
         <ul>
           <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
-          <li><strong>global</strong>: mounts to the platform management menu.</li>
+          <li><strong>global</strong>: mounts to the extensions menu.</li>
           <li><strong>toolbox</strong>: mounts to the toolbox menu.</li>
           <li><strong>access</strong>: mounts to the left-side navigation pane on the Access Control page.</li>
           <li><strong>cluster</strong>: mounts the left-side navigation pane on the Cluster Management page.</li>

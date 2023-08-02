@@ -1,7 +1,7 @@
 ---
 title: Create a Hello World Extension
 weight: 2
-description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程
+description: Describes how to create a demo extension "Hello World".
 ---
 
 This section describes how to create a Hello World extension and add a separate page in the KubeSphere web console.
@@ -10,7 +10,7 @@ After reading this topic, you can get to know:
 
 * how to initialize a project for extension development.
 
-* 如何在本地运行 KubeSphere Console。
+* how to launch the KubeSphere web console in your local environment.
 
 * how to debug an extension.
 
@@ -29,10 +29,11 @@ A development environment is ready. For more information, see [Build a developme
    ```bash
    mkdir -p ~/kubesphere-extensions
    cd ~/kubesphere-extensions
-   yarn create ks-project ks-console --fast-mode
+   yarn add global create-ks-project
+   yarn create ks-project ks-console
    ```
 
-   KubeSphere 扩展组件开发项目中包含了一个可以在本地运行的 KubeSphere Console。
+The project contains a KubeSphere web console that can run locally.
 
 2. Create a Hello World extension:
 
@@ -41,7 +42,7 @@ A development environment is ready. For more information, see [Build a developme
    yarn create:ext
    ```
 
-   根据命令提示，设置扩展组件的名称、显示名称、描述、作者和语言等基础信息，完成扩展组件创建。
+     Configure basic information, for example, the extension name, alias, description, author, and language.
 
    ```bash
    Extension Name hello-world
@@ -100,7 +101,7 @@ server:
    yarn dev
    ```
 
-2. Open a browser, visit `http://localhost:880` and use default username `admin` and password `P@88w0` to log in to the KubeSphere web console.
+2. Open a browser, visit `http://localhost:880` and use default username `admin` and password `P@88w0rd` to log in to the KubeSphere web console.
 
    The access point to `Hello World` appears on the top navigation bar. Click `Hello World` to open the page.
 
@@ -108,7 +109,7 @@ server:
 
 ### Debug the extension
 
-Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-console/extensions/hello-word/src` 目录中。
+The source code of the Hello World extension is stored in  `~/kubesphere-extensions/ks-console/extensions/hello-word/src` .
 
 You can change the string displayed on the page to `Test!`, as shown in the following figure:
 
