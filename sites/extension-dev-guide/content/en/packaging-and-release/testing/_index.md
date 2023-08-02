@@ -1,7 +1,7 @@
 ---
 title: Test Extensions
 weight: 2
-description: "Describe how to publish an extension to the Extension Marketplace and test the extension."
+description: "Describe how to publish an extension to the KubeSphere Marketplace and test the extension."
 ---
 
 Previously, we have learnt how to develop and package extensions. In this section, we will learn how to test published extensions.

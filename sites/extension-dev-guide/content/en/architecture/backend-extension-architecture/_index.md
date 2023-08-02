@@ -1,10 +1,10 @@
 ---
 title: Backend Extensions
 weight: 2
-description: 介绍 KubeSphere 后端扩展机制
+description: Describes KubeSphere backend extensions.
 ---
 
-KubeSphere LuBan 构建在 K8s 之上，和 K8s 一样是高度可配置和可扩展的，除了可以借助 [K8s 的扩展机制](https://kubernetes.io/docs/concepts/extend-kubernetes/)来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式，您可以创建以下几种类型的 [CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API、扩展前端 UI 或者创建动态资源代理。
+ Built on K8s, KubeSphere LuBan is highly configurable and extensible like K8s. In addition to extending KubeSphere capabilities with the help of the [K8s extension mechanism](https://kubernetes.io/docs/concepts/extend-kubernetes/), KubeSphere offers a more flexible way to extend the platform by creating the following types of [CRs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources) to register APIs with KubeSphere, extend the front-end UI, or create dynamic resource proxies.
 
 ## APIService
 

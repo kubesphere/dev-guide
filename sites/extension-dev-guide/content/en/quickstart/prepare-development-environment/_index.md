@@ -1,7 +1,7 @@
 ---
 title: Build a Development Environment
 weight: 1
-description: 介绍如何搭建扩展组件的开发环境
+description: Describes how to build a development environment for extensions.
 ---
 
 This section describes how to build a development environment for extensions. Before you start, make sure KubeSphere Core and related development tools are installed.
@@ -20,7 +20,7 @@ This section describes how to build a development environment for extensions. Be
    helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/test/ks-core-0.3.2.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
-   {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群。" %}}
+   {{%expand "If you don't have a Kubernetes cluster available, you can expand the current content and quickly create a cluster in the following way." %}}
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
@@ -57,7 +57,7 @@ Install development tools on the development host
    {{% /tab %}}
 {{% tab name="Run containers" %}}
 
-您可以在容器中运行开发扩展组件所需的开发工具，执行以下命令为开发工具命令设置别名：
+You can run the development tools required for extension development in containers, and execute the following command to set an alias for the development tools:
 
 ```bash
 # Create a local cache and configuration file directory

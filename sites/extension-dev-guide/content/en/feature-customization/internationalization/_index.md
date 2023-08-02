@@ -1,7 +1,7 @@
 ---
 title: Internationalization
 weight: 5
-description: 介绍如何实现扩展组件前端国际化
+description: Describes how to internationalize frontend extensions.
 ---
 
 This section describes how to internationalize frontend extensions.

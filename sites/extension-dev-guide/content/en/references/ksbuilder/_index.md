@@ -1,7 +1,7 @@
 ---
 title: ksbuilder CLI Reference
 weight: 1
-description: ksbuilder is an extension packaging and release tool
+description: ksbuilder is an extension packaging and release tool.
 ---
 
 {{< table_of_contents >}}
