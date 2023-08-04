@@ -78,6 +78,7 @@ The following content describes how to configure parameters for custom permissio
   * `annotations`:
 
      * `iam.kubesphere.io/dependencies`: it will be displayed as a dependency on the Console, and when this permission item is selected, the dependent permission item will be automatically selected.
+     * `iam.kubesphere.io/role-template-rules`: it controls the permission rules of the Console, see `Permission control on the frontend of Console` below.
 
   * `labels`:
 
@@ -140,6 +141,76 @@ spec:
         * `en`: display name in English.
 
         * `zh`: display name in Chinese.
+
+### Permission control on the frontend of Console
+
+  * menu permission settings
+  ```JavaScript
+  // menu relates to permission fields
+  const menu = { 
+  name: 'hello-world',         // name is required
+  ksModule: 'hello-world',    
+  authKey: 'hello-world',     
+  skipAuth: true,      
+};
+  ```
+Permission Filtering Effect
+| | Permissions | Fields | Description |
+| --- | --- | --- | --- |
+| 1 | Filter by installed and uninstalled modules | `ksModule` | Uninstalled modules are not displayed |
+| 2 | Filter by permissions |  `authKey` or `name` | If there is `authKey`, take `authKey`, otherwise take `name`|.
+| 3 | Skip permission control | `skipAuth` | Highest priority, if it is `true`, ignores the above 1 and 2 configurations|
+
+
+  * RoleTemplate frontend permission control
+  ```yaml
+- metadata:
+    annotations:
+      iam.kubesphere.io/role-template-rules: '{"pipelines":"view"}'
+- metadata:
+    annotations:
+      iam.kubesphere.io/role-template-rules: '{"pipelines":"manage"}'
+```
+  * Parameters of RoleTemplate frontend permission control
+
+    * `iam.kubesphere.io/role-template-rules`: control the annotations of frontend permissions, `{key: action }` is a JSON string.
+    * `{key}`: the key of the frontend permission, corresponding to the `authKey` or `name` field of the frontend permission.
+    * `{action}`: see Actions of RoleTemplate frontend permission control.
+
+  * Actions for RoleTemplate frontend permission control
+    * `view`: with this field, the corresponding menus and pages are displayed. However, it only offers view permission, no operation permission.
+    * `*`, `manage`: view and operation permissions.
+    * `create`: create permission.
+    * `delete`: delete permission.
+    * `edit`: edit permission.
+    * Other custom values (with frontend hardcoding).
+  > Note: `create`, `delete`, `edit` are frontend permissions, they should work with the frontend code to add code such as `action: 'create'` on the corresponding button, as in the following example.
+
+ ```JavaScript
+  // Code snippets
+  import { useActionMenu, DataTable } from '@ks-console/shared';}
+  const renderTableAction = useActionMenu({
+    autoSingleButton: true,
+    authKey,
+    params,
+    actions: [
+      {
+        key: 'invite',
+        text: t('INVITE'),
+        action: 'create',  //It should be a specified action 
+        props: {
+          color: 'secondary',
+          shadow: true,
+        },
+        onClick: openCreate,
+      },
+    ],
+  });
+  return (<DataTable 
+    // ... the other props
+    toolbarRight={renderTableAction({})}
+  />)
+ ``` 
 
 
 ## Best Practices
