@@ -177,9 +177,10 @@ spec:
   * RoleTemplate 前端权限控制 action
     * `view`：有此字段，会显示对应的菜单和页面。但只有查看权限，没有操作权限。
     * `*`、`manage`：有完整查看和操作权限。
-    * `create`: 有创建权限
-    * `delete`: 有删除权限
-    * `edit`: 有编辑权限
+    * `create`: 有创建权限。
+    * `delete`: 有删除权限。
+    * `edit`: 有编辑权限。
+    * 其他自定义值（配合前端硬编码）。
   > 注：`create`、`delete`、`edit` 为前端权限，需配合前端代码，在对应操作的按钮上添加类似 `action: 'create'` 代码，下例。
 
  ```JavaScript
