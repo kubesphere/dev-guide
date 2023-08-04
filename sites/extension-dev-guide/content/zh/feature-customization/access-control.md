@@ -78,6 +78,7 @@ spec:
   * `annotations`：
   
      * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
+     * `iam.kubesphere.io/role-template-rules`: 具体控制 Console 权限规则，相见下文 Console 前端权限控制。
 
   * `labels`：
 
@@ -140,6 +141,74 @@ spec:
         * `en`：英文显示名称。
         
         * `zh`：中文显示名称。
+
+### Console 前端权限控制
+  * menu 权限设置
+  ```JavaScript
+  // nemu 涉及权限字段
+  const menu = { 
+  name: 'hello-world',         // name 必填字段
+  ksModule: 'hello-world',    
+  authKey: 'hello-world',     
+  skipAuth: true,      
+};
+  ```
+权限过滤效果
+| | 权限 | 字段 | 说明 |
+| --- | --- | --- | --- |
+| 1 | 根据模块是否安装过滤 | `ksModule` | 未安装模块不显示 |
+| 2 | 根据配置权限过滤 | `authKey` or `name` | 有 `authKey` 取 `authKey`，否则取 `name`|
+| 3 | 跳过权限控制 | `skipAuth` | 优先级最高，为 `true` 则忽略 1 和 2 配置|
+
+  * RoleTemplate 前端权限控制
+  ```yaml
+- metadata:
+    annotations:
+      iam.kubesphere.io/role-template-rules: '{"pipelines":"view"}'
+- metadata:
+    annotations:
+      iam.kubesphere.io/role-template-rules: '{"pipelines":"manage"}'
+```
+  * RoleTemplate 前端权限控制参数说明
+    * `iam.kubesphere.io/role-template-rules`：控制前端权限的注解, `{key: action }` 格式 JSON 字符串。
+    * `{key}`：前端权限的 key，对应前端权限的 `authKey` 或 `name` 字段。
+    * `{action}`: 见 RoleTemplate 前端权限控制 action。
+
+  * RoleTemplate 前端权限控制 action
+    * `view`：有此字段，会显示对应的菜单和页面。但只有查看权限，没有操作权限。
+    * `*`、`manage`：有完整查看和操作权限。
+    * `create`: 有创建权限。
+    * `delete`: 有删除权限。
+    * `edit`: 有编辑权限。
+    * 其他自定义值（配合前端硬编码）。
+  > 注：`create`、`delete`、`edit` 为前端权限，需配合前端代码，在对应操作的按钮上添加类似 `action: 'create'` 代码，下例。
+
+ ```JavaScript
+  // 代码片段
+  import { useActionMenu, DataTable } from '@ks-console/shared';}
+  const renderTableAction = useActionMenu({
+    autoSingleButton: true,
+    authKey,
+    params,
+    actions: [
+      {
+        key: 'invite',
+        text: t('INVITE'),
+        action: 'create',  //此处为具体 action 
+        props: {
+          color: 'secondary',
+          shadow: true,
+        },
+        onClick: openCreate,
+      },
+    ],
+  });
+  return (<DataTable 
+    // ... the other props
+    toolbarRight={renderTableAction({})}
+  />)
+ ``` 
+
 
 
 ## 最佳实践
