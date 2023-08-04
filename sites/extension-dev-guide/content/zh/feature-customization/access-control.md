@@ -145,7 +145,7 @@ spec:
 ### Console 前端权限控制
   * menu 权限设置
   ```JavaScript
-  // nemu 设计权限字段
+  // nemu 涉及权限字段
   const menu = { 
   name: 'hello-world',         // name 必填字段
   ksModule: 'hello-world',    
