@@ -145,7 +145,7 @@ spec:
 ### Console 前端权限控制
   * menu 权限设置
   ```JavaScript
-  // nemu 涉及权限字段
+  // menu 涉及权限字段
   const menu = { 
   name: 'hello-world',         // name 必填字段
   ksModule: 'hello-world',    
@@ -170,7 +170,7 @@ spec:
       iam.kubesphere.io/role-template-rules: '{"pipelines":"manage"}'
 ```
   * RoleTemplate 前端权限控制参数说明
-    * `iam.kubesphere.io/role-template-rules`：控制前端权限的注解, `{key: action }` 格式 JSON 字符串。
+    * `iam.kubesphere.io/role-template-rules`：控制前端权限的注解， `{key: action }` 格式 JSON 字符串。
     * `{key}`：前端权限的 key，对应前端权限的 `authKey` 或 `name` 字段。
     * `{action}`: 见 RoleTemplate 前端权限控制 action。
 
