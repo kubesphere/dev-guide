@@ -161,12 +161,12 @@ Reference:
 3. Modify the [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) declaration in `charts/frontend/templates/extensions.yaml` according to [Register a frontent extension](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver).
 
 
-You can clone the employee management extension package from GitHub to view details:
+您可以直接从 GitHub 上克隆员工管理这个示例扩展组件的安装包。
 
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
-cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
+cp -r ~/kubesphere-extensions/extension-samples/extensions/employee ~/kubesphere-extensions/employee
 ```
 
 接下来您可以参考[测试扩展组件](../testing)，将员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
