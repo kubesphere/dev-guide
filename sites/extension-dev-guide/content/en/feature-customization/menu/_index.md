@@ -14,9 +14,9 @@ You can mount extensions to the following points:
 
   <img src="./top-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* Platform management menu
+* 扩展组件菜单
 
-  In the top navigation bar, click `Platform` to open the menu.
+  在顶部菜单栏点击 <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top" /> 图标打开菜单。
 
   <img src="./platform-menu.png" style="max-width: 1000px; margin: 0px" />
 
@@ -66,7 +66,7 @@ const menu = {
       <td>The mount point of the extension. Valid values:
         <ul>
           <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
-          <li><strong>global</strong>: mounts to the platform management menu.</li>
+          <li><strong>global</strong>：挂载到扩展组件菜单。</li>
           <li><strong>toolbox</strong>: mounts to the toolbox menu.</li>
           <li><strong>access</strong>: mounts to the left-side navigation pane on the Access Control page.</li>
           <li><strong>cluster</strong>: mounts the left-side navigation pane on the Cluster Management page.</li>
