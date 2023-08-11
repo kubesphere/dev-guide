@@ -14,12 +14,27 @@ In the root directory `~/workspace/kubesphere-extensions/` of the extension, run
 ksbuilder publish employee
 ```
 
-Then you can log in to the KubeSphere Console via port 30880 and install and test the published extension.If installation fails, you can view the error log on the Console.
+Then you can log in to the KubeSphere Console via port 30880 and install and test the published extension. If installation fails, you can view the error log on the Console.
 
-![](./kubesphere-extensions.png)
+![](./kubesphere-extension-employee-1.png)
 
 By default, the extension will be published on the cluster specified in the system's default kubeconfig file (`~/.kube/config`). If you want to publish the extension to a specified cluster, you can use `--kubeconfig` parameter to specify the path of the kubeconfig file.
 
 ```shell
 ksbuilder publish employee --kubeconfig=/path/to/config
 ```
+
+## Install Extensions
+
+Once the extension is installed, you can use the features provided by the extension in KubeSphere.
+
+Install an extension
+
+! [](. /kubesphere-extension-employee-2.png)
+
+Acess your extensions
+
+! [](. /kubesphere-extension-employee-3.png)
+
+
+! [](. /kubesphere-extension-employee-4.png)

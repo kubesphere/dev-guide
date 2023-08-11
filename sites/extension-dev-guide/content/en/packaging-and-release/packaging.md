@@ -162,12 +162,12 @@ In [Develop an extension for employee management](../../examples/employee-manage
 3. Modify the [JSBundle](../../architecture/backend-extension-architecture/#jsbundle) declaration in `charts/frontend/templates/extensions.yaml` according to [Register a frontent extension](../../examples/employee-management-extension-example/#4-register-the-api-of-the-frontend-extension-to-ks-apiserver).
 
 
-You can clone the employee management extension package from GitHub to view details:
+You can clone the package of the extension - "employee management" from GitHub:
 
 ```bash
 cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
-cp -r ~/kubesphere-extensions/extension-samples/deploy/employee ~/kubesphere-extensions/employee
+cp -r ~/kubesphere-extensions/extension-samples/extensions/employee ~/kubesphere-extensions/employee
 ```
 
 Then, you can release the extension to KubeSphere Marketplace to install and test. For more information, see [Test extensions](./testing).
