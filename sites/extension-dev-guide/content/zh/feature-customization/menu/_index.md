@@ -14,9 +14,9 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
   <img src="./top-menu.png" style="max-width: 1000px; margin: 0px">
 
-* 平台管理菜单
+* 扩展组件菜单
 
-  在顶部菜单栏点击`平台管理`打开菜单。
+  在顶部菜单栏点击 <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
 
   <img src="./platform-menu.png" style="max-width: 1000px; margin: 0px">
 
@@ -66,7 +66,7 @@ const menu = {
       <td>扩展组件的挂载位置，取值可以为：
         <ul>
           <li><strong>topbar</strong>：挂载到顶部菜单栏。</li>
-          <li><strong>global</strong>：挂载到平台管理菜单。</li>
+          <li><strong>global</strong>：挂载到扩展组件菜单。</li>
           <li><strong>toolbox</strong>：挂载到工具箱菜单。</li>
           <li><strong>access</strong>：挂载到访问控制页面左侧导航栏。</li>
           <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
