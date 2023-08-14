@@ -4,7 +4,7 @@ weight: 1
 description: 介绍如何搭建扩展组件的开发环境
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
+This section describes how to build a development environment for extensions. Before you start, make sure KubeSphere Core and related development tools are installed.
 
 * KubeSphere Core: the minimal core component of KubeSphere, which provides a basic runtime for extension development.
 
