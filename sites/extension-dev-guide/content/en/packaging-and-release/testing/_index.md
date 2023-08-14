@@ -16,7 +16,7 @@ ksbuilder publish employee
 
 Then you can log in to the KubeSphere Console via port 30880 and install and test the published extension.If installation fails, you can view the error log on the Console.
 
-![](./kubesphere-extension-employee-1.pngg)
+![](./kubesphere-extension-employee-1.png)
 
 By default, the extension will be published on the cluster specified in the system's default kubeconfig file (`~/.kube/config`). If you want to publish the extension to a specified cluster, you can use `--kubeconfig` parameter to specify the path of the kubeconfig file.
 
