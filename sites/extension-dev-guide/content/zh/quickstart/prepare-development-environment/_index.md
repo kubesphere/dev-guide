@@ -17,7 +17,7 @@ description: 介绍如何搭建扩展组件的开发环境
 1. 登录到 K8s 集群的主机中，执行以下命令通过 `helm` 安装 KubeSphere Core：
 
    ```bash
-   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/test/ks-core-0.3.2.tgz --set apiserver.nodePort=30881 --debug --wait
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
    {{%expand "如果您还没有一个可用的 K8s 集群，您可以展开当前内容，通过以下方式快速创建一个 K8s 集群。" %}}
@@ -41,41 +41,13 @@ description: 介绍如何搭建扩展组件的开发环境
 
 ## 安装开发工具
 
-1. 您可以自行安装相关的开发工具，或者使用 KubeSphere 团队提供的工具容器快速体验。
+1. 您需要安装以下开发工具：
 
-   {{< tabs >}}
-   {{% tab name="安装二进制文件" %}}
+   1. 安装 [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ 和 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+。
 
-执行以下步骤在开发主机上安装开发工具：
+   2. 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+ 和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
 
-1. 安装 [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ 和 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+。
-
-2. 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+ 和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
-
-2. 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到 `/usr/local/bin` 目录。
-
-   {{% /tab %}}
-{{% tab name="使用容器" %}}
-
-您可以在容器中运行开发扩展组件所需的开发工具，执行以下命令为开发工具命令设置别名：
-
-```bash
-# 创建本地缓存与配置文件目录
-mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc
-alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v4.0.0-alpha.1 yarn'
-```
-
-
-```bash
-alias kubectl='docker run --rm -v ~/.kube/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 kubectl'
-```
-
-```bash
-alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kube/config:/tmp/kubeconfig -e KUBECONFIG=/tmp/kubeconfig -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 ksbuilder'
-```
-
-   {{% /tab %}}
-   {{< /tabs >}}
+   3. 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到 `/usr/local/bin` 目录。
 
 2. 复制 K8s 集群的 [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 配置文件到开发主机上，确保使用 kubectl 可以正常访问到 K8s 集群。
 

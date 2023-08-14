@@ -17,7 +17,7 @@ This section describes how to build a development environment for extensions. Be
 1. Log in to a server on which Kubernetes is installed, and run the following commands to install KubeSphere Core by using `Helm`:
 
    ```bash
-   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/test/ks-core-0.3.2.tgz --set apiserver.nodePort=30881 --debug --wait
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
    {{%expand "If you don't have a Kubernetes cluster available, you can expand the current content and quickly create a cluster in the following way." %}}
@@ -41,41 +41,13 @@ This section describes how to build a development environment for extensions. Be
 
 ## Install development tools
 
-1. You can install development tools on your own, or quickly get started with the tool provided by KubeSphere.
+1. You need to install the following development tools:
 
-   {{< tabs >}}
-   {{% tab name="Install binary files" %}}
+   1. Install [Node.js](https://nodejs.org/en/download/package-manager) v16.17 or later and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22 or later.
 
-Install development tools on the development host
+   2. Install [Helm](https://helm.sh/docs/intro/install/) v3.8 or later and [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23 or later.
 
-1. Install [Node.js](https://nodejs.org/en/download/package-manager) v16.17 or later and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22 or later.
-
-2. Install [Helm](https://helm.sh/docs/intro/install/) v3.8 or later and [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23 or later.
-
-2. Download [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) to `/usr/local/bin`.
-
-   {{% /tab %}}
-{{% tab name="Run containers" %}}
-
-You can run the development tools required for extension development in containers, and execute the following command to set an alias for the development tools:
-
-```bash
-# Create a local cache and configuration file directory
-mkdir -p ~/.kubesphere/.yarn ~/.kubesphere/.config && touch ~/.kubesphere/.yarnrc
-alias yarn='docker run --rm -e YARN_CACHE_FOLDER=/.yarn/cache --user $(id -u):$(id -g) -v $PWD:$PWD -v ~/.kubesphere/.yarnrc:/.yarnrc -v ~/.kubesphere/.yarn:/.yarn -v ~/.kubesphere/.config:/.config -w $PWD -p 8000:8000 -p 8001:8001 -it kubespheredev/dev-tools:v4.0.0-alpha.1 yarn'
-```
-
-
-```bash
-alias kubectl='docker run --rm -v ~/.kube/config:/root/.kube/config -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 kubectl'
-```
-
-```bash
-alias ksbuilder='docker run --rm --user $(id -u):$(id -g) -v ~/.kube/config:/tmp/kubeconfig -e KUBECONFIG=/tmp/kubeconfig -v $PWD:$PWD -w $PWD -it kubespheredev/dev-tools:v4.0.0-alpha.1 ksbuilder'
-```
-
-   {{% /tab %}}
-   {{< /tabs >}}
+   3. Download [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) to `/usr/local/bin`.
 
 2. Copy the [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) configuration file of the Kubernetes cluster to the development host to ensure that the cluster can be accessed by using kubectl.
 
