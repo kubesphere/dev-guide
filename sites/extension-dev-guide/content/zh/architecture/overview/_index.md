@@ -18,7 +18,7 @@ KubeSphere 扩展组件是一个可以对 KubeSphere 功能进行扩展并借助
 
 ### KubeSphere 扩展组件可以做什么？
 
-从前端 UI 到后端 API，KubeSphere 的几乎每个部分都可以通过扩展 API 进行定制和增强。KubeSphere 的许多核心功也都是作为扩展构建的，并使用相同的扩展 API。
+从前端 UI 到后端 API，KubeSphere 的几乎每个部分都可以通过扩展 API 进行定制和增强。KubeSphere 的许多核心功能也都是作为扩展构建的，并使用相同的扩展 API。
 
 以下是使用扩展 API 可以实现的一些示例：
 
