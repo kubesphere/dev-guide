@@ -1,7 +1,7 @@
 ---
-title: Frontend Extensions
-weight: 1
-description: Describes KubeSphere frontend extensions.
+title: Frontend Extension Mechanism
+weight: 02
+description: Describes how to extend the frontend UI of KubeSphere.
 ---
 
 To enable flexibility and scalability, KubeSphere adopts an architecture that consists of a `microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. You can dynamically install, uninstall, start, or stop extensions during system running. The following figure shows the architecture:
