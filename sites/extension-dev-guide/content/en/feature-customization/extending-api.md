@@ -1,6 +1,6 @@
 ---
 title: API Extensions
-weight: 06
+weight: 02
 description: Describes how to extend the API.
 ---
 
@@ -37,7 +37,7 @@ spec:
 
 During routing processing, the request: `/kapi/{spec.group}/{spec.version}` will be routed to the configuration `{spec.url}`. It is to route the request prefixed with `/kapis/employee.kubesphere.io/v1alpha1` to the `http://employee-api.default.svc:8080` service.
 
-It can also be configured as spec.service when specifying the route service. If the https protocol needs certificate configurations, see [APIService](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice for more configuration methods).
+It can also be configured as spec.service when specifying the route service. If the https protocol needs certificate configurations, see [APIService](https://dev-guide.kubesphere.io/extension-dev-guide/en/architecture/backend-extension-architecture/#apiservice for more configuration methods).
 
 ### ReverseProxy
 
@@ -69,7 +69,7 @@ spec:
 
 This configuration means that all requests with a path prefix of `/proxy/weave.works` are forwarded to the specified upstream service: `http://weave-scope-app.weave.svc`, and the Authorization field in the request header and the prefix `/proxy/weave. works` in the request path are removed.
 
-In addition, it supports advanced configurations such as rewrite, redirect, request header injection, circuit breaking, and traffic limiting. For more configuration methods, see [ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/zh/ architecture/backend-extension-architecture/#reverseproxy).
+In addition, it supports advanced configurations such as rewrite, redirect, request header injection, circuit breaking, and traffic limiting. For more configuration methods, see [ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/en/architecture/backend-extension-architecture/#reverseproxy).
 
 ## Extend resource API
 

@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-weight: 5
+weight: 05
 description: Describes how to internationalize frontend extensions.
 ---
 
