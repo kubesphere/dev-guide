@@ -4,7 +4,7 @@ weight: 02
 description: Describes how to extend the frontend UI of KubeSphere.
 ---
 
-To enable flexibility and scalability, KubeSphere adopts an architecture that consists of a `microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. You can dynamically install, uninstall, start, or stop extensions during system running. The following figure shows the architecture:
+To enable flexibility and scalability, KubeSphere adopts an architecture that consists of `a microkernel and extension components`. In this architecture, the microkernel provides only the basic features for system running, and business modules are encapsulated separately in extension components. You can dynamically install, uninstall, start, or stop extensions during system running. The following figure shows the architecture:
 
 
 ![frontend-extension-arch](./frontend-arch.png)
@@ -13,10 +13,12 @@ To enable flexibility and scalability, KubeSphere adopts an architecture that co
 
 When it comes to decoupling megalithic applications and dynamic extensions, the buzzword `micro frontends` in recent years must pop into our mind. Well-known implementations of `micro frontends` such as qiankun and micro-app have done a lot of work on JavaScript sandboxes and styling isolation, so as to prevent the styles of sub-applications in a micro-frontend framework inadvertently affect the styles of other sub-applications. Styling isolation is often a compromise to solve specific technical debt or team coordination problems. If a front-end system integrates React, Vue, and Angular, it will be difficult to ensure UI consistency, and the size of the front-end bundle will also be significantly increased. Moreover, if each sub-application is isolated in its own runtime, and its integration with the main application is not tight enough.
 
-To enable extensibility, KubeSphere LuBan 4.0 aims to implement `micro frontends` or `micro modules`, which are more lightweight and have less demand for styling isolation. In a `micro module` architecture, sub-applications can share the tech stack and runtime with the main application. This can achieve experience consistency, high integration, and easy dependency sharing, thereby improving operation efficiency. As shown in the preceding architecture, the development of extension components relies on common dependencies such as kube-design and @ks-console/shared. Then, extensions can be packaged and released by using CLI tools. In the Core module, you can sign up for and run extension components.
+To enable extensibility, KubeSphere LuBan aims to implement `micro frontends` or `micro modules`, which are more lightweight and have less demand for styling isolation. In a `micro module` architecture, sub-applications can share the tech stack and runtime with the main application. This can achieve experience consistency, high integration, and easy dependency sharing, thereby improving operation efficiency. As shown in the preceding architecture, the development of extension components relies on common dependencies such as `kube-design` and `@ks-console/shared`. Then, extensions can be packaged and released by using CLI tools. In the Core module, you can sign up for and run extension components.
 
-## Core components
+## KubeSphere Core
+
 The core components provide the following main features:
+
 1. Extension management
 
    Two steps are important for extension management: load JavaScript bundles in the runtime and authorize and authenticate extensions. KubeSphere LuBan 4.0 uses SystemJS to load JavaScript bundles for extensions and defines standard specifications for extension integration with the Core module.
@@ -119,5 +121,5 @@ As shown in the preceding code, the extension is intialized by using a scaffoldi
 KubeSphere provides some common components, tools, and libraries to help developers develop extensions efficiently, taking into account experience consistency and operation efficiency.
 1. Common extension library [KubeDesign](https://github.com/kubesphere/kube-design)
 2. Frontend scaffolding tool [create-ks-project](https://github.com/kubesphere/create-ks-project)
-3. Lightweight status management library @ks-console/stook
-4. General utility library @ks-console/shared
+3. Lightweight status management library [@kubed/stook](https://www.npmjs.com/package/@kubed/stook)
+4. General utility library [@ks-console/shared](https://www.npmjs.com/package/@ks-console/shared)
