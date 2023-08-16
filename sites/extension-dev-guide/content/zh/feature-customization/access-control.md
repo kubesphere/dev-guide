@@ -1,6 +1,6 @@
 ---
 title: 访问控制
-weight: 03
+weight: 04
 description: 介绍如何控制扩展组件定制资源的访问权限
 ---
 
