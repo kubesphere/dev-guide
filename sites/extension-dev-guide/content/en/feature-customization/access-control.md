@@ -1,6 +1,6 @@
 ---
 title: Access Control
-weight: 3
+weight: 04
 description: Describes how to manage access control for custom resources of extensions.
 ---
 
