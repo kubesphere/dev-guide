@@ -1,6 +1,6 @@
 ---
 title: 挂载位置
-weight: 02
+weight: 03
 description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载位置
 ---
 
