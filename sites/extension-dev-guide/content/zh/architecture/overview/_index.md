@@ -39,6 +39,6 @@ KubeSphere 扩展组件是一个可以对 KubeSphere 功能进行扩展并借助
 
 如果您对扩展开发有疑问，请尝试在以下渠道获得帮助：
 
-* [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE)
+* [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/zt-219hq0b5y-el~FMRrJxGM1Egf5vX6QiA)
 
 * [GitHub Issue](https://github.com/kubesphere/kubesphere/issues/new/choose)

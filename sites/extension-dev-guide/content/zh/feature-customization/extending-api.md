@@ -6,15 +6,24 @@ description: 介绍如何扩展 API
 
 ## API 扩展
 
-后端完成 API 开发后，需要将 API 注册到 KS API 扩展中由 KS 统一对外暴露和处理，这样就不用单独处理鉴权等通用操作。另外我们在访问各个扩展的服务时，不可能单独为每个服务都配置各自 Endpoint 去访问，这样会太过于繁琐且不便于管理。于是就可以通过在 API 扩展中管理这些配置。可以将 KS API 扩展模块理解为一个 API 网关，扩展的 API 只需关注各自的业务逻辑，然后通过 API 扩展接入到 KS 平台。
+KubeSphere 构建在 K8s 之上，和 K8s 一样是高度可配置和可扩展的，除了可以借助 [K8s 的扩展机制](https://kubernetes.io/docs/concepts/extend-kubernetes/)来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式，您可以创建以下几种类型的 [CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API、扩展前端 UI 或者创建动态资源代理。
 
-API 扩展主要有两种方式，分别有不同的使用场景：
+
+在开始之前，您需要先了解：[KubeSphere API 概念](https://dev-guide.kubesphere.io/extension-dev-guide/zh/references/kubesphere-api-concepts/)
+
+通过 KubeSphere 提供的 API 扩展方式，您可以便捷的使用 KubeSphere 中的访问控制，多租户，多集群等能力。
+
+KubeSphere 中 API 扩展主要有以下两种方式，他们适用于不同的场景：
 
 ### APIService
 
-这种方式常见于**自定义开发的扩展组件**，将扩展组件的 API 接入平台。
+KubeSphere 提供了一种与 [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) 类似的 API 拓展机制，提供声明式的 API 注册机制。
 
-比如开发了 employee 后端 API 后，后端 API 前缀为 `/kapis/employee.kubesphere.io/v1alpha1` ，部署的服务的 Endpoint 为 `http://employee-api.default.svc:8080`，我们可以进行如下配置：
+API Service 是一种严格的声明式 API 的定义方式，通过 API Group、API Version、Resource 以及 API 路径中定义的资源层级紧密的和 KubeSphere 的访问控制、多租户权限管理体系相结合。
+
+对于可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
+
+以 [employee 示例扩展组件为例](https://dev-guide.kubesphere.io/extension-dev-guide/zh/examples/employee-management-extension-example/) ，我们可以为 employee 扩展组件分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，会将请求转发到 `{spec.url}`。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -30,20 +39,24 @@ spec:
 # insecureSkipTLSVerify: false
 
 # service:
-#   namespace: example-system
+#   namespace: extension-employee
 #   name: apiserver
 #   port: 80
 ```
 
-路由处理时会将请求： `/kapi/{spec.group}/{spec.version}` 路由到这个配置中 `{spec.url}` 上。就是将 `/kapis/employee.kubesphere.io/v1alpha1` 前缀的请求路由到 `http://employee-api.default.svc:8080` 服务上处理。
+| 字段 | 描述 |
+| --- | ---|
+| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的API路径中的 API Group 与 API Version |
+| `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify`| 可以为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint |
+| `spec.service` | 与 `spec.url` 类似，可以为 API 指定 K8s 集群内部的服务引用地址 |
 
-指定路由的服务时也可以配置成 spec.service。若是 https 协议还需进行证书的相关配置，更多配置方式见 [APIService](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#apiservice)。
+如果您需要进一步对 API 的访问权限进行管理，请参阅：[扩展组件访问控制](https://dev-guide.kubesphere.io/extension-dev-guide/zh/feature-customization/access-control/)。
 
 ### ReverseProxy
 
-这种方式常见于**接入三方组件**，考虑到安全性、需要对请求及 URL 进行特殊的处理等因素，可以用反向代理的方式将扩展组件 API 接入平台。
+提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等配置。
 
-如下接入 weave-scope 三方系统的配置：
+以 weave-scope 配置为例，此配置表示将所有请求路径前缀为 `/proxy/weave.works`  的请求转发到指定的上游服务: `http://weave-scope-app.weave.svc`，并移除请求头中的 Authorization 字段和请求路径中的前缀 `/proxy/weave.works`。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -67,189 +80,109 @@ spec:
 #     port: 443
 ```
 
-此配置表示将所有请求路径前缀为 `/proxy/weave.works`  的请求转发到指定的上游服务: `http://weave-scope-app.weave.svc`，并移除请求头中的 Authorization 字段和请求路径中的前缀 `/proxy/weave.works`。
+| 字段 | 描述 |
+| --- | ---|
+| `spec.matcher` | API 的匹配规则，可以用来拦截特定的请求 |
+| `spec.upstream` | 定义具体的服务后端，支持健康检查、TLS配置 |
+| `spec.directives` | 可以向请求链注入不同的指令 |
 
-除此之外支持 rewrite、redirect、请求头注入、熔断、限流等高级配置，更多配置方式见[ReverseProxy](https://dev-guide.kubesphere.io/extension-dev-guide/zh/architecture/backend-extension-architecture/#reverseproxy)。
+#### Directives
 
-在开发扩展组件时有可能会用到 CRD(CustomResourceDefinition)，用到 CRD 就可能有分页查询的需求，但原生 K8s API 对资源的分页查询支持灵活性比较欠缺。于是我们在 ks-core 中内置了对 CRD 扩展资源操作的 API，除了分页查询还支持了增删改的 API，相比 K8s API 用起来更灵活更方便。
+1. `method` 修改 HTTP 请求方法
 
-## 资源 API 扩展
+```yaml
+spec:
+  directives:
+    method: 'POST'
+```
 
-### 扩展方式
+2. `stripPathPrefix` 移除请求路径中的前缀
 
-在对应的 CRD 上加 labels：`kubesphere.io/resource-served: "true"`。
+```yaml
+spec:
+  directives:
+    stripPathPrefix: '/path/prefix'
+```
 
-若是 ks-core 中的资源则只需把该 GVK 注册到 schema 中即可，不需在 CRD 上加这 label。
+3. `stripPathSuffix` 移除请求路径中的后缀
 
-### API 概要
+```yaml
+spec:
+  directives:
+    stripPathSuffix: '.html'
+```
 
-**URL格式：**
+4. `headerUp` 为发送到上游的请求增加、删除或替换请求头
 
-`/kapis/clusters/{cluster}/{group}/{version}/workspaces/{workspace}/namespaces/{namespace}/{resources}`
+```yaml
+spec:
+  directives:
+    headerUp:
+    - '-Authorization'
+    - 'Foo bar'
+```
 
-| 参数        | 类型     | 含义     | 是否必须 | 备注                                                     |
-| --------- | ------ | ------ | ---- | ------------------------------------------------------ |
-| group     | string | API 分组 | 是    |                                                        |
-| version   | string | API 版本 | 是    |                                                        |
-| resources | string | API 资源 | 是    | API 资源的复数形式                                            |
-| cluster   | string | 集群名    | 是    | 操作指定集群上的资源需要设置此值，4.0 默认多集群模式，默认用到该参数                   |
-| workspace | string | 企业空间名  | 否    | 操作 workspace 级别的资源需要设置此值，在创建资源时为该资源设置上 workspace label |
-| namespace | string | 命名空间名  | 否    | 操作 namespace 级别的资源需要设置此值                               |
+5. `headerDown` 为上游返回的响应增加、删除或替换响应头
 
-操作不同级别的资源时，设置对应参数需要和该级别的前缀共存。比如，
+```yaml
+spec:
+  directives:
+    headerDown:
+    - 'Content-Type "application/json"'
+```
 
-操作 namespace 级别的资源：
+## 针对 CRD 的 API 扩展
 
-`/kapis/clusters/{cluster}/{group}/{version}/namespaces/{namespace}/{resources}`
+如果您已经借助 K8s CRD 定义了 API，在 KubSphere 中 K8s 提供的 API 可以直接使用。在此基础之上，还可以借助 KubeSphere 对您的 API 进行增强。
 
-操作 workspace 级别的资源：
+### 多集群
 
-`/kapis/clusters/{cluster}/{group}/{version}/workspaces/{workspace}/{resources}`
+`/clusters/{cluster}/apis/{group}/{version}/resources`
 
-操作 cluster 级别的资源：
+通过 `/clusters/{cluster}` 前缀可以直接访问特定集群中的资源
 
-`/kapis/clusters/{cluster}/{group}/{version}/{resources}`
+### 访问控制
 
+CRD 中已经定义的资源层级 cluster 或者 namespaced 同样适用。
 
+### 分页与模糊搜索
 
-下面将介绍 API 详情操作，其中省略了操作不同级别资源的描述。
+`kapis` 是 KubeSphere API 的前缀，您可以将 CRD 打上 `kubesphere.io/resource-served: 'true'`，这意味着 KubeSphere 将提供相关 CR 资源的分页、模糊查询 API。
 
-
-
-### API 详情
-
-#### get CR
-
-##### HTTP 请求
-
-GET /kapis/{group}/{version}/{resources}/{name}
-
-##### 参数
-
-**name** （**路径参数**）：string，必需，CR 的名称
-
-##### 响应
-
-200 (CustomResource): OK
-
-401: Unauthorized
-
-#### list 分页查询 CR
-
-##### HTTP 请求
-
-GET /kapis/{group}/{version}/{resources}
-
-##### 参数
-
-查询参数：
-
-| 参数             | 类型     | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                           |
-| -------------- | ------ | ---------------------------------------------- | ---- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| page           | int    | 页码                                             | 否    | 1                 |                                                                                                                              |
-| limit          | int    | 页宽                                             | 否    | -1                |                                                                                                                              |
-| sortBy         | string | 排序字段，支持 name, createTime,creationTimestamp     | 否    | creationTimestamp |                                                                                                                              |
-| ascending      | bool   | 升序                                             | 否    | false             |                                                                                                                              |
-| name           | string | 资源名                                            | 否    |                   |                                                                                                                              |
-| names          | string | 资源名集合，多个用英文逗号分开                                | 否    |                   |                                                                                                                              |
-| uid            | string | 资源 uid                                         | 否    |                   |                                                                                                                              |
-| namespace      | string | namespace                                      | 否    |                   |                                                                                                                              |
-| ownerReference | string | ownerReference                                 | 否    |                   |                                                                                                                              |
-| ownerKind      | string | ownerKind                                      | 否    |                   |                                                                                                                              |
-| annotation     | string | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | 否    |                   | annotation=ab=ok或annotation=ab                                                                                               |
-| label          | string | 标签，支持‘=’, '!='，单个label，键值对或单个键                 | 否    |                   | label=kubesphere.io/workspace=system-workspace 或 label=kubesphere.io/workspace                                               |
-| labelSelector  | string | 标签选择器                                          | 否    |                   | 与 K8s 中 labelSeletor 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
-| fieldSelector  | string | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔。从根开始查询所有路径属性 | 否    |                   | fieldSelector={field path}={field name}。fieldSelector=spec.ab=true,spec.bc!=ok                                               |
-
-##### 响应
-
-200 (CustomResourceList): OK
+**注意:** KubeSphere Served Resource API 会与 APIService 产生冲突（如果适用了相同的 API Group 与 API Version）。
 
 
+**API 请求**
+
+`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{banesoaces}/)?{resources}`
+
+| 参数             | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                            |
+|----------------|------------------------------------------------|------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| page           | 页码                                             | 否    | 1                 |                                                                                                                               |
+| limit          | 页宽                                             | 否    | -1                |                                                                                                                               |
+| sortBy         | 排序字段，支持 name, createTime,creationTimestamp     | 否    | creationTimestamp |                                                                                                                               |
+| ascending      | 升序                                             | 否    | false             |                                                                                                                               |
+| name           | 资源名，支持模糊搜索                                     | 否    |                   |                                                                                                                               |
+| names          | 资源名集合，多个用英文逗号分开                                | 否    |                   |                                                                                                                               |
+| uid            | 资源 uid                                         | 否    |                   |                                                                                                                               |
+| namespace      | namespace                                      | 否    |                   |                                                                                                                               |
+| ownerReference | ownerReference                                 | 否    |                   |                                                                                                                               |
+| ownerKind      | ownerKind                                      | 否    |                   |                                                                                                                               |
+| annotation     | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | 否    |                   | annotation=ab=ok或annotation=ab                                                                                                |
+| labelSelector  | 标签选择器                                          | 否    |                   | 与 K8s 中 labelSelector 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
+| fieldSelector  | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔。从根开始查询所有路径属性 | 否    |                   | fieldSelector=spec.ab=true,spec.bc!=ok                                                                                        |
+
+**API 响应**
 
 ```json
 {
-    "apiVersion":"group/version",
+    "apiVersion":"{Group}/{Version}",
     "items":[],
     "kind":"{CR}List",
     "metadata":{
         "continue":"",
-        "remainingItemCount":0, // 剩余的数据
+        "remainingItemCount":0, 
         "resourceVersion":""
     }
 }
 ```
-
-> 说明：根据 page, limit 查询参数和返回值中 remainingItemCount 就可计算得总数据。
-
-
-
-401: Unauthorized
-
-#### create CR
-
-##### HTTP 请求
-
-POST /kapis/{group}/{version}/{resources}
-
-##### 参数
-
-body: CustomResource, 必须
-
-##### 响应
-
-200 : OK
-
-401: Unauthorized
-
-409: Conflict
-
-#### update  CR
-
-##### HTTP 请求
-
-PUT /kapis/{group}/{version}/{resources}
-
-##### 参数
-
-body: CustomResource, 必须
-
-##### 响应
-
-200 : OK
-
-401: Unauthorized
-
-#### patch  CR
-
-##### HTTP 请求
-
-PATCH /kapis/{group}/{version}/{resources}
-
-##### 参数
-
-body: CustomResource, 必须
-
-##### 响应
-
-200 : OK
-
-401: Unauthorized
-
-#### delete CR
-
-##### HTTP 请求
-
-DELETE /kapis/{group}/{version}/{resources}/{name}
-
-##### 参数
-
-**name** （**路径参数**）：string，必需，CR 的名称
-
-##### 响应
-
-200 : OK
-
-401: Unauthorized
-
-404: Not Found
