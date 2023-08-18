@@ -38,6 +38,6 @@ Building an extension may take a lot of time and effort, see the [Procedure](../
 
 ### Getting Help
 
-* [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/enQtNTE3MDIxNzUxNzQ0LTZkNTdkYWNiYTVkMTM5ZThhODY1MjAyZmVlYWEwZmQ3ODQ1NmM1MGVkNWEzZTRhNzk0MzM5MmY4NDc3ZWVhMjE)
+* [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/zt-219hq0b5y-el~FMRrJxGM1Egf5vX6QiA)
 
 * [GitHub Issue](https://github.com/kubesphere/kubesphere/issues/new/choose)
