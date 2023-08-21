@@ -23,7 +23,11 @@ API Service 是一种严格的声明式 API 的定义方式，通过 API Group�
 
 对于可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
 
+<<<<<<< HEAD
 以 [employee 示例扩展组件为例](https://dev-guide.kubesphere.io/extension-dev-guide/zh/examples/employee-management-extension-example/) ，我们可以为 employee 扩展组件分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，会将请求转发到 `{spec.url}`。
+=======
+以 [employee 示例扩展组件](https://dev-guide.kubesphere.io/extension-dev-guide/zh/examples/employee-management-extension-example/) 为例，我们可以为 employee 扩展组件分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，会将请求转发到 `{spec.url}`。
+>>>>>>>  fix en docs #243
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
