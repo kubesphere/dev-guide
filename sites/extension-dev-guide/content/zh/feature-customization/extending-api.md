@@ -9,9 +9,9 @@ description: 介绍如何扩展 API
 KubeSphere 构建在 K8s 之上，和 K8s 一样是高度可配置和可扩展的，除了可以借助 [K8s 的扩展机制](https://kubernetes.io/docs/concepts/extend-kubernetes/)来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式，您可以创建以下几种类型的 [CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API、扩展前端 UI 或者创建动态资源代理。
 
 
-在开始之前，您需要先了解：[KubeSphere API 概念](https://dev-guide.kubesphere.io/extension-dev-guide/zh/references/kubesphere-api-concepts/)
+在开始之前，您需要先了解：[KubeSphere API 概念](https://dev-guide.kubesphere.io/extension-dev-guide/zh/references/kubesphere-api-concepts/).
 
-通过 KubeSphere 提供的 API 扩展方式，您可以便捷的使用 KubeSphere 中的访问控制，多租户，多集群等能力。
+通过 KubeSphere 提供的 API 扩展方式，您可以便捷地使用 KubeSphere 中的访问控制，多租户，多集群等能力。
 
 KubeSphere 中 API 扩展主要有以下两种方式，他们适用于不同的场景：
 
@@ -19,11 +19,11 @@ KubeSphere 中 API 扩展主要有以下两种方式，他们适用于不同的�
 
 KubeSphere 提供了一种与 [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) 类似的 API 拓展机制，提供声明式的 API 注册机制。
 
-API Service 是一种严格的声明式 API 的定义方式，通过 API Group、API Version、Resource 以及 API 路径中定义的资源层级紧密的和 KubeSphere 的访问控制、多租户权限管理体系相结合。
+API Service 是一种严格的声明式 API 的定义方式，通过 API Group、API Version、Resource 以及 API 路径中定义的资源层级紧密地和 KubeSphere 的访问控制、多租户权限管理体系相结合。
 
 对于可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
 
-以 [employee 示例扩展组件为例](https://dev-guide.kubesphere.io/extension-dev-guide/zh/examples/employee-management-extension-example/) ，我们可以为 employee 扩展组件分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，会将请求转发到 `{spec.url}`。
+以 [employee 示例扩展组件](https://dev-guide.kubesphere.io/extension-dev-guide/zh/examples/employee-management-extension-example/) ，我们可以为 employee 扩展组件分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，会将请求转发到 `{spec.url}`。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
