@@ -3,47 +3,47 @@ publishdir = "public/extension-dev-guide"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh"
 staticDir = "static"
-title = "KubeSphere Extension Development Guide"
 theme = "hugo-theme-learn"
 themesdir = "themes"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir = true
 # uglyURLs = true
 
+
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
 
 [params]
-  description = "A set of development guidelines for KubeSphere Extension developers."
-  author = "KubeSphere"
-  showVisitedLinks = true
-  disableBreadcrumb = false
-  disableNextPrev = false
-  disableLandingPageButton = true
-  disableInlineCopyToClipBoard = true
-  disableMermaid = false
-  customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
-  titleSeparator = "::"
-  themeVariant = "green"
+description = "A set of development guidelines for KubeSphere Extension developers."
+author = "KubeSphere"
+showVisitedLinks = true
+disableBreadcrumb = false
+disableNextPrev = false
+disableLandingPageButton = true
+disableInlineCopyToClipBoard = true
+disableMermaid = false
+customMermaidURL = "https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"
+titleSeparator = "::"
+themeVariant = "green"
 
 [outputs]
-home = [ "HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]
 
 [Languages]
 [Languages.en]
-editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/extension-dev-guide/content/en/"
 contentDir = "sites/extension-dev-guide/content/en"
 title = "KubeSphere Extension Development Guide"
 weight = 1
 languageName = "English"
-landingPageURL = ""
+[Languages.en.params]
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/extension-dev-guide/content/en/"
 
 [Languages.zh]
-editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/extension-dev-guide/content/zh/"
 contentDir = "sites/extension-dev-guide/content/zh"
 title = "KubeSphere 扩展组件开发指南"
 weight = 3
 languageName = "简体中文"
-landingPageURL = ""
+[Languages.zh.params]
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/extension-dev-guide/content/zh/"

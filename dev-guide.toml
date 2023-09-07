@@ -28,17 +28,17 @@ home = [ "HTML", "RSS", "JSON"]
 
 [Languages]
 [Languages.en]
-editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/en/"
 contentDir = "sites/dev-guide/content/en"
 title = "KubeSphere Development Guide"
 weight = 1
 languageName = "English"
-landingPageURL = ""
+[Languages.en.params]
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/en/"
 
 [Languages.zh]
-editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/zh/"
 contentDir = "sites/dev-guide/content/zh"
 title = "KubeSphere 开发指南"
 weight = 3
 languageName = "简体中文"
-landingPageURL = ""
+[Languages.zh.params]
+editURL = "https://github.com/kubesphere/dev-guide/edit/master/sites/dev-guide/content/zh/"
