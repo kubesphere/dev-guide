@@ -101,20 +101,26 @@ icon: ./static/favicon.svg   # 扩展组件展示时使用的图标，可以定�
 screenshots:                 # 扩展组件截图（可选项）
   - ./static/screenshots/screenshot.png
 dependencies:                # 扩展组件依赖的 Helm Chart，语法与 Helm 的 Chart.yaml 中 dependencies 兼容（可选项）
-  - name: frontend
-    condition: frontend.enabled
-  - name: backend
-    condition: backend.enabled
-# external dependencies example
-#externalDependencies:       # 对其它扩展组件的依赖（可选项）
-#  - name: a
-#    type: extension
-#    version: ">= 2.6.0"
-#    required: true
-#  - name: b
-#    type: extension
-#    version: ">= 2.2.0"
-#    required: true
+  - name: extension
+    tags:
+      - extension
+  - name: apiserver
+    tags:
+      - agent
+# 扩展组件的安装模式，它可以是 HostOnly 或 Multicluster。
+# HostOnly 模式下，扩展组件只会被安装到 host 集群。
+# Multicluster 模式下 tag 中带有 agent  的 subchart 可以选择集群进行部署。    
+installationMode: HostOnly
+# 对其它扩展组件的依赖（可选项）
+# externalDependencies:       
+#   - name: a
+#     type: extension
+#     version: ">= 2.6.0"
+#     required: true
+#   - name: b
+#     type: extension
+#     version: ">= 2.2.0"
+#     required: true
 ```
 
 `permissions.yaml` 定义了扩展组件安装时所需要的资源授权：
