@@ -6,12 +6,9 @@ description: 介绍如何扩展 API
 
 ## API 扩展
 
-KubeSphere 构建在 K8s 之上，和 K8s 一样是高度可配置和可扩展的，除了可以借助 [K8s 的扩展机制](https://kubernetes.io/docs/concepts/extend-kubernetes/)来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式，您可以创建以下几种类型的 [CR](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API、扩展前端 UI 或者创建动态资源代理。
+KubeSphere 提供了灵活的 API 扩展方式，您可以创建以下几种类型的 [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 向 KubeSphere 注册 API或创建动态的代理规则。
 
-
-在开始之前，您需要先了解：[KubeSphere API 概念](https://dev-guide.kubesphere.io/extension-dev-guide/zh/references/kubesphere-api-concepts/)。
-
-通过 KubeSphere 提供的 API 扩展方式，您可以便捷地使用 KubeSphere 中的访问控制，多租户，多集群等能力。
+在开始之前，您需要先了解[KubeSphere API 概念](https://dev-guide.kubesphere.io/extension-dev-guide/zh/references/kubesphere-api-concepts/)，也可以查看[访问控制](https://dev-guide.kubesphere.io/extension-dev-guide/zh/feature-customization/access-control/)章节了解更多有关 API 访问控制的内容，这在 API 的扩展中很容易做到。
 
 KubeSphere 中 API 扩展主要有以下两种方式，他们适用于不同的场景：
 
