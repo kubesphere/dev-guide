@@ -1,6 +1,6 @@
 ---
-title: "开发流程"
-weight: 03
+title: "扩展组件开发流程"
+weight: 04
 description: 介绍 KubeSphere 扩展组件的开发流程
 ---
 

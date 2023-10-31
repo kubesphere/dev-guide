@@ -1,5 +1,5 @@
 ---
-title: 功能定制
+title: 扩展能力
 weight: 05
 description: "KubeSphere 提供了非常多的定制方法，供扩展组件扩展 KubeSphere 本身的能力"
 ---
