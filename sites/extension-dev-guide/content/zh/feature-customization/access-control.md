@@ -149,7 +149,8 @@ spec:
   const menu = { 
   name: 'hello-world',         // name 必填字段
   ksModule: 'hello-world',    
-  authKey: 'hello-world',     
+  authKey: 'hello-world',  
+  authAction:'view',   
   skipAuth: true,      
 };
   ```
@@ -158,7 +159,8 @@ spec:
 | --- | --- | --- | --- |
 | 1 | 根据模块是否安装过滤 | `ksModule` | 未安装模块不显示 |
 | 2 | 根据配置权限过滤 | `authKey` or `name` | 有 `authKey` 取 `authKey`，否则取 `name`|
-| 3 | 跳过权限控制 | `skipAuth` | 优先级最高，为 `true` 则忽略 1 和 2 配置|
+| 3 | 根据配置权限项 | `authAction` | 默认是 `view` |
+| 4 | 跳过权限控制 | `skipAuth` | 优先级最高，为 `true` 则忽略 1 和 2 配置|
 
   * RoleTemplate 前端权限控制
   ```yaml

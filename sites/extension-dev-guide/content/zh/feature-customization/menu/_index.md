@@ -45,6 +45,8 @@ const menu = {
   icon: 'cluster',
   order: 0,
   desc: 'HELLO_WORLD_DESC',
+  authKey: 'hello',
+  authAction: 'hello-view',
   skipAuth: true,
 };
 ```
@@ -74,11 +76,15 @@ const menu = {
           <li><strong>project</strong>：挂载到项目管理页面左侧导航栏。</li>
           <li><strong>platformSettings</strong>：挂载到平台设置页面左侧导航栏。</li>
         </ul>
+        如果需要挂载到当前菜单的子菜单下，需要这样设置 parent 的路径: <code>parent: 'cluster.xxxx.xxxx'</code>
       </td>
     </tr>
     <tr>
       <td>name</td>
-      <td>扩展组件在菜单上的位置标识。</td>
+      <td>
+        <p>扩展组件在菜单上的位置标识。</p>
+        <p>菜单的权限校验默认以 name 作为 key。可以设置 authKey 来指定模块权限进行校验。有关更多信息，请参阅<a href="../access-control">访问控制</a>。 </p>
+      </td>
     </tr>
     <tr>
       <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
@@ -98,6 +104,14 @@ const menu = {
     <tr>
       <td>skipAuth</td><td>是否跳过用户权限检查。有关更多信息，请参阅<a href="../access-control">访问控制</a>。</td>
     </tr>
+    <tr>
+      <td>authKey</td><td>配置权限过滤。有关更多信息，请参阅<a href="../access-control">访问控制</a>。</td>
+    </tr>
+    <tr>
+      <td>authAction</td><td>配置权限项。有关更多信息，请参阅<a href="../access-control">访问控制</a>。</td>
+    </tr>
+
+    
   </tbody>
 </table>
 
