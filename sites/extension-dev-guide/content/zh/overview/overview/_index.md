@@ -1,6 +1,6 @@
 ---
-title: 扩展组件 
-weight: 02
+title: 扩展组件概述
+weight: 01
 description: 介绍 KubeSphere LuBan 的扩展机制及系统架构
 ---
 

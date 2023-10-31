@@ -1,6 +1,6 @@
 ---
 title: 快速入门
-weight: 04
+weight: 02
 description: "创建并运行您的第一个 KubeSphere 扩展组件"
 ---
 
