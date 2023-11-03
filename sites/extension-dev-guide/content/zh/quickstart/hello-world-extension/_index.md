@@ -6,13 +6,13 @@ description: 演示如何创建示例扩展组件 Hello World，帮助您快速�
 
 本章节帮助您快速了解：
 
-- 如何初始化扩展组件开发项目。
-- 如何在本地运行 KubeSphere Console。
-- 如何对扩展组件进行调试。
+* 如何初始化扩展组件开发项目。
+* 如何在本地运行 KubeSphere Console。
+* 如何对扩展组件进行调试。
 
 ### 前提条件
 
-已搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
+您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
 
 KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
 
