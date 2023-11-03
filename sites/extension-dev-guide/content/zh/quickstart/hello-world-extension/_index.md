@@ -4,23 +4,17 @@ weight: 02
 description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程
 ---
 
-本章节介绍如何创建一个简单的 Hello World 扩展组件：在 KubeSphere Console 添加一个独立的功能页面。
-
-帮助您快速了解：
+本章节帮助您快速了解：
 
 * 如何初始化扩展组件开发项目。
-
 * 如何在本地运行 KubeSphere Console。
-
 * 如何对扩展组件进行调试。
-
-KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
-
-Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[示例与教程](../../examples)。
 
 ### 前提条件
 
 您需要提前搭建扩展组件开发环境。有关更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
+
+KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请访问 [React 官方网站](https://reactjs.org)。
 
 ### 初始化扩展组件开发项目
 
@@ -80,20 +74,18 @@ Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完�
        └── yarn.lock
    ```
 
+### 配置本地运行环境
 
-### 配置 KubeSphere Console
-
-为使 KubeSphere Console 可以在本地运行，你需要先[搭建开发环境](../prepare-development-environment/)，获取KubeSphere API Server 的访问地址，并在 `local_config.yaml` 文件中进行配置。
+在配置本地运行环境之前，您需要先搭建开发环境，获取 KubeSphere API Server 的访问地址，在 `local_config.yaml` 文件中进行配置。
 
 ```yaml
 server:
   apiServer:
-    url: http://172.31.73.3:30881
-    wsUrl: ws://172.31.73.3:30881
+    url: http://172.31.73.3:30881 # ks-apiserver 的 IP 与端口地址
+    wsUrl: ws://172.31.73.3:30881 # ks-apiserver 的 IP 与端口地址
 ```
 
-
-### 本地运行 KubeSphere Console 加载扩展组件
+### 本地运行 KubeSphere Console 并加载扩展组件
 
 1. 执行以下命令运行 KubeSphere Console：
 
@@ -116,3 +108,7 @@ Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-consol
 ![coding.png](./coding.png?width=1080px)
 
 ![preview.png](./preview.png?width=1080px)
+
+### 更多示例
+
+Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[示例与教程](../../examples)。
