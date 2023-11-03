@@ -4,17 +4,17 @@ weight: 03
 description: 解读 Hello World 扩展组件的工作方式
 ---
 
-在上一个章节中，您已经可以在本地运行 KubeSphere Console 并正确加载扩展组件，下面我们来看看它是如何工作的。
+在前一节中，您已学习如何在本地运行 KubeSphere Console 并成功加载扩展组件。现在，让我们深入了解它的工作原理。
 
-Hello World 扩展组件执行了 3 件事情：
+加载 Hello World 扩展组件时，它执行了以下三个关键任务，这对于 KubeSphere 扩展组件的开发至关重要。
 
-1. 在顶部导航栏注册菜单按钮，便于快速访问扩展组件的页面。
-2. 添加独立的页面路由，当用户访问 `http://localhost:8000/hello-world` 路径时可以正确地渲染扩展组件页面。
-3. 实现扩展组件页面。
+1. 在顶部导航栏注册了一个菜单按钮，以方便用户快速访问该扩展组件的页面。
+2. 添加了独立的页面路由，当用户访问 `http://localhost:8000/hello-world` 时可以正确地渲染扩展组件页面。
+3. 实现了扩展组件的页面内容。
 
-这三个步骤对于开发 KubeSphere 扩展组件来说至关重要，我们再仔细看看 Hello World 扩展组件的文件结构和源代码，进一步了解这些功能是如何实现的。
+现在，让我们更详细地查看 Hello World 扩展组件的文件结构和源代码，以深入了解这些功能是如何实现的。
 
-**扩展组件的目录结构**
+### 扩展组件的目录结构
 
 ```bash
 $ tree extensions/hello-world 
@@ -37,7 +37,7 @@ extensions/hello-world
         └── index.js
 ```
 
-### 定义扩展组件的基础信息
+### 扩展组件的基础信息
 
 `package.json` 文件中包含了扩展组件的基础信息与 ` Node.js` 元数据。
 
@@ -83,7 +83,7 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);
 ```
 
-通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件中的功能页面。
+通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件的功能页面。
 
 ```js
 import React from 'react';
@@ -100,7 +100,7 @@ export default [
 
 ### 扩展组件功能实现
 
-`src/App.jsx` 实现了具体的功能，展示 `Hello World!` 字样。
+通过 `src/App.jsx` 实现具体的功能，例如：展示 `Hello World!` 字样。
 
 ```jsx
 import React from 'react';
@@ -116,17 +116,4 @@ export default function App() {
 }
 ```
 
-### 了解更多
-
-在这个快速入门中，我们学习了如何在本地创建、运行和调试一个简单扩展组件的前端部分。一个完整的、具备实际业务能力的扩展组件应包含前后端，甚至需要通过 API 与外部系统或工具进行集成；同时，还需要将扩展组件打包和部署。也可以发布到扩展组件市场，与他人分享您开发的扩展组件。下面是一些建议的学习路线，来进一步提高您开发 KubeSphere 扩展组件的技能：
-
-[系统架构](../../architecture) 该章节帮助大家深入了解 KubeSphere LuBan 基于扩展机制的系统架构。
-
-[功能定制](../../feature-customization) 在该章节中，我们将 KubeSphere API 和扩展点按照功能划分为几个类别，每个类别都有关于您的扩展可以实现什么功能的简短描述。通过查看 KubeSphere API 或阅读扩展功能定制部分，可以了解 KubeSphere 的扩展能力。
-
-[示例与教程](../../examples) 我们有大量示例与文字或视频教程，其中包含了一些详细解读源代码的指南。您可以在示例与教程列表或 [extension-samples](https://github.com/kubesphere/extension-samples) 仓库中找到所有示例和指南。
-
-[打包发布](../../packaging-and-release) 该章节介绍如何利用工具 ksbuilder 打包扩展组件并进行测试，以及如何将其发布到扩展组件市场。
-
-[最佳实践](../../best-practices) 为了帮助您的扩展组件无缝融入 KubeSphere 用户界面，此章节介绍了大量创建扩展组件 UI 的最佳实践。
 
