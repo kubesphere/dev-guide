@@ -128,6 +128,45 @@ spec:
     - 'Content-Type "application/json"'
 ```
 
+6. `rewrite` 重写发送到上游的请求路径以及查询参数
+
+```yaml
+spec:
+  directives:
+    rewrite:
+    - * /foo.html
+    - /api/* ?a=b
+    - /api_v2/* ?{query}&a=b
+    - * /index.php?{query}&p={path}
+
+# - "* /foo.html" ==> rewrite "/" to "/foo.html"
+# - "/api/* ?a=b" ==> rewrite "/api/abc" to "/api/abc?a=b"
+# - "/api_v2/* ?{query}&a=b" ==> rewrite "/api_v2/abc" to "/api_v2/abc?a=b"
+# - "* /index.php?{query}&p={path}" ==> rewrite "/foo/bar" to "/index.php?p=%2Ffoo%2Fbar"
+```
+
+7. `replace` 替换发送到上游的请求路径
+
+```yaml
+spec:
+  directives:
+    replace:
+    - /docs/ /v1/docs/
+
+# - "/docs/ /v1/docs/" ==> rewrite "/docs/go" to "/v1/docs/go"
+```
+
+8. `pathRegexp` 正则替换发送到上游的请求路径
+
+```yaml
+spec:
+  directives:
+    pathRegexp:
+    - /{2,} /
+
+# - "/{2,} /" ==> rewrite "/doc//readme.md" to "/doc/readme.md"
+```
+
 ## 针对 CRD 的 API 扩展
 
 如果您已经借助 K8s CRD 定义了 API，在 KubSphere 中 K8s 提供的 API 可以直接使用。在此基础之上，还可以借助 KubeSphere 对您的 API 进行增强。
