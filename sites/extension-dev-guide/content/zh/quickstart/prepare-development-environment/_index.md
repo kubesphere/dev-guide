@@ -4,7 +4,7 @@ weight: 01
 description: 介绍如何搭建扩展组件的开发环境
 ---
 
-本节介绍如何搭建扩展组件开发环境。为搭建开发环境，您需要安装 KubeSphere Core 和开发工具。
+本节介绍如何搭建扩展组件开发环境。搭建开发环境，需要安装 KubeSphere Core 和相应的开发工具。
 
 * KubeSphere Core：KubeSphere 最小化核心组件，为扩展组件开发提供基础的运行环境。
 
@@ -43,7 +43,7 @@ description: 介绍如何搭建扩展组件的开发环境
 
    * 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到 `/usr/local/bin` 目录。
 
-2. 复制 K8s 集群的 [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 配置文件到开发主机上，确保使用 kubectl 可以正常访问到 K8s 集群。
+   - 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到 `/usr/local/bin` 目录。
 
    ```bash
    ➜  ~ kubectl -n kubesphere-system get po
