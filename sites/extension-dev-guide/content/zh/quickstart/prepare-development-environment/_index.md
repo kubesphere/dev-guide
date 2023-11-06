@@ -32,7 +32,7 @@ description: 介绍如何搭建扩展组件的开发环境
    helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
-   更多配置参数，请参考 [https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/)。
+   更多配置参数，请参考 [安装 KubeSphere 企业版](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/#_%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE)。
 
 ## 安装开发工具
 
