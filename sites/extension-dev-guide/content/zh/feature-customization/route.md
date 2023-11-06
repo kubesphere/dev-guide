@@ -9,8 +9,8 @@ description: "创建新的功能页面并设置路由"
 
 ## 路由定义
 
-KubeSphere4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便地实现路由注册，使用了 `Route Object` 的方式书写路由。
-形如：
+KubeSphere 4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便地实现路由注册，采用了 `Route Object` 的方式书写路由，示例如下：
+
 ```javascript
 let routes = [
     {
@@ -32,8 +32,7 @@ let routes = [
   ];
 ```
 
-某些情形下，需要向已存在的路由插入或替换新的路由。这种情况下，需要指定路由的父路由 `parentRoute`。比如若想在集群管理的左侧菜单添加一个新的路由，首先去 ks console
-源码中找到对应的路由定义。在 `packages/clusters/src/routes/index.tsx` 找到了对应的代码，如下：
+某些情形下，需要向已存在的路由插入或替换新的路由。这种情况下，需要指定路由的父路由 `parentRoute`。比如若想在集群管理的左侧菜单添加一个新的路由，首先需要查找 ks console 源码中对应的路由定义。在 `packages/clusters/src/routes/index.tsx` 文件中找到了对应的代码，如下：
 
 ```javascript
 const PATH = '/clusters/:cluster';
@@ -75,7 +74,7 @@ export default [
 
 ## 路由注册
 
-使用 `yarn create:ext` 初始化扩展组件目录后，默认会生成 routes 文件夹，如下面目录结构：
+使用 `yarn create:ext` 初始化扩展组件目录后，默认会生成 routes 文件夹，目录结构如下：
 
 ```shell
 └── hello-world
@@ -96,7 +95,7 @@ export default [
         └── routes
             └── index.js
 ```
-可以将路由定义写在 `routes/index.js` 里。然后在扩展组件的 entry file 里注册路由，如下：
+将路由定义写在 `routes/index.js`文件中，然后在扩展组件的 entry file 里注册路由，如下：
 
 ```javascript
 import routes from './routes';  // 引入路由文件

@@ -76,7 +76,7 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
 
 ### 配置本地运行环境
 
-在配置本地运行环境之前，您需要先搭建开发环境，获取 KubeSphere API Server 的访问地址，在 `local_config.yaml` 文件中进行配置。
+在配置本地运行环境之前，请先搭建好开发环境，获取 KubeSphere API Server 的访问地址，并在 `local_config.yaml` 文件中进行如下配置。
 
 ```yaml
 server:
@@ -111,4 +111,4 @@ Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-consol
 
 ### 更多示例
 
-Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[示例与教程](../../examples)。
+Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[开发示例](../../examples)。

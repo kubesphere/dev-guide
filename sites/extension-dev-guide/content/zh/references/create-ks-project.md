@@ -6,7 +6,7 @@ description:  介绍 KubeSphere 前端开发脚手架工具
 
 ## create-ks-project
 
-KubeSphere 前端开发脚手架工具，执行后将会在指定目录下创建一个前端脚手架文件夹并且安装相应前端依赖。
+KubeSphere 前端开发脚手架工具，执行后将会在指定目录下创建一个前端脚手架文件夹，并安装相应前端依赖。
 
 使用方式：
 
