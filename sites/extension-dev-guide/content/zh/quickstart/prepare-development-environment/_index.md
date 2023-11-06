@@ -7,7 +7,7 @@ description: 介绍如何搭建扩展组件的开发环境
 本节介绍如何搭建扩展组件开发环境。搭建开发环境，需要安装 KubeSphere Enterprise 和相应的开发工具。
 
 * KubeSphere Enterprise：在 K8s 集群中部署 KubeSphere Enterprise Helm Chart ，为扩展组件提供基础的运行环境。
-* 开发工具： [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/create-ks-project) 用于扩展组件项目的初始化、打包和发布，以及常用的开发工具 Node.js、Helm、kubectl 等等。
+* 开发工具： [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/create-ks-project) 用于扩展组件项目的初始化、打包和发布，以及常用的开发工具 Node.js、Helm、kubectl 等。
 
 ## 安装 KubeSphere Enterprise
 

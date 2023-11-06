@@ -4,13 +4,13 @@ weight: 05
 description: 介绍如何实现扩展组件前端国际化
 ---
 
-本章节介绍如何实现扩展组件前端国际化。
+本章节介绍如何实现扩展组件前端页面的国际化。
 
-KubeSphere Core 集成了 [i18next](https://www.i18next.com/) 作为国际化组件。您可以通过自定义语言包实现扩展组件前端多语言显示。
+KubeSphere Core 集成了 [i18next](https://www.i18next.com/) 作为国际化组件，支持通过自定义语言包实现扩展组件前端多语言显示。
 
 ## 语言包
 
-扩展组件前端模块目录中的 `src/locales` 目录为扩展组件语言包，其中默认创建了英文语言包 `en` 和简体中文语言包 `zh`。您也可以根据需要手动创建其他语言包。每个语言的词条保存在 JSON 文件中，您可以在语言包中创建多个 JSON 文件。
+扩展组件前端模块中的 `src/locales` 目录用于存放扩展组件的语言包。默认情况下，它包括英文语言包 `en` 和简体中文语言包 `zh`，还可以根据需要手动创建其他语言包。前端界面的词条通常保存在 JSON 文件中，支持在每个语言包中创建多个 JSON 文件。
 
 ```shell
 kubesphere-extensions
@@ -30,7 +30,7 @@ kubesphere-extensions
 
 ## 开发步骤
 
-以下以 [Hello World](../../quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
+下面以 [Hello World](../../quickstart/hello-world-extension/) 扩展组件为例，演示如何在扩展组件前端分别显示英文词条 `Hello World! The current language code is {languageCode}.` 和中文词条`你好世界！当前的语言代码为 {languageCode}。`，并向 `{languageCode}` 变量动态传入当前环境的语言代码。
 
 1. 在 `src/locales/en/base.json` 文件和 `src/locales/zh/base.json` 文件中分别添加以下词条：
 
