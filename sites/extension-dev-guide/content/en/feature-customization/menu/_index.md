@@ -26,9 +26,9 @@ You can mount extensions to the following points:
 
   <img src="./toolbox-menu.png" style="max-width: 1000px; margin: 0px" />
 
-* Left-side navigation pane
+* Left navigation pane
 
-  KubeSphere provides a left-side navigation pane for each of the following module: access control, cluster management, workspace management, project management, and platform settings. Example:
+  KubeSphere provides a left navigation pane for each of the following module: access control, cluster management, workspace management, project management, and platform settings. Example:
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px" />
 
@@ -68,11 +68,11 @@ const menu = {
           <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
           <li><strong>global</strong>: mounts to the extensions menu.</li>
           <li><strong>toolbox</strong>: mounts to the toolbox menu.</li>
-          <li><strong>access</strong>: mounts to the left-side navigation pane on the Access Control page.</li>
-          <li><strong>cluster</strong>: mounts the left-side navigation pane on the Cluster Management page.</li>
-          <li><strong>workspace</strong>: mounts the left-side navigation pane on the Workspace Management page.</li>
-          <li><strong>project</strong>: mounts the left-side navigation pane on the Project Management page.</li>
-          <li><strong>platformSettings</strong>: mounts the left-side navigation pane on the Platform Settings page.</li>
+          <li><strong>access</strong>: mounts to the left navigation pane on the Access Control page.</li>
+          <li><strong>cluster</strong>: mounts the left navigation pane on the Cluster Management page.</li>
+          <li><strong>workspace</strong>: mounts the left navigation pane on the Workspace Management page.</li>
+          <li><strong>project</strong>: mounts the left navigation pane on the Project Management page.</li>
+          <li><strong>platformSettings</strong>: mounts the left navigation pane on the Platform Settings page.</li>
         </ul>
       </td>
     </tr>

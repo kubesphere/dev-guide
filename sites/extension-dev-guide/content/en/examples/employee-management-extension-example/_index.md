@@ -10,7 +10,7 @@ This topic describes how to develop and test extensions by developing an extensi
 
 ## Requirements and design
 
-Assume that you want to add a feature for employee management to the frontend of KubeSphere, and the module can be accessed by clicking `Platform` in the upper left corner of the top navigation pane. In this module, you can view, add, modify, and delete employee information. The following figures show the design of this module:
+Assume that you want to add a feature for employee management to the frontend of KubeSphere, and the module can be accessed by clicking `Platform` in the upper left corner of the top navigation bar. In this module, you can view, add, modify, and delete employee information. The following figures show the design of this module:
 
 1. Menu for employee management![Employee Management Menuemployee-management-menu](./sample-employee-menu.png)
 
