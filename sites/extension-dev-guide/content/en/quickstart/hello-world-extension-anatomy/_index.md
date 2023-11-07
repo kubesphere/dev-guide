@@ -4,17 +4,17 @@ weight: 3
 description: Describes how the Hello World extension works.
 ---
 
-In the previous section, the KubeSphere web console runs locally and the extension is loaded properly. This topic describes how the extension works.
+In the previous section, you have learned how to run the KubeSphere web console locally and load the extension. This topic describes how the extension works.
 
-The Hello World extension provides the following features:
+When loading the Hello World extension, it performs the following three key tasks, which are critical to the development of KubeSphere extensions.
 
 1. Register a menu button on the top navigation bar for quick access to the pages of the extension.
 2. Add an independent page route. When a user visits `http://localhost:8000/hello-world`, an extension page can be rendered correctly.
 3. Implement the extension pages.
 
-These three features are crucial for developing a KubeSphere extension. Let's take a closer look at the file structure and source code of the Hello World extension to learn more about how these features are implemented.
+Let's take a deeper look at the file structure and source code of the Hello World extension to learn more about how these features are implemented.
 
-**Directory for the extension**
+### Directory structure
 
 ```bash
 $ tree extensions/hello-world 
@@ -37,9 +37,9 @@ extensions/hello-world
         └── index.js
 ```
 
-### Configure basic information for the extension
+### Basic information
 
-The `package.json` file contains the basic information about the extension and `Node.js` metadata.
+The `package.json` file contains the basic information about the extension and the `Node.js` metadata.
 
 ```json
 {
@@ -58,7 +58,7 @@ The `package.json` file contains the basic information about the extension and `
 
 ### Features
 
-Use `src/index.js` to register [navigation bars](../../feature-customization/menu/) and [internationalization modules](../../feature-customization/internationalization/) to ks-console.
+Use `src/index.js` to register [navigation menus](../../feature-customization/menu/) and [internationalization modules](../../feature-customization/internationalization/) with ks-console.
 
 ```js
 import routes from './routes';
@@ -83,7 +83,7 @@ const extensionConfig = {
 globals.context.registerExtension(extensionConfig);
 ```
 
-Use `src/routes/index.js` to register [page routes](../../feature-customization/route) to ks-console, and extension pages can be rendered correctly when you access the pages.
+Use `src/routes/index.js` to register [page routes](../../feature-customization/route) with ks-console, and extension pages can be rendered correctly when you access the pages.
 
 ```js
 import React from 'react';
@@ -115,18 +115,3 @@ export default function App() {
   return <Wrapper>Hello World!</Wrapper>;
 }
 ```
-
-### Learn More
-
-In this quickstart, you get to know how to create, run, and debug the frontend of a simple extension. A complete extension should include frontend and backend capabilities, and even need to integrate with external systems or tools through APIs. At the same time, the extension also needs to be packaged and deployed. You can also publish it to the KubeSphere Marketplace to share the extension with others. Here are some suggested learning paths to further improve your skills in developing KubeSphere extensions:
-
-[System architecture](../../architecture) This section describes the system architecture of KubeSphere LuBan and its extension mechanism.
-
-[Custom features](../../feature-customization) In this section, we divide the KubeSphere API and extensions into several categories according to their functionality, and each category has a short description about what features your extension can achieve. You can learn about KubeSphere's extensibility capabilities by looking at the KubeSphere API.
-
-[Examples](../../examples) This section describes a large number of examples or video tutorials, including some guides to interpreting the source code in detail. You can find all samples and guides in [extension-samples](https://github.com/kubesphere/extension-samples).
-
-[Package and release](../../packaging-and-release) This section describes how to use the tool ksbuilder to package and test extensions, and how to release them to the KubeSphere Marketplace.
-
-[Best practices](../../best-practices) This section introduces a number of best practices for creating extension UIs to help your extensions fit seamlessly into the KubeSphere web console.
-
