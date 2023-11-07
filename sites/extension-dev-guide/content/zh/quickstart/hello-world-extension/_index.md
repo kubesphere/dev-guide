@@ -41,7 +41,7 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
    ```bash
    Extension Name hello-world
    Display Name Hello World
-   Descriptio Hello World!
+   Description Hello World!
    Author demo
    Language JavaScript
    Create extension [hello-world]? Yes

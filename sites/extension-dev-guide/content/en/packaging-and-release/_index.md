@@ -1,5 +1,5 @@
 ---
-title: Package and Release Extensions
+title: Package and Release
 weight: 7
 description: Describes how to package and release extensions.
 ---

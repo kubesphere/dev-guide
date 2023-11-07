@@ -58,7 +58,7 @@ kubesphere-extensions
 
 #### 本地调试
 
-在扩展组件的开发过程中，[配置本地开发环境](../hello-world-extension/#配置-kubesphere-console)，然后使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
+在扩展组件的开发过程中，[配置本地运行环境](../hello-world-extension/#配置本地运行环境)，然后使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
 
 ### 打包发布
 

@@ -4,9 +4,7 @@ weight: 2
 description: Describes how to create a demo extension "Hello World".
 ---
 
-This section describes how to create a Hello World extension and add a separate page in the KubeSphere web console.
-
-After reading this topic, you can get to know:
+After reading this topic, you will get:
 
 * how to initialize a project for extension development.
 
@@ -14,13 +12,11 @@ After reading this topic, you can get to know:
 
 * how to debug an extension.
 
-KubeSphere adopts React for the development of frontend extensions. For more information, visit [React official website](https://reactjs.org).
-
-This tutorial guides you through how to develop the frontend of the Hello World extension. For information about the complete tutorial, see [Examples](../../examples).
-
 ### Prerequisites
 
-A development environment is ready. For more information, see [Build a development environment](../../quickstart/prepare-development-environment/).
+A development environment is ready. For more information, view [Build a Development Environment](../../quickstart/prepare-development-environment/).
+
+KubeSphere adopts React for the frontend development of extensions. For more information, visit [React official website](https://reactjs.org).
 
 ### Initialize a project for extension development
 
@@ -47,7 +43,7 @@ The project contains a KubeSphere web console that can run locally.
    ```bash
    Extension Name hello-world
    Display Name Hello World
-   Descriptio Hello World!
+   Description Hello World!
    Author demo
    Language JavaScript
    Create extension [hello-world]? Yes
@@ -57,13 +53,13 @@ The project contains a KubeSphere web console that can run locally.
 
    ```bash
    kubesphere-extensions          
-   └── ks-console                   # Project directory for the frontend extension
+   └── ks-console                   # Extension frontend development directory
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
        │   └── local_config.yaml    # Configuration file of the KubeSphere web console
-       ├── extensions               # Source code directory for the frontend extension
+       ├── extensions               # Source code directory for the extension
        │   ├── entry.ts
        │   └── hello-world          # Source code directory for the Hello World extension
        │       ├── Dockerfile
@@ -83,17 +79,17 @@ The project contains a KubeSphere web console that can run locally.
 
 ### Configure the KubeSphere web console
 
-To make the KubeSphere web console run locally, you need to [build a development environment](../prepare-development-environment/), obtain the address of the KubeSphere API server, and then configure the `local_config .yaml` file.
+To make the KubeSphere web console run locally, you need to [Build a Development Environment](../prepare-development-environment/), obtain the address of the KubeSphere API server, and then configure the `local_config .yaml` file as below.
 
 ```yaml
 server:
   apiServer:
-    url: http://172.31.73.3:30881
-    wsUrl: ws://172.31.73.3:30881
+    url: http://172.31.73.3:30881  # IP and port of `ks-apiserver`
+    wsUrl: ws://172.31.73.3:30881  # IP and port of `ks-apiserver`
 ```
 
 
-### Launch the KubeSphere web console in your local environment
+### Launch the KubeSphere web console and load the extension
 
 1. Launch the KubeSphere web console in your local environment:
 
@@ -101,18 +97,22 @@ server:
    yarn dev
    ```
 
-2. Open a browser, visit `http://localhost:880` and use default username `admin` and password `P@88w0rd` to log in to the KubeSphere web console.
+2. Open a browser, visit `http://localhost:880`, and use the default username `admin` and password `P@88w0rd` to log in to the KubeSphere web console.
 
-   The access point to `Hello World` appears on the top navigation bar. Click `Hello World` to open the page.
+   The entry of `Hello World` appears on the top navigation bar. Click `Hello World` to open the page.
 
    ![demo-plugin-dashboard.png](./hello-world-extension-dashboard.png?width=1080px)
 
 ### Debug the extension
 
-The source code of the Hello World extension is stored in  `~/kubesphere-extensions/ks-console/extensions/hello-word/src` .
+The source code of the Hello World extension is stored in  `~/kubesphere-extensions/ks-console/extensions/hello-word/src`.
 
-You can change the string displayed on the page to `Test!`, as shown in the following figure:
+You can change the string displayed on the page to `Test!`, as shown in the following figures:
 
 ![coding.png](./coding.png?width=1080px)
 
 ![preview.png](./preview.png?width=1080px)
+
+### More examples
+
+The Hello World extension only contains the frontend part. For a comprehensive example of extension development, please refer to [Development Examples](../../examples).
