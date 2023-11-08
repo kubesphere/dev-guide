@@ -8,9 +8,9 @@ KubeSphere is dedicated to building a distributed operating system for cloud-nat
 
 So we have redefined the extensions.
 
-### What is a KubeSphere Extension?
+### What is a KubeSphere extension?
 
-A KubeSphere Extension is a Helm Chart to extend the functionality of KubeSphere and orchestrate it with Helm, which follows the KubeSphere extension development guide.
+A KubeSphere extension is a Helm Chart to extend the functionality of KubeSphere and orchestrate it with Helm, which follows the KubeSphere extension development guide.
 
 So cloud-native developers don't have to spend a lot of time learning proprietary application orchestration methods any longer.
 
@@ -38,7 +38,7 @@ The following are some examples that you can achieve with the extension API:
 Developing extensions is simple and easy to get started. View the [Procedure](../../development-procedure/) section to get familiar with the process.
 
 
-### Getting Help
+### Get help
 
 * [Slack Channel](https://join.slack.com/t/kubesphere/shared_invite/zt-26fio5qz5-Zqv85_vBcBvxe5SXWOwBmw)
 

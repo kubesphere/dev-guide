@@ -213,6 +213,6 @@ Permission Filtering Effect
  ``` 
 
 
-## Best Practices
+## Best practices
 
 TODO

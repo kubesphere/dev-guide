@@ -1,5 +1,5 @@
 ---
-title: Integrate with Third-Party Systems
+title: Weave Scope
 weight: 2
 description: Integrate with third-party tools and systems that have existing web UIs.
 ---
@@ -10,7 +10,7 @@ This section provides an example of integrating Weave Scope into extensions to h
 
 ### Deploy Weave Scope
 
-To deploy Weave Scope, view related description in [Deploy Weave Scope](https://www.weave.works/docs/scope/latest/installing). You can also run the following command to deploy it to a Kubernetes cluster:
+To deploy Weave Scope, view the related content in [Deploy Weave Scope](https://www.weave.works/docs/scope/latest/installing), or run the following command to deploy it to a Kubernetes cluster:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/master/extensions-backend/weave-scope/manifests.yaml
@@ -24,7 +24,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubesphere/extension-samples/
 
 ### Develop frontend extensions
 
-The process for project creation, local development, and debugging is the same as that in [Develop an extension for employee management](../employee-management-extension-example/#Develop an extension for employee management). You can clone the GitHub repo:
+Clone the code of this example from GitHub, and then refer to [Create a Hello World Extension](../../quickstart/hello-world-extension) for project creation, local development and debugging.
 
 ```bash
 cd  ~/kubesphere-extensions
@@ -82,14 +82,14 @@ export default function App() {
 
 The preceding code block completes the following tasks:
 
-1. Use `iframe` to integrate Weave Scope. `FRAME_URL` is the reverse proxy of Weave Scope, which shares the **origin** with the KubeSphere web console.
+1. Use `iframe` to integrate Weave Scope into extensions. `FRAME_URL` is the reverse proxy of Weave Scope, which shares the **origin** with the KubeSphere web console.
 
 {{% notice note %}}
 Due to the Same-Origin Policy, if the third-party system webpage has a different origin from the KubeSphere frontend, KubeSphere cannot use JavaScript to read and operate on the third-party system iframe. Therefore, it requires the backend to process the frontend address of the third-party system as the same source as the KubeSphere frontend (**same protocol**, **host**, and **port**).
 {{% /notice %}}
 
-2. Adjust the webpage style of Weave Scope. Due to the same origin, the extension can read and operate on the Document Object Model (DOM) of the Weave Scope page (`iframe`) by using `React` `ref`. This way, you can adjust the style and hidden the effect caused by the selector.
+2. Adjust the webpage style of Weave Scope. Due to the same origin, the extension can read and operate on the Document Object Model (DOM) of the Weave Scope page (`iframe`) by using `React` `ref`. This way, you can adjust the style and hide the effect caused by the selector.
 
-Run `yarn dev` to launch a local environment, and then you can access the webpage through the extension:
+Run `yarn dev` to launch a local environment, and then access the webpage through the extension:
 
 ![weave-scope-dashboard](./sample-weave-scope-dashboard.png)
