@@ -6,11 +6,11 @@ description: 介绍如何扩展 API
 
 ## API 扩展
 
-KubeSphere 提供了灵活的 API 扩展方式，支持创建以下几种类型的 [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 以注册 API 或创建动态的代理规则。
+KubeSphere 提供灵活的 API 扩展方式，支持创建以下几种类型的 [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，以注册 API 或创建动态的代理规则。
 
 在开始之前，请先了解 [KubeSphere API 概念](../references/kubesphere-api-concepts/)，或查看[访问控制](../access-control/)章节，了解更多有关 API 访问控制的内容。
 
-在 KubeSphere 中，API 扩展主要有以下两种方式，它们适用于不同的场景：
+在 KubeSphere 中，API 扩展主要有以下两种方式，它们适用于不同的场景。
 
 ### APIService
 
@@ -18,7 +18,7 @@ KubeSphere 提供了一种类似于 [Kubernetes API Aggregation Layer](https://k
 
 API Service 是一种严格的声明式 API 定义方式，通过 API Group、API Version、Resource，以及 API 路径中定义的资源层级，与 KubeSphere 的访问控制和多租户权限管理体系紧密结合。对于那些可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
 
-以 weave-scope 扩展组件为例，可以为其分配特定的 API Group 和 API Version，当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，该请求将会被转发到 `{spec.url}`。
+以 weave-scope 扩展组件为例，可以为其分配特定的 API Group 和 API Version。当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，该请求将会被转发到 `{spec.url}`。
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1

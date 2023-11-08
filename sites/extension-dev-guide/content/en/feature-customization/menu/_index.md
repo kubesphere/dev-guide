@@ -28,13 +28,13 @@ You can mount extensions to the following points:
 
 * Left navigation pane
 
-  KubeSphere provides a left navigation pane for each of the following module: access control, cluster management, workspace management, project management, and platform settings. Example:
+  KubeSphere provides a left navigation pane for each of the following modules: users and roles, cluster management, workspace management, project management, and platform settings. Example:
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px" />
 
 ### Configure a mount point
 
-You can set the mount point in the `menu` object of `src/index.js`. For example:
+Set the mount point in the `menu` object of `src/index.js`. For example:
 
 ```javascript
 const menu = { 
@@ -45,6 +45,8 @@ const menu = {
   icon: 'cluster',
   order: 0,
   desc: 'HELLO_WORLD_DESC',
+  authKey: 'hello',
+  authAction: 'hello-view',
   skipAuth: true,
 };
 ```
@@ -68,23 +70,27 @@ const menu = {
           <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
           <li><strong>global</strong>: mounts to the extensions menu.</li>
           <li><strong>toolbox</strong>: mounts to the toolbox menu.</li>
-          <li><strong>access</strong>: mounts to the left navigation pane on the Access Control page.</li>
+          <li><strong>access</strong>: mounts to the left navigation pane on the Users and Roles page.</li>
           <li><strong>cluster</strong>: mounts the left navigation pane on the Cluster Management page.</li>
           <li><strong>workspace</strong>: mounts the left navigation pane on the Workspace Management page.</li>
           <li><strong>project</strong>: mounts the left navigation pane on the Project Management page.</li>
           <li><strong>platformSettings</strong>: mounts the left navigation pane on the Platform Settings page.</li>
         </ul>
+          To mount to a submenu of the current menu, set the path to: <code>parent: 'cluster.xxxx.xxxx'</code>.
       </td>
     </tr>
     <tr>
       <td>name</td>
-      <td>The identifier of the extension on the menu.</td>
+      <td>
+      <p>The identifier of the extension on the menu.</p>
+      <p>Menu permission validation uses the 'name' as the key by default. Set 'authKey' to specify module permissions for validation. For more information, please refer to <a href="../access-control">Access Control</a>.</p>
+</td>
     </tr>
     <tr>
       <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>.</td>
     </tr>
     <tr>
-      <td>title</td><td>The extension name displayed on the menu. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, see <a href="../internationalization">Internationalization</a>.</td>
+      <td>title</td><td>The extension name displayed on the menu. Please do not hard-code the parameter values. Instead, configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../internationalization">Internationalization</a>.</td>
     </tr>
     <tr>
       <td>icon</td><td>The icon name of the extension displayed on the menu. </td>
@@ -93,11 +99,17 @@ const menu = {
       <td>order</td><td>The sequence of the extension on the menu. Valid values: <code>0</code> or a positive integer. Value <code>0</code> indicates that the extension is at the top of the menu.</td>
     </tr>
     <tr>
-      <td>desc</td><td>The description of the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, see <a href="../internationalization">Internationalization</a>.</td>
+      <td>desc</td><td>The description of the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../Internationalization">Internationalization</a>.</td>
     </tr>
     <tr>
-      <td>skipAuth</td><td>Whether to skip user permission check. For more information, see <a href="../access-control">Access control</a>.</td>
+      <td>skipAuth</td><td>Whether to skip user permission check. For more information, please refer to <a href="../access-control">Access control</a>.</td>
     </tr>
+    <tr>
+  <td>authKey</td><td>Configure permission filtering. For more information, please refer to <a href="../access-control">Access Control</a>.</td>
+</tr>
+<tr>
+  <td>authAction</td><td>Configure permission items. For more information, please refer to <a href="../access-control">Access Control</a>.</td>
+</tr>
   </tbody>
 </table>
 

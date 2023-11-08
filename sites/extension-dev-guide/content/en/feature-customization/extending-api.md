@@ -1,28 +1,24 @@
 ---
-title: API Extensions
+title: API Extension
 weight: 02
 description: Describes how to extend the API.
 ---
 
 ## Extend API
 
- Built on K8s, KubeSphere LuBan is highly configurable and extensible like K8s. In addition to extending KubeSphere capabilities with the help of the [K8s extension mechanism](https://kubernetes.io/docs/concepts/extend-kubernetes/), KubeSphere offers a more flexible way to extend the platform by creating the following types of [CRs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources) to register APIs with KubeSphere, extend the front-end UI, or create dynamic resource proxies.
+KubeSphere offers flexible methods to extend its API, supporting the creation of various types of [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to register APIs or create dynamic proxy rules.
 
-Before you start, you should learn: [KubeSphere API Concepts](https://dev-guide.kubesphere.io/extension-dev-guide/en/references/kubesphere-api-concepts/).
+Before getting started, please check out [KubeSphere API Concepts](../../references/kubesphere-api-concepts/), or view the [access control] (../access-control/) section to learn more about API access control.
 
-With KubeSphere API extensions, you can easily utilize the access control, multi-tenancy, and multi-cluster capabilities of KubeSphere.
-
-There are two main methods for API extension in KubeSphere, each with different usage scenarios:
+In KubeSphere, there are primarily two ways for API extension, each with different usage scenarios.
 
 ### APIService
 
 KubeSphere has an API extension mechanism similar to the [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/), with a declarative API registration mechanism.
 
-The API Service is a strictly declarative API definition that is tightly integrated with KubeSphere's access control and multi-tenant privilege management system through the resource hierarchy defined in the API Group, API Version, Resource, and API Path.
+The API Service is a strictly declarative API definition that is tightly integrated with KubeSphere's access control and multi-tenant privilege management system through the resource hierarchy defined in the API Group, API Version, Resource, and API Path. It is very suitable for APIs that can be abstracted into declarative resources.
 
-It is very suitable for APIs that can be abstracted into declarative resources.
-
-Taking the [employee management extension](https://dev-guide.kubesphere.io/extension-dev-guide/en/examples/employee-management-extension-example/) as an example, you can assign specific API Group and API Version to it, when the request matches the `/kapi/{spec.group}/{spec.version}` path, the request will be forwarded to `{spec.url}`.
+Taking the weave-scope extension as an example, you can assign a specific API Group and API Version to it. When the request matches the `/kapi/{spec.group}/{spec.version}` path, the request will be forwarded to `{spec.url}`.
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -49,7 +45,7 @@ spec:
 | `spec.url`, `spec.caBundle`, `spec.insecureSkipTLSVerify`|  They specify an external service for APIService, and proxy the API request to the specified endpoint. |
 | `spec.service` | Similar to `spec.url`, it specifies the service reference address inside the K8s cluster for the API. |
 
-If you need to further manage API access permissions, please refer to: [Access Control](https://dev-guide.kubesphere.io/extension-dev-guide/en/feature-customization/access-control/ ).
+If you need to further manage API access permissions, please refer to: [Access Control](../access-control/).
 
 ### ReverseProxy
 
@@ -121,7 +117,7 @@ spec:
     - 'Foo bar'
 ```
 
-5. `headerDown` adds, removes or replaces response headers for responses returned from upstream.
+1. `headerDown` adds, removes or replaces headers for responses returned from upstream.
 
 ```yaml
 spec:
@@ -142,13 +138,13 @@ Resources in a specific cluster can be directly accessed through the `/clusters/
 
 ### Access control
 
-It is also applicable for the resource level "cluster" or "namespaced" already defined in the CRD.
+It is also applicable for the resource level "cluster" or "namespace" already defined in the CRD.
 
 ### Pagination and fuzzy search
 
 `kapis` is the prefix of KubeSphere API, you can mark the CRD with `kubesphere.io/resource-served: 'true'`, which means that KubeSphere will provide the pagination and fuzzy query API for related CR resources.
 
-**Note:** KubeSphere Served Resource API will conflict with APIService (if the same API Group and API Version are applied).
+**Note**: KubeSphere Served Resource API will conflict with APIService (if the same API Group and API Version are applied).
 
 
 **API Request**

@@ -1,9 +1,9 @@
 ---
 title: Custom Features
 weight: 5
-description: "KubeSphere provides various methods for custom extensions to extend its capabilities."
+description: "KubeSphere provides extensions with a number of customization methods to extend the capabilities of KubeSphere."
 ---
 
-KubeSphere provides various methods for custom extensions to extend its capabilities.
+KubeSphere provides extensions with a number of customization methods to extend the capabilities of KubeSphere.
 
 {{%children description="true" %}}

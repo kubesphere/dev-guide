@@ -57,7 +57,7 @@ const routes: RouteObject[] = [
           ...
 ```
 
-如果想在 `Overview` 这一层新增一个路由，可以这样写：
+如果要在 `Overview` 这一层新增一个路由，可以按以下方式进行定义：
 
 ```javascript
 const PATH = '/clusters/:cluster';
@@ -70,7 +70,7 @@ export default [
   },
 ];
 ```
-可以看到，这里定义的 `parentRoute` 是 `Overview` 路由的父级路由的 path。
+这里定义的 `parentRoute` 是 `Overview` 路由的父级路由的 path。
 
 ## 路由注册
 

@@ -10,7 +10,7 @@ KubeSphere Core integrates [i18next](https://www.i18next.com/) as an internation
 
 ## Language packages
 
-KubeSphere provides language packages for frontend extensions in directory `src/locales`. By default, language packages `en` and `zh` are created. You can also create other language packages as needed. The UI text for each language is stored in JSON files. You can create multiple JSON files in language packages.
+KubeSphere provides language packages for frontend extensions in the directory `src/locales`. By default, language packages `en` and `zh` are created. You can also create other language packages as needed. The UI text for each language is stored in JSON files. You can create multiple JSON files in language packages.
 
 ```shell
 kubesphere-extensions
@@ -30,7 +30,7 @@ kubesphere-extensions
 
 ## Development process
 
-The following takes the [Hello World](../../quickstart/hello-world-extension/) extension as an example to demonstrate how to display `Hello World! The current language code is {languageCode}.` in English and `你好世界！当前的语言代码为 {languageCode}。Also, this example shows how to replace <code>{languageCode}` with the language code of a local environment.
+The following takes the [Hello World](../../quickstart/hello-world-extension/) extension as an example to demonstrate how to display `Hello World! The current language code is {languageCode}.` and `你好世界！当前的语言代码为 {languageCode}`。Also, this example shows how to replace `{languageCode}` with the language code of a local environment.
 
 1. In `src/locales/en/base.json` and `src/locales/zh/base.json`, add the following text:
 
