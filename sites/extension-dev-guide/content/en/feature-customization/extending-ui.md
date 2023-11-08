@@ -4,8 +4,6 @@ weight: 01
 description: Describes how to extend the UI.
 ---
 
-## UI Extension
-
 Different from the development mode, ks-console running in the production mode cannot directly load the pages you developed locally. After completing the development of the frontend part, you should package the frontend code, and use the resource statement **JSBundle** to inject your UI package into ks-console.
 
 Example: 
