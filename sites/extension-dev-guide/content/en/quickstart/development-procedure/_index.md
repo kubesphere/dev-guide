@@ -54,7 +54,7 @@ kubesphere-extensions
 
 #### Develop the extension
 
-Once the project is initialized, you can start writing the code of the extension. KubeSphere provides rich API, please refer to [Custom Features](../../feature-customization) to extend the capabilities of KubeSphere.
+Once the project is initialized, you can start writing the code of the extension. KubeSphere provides rich APIs, please refer to [Custom Features](../../feature-customization) to extend the capabilities of KubeSphere.
 
 #### Local debugging
 

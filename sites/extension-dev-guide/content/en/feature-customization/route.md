@@ -4,11 +4,12 @@ weight: 06
 description: "Describes how to create a feature page and configure route settings."
 ---
 
-For development based on `React`, if our application contains multiple pages, it is necessary to configure route settingns for the application. Routing can be viewed as the mapping between access paths and React components. In our extension development, routing can be used as follows:
+For development based on `React`, if the application contains multiple pages, it is necessary to configure route settings for the application. Routing can be viewed as the mapping between access paths and React components. In extension development, routing can be used as follows:
 
 ## Principles
 
 KubeSphere 4.0 adopts [react-router V6](https://reactrouter.com/docs/en/v6) for frontend routing. To make route registration easier, KubeSphere adopts `Route Object`. Example:
+
 ```javascript
 let routes = [
     {
@@ -30,7 +31,7 @@ let routes = [
   ];
 ```
 
-In some cases, you need to insert or replace new routes to existing routes. In such a scenario, you need to specify `parentRoute` as the parent route. For example, if you want to add a route to the left menu of the cluster management page, you first find the corresponding route definition in the ks console source code. In `packages/clusters/src/routes/index.tsx`, find the following code:
+In some cases, you need to insert or replace new routes with existing routes. In such a scenario, you need to specify `parentRoute` as the parent route. For example, if you want to add a route to the left menu of the cluster management page, you first find the corresponding route definition in the ks console source code. In `packages/clusters/src/routes/index.tsx`, find the following code:
 
 ```javascript
 const PATH = '/clusters/:cluster';
