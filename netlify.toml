@@ -5,12 +5,12 @@ command = "URL=$DEPLOY_PRIME_URL make build"
 [context.production]
 command = "make build"
   [context.production.environment]
-  HUGO_VERSION = "0.120.2"
+  HUGO_VERSION = "0.120.4"
 
 [context.deploy-preview]
 command = "URL=$DEPLOY_PRIME_URL make build"
   [context.deploy-preview.environment]
-  HUGO_VERSION = "0.120.2"
+  HUGO_VERSION = "0.120.4"
   HUGO_ENABLEGITINFO = "true"
 
 [[redirects]]
