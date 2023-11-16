@@ -11,20 +11,20 @@ description: 介绍 KubeSphere 4.0 扩展机制的背景和优势
 首先，尽管这些功能满足了用户在容器管理平台方面的基本需求，却引发了一些挑战，比如：
   
 - 版本发布周期较长：需要等待所有组件完成开发、测试，并通过集成测试。这导致了不必要的等待时间，使用户难以及时获得新功能和修复。
-- 响应不及时：KubeSphere的组件难以单独迭代，因此社区和用户提出的反馈需要等待 KubeSphere 发布新版本才能解决。这降低了对用户反馈的快速响应能力。
+- 响应不及时：KubeSphere 的组件难以单独迭代，因此社区和用户提出的反馈需要等待 KubeSphere 发布新版本才能解决。这降低了对用户反馈的快速响应能力。
 - 前后端代码耦合：尽管目前已能实现单独启用/禁用特定组件，但这些组件的前后端代码仍然耦合在一起，容易相互影响，架构上不够清晰和模块化。
 - 组件默认启用：部分组件默认启用，这可能会占用过多的系统资源，尤其对于没有相关需求的用户。
 
 其次，云原生领域的创新非常活跃。通常在同一个领域存在多种选择，例如：
 
 - GitOps 用户可以选用 ArgoCD 或 FluxCD；
-- 服务网格用户可以选择 Istio 或 Linkerd 或其他实现；
+- 服务网格用户可以选择 Istio 或 Linkerd 或其它实现；
 - 联邦集群管理可选择 Karmada、OCM 或 Clusternet；
 - 日志管理可以采用 Elasticsearch 或 Loki；
 - 边缘计算框架可使用 KubeEdge、OpenYurt 或 SuperEdge；
 - 存储和网络领域也提供了众多选择。
 
-KubeSphere 通常会优先支持其中一种实现，但用户常常有对其他实现的需求。
+KubeSphere 通常会优先支持其中一种实现，但用户常常有对其它实现的需求。
 
 此外，在使用 KubeSphere 的过程中，用户通常会面临以下问题：
 
@@ -48,12 +48,12 @@ KubeSphere 通常会优先支持其中一种实现，但用户常常有对其他
 
 ## KubeSphere LuBan 架构的优势
 
-KubeSphere LuBan 架构的优势可以从多个角度分析，包括 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）和其他开源项目、以及 KubeSphere 用户：
+KubeSphere LuBan 架构的优势可以从多个角度分析，包括 KubeSphere 维护者、KubeSphere 贡献者、云原生应用开发商（ISV）和其它开源项目、以及 KubeSphere 用户：
 
-- 对于 KubeSphere 维护者：LuBan 架构引入的扩展机制使维护者能够更专注于开发 KubeSphere 核心功能，使 ks-core 变得更轻量化，同时可以提高版本发布速度。对于其他功能，由于采用扩展组件实现，这些组件可以独立迭代，更及时地满足用户需求。
+- 对于 KubeSphere 维护者：LuBan 架构引入的扩展机制使维护者能够更专注于开发 KubeSphere 核心功能，使 ks-core 变得更轻量化，同时可以提高版本发布速度。对于其它功能，由于采用扩展组件实现，这些组件可以独立迭代，更及时地满足用户需求。
 
-- 对于 KubeSphere 贡献者：扩展机制的引入使 ks-core 和其他 KubeSphere 扩展组件之间更松耦合，开发也更加容易上手。
+- 对于 KubeSphere 贡献者：扩展机制的引入使 ks-core 和其它 KubeSphere 扩展组件之间更松耦合，开发也更加容易上手。
 
-- 对于云原生应用开发商（ISV）和其他开源项目：KubeSphere LuBan 架构的扩展机制允许 ISV 和其他开源项目以较低的成本将其产品或项目顺利集成到 KubeSphere 生态系统中。例如，Karmada 和 KubeEdge 的开发者可以基于这一扩展机制开发适用于 KubeSphere 的自定义控制台。
+- 对于云原生应用开发商（ISV）和其它开源项目：KubeSphere LuBan 架构的扩展机制允许 ISV 和其它开源项目以较低的成本将其产品或项目顺利集成到 KubeSphere 生态系统中。例如，Karmada 和 KubeEdge 的开发者可以基于这一扩展机制开发适用于 KubeSphere 的自定义控制台。
 
 - 对于 KubeSphere 用户：用户可以自由选择启用哪些 KubeSphere 扩展组件，还能将自己的组件顺利集成到 KubeSphere 控制台中。随着 KubeSphere 扩展组件生态的不断丰富，用户可以在 KubeSphere 扩展市场中选择更多丰富的产品和服务，实现容器管理平台的高度个性化。
