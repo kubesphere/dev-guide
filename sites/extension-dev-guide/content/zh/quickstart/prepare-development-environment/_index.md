@@ -7,7 +7,7 @@ description: 介绍如何搭建扩展组件的开发环境
 本节介绍如何搭建扩展组件开发环境。搭建开发环境，需要安装 KubeSphere Enterprise 和相应的开发工具。
 
 * KubeSphere Enterprise：在 K8s 集群中部署 KubeSphere Enterprise Helm Chart，为扩展组件提供基础的运行环境。
-* 开发工具：安装 [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/create-ks-project) 用于初始化扩展组件项目、打包和发布扩展组件，并安装常用的开发工具 Node.js、Helm、kubectl 等。
+* 开发工具：安装 [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/ksbuilder) 用于初始化扩展组件项目、打包和发布扩展组件，并安装常用的开发工具 Node.js、Helm、kubectl 等。
 
 ## 安装 KubeSphere Enterprise
 
@@ -39,7 +39,7 @@ description: 介绍如何搭建扩展组件的开发环境
 1. 安装开发扩展组件所需的开发工具
 
    * `Node.js` 和 `Yarn` 用于扩展组件的前端开发：安装 [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ 和 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+。
-   * `Helm` 和 `kubectl` 用于扩展组件的编排和 K8s 集群管理： 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+ 和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
+   * `Helm` 和 `kubectl` 用于扩展组件的编排和 K8s 集群管理： 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+（上述已安装）和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
    * `ksbuilder` 用于扩展组件的打包与发布： 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到可执行文件目录。
 
 2. 配置开发环境
