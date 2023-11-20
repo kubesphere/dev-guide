@@ -4,16 +4,16 @@ weight: 01
 description: 介绍如何搭建扩展组件的开发环境
 ---
 
-本节介绍如何搭建扩展组件开发环境。搭建开发环境，需要安装 KubeSphere Enterprise 和相应的开发工具。
+搭建开发环境，需要安装 KubeSphere Luban 和扩展组件开发所需的开发工具。
 
-* KubeSphere Enterprise：在 K8s 集群中部署 KubeSphere Enterprise Helm Chart，为扩展组件提供基础的运行环境。
-* 开发工具：安装 [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/ksbuilder) 用于初始化扩展组件项目、打包和发布扩展组件，并安装常用的开发工具 Node.js、Helm、kubectl 等。
+* KubeSphere Luban：准备 K8s 集群并部署 KubeSphere Luban Helm Chart，为扩展组件提供基础的运行环境。
+* 开发工具：安装 [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/ksbuilder) 用于初始化扩展组件项目、打包和发布扩展组件，你也可能需要用到以下开发工具 Node.js、Helm、kubectl 等。
 
-## 安装 KubeSphere Enterprise
+## 安装 KubeSphere Luban
 
 1. 准备 Kubernetes 集群
 
-   KubeSphere Enterprise 在任何 Kubernetes 集群上均可安装。使用 [KubeKey](https://github.com/kubesphere/kubekey) 部署 K8s 集群。
+   KubeSphere Luban 在任何 Kubernetes 集群上均可安装。可以使用 [KubeKey](https://github.com/kubesphere/kubekey) 快速部署 K8s 集群。
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
@@ -26,13 +26,13 @@ description: 介绍如何搭建扩展组件的开发环境
    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
    ```
 
-2. 安装 KubeSphere Enterprise Helm Chart。
+2. 安装 KubeSphere Luban Helm Chart。
 
    ```bash
    helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
-   更多配置参数，请参考[安装 KubeSphere 企业版](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/#_%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE)。
+   更多配置参数，请参考[KubeSphere Helm Chart 配置](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/#_%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE)。
 
 ## 安装开发工具
 
