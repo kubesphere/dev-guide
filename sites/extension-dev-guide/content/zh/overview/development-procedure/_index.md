@@ -8,27 +8,20 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 
 ### 配置开发环境
 
-在开发 KubeSphere 扩展组件之前，请确保已部署 KubeSphere 并安装了必要的开发工具：
-
-- **KubeSphere Core**： KubeSphere 的核心组件，需要通过 helm 部署在 K8s 集群之中，它为扩展组件的开发提供了基础的运行环境。
-
-- **开发工具**： KubeSphere 已提供了开发扩展组件所需要的工具，包括 `create-ks-project` 和 `ksbuilder`。此外，还可根据实际需求安装 `Node.js`、`Helm`、`kubectl` 等开发工具。
-
-有关配置开发环境的更多信息，请参阅[搭建开发环境](../prepare-development-environment/)。
+在开发 KubeSphere 扩展组件之前，需要创建 K8s 集群并部署 KubeSphere Luban 为扩展组件提供基础的运行环境，安装必要的开发工具（Node.js、Yarn、 create-ks-project、Helm、kubectl、ksbuilder 等等）。有关配置开发环境的更多信息，请参阅[搭建开发环境](../prepare-development-environment/)。
 
 ### 开发扩展组件
 
-完成开发环境的配置后，请确保 KubeSphere 的开发环境可以正常访问，并已开放必要的端口，以便进行本地调试。
+完成开发环境的配置后，请确保 KubeSphere Console 可以正常访问，开放必要的端口（kube-apiserver 6443、ks-console 30880,ks-apiserver 30881 等端口），以便进行本地调试。
 
-#### 初始化项目
+#### 创建扩展组件开发项目
 
-在开发之前，需要对扩展组件的开发项目进行初始化，步骤如下：
+如果你的扩展组件需要对 KubeSphere 的前端进行扩展，需要借助 `create-ks-project` 创建扩展组件的前端工程目录，步骤如下：
 
-1. 使用 `yarn create ks-project <NAME>` 初始化扩展组件的前端开发工程目录。
+1. 使用 `yarn create ks-project <NAME>` 初始化扩展组件的前端开发工程目录，借助此前端工程可本地运行 KubeSphere Console 并加载开发中的扩展组件。
+2. 使用 `yarn create:ext` 初始化扩展组件前端的源代码目录。
 
-2. 使用 `yarn create:ext` 初始化扩展组件。
-
-执行上述命令后，目录结构将如下所示：
+目录结构：
 
 ```bash
 kubesphere-extensions          
@@ -52,17 +45,19 @@ kubesphere-extensions
     └── yarn.lock
 ```
 
+如果你的扩展组件不包含前端扩展，可以跳过这一步骤。
+
 #### 开发组件
 
-项目初始化完成后，即可开始编写扩展组件的核心逻辑。 KubeSphere 提供了丰富的 API 支持，请参考[扩展能力](../../feature-customization)章节，对 KubeSphere 的功能进行扩展。
+完成扩展组件源代码目录的创建之后，即可开始编写扩展组件的核心逻辑。KubeSphere 提供了丰富的 API、和组件库，请参考[扩展能力](../../feature-customization)章节。
 
 #### 本地调试
 
-在扩展组件的开发过程中，[配置本地运行环境](../hello-world-extension/#配置本地运行环境)，然后使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
+在扩展组件的开发过程中，[配置本地运行环境](../hello-world-extension/#配置本地运行环境)之后，可使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
 
 ### 打包发布
 
-扩展组件开发完成后，借助 ksbuilder 工具来编排、打包和发布扩展组件。
+扩展组件开发完成后，需要借助 Helm、ksbuilder 工具来编排、打包和发布扩展组件。
 
 #### 打包扩展组件
 
