@@ -8,7 +8,7 @@ This section describes how to build a development environment for extensions. Be
 
 * KubeSphere Enterprise: Deploy KubeSphere Enterprise Helm Chart in a K8s cluster to provide a base runtime environment for extensions.
 
-* Development tools: Install [create-ks-project](https://github.com/kubesphere/create-ks-project) and [ksbuilder](https://github.com/kubesphere/create-ks-project ) for initializing the extension project, packaging and publishing extensions, and install common development tools Node.js, Helm, kubectl, etc.
+* Development tools: Install [create-ks-project](https://github.com/kubesphere/create-ks-project) and [ksbuilder](https://github.com/kubesphere/ksbuilder) for initializing the extension project, packaging and publishing extensions, and install common development tools Node.js, Helm, kubectl, etc.
 
 
 ## Install KubeSphere Enterprise
@@ -42,7 +42,7 @@ For more configuration, view [Install KubeSphere Enterprise](https://docs.kubesp
 1. Install the following development tools
   
    * `Node.js` and `Yarn` for frontend development of extensions: install [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+.
-   * `Helm` and `kubectl` for extensions orchestration and K8s cluster management: install [Helm](https://helm.sh/docs/intro/install/) v3.8+ and [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.23+.
+   * `Helm` and `kubectl` for extensions orchestration and K8s cluster management: install [Helm](https://helm.sh/docs/intro/install/) v3.8+ (installed already in the above steps) and [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.23+.
    * `ksbuilder` for packaging and publishing extensions: Download [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) and install it to `/usr/local/bin`.
   
 2. Configure the development environment
