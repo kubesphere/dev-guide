@@ -202,7 +202,8 @@ spec:
 | ownerReference | ownerReference                                 | 否    |                   |                                                                                                                               |
 | ownerKind      | ownerKind                                      | 否    |                   |                                                                                                                               |
 | annotation     | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | 否    |                   | annotation=ab=ok或annotation=ab                                                                                                |
-| labelSelector  | 标签选择器                                          | 否    |                   | 与 K8s 中 labelSelector 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
+| label     | 注解，支持‘=’, '!='，单个 label，键值对或单个键            | 否    |                   |  label=ab=ok或label=ab                                                                                                |
+| ~~labelSelector~~  | 标签选择器(暂未支持)                                          | 否    |                   | 与 K8s 中 labelSelector 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
 | fieldSelector  | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔，从根开始查询所有路径属性 | 否    |                   | fieldSelector=spec.ab=true,spec.bc!=ok                                                                                        |
 
 **API 响应**
