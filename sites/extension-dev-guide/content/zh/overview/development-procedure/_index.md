@@ -57,18 +57,18 @@ kubesphere-extensions
 
 ### 打包发布
 
-扩展组件开发完成后，需要借助 Helm、ksbuilder 工具来编排、打包和发布扩展组件。
+开发完成后，需要借助 Helm、ksbuilder 对扩展组件进行编排、打包和发布。
 
 #### 打包扩展组件
 
-KubeSphere 使用 Helm 作为扩展组件的打包和编排规范，若要了解更多信息，请参阅 [Helm Docs](https://helm.sh/docs/)。在 Helm 的基础之上，KubeSphere 扩展组件提供了更丰富的元数据定义能力，详见[打包扩展组件](../../packaging-and-release/packaging)。
+KubeSphere 使用 Helm 作为扩展组件的编排规范，若要了解更多信息，请参阅 [Helm Docs](https://helm.sh/docs/)。在 Helm 的基础之上，KubeSphere 扩展组件提供了更丰富的元数据定义能力，详见[打包扩展组件](../../packaging-and-release/packaging)。
 
 #### 测试扩展组件
 
-借助 ksbuilder 工具即可将编排好的扩展组件提交到本地的扩展组件市场，以便进行测试和部署。详细信息请参考[测试扩展组件](../../packaging-and-release/testing)。
+借助 ksbuilder 工具可以将编排好的扩展组件推送到开发环境中，以便进行部署与测试。详细信息请参考[测试扩展组件](../../packaging-and-release/testing)。
 
 #### 发布扩展组件
 
-一旦您的扩展组件经过测试，就可以使用 ksbuilder 工具将其提交到扩展市场 （KubeSphere Marketplace）。通过审核后，KubeSphere 用户就能订阅和安装您的扩展组件。
+扩展组件经过测试后，可以使用 ksbuilder 工具将其提交到扩展市场 （KubeSphere Marketplace）。
 
-在将扩展组件提交到 KubeSphere Marketplace 之前，请务必详细阅读相关的协议、准则和条款。
+在将扩展组件提交到扩展市场之前，请务必详细阅读相关的协议、准则和条款。
