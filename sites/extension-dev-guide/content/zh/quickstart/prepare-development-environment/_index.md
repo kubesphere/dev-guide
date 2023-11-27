@@ -17,7 +17,7 @@ description: 介绍如何搭建扩展组件的开发环境
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
-   ./kk create cluster --skip-pull-images --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y
+   ./kk create cluster --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y
    ```
 
    在 K8s 集群中[安装 Helm](https://helm.sh/zh/docs/intro/install/)。
@@ -36,10 +36,12 @@ description: 介绍如何搭建扩展组件的开发环境
 
 ## 安装开发工具
 
+除了 K8s 和 KubeSphere Luban 的环境搭建，开发主机上需要用到以下工具。
+
 1. 安装开发扩展组件所需的开发工具
 
    * `Node.js` 和 `Yarn` 用于扩展组件的前端开发：安装 [Node.js](https://nodejs.org/en/download/package-manager) v16.17+ 和 [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) v1.22+。
-   * `Helm` 和 `kubectl` 用于扩展组件的编排和 K8s 集群管理： 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+（上述已安装）和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
+   * `Helm` 和 `kubectl` 用于扩展组件的编排和 K8s 集群管理： 安装 [Helm](https://helm.sh/docs/intro/install/) v3.8+ 和 [kubectl](https://kubernetes.io/zh-cn/docs/tasks/tools/#kubectl) v1.23+。
    * `ksbuilder` 用于扩展组件的打包与发布： 下载 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 并保存到可执行文件目录。
 
 2. 配置开发环境

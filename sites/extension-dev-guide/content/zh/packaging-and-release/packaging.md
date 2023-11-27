@@ -61,7 +61,7 @@ The extension charts has been created.
 └── values.yaml
 ```
 
-### 编辑 extension.yaml
+### extension.yaml 的定义
 
 `extension.yaml` 文件中包含了扩展组件的元数据信息，您需要完善它：
 
@@ -123,15 +123,36 @@ installationMode: HostOnly
 #     required: true
 ```
 
+扩展组件包名(name)作为扩展组件的唯一标识，需要遵循以下规则：
+
+1. 包名只能包含小写字母、数字和点(".")。
+2. 最大长度 32 个字符。
+3. 包名应该具有全球唯一性，以确保不与其他应用程序的包名发生冲突。
+
+displayName、description 和 provider 字段支持国际化，Language Code 基于 [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)，当浏览器、用户语言都无法匹配时，`en` 会作为的默认的语言区域。
+
 ### 根据 Helm 的规范对扩展组件进行编排
 
 扩展组件将以 Helm Chart 的形式在 KubeSphere 管理的集群中进行部署，需要对扩展组件依赖的资源进行编排，并设置合理的安装模式。
 
 1. 在 `charts/backend` 和 `charts/frontend` 修改员工管理扩展组件前后端服务部署资源声明
-2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../feature-customization/extending-ui/) 声明
-3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../feature-customization/extending-api/) 声明
+2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../feature-customization/extending-api/) 声明
+3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../feature-customization/extending-ui/) 声明
 
-### 编辑 permissions.yaml
+扩展组件可以使用的全局参数：
+
+|参数｜说明｜
+|---|---|
+|`global.clusterInfo.name`|扩展组件安装所在的集群名称|
+|`global.clusterInfo.role`|扩展组件安装所在的集群角色|
+|`global.imageRegistry`|全局配置镜像仓库地址|
+
+扩展组件的编排过程中需要遵循以下规则：
+
+1. 兼容 KubeSphere 的全局配置参数，比如全局的仓库地址，可以避免用户手动调整参数出错的概率。
+2. 子Chart尽可能引用本地文件而非应用远端 url，避免网络问题导致扩展组件不可用。
+
+### permissions.yaml 的定义
 
 `permissions.yaml` 定义了扩展组件安装时所需要的资源授权：
 
@@ -168,6 +189,12 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
       - 'ingresses'
       - 'networkpolicies'
 ```
+
+在定义扩展组件安装所需的资源授权时需要遵循以下规则：
+
+1. 尽可能减少不必要的权限，只读权限够用就不要申请编辑创建权限，编辑创建权限够用就不要申请删除资源的权限。
+2. 尽可能不要申请敏感权限，clusterrolebinding，rolebinding，secret，muutatingwebhookconfiguration 和 validatingwebhookconfiguration 等敏感资源的访问权限需要有明确的理由。
+3. 能通过 resourceNames 限制资源范围的权限项不要使用通配符('*')。
 
 相关文档：
 
