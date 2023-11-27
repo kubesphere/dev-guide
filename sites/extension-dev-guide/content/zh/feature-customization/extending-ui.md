@@ -8,16 +8,20 @@ description: 介绍如何扩展 UI
 
 与开发模式不同，以生产模式运行的 ks-console 无法直接从本地加载您开发的功能页面。因此，在完成前端功能开发后，需要将前端代码打包，并通过 **JSBundle** 资源声明将您的 UI 扩展包注入到 ks-console 中。
 
-示例：
+在前端工程目录下，使用 `yarn build:ext <extension>` 打包前端扩展，扩展组件源代码目录下会生成 `dist/index.js` 文件。
+
+![yarn-build-ext](../yarn-build-ext.png)
+
+JSBundle 示例：
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: JSBundle
 metadata:
-  name: v1alpha1.employee.kubesphere.io
+  name: v1alpha1.example.kubesphere.io
 spec:
   rawFrom:
-    url: http://employee-frontend.extension-employee.svc/dist/employee-frontend/index.js
+    url: http://example-frontend.extension-example.svc/dist/employee-frontend/index.js
   # configMapKeyRef:
   #   name: example
   #   key: index.js
