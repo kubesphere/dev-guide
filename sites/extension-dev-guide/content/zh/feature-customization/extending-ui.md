@@ -10,6 +10,21 @@ description: 介绍如何扩展 UI
 
 在前端工程目录下，使用 `yarn build:ext <extension>` 打包前端扩展，扩展组件源代码目录下会生成 `dist/index.js` 文件。
 
+```bash
+➜  extensions-frontend git:(master) ✗ yarn build:ext example
+yarn run v1.22.19
+$ ksc build:ext example
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+asset index.js 15.2 KiB [emitted] [minimized] (name: index)
+webpack 5.74.0 compiled successfully in 816 ms
+
+  Webpack Finished
+
+✨  Done in 2.59s.
+```
+
 ![yarn-build-ext](../yarn-build-ext.png)
 
 JSBundle 示例：
@@ -37,6 +52,6 @@ spec:
 | `spec.raw`、`spec.rawFrom.configMapKeyRef`、`spec.rawFrom.secretKeyRef` | 为便于开发，体积较小的 js 文件可以直接在自定义资源 (CR) 中定义或者直接嵌入到 ConfigMap 或 Secret 中|
 | `spec.rawFrom.url` | 体积较大的 js 文件则需要通过额外的后端服务来提供，扩展组件被启用后，`ks-console` 会自动注入该扩展包|
 
-对于打包后体积较小的 js 文件，可以借助 ConfigMap 或 Secret 来保存，并通过 `spec.configMapKeyRef`、`spec.secretKeyRef` 进行引用。
+打包后体积较小的 js 文件，可以借助 ConfigMap 或 Secret 来保存，并通过 `spec.configMapKeyRef`、`spec.secretKeyRef` 进行引用。
 
-对于打包后体积较大的 js 文件，则需要通过 HTTP 服务来提供对应的 js 文件，并使用 `spec.rawFrom.url` 指定 js 文件的访问路径。
+打包后体积较大的 js 文件，则需要通过 HTTP 服务来提供对应的 js 文件，并使用 `spec.rawFrom.url` 指定 js 文件的访问路径，通常可以和后端共用一个服务。
