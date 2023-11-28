@@ -16,42 +16,42 @@ KubeSphere 提供灵活的 API 扩展方式，支持创建以下几种类型的 
 
 KubeSphere 提供了一种类似于 [Kubernetes API Aggregation Layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) 的 API 扩展机制，使用声明式的 API 注册机制。
 
-API Service 是一种严格的声明式 API 定义方式，通过 API Group、API Version、Resource，以及 API 路径中定义的资源层级，与 KubeSphere 的访问控制和多租户权限管理体系紧密结合。对于那些可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
+APIService 是一种严格的声明式 API 定义方式，通过 API Group、API Version、Resource，以及 API 路径中定义的资源层级，与 KubeSphere 的访问控制和多租户权限管理体系紧密结合。对于那些可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
 
-以 weave-scope 扩展组件为例，可以为其分配特定的 API Group 和 API Version。当请求匹配 `/kapi/{spec.group}/{spec.version}` 路径时，该请求将会被转发到 `{spec.url}`。
+**APIService 示例与参数说明：**
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
 kind: APIService
 metadata:
-  name: v1alpha1.employee.kubesphere.io
+  name: v1alpha1.example.kubesphere.io
 spec:
-  group: employee.kubesphere.io
+  group: example.kubesphere.io
   version: v1alpha1                                      
-  url: http://employee-api.default.svc:8080
+  url: http://apiserver.example.svc
 
 # caBundle: <Base64EncodedData>
 # insecureSkipTLSVerify: false
 
 # service:
-#   namespace: extension-employee
+#   namespace: example
 #   name: apiserver
-#   port: 80
+#   port: 443
 ```
 
 | 字段 | 描述 |
 | --- | ---|
-| `spec.group`、`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的 API 路径中的 API Group 与 API Version |
-| `spec.url`、`spec.caBundle`、`spec.insecureSkipTLSVerify`| 为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint |
+| `spec.group`</br>`spec.version` | 创建 APIService 类型的 CR 会向 ks-apiserver 动态注册 API，其中`spec.group`、`spec.version`表示所注册的 API 路径中的 API Group 与 API Version |
+| `spec.url`</br>`spec.caBundle`</br>`spec.insecureSkipTLSVerify`| 为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint |
 | `spec.service` | 与 `spec.url` 类似，为 API 指定 K8s 集群内部的服务引用地址 |
 
-若要进一步管理 API 的访问权限，请参阅：[访问控制](../access-control/)。
+> 通 `spec.service` 定义后端的 endpoint 默认需要启用 TLS，如需指定 HTTP 服务地址，需要通过 `spec.url` 显式指定 scheme 为 `http`。
 
 ### ReverseProxy
 
 它提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等配置。
 
-以 weave-scope 配置为例，此配置表示将所有请求路径前缀为 `/proxy/weave.works`  的请求转发到指定的上游服务: `http://weave-scope-app.weave.svc`，并移除请求头中的 Authorization 字段和请求路径中的前缀 `/proxy/weave.works`。
+**ReverseProxy 示例与参数说明：**
 
 ```yaml
 apiVersion: extensions.kubesphere.io/v1alpha1
@@ -67,7 +67,7 @@ spec:
     method: '*'
     path: /proxy/weave.works/*
   upstream:
-    url: http://weave-scope-app.weave.svc
+    url: http://app.weave.svc
 
 #   service:
 #     namespace: example-system
@@ -83,7 +83,7 @@ spec:
 
 #### Directives
 
-1. `method` 修改 HTTP 请求方法
+`method` 修改 HTTP 请求方法
 
 ```yaml
 spec:
@@ -91,7 +91,7 @@ spec:
     method: 'POST'
 ```
 
-2. `stripPathPrefix` 移除请求路径中的前缀
+`stripPathPrefix` 移除请求路径中的前缀
 
 ```yaml
 spec:
@@ -99,7 +99,7 @@ spec:
     stripPathPrefix: '/path/prefix'
 ```
 
-3. `stripPathSuffix` 移除请求路径中的后缀
+`stripPathSuffix` 移除请求路径中的后缀
 
 ```yaml
 spec:
@@ -107,7 +107,7 @@ spec:
     stripPathSuffix: '.html'
 ```
 
-4. `headerUp` 为发送到上游的请求增加、删除或替换请求头
+`headerUp` 为发送到上游的请求增加、删除或替换请求头
 
 ```yaml
 spec:
@@ -117,7 +117,7 @@ spec:
     - 'Foo bar'
 ```
 
-5. `headerDown` 为上游返回的响应增加、删除或替换响应头
+`headerDown` 为上游返回的响应增加、删除或替换响应头
 
 ```yaml
 spec:
@@ -126,7 +126,7 @@ spec:
     - 'Content-Type "application/json"'
 ```
 
-6. `rewrite` 重写发送到上游的请求路径以及查询参数
+`rewrite` 重写发送到上游的请求路径以及查询参数
 
 ```yaml
 spec:
@@ -143,7 +143,7 @@ spec:
 # - "* /index.php?{query}&p={path}" ==> rewrite "/foo/bar" to "/index.php?p=%2Ffoo%2Fbar"
 ```
 
-7. `replace` 替换发送到上游的请求路径
+`replace` 替换发送到上游的请求路径
 
 ```yaml
 spec:
@@ -154,7 +154,7 @@ spec:
 # - "/docs/ /v1/docs/" ==> rewrite "/docs/go" to "/v1/docs/go"
 ```
 
-8. `pathRegexp` 正则替换发送到上游的请求路径
+`pathRegexp` 正则替换发送到上游的请求路径
 
 ```yaml
 spec:
@@ -171,23 +171,25 @@ spec:
 
 ### 多集群
 
-`/clusters/{cluster}/apis/{group}/{version}/resources`
+通过 KubeSphere host 集群的 ks-apiserver 可以代理访问各 member 集群的资源，API 模式如下： `/clusters/{cluster}/apis/{group}/{version}/{resources}`
 
-通过 `/clusters/{cluster}` 前缀可以直接访问特定集群中的资源。
+通过 `/clusters/{cluster}` 前缀可以指定访问特定集群中的资源。
 
 ### 访问控制
 
-同样适用于 CRD 中已经定义的资源层级 cluster 或者 namespace。
+KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵循[KubeSphere API 的设计模式](../references/kubesphere-api-concepts/)。用户访问权限往往需要与前端联动，请参考[访问控制](../access-control/)章节。
 
 ### 分页与模糊搜索
 
-`kapis` 是 KubeSphere API 的前缀，若将 CRD 配置为 `kubesphere.io/resource-served: 'true'`，这表示 KubeSphere 会为相关的 CR 资源提供分页和模糊查询 API 等功能。
+为 CRD 添加 Label `kubesphere.io/resource-served: 'true'`，KubeSphere 会为相关的 CR 资源提供分页和模糊查询 API 等功能。
 
-**注意**: 如果使用了相同的 API Group 与 API Version，KubeSphere Served Resource API 会与 APIService 产生冲突。
+默认生成的 List API 模式为: `/clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
 
-**API 请求**
+**注意：** 如果使用了相同的 API Group 与 API Version，APIService 的优先级高于 KubeSphere Served Resource API。
 
-`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{banesoaces}/)?{resources}`
+**请求示例与参数说明：**
+
+`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
 
 | 参数             | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                            |
 |----------------|------------------------------------------------|------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -206,7 +208,7 @@ spec:
 | ~~labelSelector~~  | 标签选择器(暂未支持)                                          | 否    |                   | 与 K8s 中 labelSelector 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
 | fieldSelector  | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔，从根开始查询所有路径属性 | 否    |                   | fieldSelector=spec.ab=true,spec.bc!=ok                                                                                        |
 
-**API 响应**
+**响应：**
 
 ```json
 {
