@@ -4,66 +4,59 @@ weight: 01
 description: 如何打包 KubeSphere 扩展组件
 ---
 
-本章节将以[员工管理扩展组件](../../examples/employee-management-extension-example/)作为示例，带大家熟悉扩展组件的打包方式，在上述章节中完成扩展组件前后端的开发，构建好了需要用到的容器镜像之后，我门需要借助 ksbuilder、Helm 对扩展组件进行打包。
+扩展组件开发完成之后，需要遵循 Helm 规范对扩展组件进行编排。
 
-### 初始化 employee 扩展组件包目录
+### 初始化扩展组件包
 
-首先，我们需要使用 `ksbuilder` 的交互式命令创建出扩展组件包的目录。
+使用 `ksbuilder create` 创建扩展组件包（Helm Chart）。
 
 ```text
-$ cd kubesphere-extensions
-$ ksbuilder create
-Please input extension name: employee
-✔ Others
-Please input extension author: ks
-Please input Email (optional): ks@kubesphere.io
-Please input author's URL (optional): https://www.kubesphere.io
-Directory: ~/workspace/kubesphere-extensions/employee
-
-The extension charts has been created.
+➜  extension-samples git:(master) cd extensions
+➜  extensions git:(master) ksbuilder create   
+Please input extension name: hello-world
+✔ other
+Please input extension author: hongming
+Please input Email (optional): hongming@kubesphere.io
+Please input author's URL (optional): 
+Directory: /Users/hongming/GitHub/extension-samples/extensions/hello-world
 ```
 
-当看到上面提示信息时表示扩展组件包的目录 `employee` 创建成功，我们使用 [Helm](https://helm.sh/zh/docs/topics/charts/) 对扩展组件进行编排，目录结构如下：
+使用 [Helm](https://helm.sh/zh/docs/topics/charts/) 对扩展组件进行编排，扩展组件包的目录结构：
 
 ```text
-.
 ├── README.md
 ├── README_zh.md
-├── charts
-│   ├── backend
+├── charts             # 扩展组件的子 Chart，通常前后端扩展分为两个部分
+│   ├── backend        # 扩展组件支持多集群调度，多集群模式下需要添加 agent tag
 │   │   ├── Chart.yaml
-│   │   ├── templates
+│   │   ├── templates  # 模板文件
 │   │   │   ├── NOTES.txt
 │   │   │   ├── deployment.yaml
 │   │   │   ├── extensions.yaml
 │   │   │   ├── helps.tpl
-│   │   │   ├── service.yaml
-│   │   │   └── tests
-│   │   │       └── test-connection.yaml
+│   │   │   └── service.yaml
 │   │   └── values.yaml
-│   └── frontend
+│   └── frontend       # 前端扩展需要在 host 集群中部署，需要添加 extension tag
 │       ├── Chart.yaml
-│       ├── templates
+│       ├── templates  # 模板文件
 │       │   ├── NOTES.txt
 │       │   ├── deployment.yaml
 │       │   ├── extensions.yaml
 │       │   ├── helps.tpl
-│       │   ├── service.yaml
-│       │   └── tests
-│       │       └── test-connection.yaml
+│       │   └── service.yaml
 │       └── values.yaml
-├── extension.yaml
-├── permissions.yaml
-├── static
+├── extension.yaml     # extension 元数据声明文件
+├── permissions.yaml   # 扩展组件安装时说需要的资源授权
+├── static             # 静态资源文件
 │   ├── favicon.svg
 │   └── screenshots
 │       └── screenshot.png
-└── values.yaml
+└── values.yaml        # 扩展组件配置
 ```
 
 ### extension.yaml 的定义
 
-`extension.yaml` 文件中包含了扩展组件的元数据信息，您需要完善它：
+`extension.yaml` 文件中包含了扩展组件的元数据信息：
 
 ```yaml
 apiVersion: v1
@@ -125,19 +118,19 @@ installationMode: HostOnly
 
 扩展组件包名(name)作为扩展组件的唯一标识，需要遵循以下规则：
 
-1. 包名只能包含小写字母、数字和点(".")。
+1. 包名只能包含小写字母、数字。
 2. 最大长度 32 个字符。
 3. 包名应该具有全球唯一性，以确保不与其他应用程序的包名发生冲突。
 
 displayName、description 和 provider 字段支持国际化，Language Code 基于 [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)，当浏览器、用户语言都无法匹配时，`en` 会作为的默认的语言区域。
 
-### 根据 Helm 的规范对扩展组件进行编排
+扩展组件包是一个 Main Chart，可以在 KubeSphere 管理的集群中进行部署。通常扩展组件会被分为前端扩展和后端扩展两个部分，扩展组件支持多集群部署时，需要分别给前端扩展 Sub Chart 和后端扩展 Sub Chart（在 extension.yaml中）添加 `extension` 和 `agent` tag。前端扩展只会被部署到 host 集群，后端扩展允许选择集群进行调度。
 
-扩展组件将以 Helm Chart 的形式在 KubeSphere 管理的集群中进行部署，需要对扩展组件依赖的资源进行编排，并设置合理的安装模式。
+### 编排扩展组件
 
-1. 在 `charts/backend` 和 `charts/frontend` 修改员工管理扩展组件前后端服务部署资源声明
-2. 按照[注册后端扩展组件](../../examples/employee-management-extension-example/#3-注册后端扩展组件-api-到-ks-apiserver)修改 `charts/backend/templates/extensions.yaml` [APIService](../../feature-customization/extending-api/) 声明
-3. 按照[注册前端扩展组件](../../examples/employee-management-extension-example/#4-注册前端扩展组件到-ks-apiserver)修改 `charts/frontend/templates/extensions.yaml` [JSBundle](../../feature-customization/extending-ui/) 声明
+前端扩展请参考 [UI 扩展](../../feature-customization/extending-ui/)，后端扩展请参考 [API 扩展](../../feature-customization/extending-api/)
+
+Helm Chart 编排规范及最佳实践请参考 <https://helm.sh/docs/>
 
 扩展组件可以使用的全局参数：
 
@@ -198,24 +191,22 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
 
 相关文档：
 
-1. https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-2. https://helm.sh/docs/topics/rbac/
+1. <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
+2. <https://helm.sh/docs/topics/rbac/>
 
-### 打包员工管理扩展组件包
+### 扩展组件打包
 
-您也可以直接从 GitHub 上克隆员工管理这个示例扩展组件的安装包。
+可以直接从 GitHub 上克隆 hello-world 这个示例扩展组件的安装包。
 
 ```bash
-cd  ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
-cp -r ~/kubesphere-extensions/extension-samples/extensions/employee ~/kubesphere-extensions/employee
 ```
 
-使用 `ksbuilder package` 命令便可以将编排好的扩展组件进行打包为压缩文件，便于分发。
+使用 `ksbuilder package` 命令可以将编排好的扩展组件进行打包为压缩文件，便于分发。
 
 ```bash
-cd  ~/kubesphere-extensions/extensions
-ksbuilder package employee
+cd extension-samples/extension/hello-world
+ksbuilder package .
 ```
 
-接下来您可以参考[测试扩展组件](../testing)，将员工管理扩展组件上架到 KubeSphere 扩展市场中进行安装测试。
+接下来您可以参考[测试扩展组件](../testing)，将扩展组件提交到扩展市场中部署测试。
