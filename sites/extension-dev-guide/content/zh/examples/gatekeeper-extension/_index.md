@@ -4,6 +4,12 @@ weight: 01
 description: 集成 Gatekeeper
 ---
 
+本章节将以 Gatekeeper 为例，介绍如何快速将 Helm Chart 转换为 KubeSphere 的扩展组件。
+
+本示例不包含对 KubeSphere UI 的扩展，将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 的扩展组件之后就可以通过 KubeSphere 的扩展组件商店，将其安装部署到 KubeSphere 纳管的集群之中，进行统一的管理。
+
+#### Gatekeeper 是什么
+
 [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) 是一种开源通用策略引擎，可统一整个堆栈中的策略实施。OPA 提供了一种高级声明性语言，让我们可以通过简单的代码定义策略。
 
 Gatekeeper 是一个基于 OPA 构建在 [K8s admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) 机制之上的安全策略管理工具，能够在不牺牲开发敏捷性和操作独立性的前提下确保集群的安全合规。
@@ -17,20 +23,16 @@ Gatekeeper 是一个基于 OPA 构建在 [K8s admission webhook](https://kuberne
 
 OPA 社区已经提供了 Gatekeeper 的 [Helm Chart](https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper)，我们可以通过以下步骤将其快速集成到 KubeSphere 扩展商店之中。
 
-将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 的扩展组件之后就可以通过 KubeSphere 的扩展组件商店，将其安装部署到 KubeSphere 纳管的集群之中，进行统一的管理。
-
-本示例不包含对 KubeSphere UI 的扩展，我们可以借助 ksbuilder 在 Gatekeeper Helm Chart 的基础之上进行打包。
-
 #### 使用 ksbuilder 创建扩展组件包
 
 ```bash
-➜  extensions git:(master) ksbuilder create
+➜  charts git:(master) ksbuilder create
 Please input extension name: gatekeeper
 ✔ security
 Please input extension author: hongming
 Please input Email (optional): hongming@kubesphere.io
 Please input author's URL (optional): 
-Directory: /Users/hongming/GitHub/gatekeeper
+Directory: /Users/hongming/GitHub/gatekeeper/charts/gatekeeper
 ```
 
 通过上述命令将创建出扩展组件的主 Chart，ksbuilder 会初始化一个基础的扩展组件包的目录结构，我们需要在此基础之上进行调整。
@@ -77,7 +79,7 @@ curl -o charts/gatekeeper-3.14.0.tgz https://open-policy-agent.github.io/gatekee
 
 ```yaml
 apiVersion: kubesphere.io/v1alpha1
-name: gatekeeper.kubesphere.io
+name: gatekeeper
 version: 0.1.0
 displayName:
   en: Gatekeeper
@@ -515,9 +517,9 @@ gatekeeper:
 
 {{% /expand%}}
 
-#### 将扩展组件提交到远程环境中测试
+#### 将扩展组件提交到远程环境中
 
-通过 `yarn dev` 运行的本地 KubeSphere Console 环境不会加载远端环境中的扩展组件，我们需要借助 ksbuilder 将扩展组件提交到 KubeSphere Luban 环境之后通过扩展商店进行安装部署。
+借助 ksbuilder 将扩展组件提交到 KubeSphere 远端环境的扩展商店。
 
 ```yaml
 ➜  gatekeeper git:(master) ✗ ksbuilder publish .
@@ -527,4 +529,26 @@ creating ExtensionVersion gatekeeper.kubesphere.io-0.1.0
 creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 ```
 
+#### 部署测试
+
+通过 `yarn start` 以 production 模式运行 KubeSphere Console 或访问远端的 KubeSphere Console，紧接着我们可以在扩展组件商店中看到我们通过 ksbuilder 提交上来的扩展组件。
+
 ![Gatekeeper Extension](gatekeeper-extension.png)
+
+点击安装
+
+![install-gatekeeper-extension](install-gatekeeper-extension.png)
+
+扩展组件安装完成后，选择集群调度 Gatekeeper
+
+![install-gatekeeper-agent](install-gatekeeper-agent.png)
+
+Gatekeeper 在指定集群中成功部署
+
+![installed](installed.png)
+
+创建 Gatekeeper Constraints 并测试
+
+测试：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
+
+![gatekeeper-constraint-test](gatekeeper-constraint-test.png)
