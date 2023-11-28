@@ -4,9 +4,9 @@ weight: 01
 description: 集成 Gatekeeper
 ---
 
-本章节将以 Gatekeeper 为例，介绍如何快速将 Helm Chart 转换为 KubeSphere 的扩展组件。
+本章节将以 Gatekeeper 为例，介绍如何将 Helm Chart 迁移到 KubeSphere 平台作为扩展组件。
 
-本示例不包含对 KubeSphere UI 的扩展，将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 的扩展组件之后就可以通过 KubeSphere 的扩展组件商店，将其安装部署到 KubeSphere 纳管的集群之中，进行统一的管理。
+本示例不涉及对 KubeSphere UI 的扩展，将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 的扩展组件之后就可以通过 KubeSphere 的扩展组件商店，将其安装部署到 KubeSphere 纳管的集群之中，进行统一的管理。
 
 #### Gatekeeper 是什么
 
@@ -14,7 +14,7 @@ description: 集成 Gatekeeper
 
 Gatekeeper 是一个基于 OPA 构建在 [K8s admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) 机制之上的安全策略管理工具，能够在不牺牲开发敏捷性和操作独立性的前提下确保集群的安全合规。
 
-例如，您可以在 K8s 集群中执行以下策略：
+例如，可以在 K8s 集群中执行以下策略：
 
 * 所有的容器镜像必须来自可信的镜像仓库。
 * 所有 ingress 的 host name 必须是全局唯一的。
@@ -539,7 +539,7 @@ creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 
 ![install-gatekeeper-extension](install-gatekeeper-extension.png)
 
-扩展组件安装完成后，选择集群调度 Gatekeeper
+扩展组件安装完成后，选择要部署 Gatekeeper 的集群
 
 ![install-gatekeeper-agent](install-gatekeeper-agent.png)
 
@@ -549,6 +549,6 @@ Gatekeeper 在指定集群中成功部署
 
 创建 Gatekeeper Constraints 并测试
 
-测试：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
+Gatekeeper 测试例子：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
 
 ![gatekeeper-constraint-test](gatekeeper-constraint-test.png)
