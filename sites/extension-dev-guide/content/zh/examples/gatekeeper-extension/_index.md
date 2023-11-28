@@ -8,6 +8,8 @@ description: 集成 Gatekeeper
 
 本示例不涉及对 KubeSphere UI 的扩展，将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 的扩展组件之后就可以通过 KubeSphere 的扩展组件商店，将其安装部署到 KubeSphere 纳管的集群之中，进行统一的管理。
 
+本示例的源代码：<https://github.com/kubesphere-extensions/gatekeeper/tree/master/charts/gatekeeper>
+
 #### Gatekeeper 是什么
 
 [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) 是一种开源通用策略引擎，可统一整个堆栈中的策略实施。OPA 提供了一种高级声明性语言，让我们可以通过简单的代码定义策略。
