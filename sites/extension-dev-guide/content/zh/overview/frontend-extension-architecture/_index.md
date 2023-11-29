@@ -8,7 +8,7 @@ description: 如何对 KubeSphere 的前端 UI 进行扩展？
 
 总体架构如下图所示：
 
-![frontend-extension-arch](./frontend-arch.png)
+<img width="1000" alt="kse4-frontend-extension-architecture" src="./luban-frontend-extension-architecture.png">
 
 ## 设计思想
 
