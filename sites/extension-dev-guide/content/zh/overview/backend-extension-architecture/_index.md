@@ -8,7 +8,7 @@ KubeSphere 构建在 K8s 之上，和 K8s 一样也具备高度可配置和可�
 
 `ks-apiserver` 是 KubeSphere 的 API 网关，提供了统一的认证、鉴权和请求代理能力，借助 `ks-apiserver` 的聚合层，可以对 KubeSphere 的 API 进行扩展：
 
-![api-proxy](./api-proxy.png)
+<img width="1000" alt="luban-backend-extension-architecture" src="./luban-backend-extension-architecture.png">
 
 ### 认证与鉴权
 
