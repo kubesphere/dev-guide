@@ -49,7 +49,34 @@ spec:
 
 ### ReverseProxy
 
-它提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等配置。
+提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等配置。
+
+需要用到 ks-apiserver 做反向代理，本地运行 KubeSphere Console 时需要增加如下 webpack 配置：
+
+**webpack.config.js：**
+
+```js
+const { merge } = require('webpack-merge');
+const baseConfig = require('@ks-console/bootstrap/webpack/webpack.dev.conf');
+
+const webpackDevConfig = merge(baseConfig, {
+  devServer: {
+    proxy: {
+      '/proxy': {
+        target: 'http://172.31.73.3:30881', // 修改为目标 ks-apiserver 的地址
+        onProxyReq: (proxyReq, req, res) => {
+            const username = 'admin'        // 请求代理时的用户凭证
+            const password = 'P@88w0rd'
+            const auth = Buffer.from(`${username}:${password}`).toString("base64");
+            proxyReq.setHeader('Authorization', `Basic ${auth}`);
+          },
+      },
+    },
+  },
+});
+
+module.exports = webpackDevConfig;
+```
 
 **ReverseProxy 示例与参数说明：**
 
@@ -200,7 +227,7 @@ KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵
 
 默认生成的 List API 模式为: `/clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
 
-**注意：** 如果使用了相同的 API Group 与 API Version，APIService 的优先级高于 KubeSphere Served Resource API。
+> 如果使用了相同的 API Group 与 API Version，APIService 的优先级高于 KubeSphere Served Resource API。
 
 **请求示例与参数说明：**
 

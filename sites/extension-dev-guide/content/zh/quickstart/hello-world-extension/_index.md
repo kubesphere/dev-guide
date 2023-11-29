@@ -56,6 +56,7 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
+       |   ├── webpack.config.js    # webpack 配置文件
        │   └── local_config.yaml    # KubeSphere Console 配置文件
        ├── extensions               # 扩展组件源代码目录
        │   ├── entry.ts
