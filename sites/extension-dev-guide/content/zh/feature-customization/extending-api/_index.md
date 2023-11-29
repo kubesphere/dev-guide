@@ -45,7 +45,7 @@ spec:
 | `spec.url`</br>`spec.caBundle`</br>`spec.insecureSkipTLSVerify`| 为 APIService 指定外部服务，将 API 请求代理到指定的 endpoint |
 | `spec.service` | 与 `spec.url` 类似，为 API 指定 K8s 集群内部的服务引用地址 |
 
-> 通 `spec.service` 定义后端的 endpoint 默认需要启用 TLS，如需指定 HTTP 服务地址，需要通过 `spec.url` 显式指定 scheme 为 `http`。
+> 通过 `spec.service` 定义后端的 endpoint 默认需要启用 TLS，如需指定 HTTP 服务地址，需要通过 `spec.url` 显式指定 scheme 为 `http`。
 
 ### ReverseProxy
 
@@ -163,6 +163,21 @@ spec:
     - /{2,} /
 
 # - "/{2,} /" ==> rewrite "/doc//readme.md" to "/doc/readme.md"
+```
+
+`authProxy` 向上游服务传递用户认证相关的请求头
+
+```yaml
+spec:
+  directives:
+    authProxy: true
+```
+
+上游服务会收到如下请求头
+
+```text
+X-Remote-Group: system:authenticated
+X-Remote-User: admin
 ```
 
 ## 针对 CRD 的 API 扩展

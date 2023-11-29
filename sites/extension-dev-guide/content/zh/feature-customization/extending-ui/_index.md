@@ -43,7 +43,8 @@ System.register(["react","styled-components"],(function(e,t){var r={},n={};retur
 在 default namespace 下创建 ConfigMap 保存 JS Bundle 文件
 
 ```bash
-kubectl create configmap hello-world --from-file=/extensions/hello-world/dist/index.js
+➜  extension-samples git:(master) cd extensions-frontend 
+➜  extensions-frontend git:(master) kubectl create configmap hello-world --from-file=extensions/hello-world/dist/index.js
 configmap/hello-world created
 ```
 
