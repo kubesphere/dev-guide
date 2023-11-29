@@ -205,8 +205,10 @@ git clone https://github.com/kubesphere/extension-samples.git
 使用 `ksbuilder package` 命令可以将编排好的扩展组件进行打包为压缩文件，便于分发。
 
 ```bash
-cd extension-samples/extension/hello-world
-ksbuilder package .
+➜  extension-samples git:(master) ✗ cd extensions
+➜  extensions git:(master) ✗ ksbuilder package hello-world    
+package extension hello-world
+package saved to /Users/hongming/GitHub/extension-samples/extensions/hello-world-0.1.0.tgz
 ```
 
 接下来您可以参考[测试扩展组件](../testing)，将扩展组件提交到扩展市场中部署测试。
