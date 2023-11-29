@@ -535,22 +535,22 @@ creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 
 通过 `yarn start` 以 production 模式运行 KubeSphere Console 或访问远端的 KubeSphere Console，紧接着我们可以在扩展组件商店中看到我们通过 ksbuilder 提交上来的扩展组件。
 
-![Gatekeeper Extension](gatekeeper-extension.png)
+![Gatekeeper Extension](gatekeeper-extension.png?width=1200px)
 
 点击安装
 
-![install-gatekeeper-extension](install-gatekeeper-extension.png)
+![install-gatekeeper-extension](install-gatekeeper-extension.png?width=1200px)
 
 扩展组件安装完成后，选择要部署 Gatekeeper 的集群
 
-![install-gatekeeper-agent](install-gatekeeper-agent.png)
+![install-gatekeeper-agent](install-gatekeeper-agent.png?width=1200px)
 
 Gatekeeper 在指定集群中成功部署
 
-![installed](installed.png)
+![installed](installed.png?width=1200px)
 
 创建 Gatekeeper Constraints 并测试
 
 Gatekeeper 测试例子：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
 
-![gatekeeper-constraint-test](gatekeeper-constraint-test.png)
+![gatekeeper-constraint-test](gatekeeper-constraint-test.png?width=1200px)
