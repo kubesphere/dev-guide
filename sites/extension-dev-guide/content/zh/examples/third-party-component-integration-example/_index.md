@@ -92,4 +92,4 @@ export default function App() {
 
 通过 `yarn dev` 启动本地预览环境，然后通过扩展组件入口访问到以下页面。
 
-![weave-scope-dashboard](./sample-weave-scope-dashboard.png)
+![weave-scope-dashboard](./sample-weave-scope-dashboard.png?width=1200px)

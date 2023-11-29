@@ -20,7 +20,7 @@ KubeSphere 中的资源被划分为平台、企业空间、集群、项目四个
 
 **项目角色：** 主要控制项目下资源的访问权限，如工作负载的管理、流水线的管理、项目成员的管理等。
 
-![rbac](rbac.png)
+![rbac](rbac.png?width=900px)
 
 ### KubeSphere API
 
@@ -153,19 +153,19 @@ KubeSphere 中可以通过授权项灵活的创建自定义角色，做到精细
 
 **平台角色权限项：**
 
-![global-role](global-role.png)
+![global-role](global-role.png?width=1200px)
 
 **企业空间角色权限项：**
 
-![workspace-role](workspace-role.png)
+![workspace-role](workspace-role.png?width=1200px)
 
 **集群角色权限项：**
 
-![cluster-role](cluster-role.png)
+![cluster-role](cluster-role.png?width=1200px)
 
 **项目角色权限项：**
 
-![project-role](project-role.png)
+![project-role](project-role.png?width=1200px)
 
 ### RoleTemplate 示例
 

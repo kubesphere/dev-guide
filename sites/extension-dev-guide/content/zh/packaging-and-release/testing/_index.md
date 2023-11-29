@@ -24,14 +24,14 @@ creating ConfigMap extension-hello-world-0.1.0-chart
 
 访问远端的 KubeSphere Console，在扩展组件商店可以看到推送上来的扩展组件。
 
-![hell-world-extension](hell-world-extension.png)
+![hello-world-extension](hello-world-extension.png?width=1200px)
 
 ## 安装扩展组件
 
 安装扩展组件
 
-![install-hell-world-extension](install-hell-world-extension.png)
+![install-hello-world-extension](install-hello-world-extension.png?width=1200px)
 
 扩展组件成功启用
 
-![enable-hello-world-extension](enable-hello-world-extension.png)
+![enable-hello-world-extension](enable-hello-world-extension.png?width=1200px)

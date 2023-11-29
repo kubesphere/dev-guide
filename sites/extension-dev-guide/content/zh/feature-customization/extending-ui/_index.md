@@ -36,7 +36,7 @@ System.register(["react","styled-components"],(function(e,t){var r={},n={};retur
 
 {{% /expand%}}
 
-![yarn-build-ext](yarn-build-ext.png)
+![yarn-build-ext](yarn-build-ext.png?width=1200px)
 
 ### 通过 ConfigMap 保存 JS Bundle 文件
 
@@ -74,7 +74,7 @@ EOF
 
 本地通过 `yarn start` 以 production 模式启动 KubeSphere Console 加载 JSBundle 声明的扩展组件
 
-![ks-console](ks-console.png)
+![ks-console](ks-console.png?width=1200px)
 
 ### JSBundle 字段说明
 
