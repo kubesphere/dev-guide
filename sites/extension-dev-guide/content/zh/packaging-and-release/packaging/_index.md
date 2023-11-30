@@ -6,7 +6,7 @@ description: 如何打包 KubeSphere 扩展组件
 
 扩展组件开发完成之后，需要遵循 Helm 规范对扩展组件进行编排。
 
-### 初始化扩展组件包
+## 初始化扩展组件包
 
 使用 `ksbuilder create` 创建扩展组件包（Helm Chart）。
 
@@ -122,28 +122,28 @@ installationMode: HostOnly
 2. 最大长度 32 个字符。
 3. 包名应该具有全球唯一性，以确保不与其他应用程序的包名发生冲突。
 
-displayName、description 和 provider 字段支持国际化，Language Code 基于 [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)，当浏览器、用户语言都无法匹配时，`en` 会作为的默认的语言区域。
+displayName、description 和 provider 字段支持国际化，Language Code 基于 [ISO 639-1][iso-639-1]，当浏览器、用户语言都无法匹配时，`en` 会作为的默认的语言区域。
 
 扩展组件包是一个 Main Chart，可以在 KubeSphere 管理的集群中进行部署。通常扩展组件会被分为前端扩展和后端扩展两个部分，扩展组件支持多集群部署时，需要分别给前端扩展 Sub Chart 和后端扩展 Sub Chart（在 extension.yaml中）添加 `extension` 和 `agent` tag。前端扩展只会被部署到 host 集群，后端扩展允许选择集群进行调度。
 
-### 编排扩展组件
+## 编排扩展组件
 
-前端扩展请参考 [UI 扩展](../../feature-customization/extending-ui/)，后端扩展请参考 [API 扩展](../../feature-customization/extending-api/)
+前端扩展请参考 [UI 扩展][ui-extension]，后端扩展请参考 [API 扩展][api-extension]
 
 Helm Chart 编排规范及最佳实践请参考 <https://helm.sh/docs/>
 
 扩展组件可以使用的全局参数：
 
-|参数｜说明｜
-|---|---|
-|`global.clusterInfo.name`|扩展组件安装所在的集群名称|
-|`global.clusterInfo.role`|扩展组件安装所在的集群角色|
-|`global.imageRegistry`|全局配置镜像仓库地址|
+| 参数                           | 说明                                     |
+| ------------------------------ | ---------------------------------------- |
+| `global.clusterInfo.name`      | 扩展组件安装所在的集群名称                |
+| `global.clusterInfo.role`      | 扩展组件安装所在的集群角色                |
+| `global.imageRegistry`          | 全局配置镜像仓库地址                     |
 
 扩展组件的编排过程中需要遵循以下规则：
 
 1. 兼容 KubeSphere 的全局配置参数，比如全局的仓库地址，可以避免用户手动调整参数出错的概率。
-2. 子Chart尽可能引用本地文件而非应用远端 url，避免网络问题导致扩展组件不可用。
+2. 子Chart尽可能引用本地文件而非远端URL，避免网络问题导致扩展组件无法正确加载。
 
 ### permissions.yaml 的定义
 
@@ -194,7 +194,7 @@ rules:  # 如果你的扩展组件需要创建、变更 Namespace 级别的资�
 1. <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
 2. <https://helm.sh/docs/topics/rbac/>
 
-### 扩展组件打包
+## 扩展组件打包
 
 可以直接从 GitHub 上克隆 hello-world 这个示例扩展组件的安装包。
 
@@ -212,3 +212,7 @@ package saved to /Users/hongming/GitHub/extension-samples/extensions/hello-world
 ```
 
 接下来您可以参考[测试扩展组件](../testing)，将扩展组件提交到扩展市场中部署测试。
+
+[ui-extension]: ../../feature-customization/extending-ui/
+[api-extension]: ../../feature-customization/extending-api/
+[iso-639-1]: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

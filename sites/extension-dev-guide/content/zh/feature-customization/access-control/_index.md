@@ -24,7 +24,7 @@ KubeSphere 中的资源被划分为平台、企业空间、集群、项目四个
 
 ### KubeSphere API
 
-KubeSphere API 和 [Kubernertes API](https://kubernetes.io/zh-cn/docs/reference/using-api/api-concepts/) 的设计模式相同 是通过 HTTP 提供的基于资源 (RESTful) 的编程接口。
+[KubeSphere API](../../references/kubesphere-api-concepts/) 和 [Kubernertes API](https://kubernetes.io/zh-cn/docs/reference/using-api/api-concepts/) 的设计模式相同 是通过 HTTP 提供的基于资源 (RESTful) 的编程接口。
 它支持通过标准 HTTP 动词（POST、PUT、PATCH、DELETE、GET）检索、创建、更新和删除主要资源。
 
 对于某些资源，API 包括额外的子资源，允许细粒度授权（例如：将 Pod 的详细信息与检索日志分开），
