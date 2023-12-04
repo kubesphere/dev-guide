@@ -41,11 +41,11 @@ Kubernetes 通常使用常见的 RESTful 术语来描述 API 概念：
 * 对于某些资源类型，API 包含一个或多个 **子资源（sub-resources）**，这些子资源表示为资源下的 URI 路径
 
 大多数 Kubernetes API
-资源类型都是[对象](/zh-cn/docs/concepts/overview/working-with-objects/kubernetes-objects/#kubernetes-objects)：
+资源类型都是[对象](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/)：
 它们代表集群上某个概念的具体实例，例如 Pod 或名字空间。
 少数 API 资源类型是 “虚拟的”，它们通常代表的是操作而非对象本身，
 例如权限检查（使用带有 JSON 编码的 `SubjectAccessReview` 主体的 POST 到 `subjectaccessreviews` 资源），
-或 Pod 的子资源 `eviction`（用于触发 [API-发起的驱逐](/zh-cn/docs/concepts/scheduling-eviction/api-eviction/)）。
+或 Pod 的子资源 `eviction`（用于触发 [API-发起的驱逐](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/api-eviction/)）。
 
 ##### 对象名字
 
