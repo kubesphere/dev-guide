@@ -9,7 +9,7 @@ description: "创建新的功能页面并设置路由"
 
 ## 路由定义
 
-KubeSphere 4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/docs/en/v6)。为了更方便地实现路由注册，采用了 `Route Object` 的方式书写路由，示例如下：
+KubeSphere 4.0 的前端路由使用了 [react-router V6](https://reactrouter.com/en/6.20.1)。为了更方便地实现路由注册，采用了 `Route Object` 的方式书写路由，示例如下：
 
 ```javascript
 let routes = [

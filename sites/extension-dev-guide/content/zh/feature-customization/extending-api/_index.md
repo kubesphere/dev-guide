@@ -8,7 +8,7 @@ description: 介绍如何扩展 API
 
 KubeSphere 提供灵活的 API 扩展方式，支持创建以下几种类型的 [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)，以注册 API 或创建动态的代理规则。
 
-在开始之前，请先了解 [KubeSphere API 概念](../references/kubesphere-api-concepts/)，或查看[访问控制](../access-control/)章节，了解更多有关 API 访问控制的内容。
+在开始之前，请先了解 [KubeSphere API 概念](../../references/kubesphere-api-concepts/)，或查看[访问控制](../access-control/)章节，了解更多有关 API 访问控制的内容。
 
 在 KubeSphere 中，API 扩展主要有以下两种方式，它们适用于不同的场景。
 
@@ -219,7 +219,7 @@ X-Remote-User: admin
 
 ### 访问控制
 
-KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵循[KubeSphere API 的设计模式](../references/kubesphere-api-concepts/)。用户访问权限往往需要与前端联动，请参考[访问控制](../access-control/)章节。
+KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵循[KubeSphere API 的设计模式](../../references/kubesphere-api-concepts/)。用户访问权限往往需要与前端联动，请参考[访问控制](../access-control/)章节。
 
 ### 分页与模糊搜索
 

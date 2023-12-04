@@ -8,7 +8,7 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 
 ### 配置开发环境
 
-在开发 KubeSphere 扩展组件之前，需要创建 K8s 集群并部署 KubeSphere Luban 为扩展组件提供基础的运行环境，安装必要的开发工具（Node.js、Yarn、 create-ks-project、Helm、kubectl、ksbuilder 等等）。有关配置开发环境的更多信息，请参阅[搭建开发环境](../prepare-development-environment/)。
+在开发 KubeSphere 扩展组件之前，需要创建 K8s 集群并部署 KubeSphere Luban 为扩展组件提供基础的运行环境，安装必要的开发工具（Node.js、Yarn、 create-ks-project、Helm、kubectl、ksbuilder 等等）。有关配置开发环境的更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
 
 ### 开发扩展组件
 
@@ -53,7 +53,7 @@ kubesphere-extensions
 
 #### 本地调试
 
-在扩展组件的开发过程中，[配置本地运行环境](../hello-world-extension/#配置本地运行环境)之后，可使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
+在扩展组件的开发过程中，[配置本地运行环境](../../quickstart/hello-world-extension/#配置本地运行环境)之后，可使用 `yarn dev` 命令在本地运行 KubeSphere Console 来调试扩展组件。
 
 ### 打包发布
 
