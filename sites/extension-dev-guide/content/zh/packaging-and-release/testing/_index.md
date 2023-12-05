@@ -4,38 +4,34 @@ weight: 02
 description: "将扩展组件上架到 KubeSphere 扩展市场中进行测试"
 ---
 
-经过前面的章节，我们已经完成了扩展组件的开发与打包，在发布之前我们需要针对扩展组件做集成测试。
+扩展组件打包好之后，需要将扩展组件推送到远端环境，通过扩展组件商店进行部署测试。
 
-## 扩展组件上架
+## 推送扩展组件
 
-在扩展组件管理工程根目录（`~/workspace/kubesphere-extensions/`）执行下述命令，将扩展组件上架到 KubeSphere 扩展市场中。
+通过 `ksbuilder publish <dir>/<extension package>` 命令，可以将将扩展组件推送到远端的扩展组件商店。
 
-```shell
-ksbuilder publish employee
+```bash
+➜  extension-samples git:(master) ✗ cd extensions
+➜  extensions git:(master) ✗ ksbuilder package hello-world    
+package extension hello-world
+package saved to /Users/hongming/GitHub/extension-samples/extensions/hello-world-0.1.0.tgz
+➜  extensions git:(master) ✗ ksbuilder publish hello-world-0.1.0.tgz 
+publish extension hello-world-0.1.0.tgz
+creating Extension hello-world
+creating ExtensionVersion hello-world-0.1.0
+creating ConfigMap extension-hello-world-0.1.0-chart
 ```
 
-命令执行成功后，我们可以直接访问 KubeSphere 容器 30880 端口打开 ks-console 页面并登录，查看扩展市场中上架的组件，并进行安装测试。如果安装失败，您可以在 Console 上查看报错日志。
+访问远端的 KubeSphere Console，在扩展组件商店可以看到推送上来的扩展组件。
 
-![](./kubesphere-extension-employee-1.png)
-
-上述命令会将扩展组件上架到系统默认 kubeconfig 文件（`~/.kube/config`）所指向的集群，如果需要发布到指定的集群，可以使用 `--kubeconfig` 参数指定 kubeconfig 文件的路径：
-
-```shell
-ksbuilder publish employee --kubeconfig=/path/to/config
-```
+![hello-world-extension](hello-world-extension.png?width=1200px)
 
 ## 安装扩展组件
 
-扩展组件安装完成后，您将可以在 KubeSphere 中使用扩展组件提供的功能。
-
 安装扩展组件
 
-![](./kubesphere-extension-employee-2.png)
+![install-hello-world-extension](install-hello-world-extension.png?width=1200px)
 
-扩展组件功能入口
+扩展组件成功启用
 
-![](./kubesphere-extension-employee-3.png)
-
-
-![](./kubesphere-extension-employee-4.png)
-
+![enable-hello-world-extension](enable-hello-world-extension.png?width=1200px)

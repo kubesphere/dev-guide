@@ -1,13 +1,1 @@
-# Project dependencies
-.cache
-node_modules
-
-# Build directory
-/public
-.DS_Store
-.idea
-/resources
 .hugo_build.lock
-package-lock.json
-# Local Netlify folder
-.netlify

@@ -4,7 +4,7 @@ weight: 02
 description: 快速集成已有 Web UI 的第三方工具与系统
 ---
 
-本节将以 Weave Scope 集成为例，介绍如何快速将已有 Web UI 的第三方工具和系统整合到扩展组件中。
+本节将以 Weave Scope 集成为例，介绍如何快速将已有 Web UI 的第三方工具和系统通过 iframe 整合到扩展组件中。
 
 [Weave Scope](https://github.com/weaveworks/scope) 可以自动生成应用程序的映射，以便您直观地理解、监视和控制基于容器化微服务的应用程序。
 
@@ -87,9 +87,8 @@ export default function App() {
   {{% notice note %}}
   由于浏览器的同源策略（Same-Origin Policy），如果第三方系统网页与 KubeSphere 前端网页不同源，将无法使用 JavaScript 直接读取和操作第三方系统的 iframe。 通常，需要由后端将第三方系统的前端访问地址处理成与 KubeSphere 前端访问地址同源（**同协议**、**同主机**、**同端口**）的地址。
   {{% /notice %}}
-
 2. 调整 Weave Scope 页面的样式。由于同源，扩展组件可以通过 `React` 的 `ref` 读取和操作 Weave Scope 页面（`iframe`）的 DOM ，从而调整页面的样式，将 selector 部分隐藏。
 
 通过 `yarn dev` 启动本地预览环境，然后通过扩展组件入口访问到以下页面。
 
-![weave-scope-dashboard](./sample-weave-scope-dashboard.png)
+![weave-scope-dashboard](./sample-weave-scope-dashboard.png?width=1200px)

@@ -40,7 +40,7 @@ kubesphere-extensions
      "HELLO_WORLD_DESC": "Hello World! The current language code is {languageCode}."
    }
    ```
-    
+
    ```json
    // src/locales/zh/base.json
    {

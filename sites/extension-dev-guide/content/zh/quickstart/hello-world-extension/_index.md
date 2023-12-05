@@ -56,6 +56,7 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
+       |   ├── webpack.config.js    # webpack 配置文件
        │   └── local_config.yaml    # KubeSphere Console 配置文件
        ├── extensions               # 扩展组件源代码目录
        │   ├── entry.ts
@@ -109,6 +110,6 @@ Hello World 扩展组件的源代码保存在 `~/kubesphere-extensions/ks-consol
 
 ![preview.png](./preview.png?width=1080px)
 
-### 更多示例
+### 了解更多
 
-Hello World 扩展组件仅包含前端部分，有关扩展组件开发的完整示例，请参阅[开发示例](../../examples)。
+当前示例仅包含了前端扩展，展示了扩展组件的基础能力，[开发示例](../../examples/)这个章节包含了更多的例子提供参考。
