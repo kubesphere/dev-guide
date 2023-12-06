@@ -4,7 +4,7 @@ weight: 2
 description: Integrate with third-party tools and systems that have existing web UIs.
 ---
 
-This section provides an example of integrating Weave Scope into extensions to help you familiarize how to quickly integrate third-party tools and systems with existing web UIs.
+This section provides an example of integrating Weave Scope into extensions to help you familiarize how to quickly integrate third-party tools and systems with web UIs into extensions by iframe.
 
 [Weave Scope](https://github.com/weaveworks/scope) automatically generates a map of your application, enabling you to intuitively understand, monitor, and control your containerized, microservices-based application.
 
@@ -92,4 +92,4 @@ Due to the Same-Origin Policy, if the third-party system webpage has a different
 
 Run `yarn dev` to launch a local environment, and then access the webpage through the extension:
 
-![weave-scope-dashboard](./sample-weave-scope-dashboard.png)
+![weave-scope-dashboard](./sample-weave-scope-dashboard.png?width=1200px)

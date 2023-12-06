@@ -4,7 +4,7 @@ weight: 04
 description: 介绍如何控制扩展组件定制资源的访问权限
 ---
 
-本章节介绍扩展组件如何对接 KubeSphere 访问控制。
+本节介绍扩展组件如何对接 KubeSphere 访问控制。
 
 ## KubeSphere 中的访问控制
 
@@ -24,7 +24,7 @@ KubeSphere 中的资源被划分为平台、企业空间、集群、项目四个
 
 ### KubeSphere API
 
-[KubeSphere API](../../references/kubesphere-api-concepts/) 和 [Kubernertes API](https://kubernetes.io/zh-cn/docs/reference/using-api/api-concepts/) 的设计模式相同 是通过 HTTP 提供的基于资源 (RESTful) 的编程接口。
+[KubeSphere API](../../references/kubesphere-api-concepts/) 和 [Kubernertes API](https://kubernetes.io/zh-cn/docs/reference/using-api/api-concepts/) 的设计模式相同，是通过 HTTP 提供的基于资源 (RESTful) 的编程接口。
 它支持通过标准 HTTP 动词（POST、PUT、PATCH、DELETE、GET）检索、创建、更新和删除主要资源。
 
 对于某些资源，API 包括额外的子资源，允许细粒度授权（例如：将 Pod 的详细信息与检索日志分开），
@@ -34,11 +34,11 @@ KubeSphere 中的资源被划分为平台、企业空间、集群、项目四个
 
 Kubernetes 通常使用常见的 RESTful 术语来描述 API 概念：
 
-* **资源类型（Resource Type）** 是 URL 中使用的名称（`pods`、`namespaces`、`services`）
-* 所有资源类型都有一个具体的表示（它们的对象模式），称为 **类别（Kind）**
-* 资源类型的实例的列表称为 **集合（Collection）**
-* 资源类型的单个实例称为 **资源（Resource）**，通常也表示一个 **对象（Object）**
-* 对于某些资源类型，API 包含一个或多个 **子资源（sub-resources）**，这些子资源表示为资源下的 URI 路径
+* **资源类型（Resource Type）** 是 URL 中使用的名称（`pods`、`namespaces`、`services`）。
+* 所有资源类型都有一个具体的表示（它们的对象模式），称为 **类别（Kind）**。
+* 资源类型的实例的列表称为 **集合（Collection）**。
+* 资源类型的单个实例称为 **资源（Resource）**，通常也表示一个 **对象（Object）**。
+* 对于某些资源类型，API 包含一个或多个**子资源（sub-resources）**，这些子资源表示为资源下的 URI 路径。
 
 大多数 Kubernetes API
 资源类型都是[对象](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/)：
@@ -47,20 +47,18 @@ Kubernetes 通常使用常见的 RESTful 术语来描述 API 概念：
 例如权限检查（使用带有 JSON 编码的 `SubjectAccessReview` 主体的 POST 到 `subjectaccessreviews` 资源），
 或 Pod 的子资源 `eviction`（用于触发 [API-发起的驱逐](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/api-eviction/)）。
 
-##### 对象名字
+##### 对象名称
 
-你可以通过 API 创建的所有对象都有一个唯一的名字，以允许幂等创建和检索，但如果虚拟资源类型不可检索或不依赖幂等性，则它们可能没有唯一名称。
-在名字空间内，同一时刻只能有一个给定类别的对象具有给定名称。但是，如果你删除该对象，你可以创建一个具有相同名称的新对象。有些对象没有名字空间（例如：节点），因此它们的名称在整个集群中必须是唯一的。
+通过 API 创建的所有对象都必须具有唯一的名称，以便实现幂等创建和检索，但如果虚拟资源类型不可检索或不依赖幂等性，它们可能没有唯一的名称。
+在名字空间内，同一时刻只能有一个给定类别的对象具有给定名称。但如果删除了该对象，就可以创建一个具有相同名称的新对象。有些对象没有名字空间（例如：节点），因此它们的名称在整个集群中必须是唯一的。
 
 #### API 动词
 
 几乎所有对象资源类型都支持标准 HTTP 动词 - GET、POST、PUT、PATCH 和 DELETE。
 Kubernetes 也使用自己的动词，这些动词通常写成小写，以区别于 HTTP 动词。
 
-Kubernetes 使用术语 **list** 来描述返回资源集合，
-以区别于通常称为 **get** 的单个资源检索。
-如果你发送带有 `?watch` 查询参数的 HTTP GET 请求，
-Kubernetes 将其称为 **watch** 而不是 **get**。
+Kubernetes 使用术语 **list** 来描述返回资源集合，以区别于通常称为 **get** 的单个资源检索。
+如果您发送带有 `?watch` 查询参数的 HTTP GET 请求，Kubernetes 将其称为 **watch** 而不是 **get**。
 
 对于 PUT 请求，Kubernetes 在内部根据现有对象的状态将它们分类为 **create** 或 **update**。
 **update** 不同于 **patch**；**patch** 的 HTTP 动词是 PATCH。
@@ -91,7 +89,7 @@ Kubernetes 将其称为 **watch** 而不是 **get**。
 
 基于角色（Role）的访问控制（RBAC）是一种基于组织中用户的角色来调节控制对计算机或网络资源的访问的方法。
 
-RBAC 鉴权机制使用 `iam.kubesphere.io` 来驱动鉴权决定，允许你通过 KubeSphere API 动态配置策略。
+RBAC 鉴权机制使用 `iam.kubesphere.io` 来驱动鉴权决定，允许您通过 KubeSphere API 动态配置策略。
 
 RBAC API 声明了八种 CRD 对象：**Role**、**ClusterRole**、**GlobalRole**、**WorkspaceRole**、**RoleBinding** 、
 **ClusterRoleBinding**、**GlobalRoleBinding** 和 **WorkspaceRoleBinding**
@@ -118,38 +116,38 @@ rules:
   verbs: ["get", "watch", "list"]
 ```
 
-下面的例子中的 RoleBinding 将 "pod-reader" Role 授予在 "default" 名字空间中的用户 "jane"。
+下面的例子中，RoleBinding 将 "pod-reader" Role 授予在 "default" 名字空间中的用户 "jane"。
 这样，用户 "jane" 就具有了读取 "default" 名字空间中所有 Pod 的权限。
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
 # 此角色绑定允许 "jane" 读取 "default" 名字空间中的 Pod
-# 你需要在该名字空间中有一个名为 “pod-reader” 的 Role
+# 您需要在该名字空间中有一个名为 “pod-reader” 的 Role
 kind: RoleBinding
 metadata:
   name: read-pods
   namespace: default
 subjects:
-# 你可以指定不止一个“subject（主体）”
+# 您可以指定不止一个“subject（主体）”
 - kind: User
   name: jane # "name" 是区分大小写的
   apiGroup: iam.kubesphere.io
 roleRef:
   # "roleRef" 指定与某 Role 或 ClusterRole 的绑定关系
   kind: Role        # 此字段必须是 Role 或 ClusterRole
-  name: pod-reader  # 此字段必须与你要绑定的 Role 或 ClusterRole 的名称匹配
+  name: pod-reader  # 此字段必须与您要绑定的 Role 或 ClusterRole 的名称匹配
   apiGroup: iam.kubesphere.io
 ```
 
 ## 自定义授权项
 
-KubeSphere 中可以通过授权项灵活的创建自定义角色，做到精细的访问控制。
+KubeSphere 支持通过授权项灵活地创建自定义角色，实现精细的访问控制。
 
 ### RoleTemplate
 
-`RoleTemplate` 是由 KubeSphere 提供的 CRD， 用于声明权限项，是 KubeSphere UI 中最小的权限分割单元，通常用来定义某一类型资源的访问权限。在各资源层级中的角色都由权限组合而成，基于权限项，我们可以灵活的创建出自定义角色，做到精细的访问控制。
+`RoleTemplate` 是由 KubeSphere 提供的 CRD， 用于声明权限项，是 KubeSphere UI 中最小的权限分割单元，通常用来定义某一类型资源的访问权限。各资源层级中的角色都由权限组合而成，基于权限项，用户可以灵活地创建自定义角色，实现精细的访问控制。
 
-在 Kubesphere 用户界面中，我们通常在获得一个资源时，同时也希望获得这个资源相关联的其他资源。我们把一组关联紧密的资源的权限放在一个 RoleTemplate 中，以满足在用户界面操作的使用需求。
+在 Kubesphere 用户界面中，用户通常在获得一个资源时，同时也希望获得这个资源相关联的其他资源。把一组关联紧密的资源的权限放在一个 RoleTemplate 中，以满足在用户界面操作的使用需求。
 
 **平台角色权限项：**
 
@@ -228,7 +226,7 @@ spec:
   * `name`：自定义权限的资源名称。
   * `annotations`：
     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
-    * `iam.kubesphere.io/role-template-rules`: 具体控制 Console 权限规则，相见下文 Console 前端权限控制。
+    * `iam.kubesphere.io/role-template-rules`: 具体控制 Console 权限规则，相见下文 [Console 前端权限控制](./#console-前端权限控制)。
   * `labels`：
     * `iam.kubesphere.io/scope`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限。取值 `global` 表示当前权限为平台级别的权限。可选的值有 `global`、`cluster`、`workspace` 和 `namespace`。
     * `iam.kubespere.io/category`：标记权限项所属的类别。
@@ -274,7 +272,7 @@ spec:
 
 ### 自定义角色创建
 
-声明 RoleTemplate、Category 后，自定义角色的创建：
+声明 RoleTemplate、Category 后，创建自定义角色：
 
 ![custom-role-template](custom-role-template.png)
 
@@ -297,11 +295,11 @@ const menu = {
 
 |   | 权限                         | 字段                  | 类型        | 说明                                 |
 |---|----------------------------|---------------------|-----------|------------------------------------|
-| 1 | 是否为平台管理员角色(platform-admin) | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示, 默认值 `false`   |
-| 2 | 根据模块是否在当前集群中安装过滤           | `clusterModule`     | `string`  | 在当前集群中未安装不显示,可以指定多个模块使用 `\|` 进行分割  |
+| 1 | 是否为平台管理员角色(platform-admin) | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示，默认值 `false`   |
+| 2 | 根据模块是否在当前集群中安装过滤           | `clusterModule`     | `string`  | 在当前集群中未安装不显示，可以指定多个模块使用 `\|` 进行分割  |
 | 3 | 根据模块是否安装过滤                 | `ksModule`          | `string`  | 未安装模块不显示                           |
 | 4 | 根据配置权限过滤                   | `authKey` or `name` | `string`  | 有 `authKey` 取 `authKey`，否则取 `name` |
-| 5 | 根据配置权限项                    | `authAction`        | `string`  | 默认值 `view`                         |
+| 5 | 根据配置权限项过滤                    | `authAction`        | `string`  | 默认值 `view`                         |
 | 6 | 跳过权限控制                     | `skipAuth`          | `boolean` | 优先级最高，为 `true` 则忽略其他配置             |
 
 * RoleTemplate 前端权限控制
