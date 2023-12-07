@@ -46,7 +46,7 @@ Directory: /Users/hongming/GitHub/extension-samples/extensions/hello-world
 │       │   └── service.yaml
 │       └── values.yaml
 ├── extension.yaml     # extension 元数据声明文件
-├── permissions.yaml   # 扩展组件安装时说需要的资源授权
+├── permissions.yaml   # 扩展组件安装时需要的资源授权
 ├── static             # 静态资源文件
 │   ├── favicon.svg
 │   └── screenshots
@@ -143,7 +143,7 @@ Helm Chart 编排规范及最佳实践请参考 <https://helm.sh/docs/>
 扩展组件的编排过程中需要遵循以下规则：
 
 1. 兼容 KubeSphere 的全局配置参数，比如全局的仓库地址，可以避免用户手动调整参数出错的概率。
-2. 子Chart尽可能引用本地文件而非远端URL，避免网络问题导致扩展组件无法正确加载。
+2. 子 Chart 尽可能引用本地文件而非远端 URL，避免网络问题导致扩展组件无法正确加载。
 
 ### permissions.yaml 的定义
 

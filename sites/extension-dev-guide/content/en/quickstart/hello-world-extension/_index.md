@@ -58,7 +58,8 @@ The project contains a KubeSphere web console that can run locally.
        ├── configs
        │   ├── config.yaml
        │   ├── console.config.js
-       │   └── local_config.yaml    # Configuration file of the KubeSphere web console
+       |   ├── webpack.config.js    # webpack configuration file
+       │   └── local_config.yaml    # Configuration file of the KubeSphere Console
        ├── extensions               # Source code directory for the extension
        │   ├── entry.ts
        │   └── hello-world          # Source code directory for the Hello World extension
@@ -113,6 +114,6 @@ You can change the string displayed on the page to `Test!`, as shown in the foll
 
 ![preview.png](./preview.png?width=1080px)
 
-### More examples
+### Learn more
 
-The Hello World extension only contains the frontend part. For a comprehensive example of extension development, please refer to [Development Examples](../../examples).
+The demo extension only contains the frontend part, showing the basic features of extensions. For more development examples, please refer to [Development Examples](../../examples).

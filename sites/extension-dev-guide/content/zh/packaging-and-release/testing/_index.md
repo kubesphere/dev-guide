@@ -8,7 +8,7 @@ description: "将扩展组件上架到 KubeSphere 扩展市场中进行测试"
 
 ## 推送扩展组件
 
-通过 `ksbuilder publish <dir>/<extension package>` 命令，可以将将扩展组件推送到远端的扩展组件商店。
+通过 `ksbuilder publish <dir>/<extension package>` 命令，可以将扩展组件推送到远端的扩展组件商店。
 
 ```bash
 ➜  extension-samples git:(master) ✗ cd extensions

@@ -6,9 +6,9 @@ description: "Describes how to create a feature page and configure route setting
 
 For development based on `React`, if the application contains multiple pages, it is necessary to configure route settings for the application. Routing can be viewed as the mapping between access paths and React components. In extension development, routing can be used as follows:
 
-## Principles
+## Route definition
 
-KubeSphere 4.0 adopts [react-router V6](https://reactrouter.com/docs/en/v6) for frontend routing. To make route registration easier, KubeSphere adopts `Route Object`. Example:
+KubeSphere 4.0 adopts [react-router V6](https://reactrouter.com/en/6.20.1) for frontend routing. To make route registration easier, KubeSphere adopts `Route Object` to write routes. Example:
 
 ```javascript
 let routes = [
