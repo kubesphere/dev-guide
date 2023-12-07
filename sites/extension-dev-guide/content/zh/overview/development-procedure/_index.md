@@ -12,7 +12,7 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 
 ### 开发扩展组件
 
-完成开发环境的配置后，请确保 KubeSphere Console 可以正常访问，开放必要的端口（kube-apiserver 6443、ks-console 30880,ks-apiserver 30881 等端口），以便进行本地调试。
+完成开发环境的配置后，请确保 KubeSphere Console 可以正常访问，开放必要的端口（kube-apiserver 6443, ks-console 30880, ks-apiserver 30881 等端口），以便进行本地调试。
 
 #### 创建扩展组件开发项目
 

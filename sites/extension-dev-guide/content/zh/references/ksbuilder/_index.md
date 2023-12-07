@@ -14,7 +14,7 @@ ksbuilder 是 KubeSphere 扩展组件的命令行接口。
 
 ```bash
 ksbuilder [flags]
-```bash
+```
 
 ### 可选项
 

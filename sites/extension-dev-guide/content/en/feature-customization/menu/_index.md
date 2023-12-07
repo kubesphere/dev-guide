@@ -99,7 +99,7 @@ const menu = {
       <td>order</td><td>The sequence of the extension on the menu. Valid values: <code>0</code> or a positive integer. Value <code>0</code> indicates that the extension is at the top of the menu.</td>
     </tr>
     <tr>
-      <td>desc</td><td>The description of the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../Internationalization">Internationalization</a>.</td>
+      <td>desc</td><td>The description of the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>. We recommend that you do not hard-code the parameter settings. Instead, you can configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../internationalization">Internationalization</a>.</td>
     </tr>
     <tr>
       <td>skipAuth</td><td>Whether to skip user permission check. For more information, please refer to <a href="../access-control">Access control</a>.</td>

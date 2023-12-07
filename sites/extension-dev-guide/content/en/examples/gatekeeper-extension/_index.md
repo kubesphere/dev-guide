@@ -1,31 +1,32 @@
 ---
 title: Gatekeeper
 weight: 01
-description: 集成 Gatekeeper
+description: Integrate Gatekeeper.
 ---
 
-本节以 Gatekeeper 为例，介绍如何将 Helm Chart 迁移为 KubeSphere 平台的扩展组件。
+This section will use Gatekeeper as an example to show how to migrate a Helm Chart to the KubeSphere platform as an extension.
 
-本示例不涉及对 KubeSphere UI 的扩展。将 Gatekeeper 的 Helm Chart 转换为 KubeSphere 扩展组件之后，就可以通过 KubeSphere 扩展市场，将其安装部署到 KubeSphere 纳管的集群之中，以便统一管理。
+This example does not involve extending the KubeSphere UI. After converting the Helm Chart of Gatekeeper into a KubeSphere extension, you can install and deploy it to the clusters managed by KubeSphere through the KubeSphere Marketplace.
 
-本示例源代码：<https://github.com/kubesphere-extensions/gatekeeper/tree/master/charts/gatekeeper>
+Source code for this example: [https://github.com/kubesphere-extensions/gatekeeper/tree/master/charts/gatekeeper](https://github.com/kubesphere-extensions/gatekeeper/tree/master/charts/gatekeeper)
 
-#### Gatekeeper 是什么
+#### What is Gatekeeper
 
-[Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) 是一种开源通用策略引擎，可统一整个堆栈中的策略实施。OPA 提供了一种高级声明性语言，支持通过简单的代码定义策略。
+[Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) is an open-source general-purpose policy engine that unifies policy enforcement across the entire stack. OPA provides a high-level declarative language that allows users to define policies through simple code.
 
-Gatekeeper 是一个基于 OPA 构建在 [K8s admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) 机制之上的安全策略管理工具，能够在不牺牲开发敏捷性和操作独立性的前提下确保集群的安全合规。
+Gatekeeper is a security policy management tool built on OPA and the [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) mechanism. It ensures cluster security and compliance of clusters without sacrificing development agility and operational independence.
 
-例如，在 K8s 集群中可以执行以下策略：
+For example, the following policies can be enforced in a Kubernetes (K8s) cluster:
 
-* 所有的容器镜像必须来自可信的镜像仓库。
-* 所有 ingress 的 host name 必须是全局唯一的。
-* 所有的 pod 必须配置 limit 和 request。
-* 不允许挂载 host path。
+* All container images must originate from a trusted image repository.
+* The host names of all Ingress objects must be globally unique.
+* All pods must be configured with `limit` and `request`.
+* Mounting host paths is not allowed.
 
-OPA 社区已经提供了 Gatekeeper 的 [Helm Chart](https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper)，通过以下步骤即可将其快速集成到 KubeSphere 扩展市场。
+The OPA community has provided the [Helm Chart](https://github.com/open-policy-agent/gatekeeper/tree/master/charts/gatekeeper) for Gatekeeper. Let's quickly integrate it into the KubeSphere Marketplace using the following steps.
 
-#### 使用 ksbuilder 创建扩展组件包
+
+#### Use ksbuilder to create an extension package:
 
 ```bash
 ➜  charts git:(master) ksbuilder create
@@ -37,7 +38,7 @@ Please input author's URL (optional):
 Directory: /Users/hongming/GitHub/gatekeeper/charts/gatekeeper
 ```
 
-通过上述命令创建扩展组件的主 Chart，ksbuilder 会初始化一个基础的扩展组件包目录结构，还需要在此基础之上进行调整。
+The above command creates the main Chart for the extension. `ksbuilder` initializes a basic directory structure for the extension package, and you need to adjust it.
 
 ```bash
 ├── CHANGELOG.md
@@ -63,21 +64,22 @@ Directory: /Users/hongming/GitHub/gatekeeper/charts/gatekeeper
 └── values.yaml
 ```
 
-#### 编排 KubeSphere 扩展组件包
+#### Orchestrate the KubeSphere Extension Package
 
-接下来简单整理这个初始目录结构。扩展组件中不包含前后端的扩展，因此需要将 Gatekeeper 的 Chart 作为[子 Chart](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/) 在 KubeSphere 纳管的集群中进行安装部署。由于 GitHub 连接的不稳定性，请直接下载 Gatekeeper 的 Chart 包。
+Next, organize the initial directory structure. Since the extension doesn't include front-end and back-end extensions, you need to deploy the Gatekeeper Chart as a [subchart](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/) in a KubeSphere-managed cluster. Due to potential connectivity issues with GitHub, please download the Gatekeeper Chart.
 
 ```bash
 cd gatekeeper
-# 移除用不到的 subchart、静态资源目录、模板文件等等
+# Remove unnecessary subcharts, static resource directories, template files, etc.
 rm -rf charts/* static applicationclass.yaml
-# 将 gatekeeper chart 保存到 charts 目录中
+# Save the Gatekeeper chart to the charts directory
 curl -o charts/gatekeeper-3.14.0.tgz https://open-policy-agent.github.io/gatekeeper/charts/gatekeeper-3.14.0.tgz
 ```
 
-现在 KubeSphere 扩展组件包已经包含了一个主 Chart 和一个子 Chart，接下来需要在 `extension.yaml` 中配置扩展组件的元数据信息，请参考扩展组件 [extension.yaml 的定义](../../packaging-and-release/packaging/#extensionyaml-的定义) 。
+The extension package now includes a main Chart and a subchart. Next, you need to configure the metadata information of the extension in the `extension.yaml`. Please refer to [Definition of extension.yaml](../../packaging-and-release/packaging/#definition-of-extensionyaml) for more info.
 
-与 Helm 不同的是，KubeSphere 扩展组件包需要在 `extension.yaml` 文件中定义元数据信息。相比于 Helm Chart 中的 `Chart.yaml`，`extension.yaml` 可以定义更多的配置信息。
+Unlike Helm, the metadata information of KubeSphere extension packages should be defined in the `extension.yaml` file. In comparison to the `Chart.yaml` in Helm Chart, `extension.yaml` can define more configurations.
+
 
 ```yaml
 apiVersion: kubesphere.io/v1alpha1
@@ -120,9 +122,10 @@ dependencies:
 installationMode: Multicluster
 ```
 
-参考 [permissions.yaml 的定义](../../packaging-and-release/packaging/#permissionsyaml-的定义) 根据 Gatekeeper Helm Chart 中的模板文件整理出安装部署时所需的权限列表，在 `permissions.yaml` 中进行配置：
+Refer to [Definition of permissions.yaml](../../packaging-and-release/packaging/#definition-of-permissionsyaml) and organize the permissions list required for installation and deployment based on the template files in the Gatekeeper Helm Chart to configure in the `permissions.yaml`.
 
-{{%expand "展开 permissions.yaml" %}}
+
+{{%expand "Show permissions.yaml" %}}
 
 ```yaml
 kind: ClusterRole
@@ -235,9 +238,9 @@ rules:
 
 {{% /expand%}}
 
-Gatekeeper 是一个子 Chart，因此需要将 Gatekeeper 中 `values.yaml` 中的配置合并到主 Chart 的 `values.yaml` 之中，直接向终端用户[暴露子 Chart 的参数](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/)：
+Gatekeeper is a subchart, so you need to merge the configurations from the `values.yaml` in Gatekeeper into the `values.yaml` of the main Chart, and [expose the parameters of subcharts](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/) directly to end-users.
 
-{{%expand "展开 values.yaml" %}}
+{{%expand "Show values.yaml" %}}
 
 ```yaml
 gatekeeper:
@@ -519,9 +522,9 @@ gatekeeper:
 
 {{% /expand%}}
 
-#### 将扩展组件提交到远程环境中
+#### Submit the extension to the remote environment
 
-借助 ksbuilder 将扩展组件提交到 KubeSphere 远端环境的扩展市场。
+Use `ksbuilder` to submit the extension to the KubeSphere Marketplace in the remote KubeSphere environment.
 
 ```yaml
 ➜  gatekeeper git:(master) ✗ ksbuilder publish .
@@ -531,26 +534,26 @@ creating ExtensionVersion gatekeeper.kubesphere.io-0.1.0
 creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 ```
 
-#### 部署测试
+#### Deployment and testing
 
-通过 `yarn start` 以 production 模式运行 KubeSphere Console 或访问远端的 KubeSphere Console，即可在扩展市场中看到通过 ksbuilder 提交的扩展组件。
+Run KubeSphere Console in production mode using `yarn start` or access the remote KubeSphere Console, you will see the extension submitted by `ksbuilder` in the KubeSphere Marketplace.
 
 ![Gatekeeper Extension](gatekeeper-extension.png?width=1200px)
 
-1. 点击安装扩展组件
+1. Install Gatekeeper.
 
 ![install-gatekeeper-extension](install-gatekeeper-extension.png?width=1200px)
 
-2. 扩展组件安装完成后，选择要部署 Gatekeeper 的集群
+2. After the installation is completed, choose the cluster where Gatekeeper will be deployed.
 
 ![install-gatekeeper-agent](install-gatekeeper-agent.png?width=1200px)
 
-3. Gatekeeper 在指定集群中成功部署
+3. Gatekeeper has been successfully deployed in the specified cluster.
 
 ![installed](installed.png?width=1200px)
 
-4. 创建 Gatekeeper Constraints 并测试
+4. Create Gatekeeper Constraints and test.
 
-    Gatekeeper 测试样例：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
+    Gatekeeper testing examples：<https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos>
 
 ![gatekeeper-constraint-test](gatekeeper-constraint-test.png?width=1200px)

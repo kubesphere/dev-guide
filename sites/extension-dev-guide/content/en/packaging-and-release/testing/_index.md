@@ -4,37 +4,35 @@ weight: 2
 description: "Describe how to publish an extension to the KubeSphere Marketplace and test the extension."
 ---
 
-Previously, we have learnt how to develop and package extensions. In this section, we will learn how to test published extensions.
 
-## Publish extensions
+Once the extension is packaged, you can push it to the remote environment for deployment and testing in the KubeSphere Marketplace.
 
-In the root directory `~/workspace/kubesphere-extensions/` of the extension, run the following command to publish the extension.
+## Push the extension
 
-```shell
-ksbuilder publish employee
+Use the `ksbuilder publish <dir>/<extension package>` command to push the extension to the remote KubeSphere Marketplace.
+
+```bash
+➜  extension-samples git:(master) ✗ cd extensions
+➜  extensions git:(master) ✗ ksbuilder package hello-world    
+package extension hello-world
+package saved to /Users/hongming/GitHub/extension-samples/extensions/hello-world-0.1.0.tgz
+➜  extensions git:(master) ✗ ksbuilder publish hello-world-0.1.0.tgz 
+publish extension hello-world-0.1.0.tgz
+creating Extension hello-world
+creating ExtensionVersion hello-world-0.1.0
+creating ConfigMap extension-hello-world-0.1.0-chart
 ```
 
-Then you can log in to the KubeSphere Console via port 30880 and install and test the published extension. If installation fails, you can view the error log on the Console.
+Access the remote KubeSphere Console, and you will see the extension in the KubeSphere Marketplace.
 
-![](./kubesphere-extension-employee-1.png)
+![hello-world-extension](hello-world-extension.png?width=1200px)
 
-By default, the extension will be published on the cluster specified in the system's default kubeconfig file (`~/.kube/config`). If you want to publish the extension to a specified cluster, you can use `--kubeconfig` parameter to specify the path of the kubeconfig file.
+## Install the extension
 
-```shell
-ksbuilder publish employee --kubeconfig=/path/to/config
-```
+Install the extension.
 
-## Install Extensions
+![install-hello-world-extension](install-hello-world-extension.png?width=1200px)
 
-Once the extension is installed, you can use the features provided by the extension in KubeSphere.
+The extension has been successfully enabled.
 
-Install an extension
-
-! [](. /kubesphere-extension-employee-2.png)
-
-Acess your extensions
-
-! [](. /kubesphere-extension-employee-3.png)
-
-
-! [](. /kubesphere-extension-employee-4.png)
+![enable-hello-world-extension](enable-hello-world-extension.png?width=1200px)

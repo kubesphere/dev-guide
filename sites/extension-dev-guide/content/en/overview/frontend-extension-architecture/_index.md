@@ -8,7 +8,7 @@ To be more flexible and extensible, KubeSphere 4.0 adopts an architecture that c
 
 The following figure shows the architecture:
 
-![frontend-extension-arch](./frontend-arch.png)
+![luban-frontend-extension-architecture](./luban-frontend-extension-architecture.png?width=800px)
 
 ## Principles
 

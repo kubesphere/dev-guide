@@ -8,7 +8,7 @@ Built on K8s, KubeSphere is highly configurable and extensible like K8s. In addi
 
 `ks-apiserver` is the API gateway for KubeSphere, offering unified authentication, authorization, and request proxy capabilities. By using the aggregation layer of ks-apiserver, you can extend KubeSphere API as follows:
 
-![api-proxy](./api-proxy.png)
+![luban-backend-extension-architecture](./luban-backend-extension-architecture.png?width=800px)
 
 ### Authentication and Authentication
 
