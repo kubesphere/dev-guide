@@ -225,15 +225,18 @@ KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵
 
 为 CRD 添加 Label `kubesphere.io/resource-served: 'true'`，KubeSphere 会为相关的 CR 资源提供分页和模糊查询 API 等功能。
 
-默认生成的 List API 模式为: `/clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
-
 > 如果使用了相同的 API Group 与 API Version，APIService 的优先级高于 KubeSphere Served Resource API。
 
 **请求示例与参数说明：**
 
-`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
+集群资源：`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/{resources}`
 
-| 参数             | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                            |
+企业空间资源：`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/workspaces/{workspace}/{resources}`
+
+命名空间资源：`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/namespaces/{namespace}/{resources}`
+
+
+| 查询参数         | 描述                                             | 是否必须 | 默认值               | 备注                                                                                                                            |
 |----------------|------------------------------------------------|------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | page           | 页码                                             | 否    | 1                 |                                                                                                                               |
 | limit          | 页宽                                             | 否    | -1                |                                                                                                                               |
@@ -246,9 +249,8 @@ KubeSphere API 支持多级访问控制，需要在 API 路径设计上严格遵
 | ownerReference | ownerReference                                 | 否    |                   |                                                                                                                               |
 | ownerKind      | ownerKind                                      | 否    |                   |                                                                                                                               |
 | annotation     | 注解，支持‘=’, '!='，单个annotation，键值对或单个键            | 否    |                   | annotation=ab=ok或annotation=ab                                                                                                |
-| label     | 注解，支持‘=’, '!='，单个 label，键值对或单个键            | 否    |                   |  label=ab=ok或label=ab                                                                                                |
-| ~~labelSelector~~  | 标签选择器(暂未支持)                                          | 否    |                   | 与 K8s 中 labelSelector 一样的处理方式，可参考：[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) |
-| fieldSelector  | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔，从根开始查询所有路径属性 | 否    |                   | fieldSelector=spec.ab=true,spec.bc!=ok                                                                                        |
+| labelSelector  | 标签选择器，用法与 K8s labelSelector 一样，参考[labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) | 否    |     |  labelSelector=environment in (production,qa),tier in (frontend) |
+| fieldSelector  | 属性选择器，支持'=', '==', '!='，多个用英文逗号分隔，从根开始查询所有路径属性 <br/>支持大小写不敏感，需给值加上前缀`~` | 否   |     | fieldSelector=spec.ab=true,spec.bc!=ok    <br/> 大小写不敏感：fieldSelector=spec.ab=~ok,spec.bc!=~ok |        
 
 **响应：**
 
