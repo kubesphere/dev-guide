@@ -293,14 +293,15 @@ const menu = {
 
 权限过滤效果
 
-|   | 权限                         | 字段                  | 类型        | 说明                                 |
-|---|----------------------------|---------------------|-----------|------------------------------------|
-| 1 | 是否为平台管理员角色(platform-admin) | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示，默认值 `false`   |
-| 2 | 根据模块是否在当前集群中安装过滤           | `clusterModule`     | `string`  | 在当前集群中未安装不显示，可以指定多个模块使用 `\|` 进行分割  |
-| 3 | 根据模块是否安装过滤                 | `ksModule`          | `string`  | 未安装模块不显示                           |
-| 4 | 根据配置权限过滤                   | `authKey` or `name` | `string`  | 有 `authKey` 取 `authKey`，否则取 `name` |
-| 5 | 根据配置权限项过滤                    | `authAction`        | `string`  | 默认值 `view`                         |
-| 6 | 跳过权限控制                     | `skipAuth`          | `boolean` | 优先级最高，为 `true` 则忽略其他配置             |
+|   | 权限                           | 字段                  | 类型        | 说明                                                           |
+|---|------------------------------|---------------------|-----------|--------------------------------------------------------------|
+| 1 | 是否为平台管理员角色(platform-admin)   | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示, 默认值 `false`                             |
+| 2 | 根据模块是否在当前集群中安装过滤             | `clusterModule`     | `string`  | 在当前集群中未安装不显示,可以指定多个模块使用 `\|` 进行分割                            |
+| 3 | 根据模块是否安装过滤                   | `ksModule`          | `string`  | 未安装模块不显示                                                     |
+| 4 | 根据模块是否安装并给了指定`annotation`值过滤 | `annotation`        | `string`  | 模块没有指定`annotation`值不显示。注意: `annotation` 必须配合 `ksModule` 一起使用 |
+| 5 | 根据配置权限过滤                     | `authKey` or `name` | `string`  | 有 `authKey` 取 `authKey`，否则取 `name`                           |
+| 6 | 根据配置权限项                      | `authAction`        | `string`  | 默认值 `view`                                                   |
+| 7 | 跳过权限控制                       | `skipAuth`          | `boolean` | 优先级最高，为 `true` 则忽略其他配置                                       |
 
 * RoleTemplate 前端权限控制
 
