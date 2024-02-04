@@ -287,11 +287,12 @@ Permission Filtering Effect
 |   | Permissions                         | Fields                  | Type        | Description                                 |
 |---|----------------------------|---------------------|-----------|------------------------------------|
 | 1 | Whether it is the platform administrator (platform-admin) | `admin` | `boolean` | If set to `true`, non-platform administrators will not be displayed. The default value is `false`. |
-| 2 | Filter based on whether the module is installed in the current cluster | `clusterModule` | `string` | If not installed in the current cluster, it will not be displayed. Multiple modules can be specified using `\|` as a separator. |
-| 3 | Filter by installed and uninstalled modules | `ksModule` |  `string`  | Uninstalled modules are not displayed. |
-| 4 | Filter by permissions                   | `authKey` or `name` | `string`  | If there is `authKey`, take `authKey`, otherwise take `name`. |
-| 5 | Filter by permission items                    | `authAction`        | `string`  | The default value is `view`. |
-| 6 | Skip permission control                     | `skipAuth`          | `boolean` | It has the highest priority, if set to `true`, other configurations can be ignored.             |
+| 2 | Whether the module is installed in the current cluster | `clusterModule` | `string` | If not installed in the current cluster, it will not be displayed. Multiple modules can be specified using `\|` as a separator. |
+| 3 | Whether the module is installed or not | `ksModule` |  `string`  | Uninstalled modules are not displayed. |
+| 4 | Whether the module is installed and has a specified `annotation` value | `annotation` | `string` | Modules without a specified `annotation` value will not be displayed. Note: `annotation` must be used in conjunction with `ksModule`. |
+| 5 | Filter by permissions                   | `authKey` or `name` | `string`  | If there is `authKey`, take `authKey`, otherwise take `name`. |
+| 6 | Filter by permission items                    | `authAction`        | `string`  | The default value is `view`. |
+| 7 | Skip permission control                     | `skipAuth`          | `boolean` | It has the highest priority, if set to `true`, other configurations can be ignored.             |
 
 * RoleTemplate frontend permission control
 

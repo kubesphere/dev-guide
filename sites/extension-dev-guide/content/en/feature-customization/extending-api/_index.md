@@ -226,15 +226,17 @@ KubeSphere API supports multi-level access control, and the API path design shou
 
 Add the `kubesphere.io/resource-served: 'true'` Label for CRD, and KubeSphere will provide the pagination and fuzzy query API for related CR resources.
 
-The default List API mode is: `/clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
-
 > If the same API Group and API Version are used, the priority of APIService is higher than that of the KubeSphere Served Resource API.
 
 **Request examples and parameters**
 
-`GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/(namespaces/{namespace}/)?{resources}`
+Cluster resources: `GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/{resources}`
 
-| Parameter | Description | Required | Default Value | Remarks |
+Workspace resources: `GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/workspaces/{workspace}/{resources}`
+
+Namespace resources: `GET /clusters/{cluster}/kapis/{apiGroup}/{apiVersion}/namespaces/{namespace}/{resources}`
+
+| Query Parameter | Description | Required | Default Value | Remarks |
 |---------------|-----------------|--------|---------------------|------------------------|
 | page | Page number | No | 1 | |
 | limit | Page width | No | -1 | 
@@ -247,9 +249,9 @@ The default List API mode is: `/clusters/{cluster}/kapis/{apiGroup}/{apiVersion}
 | ownerReference | ownerReference | No | | |
 | ownerKind | ownerKind | No | | |
 | annotation | Annotation, support '=', '!=', a single annotation, key-value pair or a single key | No | | annotation=ab=ok or annotation=ab |
-|label | Annotation, supports '=', '!=', single label, key-value pairs, or single key | No |  | label=ab=ok or label=ab |
-|~~labelSelector~~ | Label selector (not supported yet) | No |  | Similar handling method as labelSelector in K8s, refer to: [labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api)
-| fieldSelector | Attribute selector, support '=', '==', '!=', separated by commas. Query all path properties from the root | No | | fieldSelector=spec.ab=true,spec.bc!=ok |
+| labelSelector | Label selector, used in the same way as K8s labelSelector, refer to [labels#api](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api) | No | | labelSelector=environment in (production,qa), tier in (frontend) |
+| fieldSelector | Attribute selector, support '=', '==', '!=', separated by commas. Query all path properties from the root. <br/> Case-insensitive, values need to be prefixed with `~` | No   |     | fieldSelector=spec.ab=true,spec.bc!=ok    <br/> Case-insensitive: fieldSelector=spec.ab=~ok,spec.bc!=~ok |        
+
 
 **Response**:
 
