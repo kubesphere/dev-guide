@@ -32,10 +32,6 @@ KubeSphere 提供了全面的扩展 API，从前端 UI 到后端 API，几乎覆
 
 5. **对 KubeSphere 的 API 进行扩展**：扩展 KubeSphere 的后端 API，复用 KubeSphere 提供的认证和鉴权功能。
 
-### 如何构建扩展组件？
-
-开发扩展组件简单易上手，无需大量时间和精力。请参阅[开发流程](../../overview/development-process/)章节了解如何构建扩展组件。
-
 ### 如何寻求帮助？
 
 如果您在开发扩展组件时遇到问题，请尝试在以下渠道获得帮助：
