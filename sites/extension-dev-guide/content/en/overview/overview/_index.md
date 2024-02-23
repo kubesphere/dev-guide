@@ -35,7 +35,7 @@ The following are some examples that you can achieve with the extension API:
 
 ### How to develop an extension?
 
-Developing extensions is simple and easy to get started. View the [Procedure](../../overview/development-procedure/) section to get familiar with the process.
+Developing extensions is simple and easy to get started. View the [Procedure](../../overview/development-process/) section to get familiar with the process.
 
 
 ### Get help

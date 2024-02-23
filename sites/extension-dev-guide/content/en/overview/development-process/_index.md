@@ -1,5 +1,5 @@
 ---
-title: "Development Procedure"
+title: "Development Process"
 weight: 4
 description: Describes the development process of KubeSphere extensions.
 ---
