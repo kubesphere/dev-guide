@@ -158,7 +158,7 @@ In the Kubesphere user interface, users usually want to get other resources asso
 
 ### RoleTemplate examples
 
-Assume that CRD `custom-resource` `custom-resource-version` is defined in the extension. We expect that it returns custom-resource-version when KubeSphere users view custom-resource in the user interface. The following YAML files create two custom permissions: `global-custom-resource-viewing` and `global-custom-resource- creation`, respectively authorizing users to view and create resources in the `custom-resource` type, where `global-custom-resource-creation ` depends on `global-custom-resource-viewing`.
+Assume that CRD `custom-resource` `custom-resource-version` is defined in the extension. We expect that it returns custom-resource-version when KubeSphere users view custom-resource in the user interface. The following YAML files create two custom permissions: `global-custom-resource-view` and `global-custom-resource- manage`, respectively authorizing users to view and create resources in the `custom-resource` type, where `global-custom-resource-manage ` depends on `global-custom-resource-view`.
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1

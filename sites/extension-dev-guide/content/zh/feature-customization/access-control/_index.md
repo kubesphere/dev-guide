@@ -167,7 +167,7 @@ KubeSphere 支持通过授权项灵活地创建自定义角色，实现精细的
 
 ### RoleTemplate 示例
 
-假设扩展组件中定义了 CRD `custom-resource` `custom-resource-version`。我们期望 KubeSphere 用户在用户界面查看 custom-resource 时能够同时返回 custom-resource-version, 以下 YAML 文件创建了 `global-custom-resource-viewing` 和 `global-custom-resource-creation` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `global-custom-resource-creation` 依赖于 `global-custom-resource-viewing`。
+假设扩展组件中定义了 CRD `custom-resource` `custom-resource-version`。我们期望 KubeSphere 用户在用户界面查看 custom-resource 时能够同时返回 custom-resource-version, 以下 YAML 文件创建了 `global-custom-resource-view` 和 `global-custom-resource-manage` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `global-custom-resource-manage` 依赖于 `global-custom-resource-view`。
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
@@ -226,7 +226,7 @@ spec:
   * `name`：自定义权限的资源名称。
   * `annotations`：
     * `iam.kubesphere.io/dependencies`: 在 Console 中会显示为依赖关系，当选中这个权限项时会自动选中依赖的权限项。
-    * `iam.kubesphere.io/role-template-rules`: 具体控制 Console 权限规则，相见下文 [Console 前端权限控制](./#console-前端权限控制)。
+    * `iam.kubesphere.io/role-template-rules`: 具体控制 Console 权限规则，详见下文 [Console 前端权限控制](./#console-前端权限控制)。
   * `labels`：
     * `iam.kubesphere.io/scope`：自定义权限的资源标签。KubeSphere 将权限分为平台、集群、企业空间和项目权限。取值 `global` 表示当前权限为平台级别的权限。可选的值有 `global`、`cluster`、`workspace` 和 `namespace`。
     * `iam.kubespere.io/category`：标记权限项所属的类别。
