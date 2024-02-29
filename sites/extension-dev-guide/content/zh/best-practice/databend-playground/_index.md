@@ -1,6 +1,6 @@
 ---
 title: "Databend Playground 开发小记"
-weight: 01
+weight: 02
 description: "介绍 Databend Playground 的开发经验和总结"
 ---
 
