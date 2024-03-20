@@ -240,6 +240,52 @@ spec:
     * `resources`：向用户授权的资源类型，可以为 CRD（例如本节示例中的 `custom-resource`，`custom-resource-version`）或 Kubernetes 默认资源类型（例如 `deployment`）。取值 `'*'` 表示当前权限级别的所有资源类型。
     * `verbs`：向用户授权的操作。取值 `'*'` 当前权限级别的所有操作。有关资源操作类型的更多信息，请参阅 [Kubernetes 官方文档](https://kubernetes.io/docs/reference/access-authn-authz/authorization/)。
 
+### RoleTemplate 自动聚合
+
+将特定的 label 加到 RoleTemplate中，可以实现自动聚合到内置角色。例如，将 `iam.kubesphere.io/aggregate-to-authenticated: ''` 加到 RoleTemplate 中，可以实现聚合到内置角色所有登录用户。
+
+```yaml
+apiVersion: iam.kubesphere.io/v1beta1
+kind: RoleTemplate
+metadata:
+  name: global-custom-resource-manage
+  annotations:
+    iam.kubesphere.io/dependencies: global-custom-resource-view
+  labels:
+    iam.kubesphere.io/category: custom-resource-management
+    scope.kubesphere.io/workspace: ""
+    ## 聚合到内置角色所有登录用户
+    iam.kubesphere.io/aggregate-to-authenticated: ''
+    
+spec:
+  displayName:
+    en: Custom Resource Viewing
+  rules:
+    - apiGroups:
+        - custom-api-group
+      resources:
+        - custom-resource
+        - custom-resource-version
+      verbs:
+        - *
+```
+
+以下是可用的聚合角色的label
+#### workspace
+- iam.kubesphere.io/aggregate-to-viewer: ""
+- iam.kubesphere.io/aggregate-to-regular: ""
+- iam.kubesphere.io/aggregate-to-self-provisioner: ""
+
+#### global
+- iam.kubesphere.io/aggregate-to-authenticated: ""
+
+#### cluster
+- iam.kubesphere.io/aggregate-to-cluster-viewer: ""
+
+#### namespace
+- iam.kubesphere.io/aggregate-to-operator: ""
+- iam.kubesphere.io/aggregate-to-viewer: ""
+
 ### Category
 
 Category 用于标记 RoleTemplate 所属的类别。KubeSphere Console 将根据权限项的类别将权限项分组显示。对应 RoleTemplate 的 label `iam.kubesphere.io/category: custom-resource-management`。
