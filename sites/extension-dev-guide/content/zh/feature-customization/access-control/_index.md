@@ -253,7 +253,8 @@ metadata:
     iam.kubesphere.io/dependencies: global-custom-resource-view
   labels:
     iam.kubesphere.io/category: custom-resource-management
-    scope.kubesphere.io/workspace: ""
+    ## 注意 scope 要和聚合的角色匹配
+    iam.kubesphere.io/scope: global
     ## 聚合到内置角色所有登录用户
     iam.kubesphere.io/aggregate-to-authenticated: ''
     
