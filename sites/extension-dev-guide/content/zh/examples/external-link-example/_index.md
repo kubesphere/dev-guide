@@ -10,7 +10,7 @@ description: 如何在扩展组件中打开外部链接
 
 首先，从 GitHub 克隆示例代码，并根据 [创建 Hello World 扩展组件](../../quickstart/hello-world-extension) 的指导文档，进行项目创建、本地开发及调试。
 
-````bash
+```bash
 cd ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/external-link ~/kubesphere-extensions/ks-console/extensions
@@ -37,7 +37,7 @@ export default function App() {
 
   return <Loading className="page-loading" />;
 }
-````
+```
 
 以上代码实现以下功能：
 
