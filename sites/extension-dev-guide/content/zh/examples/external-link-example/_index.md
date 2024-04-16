@@ -1,24 +1,24 @@
 ---
 title: 外部链接
 weight: 03
-description: 打开外部链接
+description: 如何在扩展组件中打开外部链接
 ---
 
-本节将介绍如何在扩展组件中打开外部链接。
+本节介绍如何在扩展组件中打开外部链接。
 
 ### 前端扩展组件开发
 
-从 GitHub 上克隆本示例的代码，然后参照[创建 Hello World 扩展组件](../../quickstart/hello-world-extension)进行创建项目、本地开发和调试。
+首先，从 GitHub 克隆示例代码，并根据 [创建 Hello World 扩展组件](../../quickstart/hello-world-extension) 的指导文档，进行项目创建、本地开发及调试。
 
-```bash
-cd  ~/kubesphere-extensions
+````bash
+cd ~/kubesphere-extensions
 git clone https://github.com/kubesphere/extension-samples.git
 cp -r ~/kubesphere-extensions/extension-samples/extensions-frontend/extensions/external-link ~/kubesphere-extensions/ks-console/extensions
 ```
 
-接下来，将重点介绍如何在扩展组件中打开外部链接。
+接下来详细介绍如何在扩展组件中实现打开外部链接。
 
-文件路径： `~/kubesphere-extensions/ks-console/extensions/external-link/src/App.jsx`
+文件路径：`~/kubesphere-extensions/ks-console/extensions/external-link/src/App.jsx`
 
 ```jsx
 import React, { useEffect } from "react";
@@ -37,19 +37,19 @@ export default function App() {
 
   return <Loading className="page-loading" />;
 }
-```
+````
 
-以上代码主要完成了以下两个任务：
+以上代码实现以下功能：
 
-1. 打开外部链接。
-2. 退回到之前的页面。
+1. 打开指定的外部链接。
+2. 返回到之前的页面。
 
 {{% notice note %}}
-示例中打开外部链接的方式虽然可以直接打开外链，但是可能会造成之前的页面状态丢失。
+虽然示例中使用的方法可以直接打开外部链接，但可能会导致之前页面的状态丢失。
 {{% /notice %}}
 
 {{% notice note %}}
-也可以在 `App.jsx` 写一个 `<a href={LINK} target="_blank">open link</a>` 或者按钮来点击打开外部链接。
+另一种方法是在 `App.jsx` 中使用 `<a href={LINK} target="_blank">Open Link</a>` 或者通过按钮来打开外部链接。
 {{% /notice %}}
 
 ![open-external-link](./open-external-link.gif?width=1200px)
