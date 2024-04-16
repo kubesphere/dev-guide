@@ -45,9 +45,11 @@ export default function App() {
 2. 退回到之前的页面。
 
 {{% notice note %}}
+示例中打开外部链接的方式虽然可以直接打开外链，但是可能会造成之前的页面状态丢失。
+{{% /notice %}}
 
-1. 这里只是一个示例，可以用这种方式打开外部链接。也可以在 `App.jsx` 写一个 `<a href={LINK} _blank />` 来手动打开外部链接。
-2. 示例中打开外部链接的方式虽然可以直接打开外链，但是可能会造成之前页面状态丢失的情况。
-   {{% /notice %}}
+{{% notice note %}}
+也可以在 `App.jsx` 写一个 `<a href={LINK} target="_blank">open link</a>` 或者按钮来点击打开外部链接。
+{{% /notice %}}
 
-![weave-scope-dashboard](./sample-weave-scope-dashboard.png?width=1200px)
+![open-external-link](./open-external-link.gif?width=1200px)
