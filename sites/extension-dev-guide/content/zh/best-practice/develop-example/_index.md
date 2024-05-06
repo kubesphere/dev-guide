@@ -90,11 +90,11 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
 扩展组件一般有以下几种集成场景：
 
-| **集成方式**                           | **开发成本** | 采用度 | **用户体验**                                               |
-| -------------------------------------- | ------------ | ------ | ---------------------------------------------------------- |
-| 编排为 Helm Chart 通过扩展组件上架     | 低           | 较少   | 适用于不需要 UI 界面的扩展组件，例如后台任务、数据处理等。 |
-| 通过 iframe 嵌入已有的页面             | 中           | 最常见 | 适用于已有 UI 界面的扩展组件， UI 风格可调整。             |
-| 基于 KubeDesign 打造自己的可视化控制台 | 高           | 较少   | 风格统一。                                                 |
+| **集成方式**| **开发成本** | 采用度 | **用户体验**|开发工作量|扩展组件示例|
+| -------------------------------------- | ------------ | ------ | ---------------------------------------------------------- | ------ | ------ | 
+| 编排为 Helm Chart 通过扩展组件上架     | 低           | 较少   | 适用于不需要 UI 界面的扩展组件，例如后台任务、数据处理等。|预计开发时间为3人天。|[KubeBlocks](https://kubesphere.com.cn/marketplace/extensions/kubeblocks/)
+| 通过 iframe 嵌入已有的页面             | 中           | 最常见 | 适用于已有 UI 界面的扩展组件， UI 风格可调整。             |预计开发时间为15人天。| [Databend Playground](https://kubesphere.com.cn/marketplace/extensions/databend-playground/)
+| 基于 KubeDesign 打造自己的可视化控制台 | 高           | 较少   | 风格统一。                                                 |开发工作量视具体开发内容而定。| [OKG Dashboard](https://kubesphere.com.cn/marketplace/extensions/kruise-game-dashboard/)
 
 ### iframe 嵌入
 
@@ -536,7 +536,6 @@ export default function App() {
    {{% /expand%}}
 
 3. 访问 `10.8.0.2:5556` 将触发登录，登录后再次访问 `10.8.0.2:5556`，您将能够获取到 OAuth 信息。
-
 <img src="./Snipaste_2024-02-21_17-56-43.png" alt="Snipaste_2024-02-21_17-56-43" style="zoom:50%;" />
 
 **注意**:
@@ -655,15 +654,12 @@ export default function App() {
    ```
 
 2. 在扩展市场查看刚提交的组件。
-
 <img src="./Snipaste_2024-02-22_11-37-56.png" alt="Snipaste_2024-02-22_11-37-56" style="zoom:50%;" />
 
 3. 点击安装。
-
 <img src="./Snipaste_2024-02-22_11-49-27.png" alt="Snipaste_2024-02-22_11-49-27" style="zoom:50%;" />
 
 4. 安装完成后，点击页面左上角的 hello-world，验证扩展组件是否正常运行。
-
 <img src="./Snipaste_2024-02-22_11-51-43.png" alt="Snipaste_2024-02-22_11-51-43" style="zoom:50%;" />
 
 调用链如下：
