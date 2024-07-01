@@ -80,7 +80,14 @@ The project contains a KubeSphere web console that can run locally.
 
 ### Configure the KubeSphere web console
 
-To make the KubeSphere web console run locally, you need to [Build a Development Environment](../prepare-development-environment/), obtain the address of the KubeSphere API server, and then configure the `local_config .yaml` file as below.
+To make the KubeSphere web console run locally, you need to [Build a Development Environment](../prepare-development-environment/), and get the address of the KubeSphere API server.
+
+If you are using a cluster created on [KubeSphere Cloud](https://kubesphere.cloud/sign-up/), get the API Server's access address by creating an external service as shown in the following images:
+
+<img src="./api-server.png" alt="api-server" style="zoom:50%;" />
+<img src="./api-server2.png" alt="api-server2" style="zoom:50%;" />
+
+Then, make configurations in the `local_config.yaml` file as below.
 
 ```yaml
 server:

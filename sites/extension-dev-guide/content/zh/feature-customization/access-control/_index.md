@@ -167,7 +167,7 @@ KubeSphere 支持通过授权项灵活地创建自定义角色，实现精细的
 
 ### RoleTemplate 示例
 
-假设扩展组件中定义了 CRD `custom-resource` `custom-resource-version`。我们期望 KubeSphere 用户在用户界面查看 custom-resource 时能够同时返回 custom-resource-version, 以下 YAML 文件创建了 `global-custom-resource-view` 和 `global-custom-resource-manage` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `global-custom-resource-manage` 依赖于 `global-custom-resource-view`。
+假设扩展组件中定义了 CRD `custom-resource` `custom-resource-version`。期望 KubeSphere 用户在用户界面查看 custom-resource 时能够同时返回 custom-resource-version。以下 YAML 文件创建了 `global-custom-resource-view` 和 `global-custom-resource-manage` 两个自定义权限，分别授权用户查看和创建 `custom-resource` 类型的资源，其中 `global-custom-resource-manage` 依赖于 `global-custom-resource-view`。
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
@@ -242,7 +242,7 @@ spec:
 
 ### RoleTemplate 自动聚合
 
-我们通过标签匹配的方式将roletemplate聚合到角色中。role中包含一个字段`aggregationRoleTemplates`，其中包含一个`roleSelector`字段，用于匹配roletemplate的label。匹配成功的roletemplate会自动聚合到role中。
+通过标签匹配的方式将 RoleTemplate 聚合到角色中。role 中包含一个字段 `aggregationRoleTemplates`，其中包含一个 `roleSelector` 字段，用于匹配 RoleTemplate 的 label。匹配成功的 RoleTemplate 会自动聚合到 role 中。
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
@@ -261,7 +261,7 @@ rules:
  ......
 ```
 
-将特定的 label 加到 RoleTemplate中。例如，将 `iam.kubesphere.io/aggregate-to-authenticated: ''` 加到 RoleTemplate 中，可以实现聚合上述的角色globalrole authenticated 。
+将特定的 label 加到 RoleTemplate 中。例如，将 `iam.kubesphere.io/aggregate-to-authenticated: ''` 加到 RoleTemplate 中，可以实现聚合上述的角色 globalrole authenticated。
 
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
@@ -291,8 +291,10 @@ spec:
 
 大多数`内置角色`都支持自动聚合功能，这样可以减少用户的配置工作。
 
-各个层级的`admin`角色可以自动聚合层级内的所有 roletemplate ，例如某个 namespace 的 admin 可以自动聚合 scope 为 namespace 的所有 roletemplate。
-对于`非admin`角色，我们支持使用以下 label 聚合到对应的角色，
+各个层级的 `admin` 角色可以自动聚合层级内的所有 RoleTemplate ，例如某个 namespace 的 admin 可以自动聚合 scope 为 namespace 的所有 RoleTemplate。
+
+对于`非 admin` 角色，支持使用以下 label 聚合到对应的角色：
+
 #### workspace
 - iam.kubesphere.io/aggregate-to-viewer: ""
 - iam.kubesphere.io/aggregate-to-regular: ""
@@ -345,15 +347,19 @@ spec:
 ![custom-role-template](custom-role-template.png)
 
 ## Console 前端权限控制
-对于前端来说，roletemplate至关重要，当给不同租户渲染页面时，会根据roletemplate的权限项来判断是否渲染某个页面或者某个按钮。
-具体的原理如下，
-1。 首先获取一个用户所绑定的各个层级的角色（globalrole，clusterrole，workspacerole，role），
-2。 根据这些角色的aggregationRoleTemplates字段，获取到所有的roletemplate。
-3。 根据所有获得到的roletemplate来判断是否渲染某个页面或者某个按钮。
 
-进入页面时，会依照不同层级的roletemplate从上到下 （global-》cluster-》workspace-》namespace） 的顺序来判断是否渲染某个页面或按钮，如果更高层级的roletemplate已经包含了需要用到的权限项，那么就不会再去判断更低层级的roletemplate。
+对于前端来说，RoleTemplate 至关重要，当给不同租户渲染页面时，会根据 RoleTemplate 的权限项来判断是否渲染某个页面或者某个按钮。具体的原理如下：
 
-所以在开发一个扩展组件的交互功能时，我们需要考虑好各租户的权限范围。以及他们能做的操作。
+1. 首先获取一个用户所绑定的各个层级的角色（globalrole, clusterrole, workspacerole, role）。
+
+2. 根据这些角色的 aggregationRoleTemplates 字段，获取到所有的 RoleTemplate。
+
+3. 根据所有获得的 RoleTemplate 来判断是否渲染某个页面或者某个按钮。
+
+进入页面时，会依照不同层级的 RoleTemplate 从上到下 （global > cluster > workspace > namespace）的顺序来判断是否渲染某个页面或按钮，如果更高层级的 RoleTemplate 已经包含了需要用到的权限项，那么就不会再去判断更低层级的 RoleTemplate。
+
+所以在开发一个扩展组件的交互功能时，您需要考虑好各租户的权限范围，以及他们能做的操作。
+
 menu 权限设置
 
 ```JavaScript
