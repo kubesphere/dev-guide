@@ -4,7 +4,7 @@ weight: 03
 description: "将扩展组件发布到 KubeSphere Marketplace"
 ---
 
-完成扩展组件的打包、测试之后，您可以使用 ksbuilder 将扩展组件提交到 [KubeSphere Marketplace](https://kubesphere.com.cn/extensions/)。
+完成扩展组件的打包、测试之后，您可以使用 ksbuilder 将扩展组件提交到 [KubeSphere Marketplace](https://kubesphere.com.cn/marketplace/)。
 
 ## 创建 API key
 

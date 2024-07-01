@@ -58,3 +58,7 @@ In addition to setting up the environment for K8s and KubeSphere Luban, the foll
    ks-console-7ffb5954d8-qr8tx              1/1     Running   0              10d
    ks-controller-manager-758dc948f5-8n4ll   1/1     Running   0              10d
    ```
+
+   If you are using a cluster created on [KubeSphere Cloud](https://kubesphere.cloud/sign-up/), download the kubeconfig file from the location shown below:
+
+   <img src="./kubeconfig.png" alt="kubeconfig" style="zoom:50%;" />

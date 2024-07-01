@@ -231,6 +231,75 @@ The following content describes how to configure parameters for custom permissio
     * `resources`: the resource type authorized to users, which can be CRD (for instance, `custom-resource`, `custom-resource-version` in the examples in this section) or a Kubernetes default resource type (such as `deployment`). The value `*` indicates all resource types at the permission level.
     * `verbs`: the operations authorized to the user. The value `*` indicates all operations at the permission level. For more information about resource types, see [Kubernetes official documentation](https://kubernetes.io/docs/reference/access-authn-authz/authorization/).
 
+### Automatic aggregation of RoleTemplates
+
+Aggregate RoleTemplates into roles using label matching method. The role contains a field called `aggregationRoleTemplates`, which includes a `roleSelector` field used to match the labels of RoleTemplates. RoleTemplates that match successfully are automatically aggregated into the role.
+
+```yaml
+apiVersion: iam.kubesphere.io/v1beta1
+kind: GlobalRole
+metadata:
+  annotations:
+    ## Add this annotation to enable automatic aggregation
+    iam.kubesphere.io/auto-aggregate: "true"
+  name: authenticated
+aggregationRoleTemplates:
+  roleSelector:
+    matchLabels:
+      iam.kubesphere.io/aggregate-to-authenticated: ""
+      iam.kubesphere.io/scope: "global"
+rules:
+ ......
+```
+
+To aggregate a RoleTemplate into the "authenticated" GlobalRole mentioned above, you can add a specific label to the RoleTemplate. For example, add `iam.kubesphere.io/aggregate-to-authenticated: ''` to the RoleTemplate.
+
+```yaml
+apiVersion: iam.kubesphere.io/v1beta1
+kind: RoleTemplate
+metadata:
+  name: global-custom-resource-manage
+  annotations:
+    iam.kubesphere.io/dependencies: global-custom-resource-view
+  labels:
+    iam.kubesphere.io/category: custom-resource-management
+    ## Make sure the scope matches the role being aggregated
+    iam.kubesphere.io/scope: global
+    ## Aggregate to the built-in role "authenticated"
+    iam.kubesphere.io/aggregate-to-authenticated: '' 
+spec:
+  displayName:
+    en: Custom Resource Viewing
+  rules:
+    - apiGroups:
+        - custom-api-group
+      resources:
+        - custom-resource
+        - custom-resource-version
+      verbs:
+        - *
+```
+
+Most built-in roles support automatic aggregation, reducing the configuration work for users.
+
+For `admin` roles at different levels, they can automatically aggregate all RoleTemplates within their respective levels. For example, an admin of a namespace can automatically aggregate all RoleTemplates with the  scope being "namespace".
+
+For `non-admin` roles, you can use the following labels to aggregate them to the corresponding roles:
+
+#### Workspace
+- iam.kubesphere.io/aggregate-to-viewer: ""
+- iam.kubesphere.io/aggregate-to-regular: ""
+- iam.kubesphere.io/aggregate-to-self-provisioner: ""
+
+#### Global
+- iam.kubesphere.io/aggregate-to-authenticated: ""
+
+#### Cluster
+- iam.kubesphere.io/aggregate-to-cluster-viewer: ""
+
+#### Namespace
+- iam.kubesphere.io/aggregate-to-operator: ""
+- iam.kubesphere.io/aggregate-to-viewer: ""
 
 ### Category
 
@@ -270,7 +339,19 @@ After declaring RoleTemplate and Category, create custom roles:
 
 ## Permission control on the frontend of Console
 
-menu permission settings
+For the frontend, the RoleTemplate is crucial as it determines whether a page or button should be rendered when rendering pages for different tenants. The specific mechanism is as follows:
+
+1. First, get the roles associated with a user at various levels (global role, cluster role, workspace role, role).
+
+2. Based on the `aggregationRoleTemplates` field of these roles, retrieve all RoleTemplates.
+
+3. Determine whether to render a page or button based on all the obtained RoleTemplates.
+
+When entering a page, whether to render a specific page or button is determined based on RoleTemplates at different levels in the following order: global > cluster > workspace > namespace. If a higher-level RoleTemplate already includes the required permission items, the RoleTemplates at lower levels will not be checked.
+
+Therefore, when developing interactive functionality for an extension, you need to consider the permission scope of tenants and what operations they are allowed to perform.
+
+Menu Permission Settings
 
   ```JavaScript
   // menu relates to permission fields

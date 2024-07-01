@@ -1,6 +1,6 @@
 ---
 title: "References"
-weight: 9
+weight: 15
 description: "CLI and API Reference"
 ---
 

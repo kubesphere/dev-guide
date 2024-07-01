@@ -1,0 +1,21 @@
+---
+title: Extensions vs Applications
+weight: 01
+description: Explain the differences between extensions and applications.
+---
+
+This section will discuss the differences between extensions and applications in the following aspects:
+
+| Feature | Extensions | Applications |
+| ------- | ------------------- | ------------ |
+| **Display Medium** | KubeSphere Marketplace | App Store |
+| **Packaging and Distribution** | Helm Chart, but the Helm Chart of an extension contains more detailed metadata such as basic information, product description, changelog, and permissions. | Applications are just Helm Charts without additional information.
+| **Installation and Deployment** | Extensions provide different installation strategies for multiple clusters, such as only on the host cluster, on both the host and member clusters, or on multiple member clusters. Differentiated configurations can also be applied between clusters. What's more, the installation process of extensions displays installation logs and the topological dependencies between extensions. | Applications do not support multi-cluster installation or distribution strategies. For example, it is not possible to install the management client of an application on the host cluster while the business client on a member cluster. Therefore, applications can only be installed on a single cluster. And, the installation process of applications does not display installation logs and topological dependencies between applications.
+| **Configuration Updates** | Extensions allow editing configurations on UI after installation, such as global configurations, installed clusters, and differentiated configurations between clusters. The updates can be applied in real-time through hot updates and displayed on the UI page. Extensions also support version upgrades that apply to all installed clusters. | Applications only allow configurations to be completed during installation and do not support configuration editing and hot updates after installation. Applications support version upgrades.
+| **Disabling and Uninstallation** | Extensions support temporary disabling and can be uninstalled with one click. | Applications do not support disabling, but the application template can be unpublished and the application can be directly deleted.
+| **Hierarchy** | Extensions provide platform-level product capabilities and are generally installed and deployed only once in the platform. | Applications provide tenant-level product capabilities and can be installed multiple times in parallel within the platform, based on user requirements.
+| **User Experience** | For extensions with UI pages, the access entry or UI page can be embedded directly in the KubeSphere console without the need for redirection. The KubeSphere console and extensions can be integrated with account systems, single sign-on (SSO) login, etc. | For applications with UI pages, after configuring the exposed Service, users need to navigate out of the KubeSphere console to access the UI page. There is no SSO login available between the KubeSphere console and applications, and the account systems are independent.
+| **Permissions** | Extensions can integrate with KubeSphere's permission system to achieve granular backend API/frontend entry permissions. | Applications do not have permission functionality.
+| **Admin Management** | Platform administrators can install, configure, and manage extensions through the "Extension Center". | Platform administrators can categorize, review, and control the publishing and unpublishing of applications through the "App Store Management" extension.
+| **Channels** | Extensions are developed, tested, and provided by QingCloud, software vendors, and community contributors. They are officially certified by QingCloud after undergoing the certification process. | Applications come from the application repository or user-configured application templates. Local application templates can be uploaded, reviewed by platform administrators, and then distributed through the App Store.
+| **Commercial Sales** | For KSE 4.x subscription editions, extensions can be sold and licensed through the online KubeSphere Marketplace. For KSE 4.x offline editions, sales and licensing can be conducted through offline business methods. | Applications do not support commercial sales.
