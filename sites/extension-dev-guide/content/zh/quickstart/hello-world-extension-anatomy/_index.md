@@ -17,7 +17,7 @@ description: 解读 Hello World 扩展组件的工作方式
 ### 扩展组件的目录结构
 
 ```bash
-$ tree extensions/hello-world 
+$ tree extensions/hello-world
 extensions/hello-world
 ├── Dockerfile
 ├── README.md
@@ -39,7 +39,7 @@ extensions/hello-world
 
 ### 扩展组件的基础信息
 
-`package.json` 文件中包含了扩展组件的基础信息与 ` Node.js` 元数据。
+`package.json` 文件中包含了扩展组件的基础信息与 `Node.js` 元数据。
 
 ```json
 {
@@ -49,9 +49,7 @@ extensions/hello-world
   "version": "1.0.0",
   "homepage": "",
   "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {}
 }
 ```
@@ -64,24 +62,31 @@ extensions/hello-world
 import routes from './routes';
 import locales from './locales';
 
-const menu = {
-  parent: 'topbar',
-  name: 'hello-world',
-  title: 'Hello World',
-  icon: 'cluster',
-  order: 0,
-  desc: 'Hello World!',
-  skipAuth: true,
-};
+const menus = [
+  {
+    parent: 'topbar',
+    name: 'hello-world',
+    title: 'Hello World',
+    icon: 'cluster',
+    order: 0,
+    desc: 'Hello World!',
+    skipAuth: true,
+    isCheckLicense: false,
+  },
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);
+export default extensionConfig;
 ```
+
+{{% notice note %}}
+从 KubeSphere 4.1.0 开始，扩展组件前端需要把配置导出（ `export default extensionConfig` ），而不是注册（ `globals.context.registerExtension(extensionConfig)` ）。
+{{% /notice %}}
 
 通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件的功能页面。
 
@@ -95,7 +100,6 @@ export default [
     element: <App />,
   },
 ];
-
 ```
 
 ### 扩展组件功能实现
@@ -115,5 +119,3 @@ export default function App() {
   return <Wrapper>Hello World!</Wrapper>;
 }
 ```
-
-
