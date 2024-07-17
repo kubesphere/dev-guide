@@ -1,5 +1,5 @@
 ---
-title: 从 4.0.0 升级到 4.1.x
+title: 从 4.0 升级到 4.1
 weight: 01
 description: 如何从 4.0.0 升级到 4.1.x 版本
 ---
