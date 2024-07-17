@@ -48,6 +48,10 @@ kubesphere-extensions
    }
    ```
 
+  {{% notice note %}}
+  为了避免 core 和各扩展组件的词条 key 重复，建议在词条前上到扩展组件 name 的前缀，例如 `HELLO_WORLD.HELLO_WORLD_DESC` 。后续我们可能对为重复词条做出检测和限制。
+  {{% /notice %}}
+
 2. 在扩展组件的入口文件（例如 `src/index.js` ）中引入语言包：
 
    ```js
