@@ -14,7 +14,7 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 npm install -g create-ks-project
 ```
 
-##### 安装/升级 KubeSphere Console 依赖包
+安装/升级 KubeSphere Console 依赖包
 
 - [`@ks-console/appstore`](https://www.npmjs.com/package/@ks-console/appstore)
 - [`@ks-console/bootstrap`](https://www.npmjs.com/package/@ks-console/bootstrap)
@@ -35,7 +35,7 @@ yarn add -W \
   @ks-console/shared@latest
 ```
 
-##### 安装/升级 Kube Design
+安装/升级 Kube Design
 
 - [`@kubed/charts`](https://www.npmjs.com/package/@kubed/charts)
 - [`@kubed/code-editor`](https://www.npmjs.com/package/@kubed/code-editor)
@@ -56,7 +56,7 @@ yarn add -W \
   @kubed/log-viewer@latest
 ```
 
-如果 `@ks-console/*` 版本 >=4.1.0，需要安装/升级 Kube Design 等依赖升级到最新版本。
+如果 @ks-console/\* 版本 >=4.1.0，需要将 Kube Design 等依赖升级到最新版本。
 
 否则在本地运行和打包时，可能会出现报错信息。
 
@@ -68,7 +68,7 @@ yarn add -W \
 export default extensionConfig;
 ```
 
-而不是之前的注册扩展组件
+而不是之前的注册扩展组件方式
 
 ```js
 globals.context.registerExtension(extensionConfig);
@@ -76,28 +76,20 @@ globals.context.registerExtension(extensionConfig);
 
 #### 扩展组件外部依赖改变
 
-KubeSphere 4.1.0 之前，core 会提供一些常用的依赖库，扩展组件不用安装这些依赖即可直接 import 使用，这些依赖被称为扩展组件的外部依赖。
+在 KubeSphere 4.1.0 之前，core 会提供一些常用的依赖库，扩展组件无需安装这些依赖即可直接 import 使用，这些依赖被称为扩展组件的外部依赖。
 
-但是如果扩展组件外部依赖导致扩展组件的功能出现异常时，扩展需要等待 core 更新依赖才能修复异常。这显然是违背扩展机制的初衷。
+然而，如果扩展组件的外部依赖导致功能异常时，扩展组件需要等待 core 更新依赖才能修复。这显然违背了扩展机制的初衷。
 
-因此，我们从 4.1.0 开始，移除了一些扩展组件的外部依赖，具体如下。
+因此，从 4.1.0 开始，我们移除了一些扩展组件的外部依赖，具体如下：
 
 - lodash
 - react-is
 - react-markdown
 
-扩展组件如需使用，需要自行安装，import 和使用方法不变。
-
-例如：
-
-扩展组件中需要使用 lodash，可以执行命令
-
-```shell
-yarn add
-```
+扩展组件如需使用这些库，需要自行安装，import 和使用方法不变。
 
 #### 拆分 Webpack 自定义配置
 
-KubeSphere 4.1.0 之前，只有一个 Webpack 定义配置文件，即 `configs/webpack.config.js` ，这个配置文件即负责执行 `yarn dev:client` 和 `yarn build:prod` 时的 Webpack 定义配置，同时也负责执行 `yarn build:ext` 时的 Webpack 自定义配置。
+在 KubeSphere 4.1.0 之前，只有一个 Webpack 配置文件，即 `configs/webpack.config.js` ，该文件负责执行 `yarn dev:client` 和 `yarn build:prod` 时的 Webpack 配置，同时也负责执行 `yarn build:ext` 时的 Webpack 自定义配置。
 
-从 4.1.0 开始，`configs/webpack.config.js` 只会与执行 `yarn dev:client` 和 `yarn build:prod` 的 Webpack 默认配置合并；新增了一个 `configs/webpack.extensions.config.js` ，该文件会与执行 `yarn build:ext` 的 Webpack 默认配置合并。
+从 4.1.0 开始，`configs/webpack.config.js` 仅会与执行 `yarn dev:client` 和 `yarn build:prod` 的 Webpack 默认配置合并；新增了一个 `configs/webpack.extensions.config.js` ，该文件会与执行 `yarn build:ext` 的 Webpack 默认配置合并。
