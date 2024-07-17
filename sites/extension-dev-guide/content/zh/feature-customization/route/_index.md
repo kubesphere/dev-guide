@@ -70,6 +70,7 @@ export default [
   },
 ];
 ```
+
 这里定义的 `parentRoute` 是 `Overview` 路由的父级路由的 path。
 
 ## 路由注册
@@ -95,28 +96,31 @@ export default [
         └── routes
             └── index.js
 ```
+
 将路由定义写在 `routes/index.js`文件中，然后在扩展组件的 entry file 里注册路由，如下：
 
 ```javascript
 import routes from './routes';  // 引入路由文件
 import locales from './locales';  
 
-const menu = {
-  parent: 'topbar',
-  name: 'hello-world',
-  link: '/hello-world',
-  title: 'HELLO_WORLD',
-  icon: 'cluster',
-  order: 0,
-  desc: 'SAY_HELLO_WORLD',
-  skipAuth: true,
-};
+const menus = [
+  {
+    parent: 'topbar',
+    name: 'hello-world',
+    link: '/hello-world',
+    title: 'HELLO_WORLD',
+    icon: 'cluster',
+    order: 0,
+    desc: 'SAY_HELLO_WORLD',
+    skipAuth: true,
+  }
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);
+export default extensionConfig;
 ```
