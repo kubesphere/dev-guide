@@ -1,6 +1,6 @@
 ---
 title: 迁移指南
-weight: 15
+weight: 14
 description: '如何升级到最新版 KubeSphere'
 ---
 
