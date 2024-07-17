@@ -44,10 +44,11 @@ extensions/hello-world
 ```json
 {
   "name": "hello-world",
-  "description": "Hello World!",
-  "author": "",
   "version": "1.0.0",
+  "private": true,
+  "description": "Hello World!",
   "homepage": "",
+  "author": "",
   "main": "dist/index.js",
   "files": ["dist"],
   "dependencies": {}
@@ -83,10 +84,6 @@ const extensionConfig = {
 
 export default extensionConfig;
 ```
-
-{{% notice note %}}
-从 KubeSphere 4.1.0 开始，扩展组件前端需要把配置导出（ `export default extensionConfig` ），而不是注册（ `globals.context.registerExtension(extensionConfig)` ）。
-{{% /notice %}}
 
 通过 `src/routes/index.js` 向 ks-console 注册[页面路由](../../feature-customization/route)，访问该路由地址会渲染扩展组件的功能页面。
 
