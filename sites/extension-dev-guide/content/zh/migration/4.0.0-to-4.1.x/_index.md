@@ -96,3 +96,9 @@ globals.context.registerExtension(extensionConfig);
 
 - `configs/webpack.config.js`：用于本地运行 KubeSphere Console（`yarn dev` 和 `yarn dev:client`）的 Webpack 自定义配置。
 - `configs/webpack.extensions.config.js`：用于打包扩展组件前端（`yarn build:ext`）的 Webpack 自定义配置。
+
+#### 弃用本地 production 模式
+
+由于可以直接访问远端的 KubeSphere Console 查看扩展组件。
+
+因此弃用 `package.json` `scripts` 中的 `build:prod` 和 `start` 。
