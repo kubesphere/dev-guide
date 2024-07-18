@@ -90,9 +90,9 @@ globals.context.registerExtension(extensionConfig);
 
 #### 拆分 Webpack 自定义配置
 
-在 KubeSphere 4.1.0 之前，只有一个 Webpack 自定义配置文件，即 `configs/webpack.config.js` ，该文件既是本地运行 KubeSphere Console（ `yarn dev` 和 `yarn dev:client` ）时的 Webpack 自定义配置，又是打包扩展组件前端（ `yarn build:ext` ）时的 Webpack 自定义配置。
+在 KubeSphere 4.1.0 之前，只有一个 Webpack 自定义配置文件，即 `configs/webpack.config.js`。该文件既用于本地运行 KubeSphere Console（`yarn dev` 和 `yarn dev:client`）时的 Webpack 自定义配置，又用于打包扩展组件前端（`yarn build:ext`）时的 Webpack 自定义配置。
 
 从 4.1.0 开始，Webpack 自定义配置文件分为 2 个：
 
-- `configs/webpack.config.js` : 本地运行 KubeSphere Console（ `yarn dev` 和 `yarn dev:client` ）的 Webpack 自定义配置。
-- `configs/webpack.extensions.config.js` : 打包扩展组件前端（ `yarn build:ext` ）的 Webpack 自定义配置。
+- `configs/webpack.config.js`：用于本地运行 KubeSphere Console（`yarn dev` 和 `yarn dev:client`）的 Webpack 自定义配置。
+- `configs/webpack.extensions.config.js`：用于打包扩展组件前端（`yarn build:ext`）的 Webpack 自定义配置。
