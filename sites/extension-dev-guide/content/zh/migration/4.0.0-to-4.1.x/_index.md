@@ -99,6 +99,6 @@ globals.context.registerExtension(extensionConfig);
 
 #### 弃用本地 production 模式
 
-由于可以直接访问远端的 KubeSphere Console 查看扩展组件。
+由于可以直接访问远端的 KubeSphere Console 查看扩展组件，因此不再需要本地的 production 模式。
 
-因此弃用 `package.json` `scripts` 中的 `build:prod` 和 `start` 。
+因此，弃用 `package.json` 中 `scripts` 的 `build:prod` 和 `start` 命令。
