@@ -70,12 +70,6 @@ status:
 EOF
 ```
 
-### production 模式下加载扩展组件
-
-本地通过 `yarn start` 以 production 模式启动 KubeSphere Console 加载 JSBundle 声明的扩展组件。
-
-![ks-console](ks-console.png?width=1200px)
-
 ### JSBundle 字段说明
 
 ```yaml
