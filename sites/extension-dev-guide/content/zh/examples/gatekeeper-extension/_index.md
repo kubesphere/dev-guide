@@ -533,7 +533,7 @@ creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 
 #### 部署测试
 
-通过 `yarn start` 以 production 模式运行 KubeSphere Console 或访问远端的 KubeSphere Console，即可在扩展市场中看到通过 ksbuilder 提交的扩展组件。
+访问远端的 KubeSphere Console，即可在扩展市场中看到通过 ksbuilder 提交的扩展组件。
 
 ![Gatekeeper Extension](gatekeeper-extension.png?width=1200px)
 

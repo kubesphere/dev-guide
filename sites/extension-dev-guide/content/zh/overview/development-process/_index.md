@@ -1,5 +1,5 @@
 ---
-title: "扩展组件开发流程"
+title: '扩展组件开发流程'
 weight: 04
 description: 介绍 KubeSphere 扩展组件的开发流程
 ---
@@ -8,7 +8,7 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 
 ### 配置开发环境
 
-在开发 KubeSphere 扩展组件之前，需要创建 K8s 集群并部署 KubeSphere Luban 为扩展组件提供基础的运行环境，安装必要的开发工具（Node.js、Yarn、 create-ks-project、Helm、kubectl、ksbuilder 等等）。有关配置开发环境的更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
+在开发 KubeSphere 扩展组件之前，需要创建 K8s 集群并部署 KubeSphere Luban 为扩展组件提供基础的运行环境，安装必要的开发工具（Node.js、Yarn、create-ks-project、Helm、kubectl、ksbuilder 等等）。有关配置开发环境的更多信息，请参阅[搭建开发环境](../../quickstart/prepare-development-environment/)。
 
 ### 开发扩展组件
 
@@ -24,21 +24,22 @@ description: 介绍 KubeSphere 扩展组件的开发流程
 目录结构：
 
 ```bash
-kubesphere-extensions          
-└── ks-console                   # 扩展组件前端开发工程目录
+kubesphere-extensions
+└── ks-console                              # 扩展组件前端开发工程目录
     ├── babel.config.js
     ├── configs
     │   ├── config.yaml
-    │   └── local_config.yaml    # KubeSphere Console 的配置文件
-    ├── extensions               # 扩展组件源代码目录
-    │   ├── entry.ts
-    │   └── hello-world          # Hello World 扩展组件的源代码目录
+    │   ├── local_config.yaml               # KubeSphere Console 的配置文件
+    │   ├── webpack.config.js               # 脚手架 Webpack 配置文件
+    │   └── webpack.extensions.config.js    # 扩展组件前端打包 Webpack 配置文件
+    ├── extensions                          # 扩展组件源代码目录
+    │   └── hello-world                     # Hello World 扩展组件的源代码目录
     │       ├── package.json
     │       └── src
-    │           ├── App.jsx      # 扩展组件核心逻辑
-    │           ├── index.js     # 扩展组件入口文件
-    │           ├── locales      # 扩展组件国际化
-    │           └── routes       # 扩展组件路由配置
+    │           ├── App.jsx                 # 扩展组件核心逻辑
+    │           ├── index.js                # 扩展组件入口文件
+    │           ├── locales                 # 扩展组件国际化
+    │           └── routes                  # 扩展组件路由配置
     ├── package.json
     ├── tsconfig.base.json
     ├── tsconfig.json
@@ -69,6 +70,6 @@ KubeSphere 使用 Helm 作为扩展组件的编排规范，若要了解更多信
 
 #### 发布扩展组件
 
-扩展组件经过测试后，可以使用 ksbuilder 工具将其提交到扩展市场 （KubeSphere Marketplace）。
+扩展组件经过测试后，可以使用 ksbuilder 工具将其提交到扩展市场（KubeSphere Marketplace）。
 
 在将扩展组件提交到扩展市场之前，请务必详细阅读相关的协议、准则和条款。

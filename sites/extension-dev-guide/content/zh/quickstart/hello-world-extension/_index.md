@@ -1,14 +1,14 @@
 ---
-title:  创建 Hello World 扩展组件
+title: 创建 Hello World 扩展组件
 weight: 02
 description: 演示如何创建示例扩展组件 Hello World，帮助您快速了解扩展组件开发流程
 ---
 
 本章节帮助您快速了解：
 
-* 如何初始化扩展组件开发项目。
-* 如何在本地运行 KubeSphere Console。
-* 如何对扩展组件进行调试。
+- 如何初始化扩展组件开发项目。
+- 如何在本地运行 KubeSphere Console。
+- 如何对扩展组件进行调试。
 
 ### 前提条件
 
@@ -50,17 +50,16 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
    以上命令执行完成后将生成如下目录结构：
 
    ```bash
-   kubesphere-extensions          
+   kubesphere-extensions
    └── ks-console                   # 扩展组件前端开发项目目录
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
-       │   ├── console.config.js
-       |   ├── webpack.config.js    # webpack 配置文件
-       │   └── local_config.yaml    # KubeSphere Console 配置文件
-       ├── extensions               # 扩展组件源代码目录
-       │   ├── entry.ts
-       │   └── hello-world          # Hello World 扩展组件的源代码目录
+       │   ├── local_config.yaml               # KubeSphere Console 的配置文件
+       │   ├── webpack.config.js               # 脚手架 Webpack 配置文件
+       │   └── webpack.extensions.config.js    # 扩展组件前端打包 Webpack 配置文件
+       ├── extensions                          # 扩展组件源代码目录
+       │   └── hello-world                     # Hello World 扩展组件的源代码目录
        │       ├── Dockerfile
        │       ├── README.md
        │       ├── package.json

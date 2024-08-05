@@ -48,30 +48,36 @@ kubesphere-extensions
    }
    ```
 
+  {{% notice note %}}
+  为了避免 core 和各扩展组件的词条 key 重复，建议在词条前加上扩展组件 name 的前缀，例如 `HELLO_WORLD.HELLO_WORLD_DESC`。后续我们可能会对重复词条进行检测和限制。
+  {{% /notice %}}
+
 2. 在扩展组件的入口文件（例如 `src/index.js` ）中引入语言包：
 
    ```js
    import routes from './routes';
    import locales from './locales';  // 引入语言包
 
-   onst menu = {
-     parent: 'topbar',
-     name: 'hello-world',
-     link: '/hello-world',
-     title: 'HELLO_WORLD',
-     icon: 'cluster',
-     order: 0,
-     desc: 'HELLO_WORLD_DESC',
-     skipAuth: true,
-   };
+   const menus = [
+    {
+      parent: 'topbar',
+      name: 'hello-world',
+      link: '/hello-world',
+      title: 'HELLO_WORLD',
+      icon: 'cluster',
+      order: 0,
+      desc: 'HELLO_WORLD_DESC',
+      skipAuth: true,
+   }
+   ];
 
    const extensionConfig = {
      routes,
-     menus: [menu],
+     menus,
      locales,
    };
 
-   globals.context.registerExtension(extensionConfig);
+   extensionConfig default extensionConfig;
    ```
 
 3. 在扩展组件前端开发过程中，使用全局函数 `t()` 获取词条内容并向变量传入动态值。例如，在 `src/App.jsx` 文件中编写以下代码：

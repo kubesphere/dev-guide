@@ -43,7 +43,7 @@ Kubernetes 通常使用常见的 RESTful 术语来描述 API 概念：
 大多数 Kubernetes API
 资源类型都是[对象](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/)：
 它们代表集群上某个概念的具体实例，例如 Pod 或名字空间。
-少数 API 资源类型是 “虚拟的”，它们通常代表的是操作而非对象本身，
+少数 API 资源类型是“虚拟的”，它们通常代表的是操作而非对象本身，
 例如权限检查（使用带有 JSON 编码的 `SubjectAccessReview` 主体的 POST 到 `subjectaccessreviews` 资源），
 或 Pod 的子资源 `eviction`（用于触发 [API-发起的驱逐](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/api-eviction/)）。
 
@@ -67,15 +67,15 @@ Kubernetes 使用术语 **list** 来描述返回资源集合，以区别于通�
 
 资源类型可以是：
 
-平台作用域的 （`(apis/kapis)/GROUP/VERSION/*`）
+平台作用域的（`(apis/kapis)/GROUP/VERSION/*`）
 
 集群作用域的（`/clusters/CLUSTER/(apis/kapis)/GROUP/VERSION/*`）
 
-企业空间作用域的 （`(apis/kapis)/GROUP/VERSION/workspaces/WORKSPACE/*`）
+企业空间作用域的（`(apis/kapis)/GROUP/VERSION/workspaces/WORKSPACE/*`）
 
 名字空间作用域的（`/clusters/CLUSTER/(apis/kapis)/GROUP/VERSION/namespaces/NAMESPACE/*`）
 
-注意： KubeSphere 支持 K8s 多集群纳管。只要在请求路径之前添加集群标识作为前缀，就可以通过 API 直接访问 member 集群。Kubernetes 核心资源使用 `/api` 而不是 `/apis`，并且不包含 GROUP 路径段。
+注意：KubeSphere 支持 K8s 多集群纳管。只要在请求路径之前添加集群标识作为前缀，就可以通过 API 直接访问 member 集群。Kubernetes 核心资源使用 `/api` 而不是 `/apis`，并且不包含 GROUP 路径段。
 
 示例：
 
@@ -122,7 +122,7 @@ rules:
 ```yaml
 apiVersion: iam.kubesphere.io/v1beta1
 # 此角色绑定允许 "jane" 读取 "default" 名字空间中的 Pod
-# 您需要在该名字空间中有一个名为 “pod-reader” 的 Role
+# 您需要在该名字空间中有一个名为“pod-reader”的 Role
 kind: RoleBinding
 metadata:
   name: read-pods
@@ -145,7 +145,7 @@ KubeSphere 支持通过授权项灵活地创建自定义角色，实现精细的
 
 ### RoleTemplate
 
-`RoleTemplate` 是由 KubeSphere 提供的 CRD， 用于声明权限项，是 KubeSphere UI 中最小的权限分割单元，通常用来定义某一类型资源的访问权限。各资源层级中的角色都由权限组合而成，基于权限项，用户可以灵活地创建自定义角色，实现精细的访问控制。
+`RoleTemplate` 是由 KubeSphere 提供的 CRD，用于声明权限项，是 KubeSphere UI 中最小的权限分割单元，通常用来定义某一类型资源的访问权限。各资源层级中的角色都由权限组合而成，基于权限项，用户可以灵活地创建自定义角色，实现精细的访问控制。
 
 在 Kubesphere 用户界面中，用户通常在获得一个资源时，同时也希望获得这个资源相关联的其他资源。把一组关联紧密的资源的权限放在一个 RoleTemplate 中，以满足在用户界面操作的使用需求。
 
@@ -291,24 +291,28 @@ spec:
 
 大多数`内置角色`都支持自动聚合功能，这样可以减少用户的配置工作。
 
-各个层级的 `admin` 角色可以自动聚合层级内的所有 RoleTemplate ，例如某个 namespace 的 admin 可以自动聚合 scope 为 namespace 的所有 RoleTemplate。
+各个层级的 `admin` 角色可以自动聚合层级内的所有 RoleTemplate，例如某个 namespace 的 admin 可以自动聚合 scope 为 namespace 的所有 RoleTemplate。
 
 对于`非 admin` 角色，支持使用以下 label 聚合到对应的角色：
 
 #### workspace
+
 - iam.kubesphere.io/aggregate-to-viewer: ""
-- iam.kubesphere.io/aggregate-to-regular: ""
-- iam.kubesphere.io/aggregate-to-self-provisioner: ""
+* iam.kubesphere.io/aggregate-to-regular: ""
+* iam.kubesphere.io/aggregate-to-self-provisioner: ""
 
 #### global
+
 - iam.kubesphere.io/aggregate-to-authenticated: ""
 
 #### cluster
+
 - iam.kubesphere.io/aggregate-to-cluster-viewer: ""
 
 #### namespace
+
 - iam.kubesphere.io/aggregate-to-operator: ""
-- iam.kubesphere.io/aggregate-to-viewer: ""
+* iam.kubesphere.io/aggregate-to-viewer: ""
 
 ### Category
 
@@ -356,31 +360,33 @@ spec:
 
 3. 根据所有获得的 RoleTemplate 来判断是否渲染某个页面或者某个按钮。
 
-进入页面时，会依照不同层级的 RoleTemplate 从上到下 （global > cluster > workspace > namespace）的顺序来判断是否渲染某个页面或按钮，如果更高层级的 RoleTemplate 已经包含了需要用到的权限项，那么就不会再去判断更低层级的 RoleTemplate。
+进入页面时，会依照不同层级的 RoleTemplate 从上到下（global > cluster > workspace > namespace）的顺序来判断是否渲染某个页面或按钮，如果更高层级的 RoleTemplate 已经包含了需要用到的权限项，那么就不会再去判断更低层级的 RoleTemplate。
 
 所以在开发一个扩展组件的交互功能时，您需要考虑好各租户的权限范围，以及他们能做的操作。
 
-menu 权限设置
+menus 权限设置
 
 ```JavaScript
-// menu 涉及权限字段
-const menu = { 
-  name: 'hello-world',     // name 必填字段
-  ksModule: 'hello-world',    
-  authKey: 'hello-world',  
-  authAction:'view',   
-  skipAuth: true,      
-};
+// menus 涉及权限字段
+const menus = [
+  { 
+    name: 'hello-world',     // name 必填字段
+    ksModule: 'hello-world',    
+    authKey: 'hello-world',  
+    authAction:'view',   
+    skipAuth: true,      
+  }
+];
 ```
 
 权限过滤效果
 
 |   | 权限                           | 字段                  | 类型        | 说明                                                           |
 |---|------------------------------|---------------------|-----------|--------------------------------------------------------------|
-| 1 | 是否为平台管理员角色(platform-admin)   | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示, 默认值 `false`                             |
-| 2 | 根据模块是否在当前集群中安装过滤             | `clusterModule`     | `string`  | 在当前集群中未安装不显示,可以指定多个模块使用 `\|` 进行分割                            |
+| 1 | 是否为平台管理员角色 (platform-admin)   | `admin`             | `boolean` | 为 `true` 则非平台管理员不显示，默认值 `false`                             |
+| 2 | 根据模块是否在当前集群中安装过滤             | `clusterModule`     | `string`  | 在当前集群中未安装不显示，可以指定多个模块使用 `\|` 进行分割                            |
 | 3 | 根据模块是否安装过滤                   | `ksModule`          | `string`  | 未安装模块不显示                                                     |
-| 4 | 根据模块是否安装并给了指定`annotation`值过滤 | `annotation`        | `string`  | 模块没有指定`annotation`值不显示。注意: `annotation` 必须配合 `ksModule` 一起使用 |
+| 4 | 根据模块是否安装并给了指定`annotation`值过滤 | `annotation`        | `string`  | 模块没有指定`annotation`值不显示。注意：`annotation` 必须配合 `ksModule` 一起使用 |
 | 5 | 根据配置权限过滤                     | `authKey` or `name` | `string`  | 有 `authKey` 取 `authKey`，否则取 `name`                           |
 | 6 | 根据配置权限项                      | `authAction`        | `string`  | 默认值 `view`                                                   |
 | 7 | 跳过权限控制                       | `skipAuth`          | `boolean` | 优先级最高，为 `true` 则忽略其他配置                                       |
