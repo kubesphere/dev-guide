@@ -73,7 +73,8 @@ keywords:                    # 关于扩展组件特性的一些关键字（可�
   - others
 home: https://kubesphere.io  # 项目 home 页面的 URL（可选项）
 sources:                     # 项目源码的 URL 列表（可选项）
-  - https://github.com/kubesphere
+  - https://github.com/kubesphere # 扩展组件仓库
+docs: https://github.com/kubesphere # 扩展组件文档
 kubeVersion: ">=1.19.0"      # 扩展组件兼容的 Kubernetes 版本限制（可选项）
 ksVersion: ">=3.0.0"         # 扩展组件兼容的 KubeSphere 版本限制（可选项）
 maintainers:                 # 扩展组件维护者（可选项）
