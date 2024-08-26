@@ -52,15 +52,16 @@ description: 如何对 KubeSphere 的前端 UI 进行扩展？
 
 如上图所示，扩展组件分为 `In-Tree 扩展组件` 和 `Out-of-Tree 扩展组件`。区别在于：
 
-* `In-Tree 扩展组件` 基本上是系统必备或者常用的功能组件，它们在编译时与 `core` 一起打包。`In-Tree 扩展组件` 目前包括：
-   1. Cluster 集群管理
-   2. Access 访问控制
-   3. Workspaces 工作空间
-   4. Projects 项目管理
-   5. Apps 应用商店
-   6. Settings 平台设置
+- `In-Tree 扩展组件` 基本上是系统必备或者常用的功能组件，它们在编译时与 `core` 一起打包。`In-Tree 扩展组件` 目前包括：
 
-* `Out-of-Tree 扩展组件` 是由开发者在自己的代码仓库中开发的扩展组件，需要独立进行编译和打包。这些组件将被发布到 `扩展市场`。用户安装后，内核会远程加载扩展组件的 `js bundle` 并将其注册到内核中。
+  1. Cluster 集群管理
+  2. Access 访问控制
+  3. Workspaces 工作空间
+  4. Projects 项目管理
+  5. Apps 应用商店
+  6. Settings 平台设置
+
+- `Out-of-Tree 扩展组件` 是由开发者在自己的代码仓库中开发的扩展组件，需要独立进行编译和打包。这些组件将被发布到 `扩展市场`。用户安装后，内核会远程加载扩展组件的 `js bundle` 并将其注册到内核中。
 
 `Out-of-Tree 扩展组件` 的前端部分统一使用 [create-ks-project](https://github.com/kubesphere/create-ks-project) 脚手架工具进行初始化。初始化后的目录结构如下：
 
@@ -69,10 +70,10 @@ description: 如何对 KubeSphere 的前端 UI 进行扩展？
 ├── babel.config.js
 ├── configs
 │   ├── config.yaml
-│   ├── console.config.js
-│   └── local_config.yaml
+│   ├── local_config.yaml
+│   ├── webpack.config.js
+│   └── webpack.extensions.config.js
 ├── extensions
-│   ├── entry.ts
 │   └── hello-world
 │       ├── Dockerfile
 │       ├── README.md
@@ -100,27 +101,31 @@ description: 如何对 KubeSphere 的前端 UI 进行扩展？
 该目录结构和普通的 react app 基本一样，不同之处在于对 entry 的定义，如示例中所示：
 
 ```javascript
-import routes from './routes';                   // 导入路由
-import locales from './locales';                 // 导入国际化文件
+import routes from './routes'; // 导入路由
+import locales from './locales'; // 导入国际化文件
 
-const menu = {                                   // 定义菜单 
-  parent: 'topbar',                              // 菜单父级
-  name: 'hello-world',                           // 菜单 name 标识 
-  link: '/hello-world',                          // 入口 url    
-  title: 'Hello World',                          // 菜单名称  
-  icon: 'cluster',                               // 菜单 icon
-  order: 0,                                      // 菜单排序  
-  desc: 'This is hello-world extension',         // 菜单描述
-  skipAuth: true,                                // 是否忽略权限检查
-};
+// 定义扩展组件入口
+const menus = [
+  {
+    parent: 'topbar', // 入口父级
+    name: 'hello-world', // 入口 name 标识
+    link: '/hello-world', // 入口 url
+    title: 'Hello World', // 入口名称
+    icon: 'cluster', // 入口 icon
+    order: 0, // 菜单排序
+    desc: 'This is hello-world extension', // 入口描述
+    skipAuth: true, // 是否忽略权限检查
+    isCheckLicense: false, // 是否进行许可检查
+  },
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);    // 通过全局对象注册扩展组件
+export default extensionConfig;
 ```
 
 如上所示，通过脚手架工具初始化后，定义扩展组件的入口文件。在开发过程中，其业务代码开发模式与普通前端项目相同。一旦开发完成，即可将扩展组件打包并发布到独立的代码仓库。这些扩展组件与内核部分相互独立，不会造成代码侵入。
@@ -131,5 +136,4 @@ globals.context.registerExtension(extensionConfig);    // 通过全局对象注�
 
 1. 通用组件库 [KubeDesign](https://github.com/kubesphere/kube-design)
 2. 前端脚手架工具 [create-ks-project](https://github.com/kubesphere/create-ks-project)
-3. 轻量的状态管理库 [@kubed/stook](https://www.npmjs.com/package/@kubed/stook)
-4. 通用 util 库 [@ks-console/shared](https://www.npmjs.com/package/@ks-console/shared)
+3. 通用 util 库 [@ks-console/shared](https://www.npmjs.com/package/@ks-console/shared)
