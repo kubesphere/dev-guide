@@ -10,7 +10,7 @@ command = "make build"
 [context.deploy-preview]
 command = "URL=$DEPLOY_PRIME_URL make build"
   [context.deploy-preview.environment]
-  HUGO_VERSION = "0.128.2"
+  HUGO_VERSION = "0.133.1"
   HUGO_ENABLEGITINFO = "true"
 
 [[redirects]]
