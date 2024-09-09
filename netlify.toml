@@ -5,7 +5,7 @@ command = "URL=$DEPLOY_PRIME_URL make build"
 [context.production]
 command = "make build"
   [context.production.environment]
-  HUGO_VERSION = "0.128.2"
+  HUGO_VERSION = "0.133.1"
 
 [context.deploy-preview]
 command = "URL=$DEPLOY_PRIME_URL make build"
