@@ -17,7 +17,7 @@ description: 介绍如何搭建扩展组件的开发环境
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
-   ./kk create cluster --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y
+   ./kk create cluster --with-local-storage  --with-kubernetes v1.31.0 --container-manager containerd  -y
    ```
 
    在 K8s 集群中[安装 Helm](https://helm.sh/zh/docs/intro/install/)。
@@ -29,7 +29,7 @@ description: 介绍如何搭建扩展组件的开发环境
 2. 安装 KubeSphere Luban Helm Chart。
 
    ```bash
-   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-1.1.0.tgz --set apiserver.nodePort=30881 --debug --wait
    ```
 
    更多配置参数，请参考[KubeSphere Helm Chart 配置](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/#_%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE)。
