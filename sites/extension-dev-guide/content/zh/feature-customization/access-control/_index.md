@@ -297,21 +297,21 @@ spec:
 
 #### workspace
 
-- iam.kubesphere.io/aggregate-to-viewer: ""
+* iam.kubesphere.io/aggregate-to-viewer: ""
 * iam.kubesphere.io/aggregate-to-regular: ""
 * iam.kubesphere.io/aggregate-to-self-provisioner: ""
 
 #### global
 
-- iam.kubesphere.io/aggregate-to-authenticated: ""
+* iam.kubesphere.io/aggregate-to-authenticated: ""
 
 #### cluster
 
-- iam.kubesphere.io/aggregate-to-cluster-viewer: ""
+* iam.kubesphere.io/aggregate-to-cluster-viewer: ""
 
 #### namespace
 
-- iam.kubesphere.io/aggregate-to-operator: ""
+* iam.kubesphere.io/aggregate-to-operator: ""
 * iam.kubesphere.io/aggregate-to-viewer: ""
 
 ### Category
