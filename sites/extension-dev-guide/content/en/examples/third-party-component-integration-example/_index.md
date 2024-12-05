@@ -44,13 +44,12 @@ import { useLocalStorage } from '@kubed/hooks';
 export default function App() {
   const [loading, setLoading] = useState(true);
 
-  const FRAME_URL =
-    '/proxy/weave.works/#!/state/{"topologyId":"pods"}';
+  const FRAME_URL = '/proxy/weave.works/#!/state/{"topologyId":"pods"}';
 
   const iframeRef = useRef();
 
   const onIframeLoad = () => {
-    const iframeDom = iframeRef.current?.contentWindow?.document;
+    const iframeDom = iframeRef.current?.contentWindow.document;
     if (iframeDom) {
       if (iframeDom.querySelector('#app > div > div.header > div')) {
         iframeDom.querySelector('#app > div > div.header > div').style.display = 'none';

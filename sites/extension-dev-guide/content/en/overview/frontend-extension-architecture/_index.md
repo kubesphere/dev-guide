@@ -63,17 +63,17 @@ The extensions can be divided into the following types: `in-tree extensions` and
 
 * `Out-of-tree extensions` are extensions developed by developers in their repos, which can be compiled and packaged independently, and published in `KubeSphere Marketplace`. If a user installs an extension, the Core module will load the `JavaScript bundle` of the extension and authorize and authenticate the extension.
 
-The frontend of `out-of-tree extensions` uses [create-ks-ext](https://github.com/kubesphere/create-ks-project) for initialization, and the directory structure after initialization is as follows:
+The frontend of `out-of-tree extensions` uses [create-ks-project](https://github.com/kubesphere/create-ks-project) for initialization, and the directory structure after initialization is as follows:
 
 ```bash
 .
 ├── babel.config.js
 ├── configs
 │   ├── config.yaml
-│   ├── console.config.js
-│   └── local_config.yaml
+│   ├── local_config.yaml
+│   ├── webpack.config.js
+│   └── webpack.extensions.config.js
 ├── extensions
-│   ├── entry.ts
 │   └── hello-world
 │       ├── Dockerfile
 │       ├── README.md
@@ -101,27 +101,31 @@ The frontend of `out-of-tree extensions` uses [create-ks-ext](https://github.com
 The structure is the same as that of a regular React app. The difference lies in the definition of the entry. Examples are as follows:
 
 ```javascript
-import routes from './routes';                   // Import routes
-import locales from './locales';                 // Import locale files
+import routes from './routes'; // Import routes
+import locales from './locales'; // Import localization files
 
-const menu = {                                   // Declare a menu item
-  parent: 'topbar',                              // Specify a parent item for the menu item
-  name: 'hello-world',                           // Specify an identifier for the menu item
-  link: '/hello-world',                          // Specify the URL that the menu item should link to
-  title: 'Hello World',                          // Specify a name for the menu item
-  icon: 'cluster',                               // Specify the icon that should be displayed next to the menu item
-  order: 0,                                      // Specify the order in which the menu item should appear
-  desc: 'This is hello-world extension',         // Specify the description for the menu item
-  skipAuth: true,                                // Specify whether to skip authentication
-};
+// Define the entry point for the extension
+const menus = [
+  {
+    parent: 'topbar', // Parent of the entry
+    name: 'hello-world', // Entry name identifier
+    link: '/hello-world', // Entry URL
+    title: 'Hello World', // Entry name
+    icon: 'cluster', // Entry icon
+    order: 0, // Menu order
+    desc: 'This is hello-world extension', // Entry description
+    skipAuth: true, // Whether to skip authentication check
+    isCheckLicense: false, // Whether to perform license check
+  },
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);    // Globally register an extension
+export default extensionConfig;
 ```
 You can initialize an extension by using a scaffolding tool and define an entry file as the above. The development mode of business code is the same as that of regular frontend projects. When the development is completed, the extension can be packaged and released, and the code is stored in its own repo, which will not affect the Core module.
 
@@ -131,5 +135,4 @@ To improve development efficiency, maintain the consistency of user experience, 
 
 1. Common extension library [KubeDesign](https://github.com/kubesphere/kube-design)
 2. Frontend scaffolding tool [create-ks-project](https://github.com/kubesphere/create-ks-project)
-3. Lightweight status management library [@kubed/stook](https://www.npmjs.com/package/@kubed/stook)
-4. General utility library [@ks-console/shared](https://www.npmjs.com/package/@ks-console/shared)
+3. General utility library [@ks-console/shared](https://www.npmjs.com/package/@ks-console/shared)

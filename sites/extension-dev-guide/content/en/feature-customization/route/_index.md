@@ -100,22 +100,24 @@ You can define a route in `routes/index.js`, and then register the route in the 
 import routes from './routes';  // Import the route file
 import locales from './locales';  
 
-const menu = {
-  parent: 'topbar',
-  name: 'hello-world',
-  link: '/hello-world',
-  title: 'HELLO_WORLD',
-  icon: 'cluster',
-  order: 0,
-  desc: 'SAY_HELLO_WORLD',
-  skipAuth: true,
-};
+const menus = [
+  {
+    parent: 'topbar',
+    name: 'hello-world',
+    link: '/hello-world',
+    title: 'HELLO_WORLD',
+    icon: 'cluster',
+    order: 0,
+    desc: 'SAY_HELLO_WORLD',
+    skipAuth: true,
+  }
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);
+export default extensionConfig;
 ```

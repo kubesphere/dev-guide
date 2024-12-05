@@ -536,7 +536,7 @@ creating ConfigMap extension-gatekeeper.kubesphere.io-0.1.0-chart
 
 #### Deployment and testing
 
-Run KubeSphere Console in production mode using `yarn start` or access the remote KubeSphere Console, you will see the extension submitted by `ksbuilder` in the KubeSphere Marketplace.
+Access the KubeSphere Console, you will see the extension submitted by `ksbuilder` in the KubeSphere Marketplace.
 
 ![Gatekeeper Extension](gatekeeper-extension.png?width=1200px)
 

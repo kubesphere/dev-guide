@@ -351,17 +351,19 @@ When entering a page, whether to render a specific page or button is determined 
 
 Therefore, when developing interactive functionality for an extension, you need to consider the permission scope of tenants and what operations they are allowed to perform.
 
-Menu Permission Settings
+Menus Permission Settings
 
   ```JavaScript
-  // menu relates to permission fields
-  const menu = { 
+  // menus relates to permission fields
+  const menus = [
+    { 
   name: 'hello-world',         // name is required
   ksModule: 'hello-world',    
   authKey: 'hello-world',  
   authAction:'view',   
   skipAuth: true,      
-};
+    }
+  ];
   ```
 Permission Filtering Effect
 

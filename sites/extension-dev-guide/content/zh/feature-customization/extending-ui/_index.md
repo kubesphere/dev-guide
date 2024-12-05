@@ -102,7 +102,7 @@ status:
 
 ### 创建 ExtensionEntry
 
-除了在扩展组件前端 js/ts 文件中的 `menus` 可以配置[挂载位置](./feature-customization/menu/)以外，还可以通过 `ExtensionEntry` 配置。
+除了在扩展组件前端 js/ts 文件中的 `menus` 可以配置[挂载位置](../menu/)以外，还可以通过 `ExtensionEntry` 配置。
 
 `ExtensionEntry` 的优先级高于 `menus`。如果在 `ExtensionEntry` 和 `menus` 中同时配置了有效的挂载位置，只有 `ExtensionEntry` 会生效，`menus` 中的配置会被忽略。
 
@@ -131,4 +131,4 @@ EOF
 
 ### ExtensionEntry 字段说明
 
-`ExtensionEntry` 字段和 `menus` 一致，请参阅[设置挂载位置](./feature-customization/menu/#设置挂载位置)。
+`ExtensionEntry` 字段和 `menus` 一致，请参阅[设置挂载位置](../menu/#设置挂载位置)。

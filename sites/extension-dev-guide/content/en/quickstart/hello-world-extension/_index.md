@@ -52,16 +52,15 @@ The project contains a KubeSphere web console that can run locally.
    The following directory is generated:
 
    ```bash
-   kubesphere-extensions          
+   kubesphere-extensions
    └── ks-console                   # Extension frontend development directory
        ├── babel.config.js
        ├── configs
        │   ├── config.yaml
-       │   ├── console.config.js
-       |   ├── webpack.config.js    # webpack configuration file
-       │   └── local_config.yaml    # Configuration file of the KubeSphere Console
+       │   ├── local_config.yaml               # Configuration file of the KubeSphere web console
+       │   ├── webpack.config.js               # Scaffold Webpack configuration file
+       │   └── webpack.extensions.config.js    # Webpack configuration file for packaging extension frontend
        ├── extensions               # Source code directory for the extension
-       │   ├── entry.ts
        │   └── hello-world          # Source code directory for the Hello World extension
        │       ├── Dockerfile
        │       ├── README.md

@@ -17,7 +17,7 @@ Let's take a deeper look at the file structure and source code of the Hello Worl
 ### Directory structure
 
 ```bash
-$ tree extensions/hello-world 
+$ tree extensions/hello-world
 extensions/hello-world
 ├── Dockerfile
 ├── README.md
@@ -44,14 +44,13 @@ The `package.json` file contains the basic information about the extension and t
 ```json
 {
   "name": "hello-world",
-  "description": "Hello World!",
-  "author": "",
   "version": "1.0.0",
+  "private": true,
+  "description": "Hello World!",
   "homepage": "",
+  "author": "",
   "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {}
 }
 ```
@@ -64,23 +63,26 @@ Use `src/index.js` to register [navigation menus](../../feature-customization/me
 import routes from './routes';
 import locales from './locales';
 
-const menu = {
-  parent: 'topbar',
-  name: 'hello-world',
-  title: 'Hello World',
-  icon: 'cluster',
-  order: 0,
-  desc: 'Hello World!',
-  skipAuth: true,
-};
+const menus = [
+  {
+    parent: 'topbar',
+    name: 'hello-world',
+    title: 'Hello World',
+    icon: 'cluster',
+    order: 0,
+    desc: 'Hello World!',
+    skipAuth: true,
+    isCheckLicense: false,
+  },
+];
 
 const extensionConfig = {
   routes,
-  menus: [menu],
+  menus,
   locales,
 };
 
-globals.context.registerExtension(extensionConfig);
+export default extensionConfig;
 ```
 
 Use `src/routes/index.js` to register [page routes](../../feature-customization/route) with ks-console, and extension pages can be rendered correctly when you access the pages.
@@ -95,7 +97,6 @@ export default [
     element: <App />,
   },
 ];
-
 ```
 
 ### Implementation

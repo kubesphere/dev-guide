@@ -19,7 +19,7 @@ This section describes how to build a development environment for extensions. Be
 
    ```bash
    curl -sfL https://get-kk.kubesphere.io | sh -
-   ./kk create cluster --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y
+   ./kk create cluster --with-local-storage  --with-kubernetes v1.31.0 --container-manager containerd  -y
    ```
 
    [Install Helm](https://helm.sh/zh/docs/intro/install/) in your Kubernetes cluster.
