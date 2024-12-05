@@ -48,30 +48,36 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
    }
    ```
 
+  {{% notice note %}}
+  To avoid key duplication between the core and various extensions, it is recommended to prefix the key of the term with the name of the extension, for example `HELLO_WORLD.HELLO_WORLD_DESC`. In the future, we may conduct checks and restrictions on duplicate terms.
+  {{% /notice %}}
+
 2. Import the language package in `src/index.js`:
 
    ```js
    import routes from './routes';
    import locales from './locales';  // Import the language package
 
-   onst menu = {
-     parent: 'topbar',
-     name: 'hello-world',
-     link: '/hello-world',
-     title: 'HELLO_WORLD',
-     icon: 'cluster',
-     order: 0,
-     desc: 'HELLO_WORLD_DESC',
-     skipAuth: true,
-   };
+   const menus = [
+    {
+      parent: 'topbar',
+      name: 'hello-world',
+      link: '/hello-world',
+      title: 'HELLO_WORLD',
+      icon: 'cluster',
+      order: 0,
+      desc: 'HELLO_WORLD_DESC',
+      skipAuth: true,
+   }
+   ];
 
    const extensionConfig = {
      routes,
-     menus: [menu],
+     menus,
      locales,
    };
 
-   globals.context.registerExtension(extensionConfig);
+   extensionConfig default extensionConfig;
    ```
 
 3. In the development of the frontend extension, use the global function `t()` to obtain the text content and pass the value to the variable. For example, use the following code in the `src/App.jsx` file:

@@ -32,9 +32,10 @@ kubesphere-extensions
     ├── babel.config.js
     ├── configs
     │   ├── config.yaml
-    │   └── local_config.yaml    # Configuration file of the KubeSphere web console
+    │   ├── local_config.yaml    # Configuration file of the KubeSphere web console
+    │   ├── webpack.config.js    # Scaffold Webpack configuration file
+    │   └── webpack.extensions.config.js    # Webpack configuration file for packaging extension frontend
     ├── extensions               # Source code directory for the extension
-    │   ├── entry.ts
     │   └── hello-world          # Source code directory for the Hello World extension
     │       ├── package.json
     │       └── src

@@ -74,7 +74,8 @@ keywords:                    # Keywords that describe extension features (option
   - others
 home: https://kubesphere.io  # URL of the project homepage (optional)
 sources:                     # URL list of the source code of the project (optional)
-  - https://github.com/kubesphere
+  - https://github.com/kubesphere # Extension repository
+docs: https://github.com/kubesphere # Extension documentation
 kubeVersion: ">=1.19.0"      # Compatible Kubernetes versions (optional)
 ksVersion: ">=3.0.0"         # Compatible KubeSphere versions (optional)
 maintainers:                 # Maintainer of the extension (optional)
