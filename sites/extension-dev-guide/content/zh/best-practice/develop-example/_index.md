@@ -19,10 +19,9 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
 2. 安装 KubeSphere Luban
 
-   需要保证ks的访问地址可被解析成 www.ks.com 您可以设置hosts实现
 
    ```bash
-   ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait --set extension.ingress.ingressClassName=nginx --set extension.ingress.domainSuffix=www.ks.com --set extension.ingress.httpPort=30888
+   ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait
    ```
 
 3. 配置连接
