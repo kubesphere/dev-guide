@@ -22,8 +22,18 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
    ```bash
    ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait
+   ```
 
-3. 配置连接
+   可以使用  nip.io 或者泛域名解析为扩展组件自动配置访问入口
+
+   ```
+   --set extension.ingress.ingressClassName=<your-ingress-class-name>\
+   --set extension.ingress.domainSuffix=<your-node-ip>.nip.io \
+   --set extension.ingress.httpPort=<your-ingress-controller-http-port> \
+   --set extension.ingress.httpsPort=<your-ingress-controller-https-port>
+   ```
+
+4. 配置连接
 
    复制 K8s 集群的 [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 配置文件到开发主机的`~/.kube/config`，确保可以使用 kubectl 正常访问 K8s 集群。
 
