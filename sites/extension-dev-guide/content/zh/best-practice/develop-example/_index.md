@@ -22,7 +22,6 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
    ```bash
    ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait
-   ```
 
 3. 配置连接
 
