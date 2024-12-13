@@ -19,8 +19,10 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
 2. 安装 KubeSphere Luban
 
+   需要保证ks的访问地址可被解析成 www.ks.com 您可以设置hosts实现
+
    ```bash
-   ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/test/ks-core-0.6.3.tgz --set apiserver.nodePort=30881 --debug --wait
+   ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait --set extension.ingress.ingressClassName=nginx --set extension.ingress.domainSuffix=www.ks.com --set extension.ingress.httpPort=30888
    ```
 
 3. 配置连接
@@ -49,11 +51,7 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 
 ## 初始化扩展组件
 
-使用最新的`ksbuilder` 工具
-
-```bash
-➜ wget https://github.com/kubesphere/ksbuilder/releases/download/v0.4.0-alpha.1/ksbuilder_0.4.0-alpha.1_darwin_all.tar.gz
-```
+下载最新的 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 工具
 
 使用一个已制作好的chart包,或者生成一个示例的
 
@@ -87,9 +85,9 @@ creating ConfigMap extension-demo-0.1.0-chart
 
 2. 点击安装。
 
-extSvcName为 你应用ui的svc名称与端口, domain为访问ks界面的方式, 可以是域名(需dns能解析)或者nip.io(需能联网), 这些参数您可以交由使用者配置, 也可以不放在最外层的参数中
+extSvcName为 你应用ui的svc名称与端口,  这些参数您可以交由使用者配置, 也可以不放在最外层的参数中
 
-<img src="./Snipaste_2024-06-20_14-18-46.png" alt="Snipaste_2024-06-20_14-18-46" style="zoom:50%;" />
+<img src="./Snipaste_2024-12-13_11-06-24.png" alt="Snipaste_2024-06-20_14-18-46" style="zoom:50%;" />
 安装完成后，点击页面左上角的 demo，验证扩展组件是否正常运行。
 <img src="./Snipaste_2024-06-20_15-29-48.png" alt="Snipaste_2024-06-20_15-29-48" style="zoom:50%;" />
 
