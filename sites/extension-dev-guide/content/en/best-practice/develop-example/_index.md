@@ -1,30 +1,29 @@
 ---
-title: "扩展组件开发案例"
+title: "Extension Development Example"
 weight: 01
-description: "介绍一个扩展组件开发案列，包括完整的开发打包和发布流程"
+description: "This case includes the complete extension development, packaging, and release process."
 ---
 
-本节将简要介绍如何开发扩展组件，包括环境准备、扩展组件初始化、集成场景、打包发布、访问控制等方面，并提供 KubeSphere API 和 FAQ 供您参考。
+This section provides a brief introduction to developing extension, including environment preparation, extension initialization, integration scenarios, packaging and release, access control, and more. It also provides KubeSphere API and FAQ for your references.
 
-## 环境准备
+## Environment Preparation
 
-1. 准备 Kubernetes 集群
+1. Prepare a Kubernetes Cluster
 
-   KubeSphere Luban 在任何 Kubernetes 集群上均可安装。建议使用 [KubeKey](https://github.com/kubesphere/kubekey) 快速部署 K8s 集群。
+   KubeSphere Luban can be installed on any Kubernetes cluster. It is recommended to use [KubeKey](https://github.com/kubesphere/kubekey) to quickly deploy a K8s cluster.
 
    ```bash
    ➜ curl -sfL https://get-kk.kubesphere.io | sh -
    ./kk create cluster --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y
    ```
 
-2. 安装 KubeSphere Luban
-
+2. Install KubeSphere Luban
 
    ```bash
    ➜ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait
    ```
 
-   可以使用  nip.io 或者泛域名解析为扩展组件自动配置访问入口。
+   You can use nip.io or wildcard DNS to automatically configure access endpoints for extensions.
 
    ```
    --set extension.ingress.ingressClassName=<your-ingress-class-name>\
@@ -33,9 +32,9 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
    --set extension.ingress.httpsPort=<your-ingress-controller-https-port>
    ```
 
-4. 配置连接
+3. Configure Connection
 
-   复制 K8s 集群的 [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 配置文件到开发主机的 `~/.kube/config`，确保可以使用 kubectl 正常访问 K8s 集群。
+   Copy the [kubeconfig](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file of the K8s cluster to the `~/.kube/config` file on the development host to ensure that kubectl can access the K8s cluster normally.
 
    ```bash
    ➜  kubectl -n kubesphere-system get po
@@ -45,9 +44,9 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
    ks-controller-manager-758dc948f5-8n4ll   1/1     Running   0              10d
    ```
 
-4. 安装 ingress 控制器
+4. Install Ingress Controller
 
-    手动安装一个 ingress 控制器，默认设置为 NodePort 模式，端口 30888，在您熟悉整个流程前，建议不要调整。
+    Manually install an ingress controller, and set it to NodePort, port 30888. It is recommended not to adjust this until you are familiar with the entire process.
 
     ```bash
     ➜ helm upgrade --install ingress-nginx ingress-nginx \
@@ -57,11 +56,11 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
     --set controller.service.nodePorts.http=30888
     ```
 
-## 初始化扩展组件
+## Initialize Your Extension
 
-下载最新的 [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) 工具。
+Download the latest [ksbuilder](https://github.com/kubesphere/ksbuilder/releases) tool.
 
-使用一个已制作好的 chart 包，或者生成一个示例 chart 包。
+Use a pre-made chart package or generate a sample one.
 
 ```bash
 ➜ helm create demo
@@ -70,14 +69,14 @@ description: "介绍一个扩展组件开发案列，包括完整的开发打包
 ➜ rm -rf demo
 ```
 
-创建扩展组件。
+Create an extension.
 
 ```bash
-# --from 添加上文中的 chart 包
+# --from adds the chart package from the context above
 ➜ ksbuilder createsimple --from=./demo-0.1.0.tgz 
 ```
 
-推送组件安装包到集群。
+Push the extension installation package to the cluster.
 
 ```bash
 ➜ ksbuilder publish demo
@@ -88,45 +87,45 @@ creating ExtensionVersion demo-0.1.0
 creating ConfigMap extension-demo-0.1.0-chart
 ```
 
-在扩展市场查看刚提交的组件。
+View the newly submitted extension in the KubeSphere Marketplace.
 
 <img src="./Snipaste_2024-02-22_11-37-56.png" alt="Snipaste_2024-02-22_11-37-56" style="zoom:50%;" />
 
-点击安装扩展组件。
+Click to install the extension.
 
-extSvcName为您应用 ui 的 svc 名称与端口，这些参数可以交由使用者配置，也可以不放在最外层的参数中。
+`extSvcName` is the name and port of your application's UI service. These parameters can be configured by the user or not placed in the top-level parameters.
 
 <img src="./Snipaste_2024-12-13_11-06-24.png" alt="Snipaste_2024-06-20_14-18-46" style="zoom:50%;" />
 
-安装完成后，点击页面左上角的 demo，验证扩展组件是否正常运行。
+After installation, click on the demo in the top left corner of the page to verify that the extension is running normally.
 
 <img src="./Snipaste_2024-06-20_15-29-48.png" alt="Snipaste_2024-06-20_15-29-48" style="zoom:50%;" />
 
-验证
+Verification
 
-> `demo` 为 chart 包的名字，即 `chart.yaml` 中的 `name` 字段。
+> `demo` is the name of the chart package, i.e., the `name` field in the `chart.yaml`.
 
-域名方式
+Domain Method
 
-安装后， 您可以访问以下示例地址验证：
+After installation, you can verify by accessing the following sample addresses:
 
-- http://demo.www.ks.com:30888/ 验证子域名解析是否正常
-- http://www.ks.com:30880/pstatic/dist/demo/index.js 验证前端 js 代理是否正常
+- http://demo.www.ks.com:30888/ Verify if subdomain resolution is normal.
+- http://www.ks.com:30880/pstatic/dist/demo/index.js Verify if the frontend JS proxy is normal.
 
 nip.io
 
-- http://demo.192.168.50.208.nip.io:30888/ 验证子域名解析是否正常
-- http://192.168.50.208:30880/pstatic/dist/demo/index.js 验证前端 js 代理是否正常
+- http://demo.192.168.50.208.nip.io:30888/ Verify if subdomain resolution is normal.
+- http://192.168.50.208:30880/pstatic/dist/demo/index.js Verify if the frontend JS proxy is normal.
 
-## 发布
+## Publish
 
-如何发布扩展组件到扩展市场，请参阅[发布扩展组件](../../packaging-and-release/release/)。
+For how to publish extensions to the KubeSphere Marketplace, please refer to [Publish Extensions](../../packaging-and-release/release/).
 
-## oauth 对接
+## OAuth Integration
 
-代码示例
+Code Example
 
-1. 创建 `OAuth Client` 配置。
+1. Create `OAuth Client` configuration.
 
    ```yaml
    cat << EOF | kubectl apply -f -
@@ -153,9 +152,9 @@ nip.io
    EOF
    ```
 
-2. 使用示例代码，可参考[此代码](https://github.com/coreos/go-oidc/blob/v3/example/idtoken/app.go)。
+2. Use the example code, refer to [this code](https://github.com/coreos/go-oidc/blob/v3/example/idtoken/app.go).
 
-   {{%expand "展开示例代码 " %}}
+   {{%expand "Expand Example Code " %}}
 
    ```go
    /*
@@ -301,16 +300,16 @@ nip.io
 
    {{% /expand%}}
 
-3. 访问 `10.8.0.2:5556` 将触发登录，登录后再次访问 `10.8.0.2:5556`，您将能够获取到 OAuth 信息。
+3. Access `10.8.0.2:5556` to trigger login. After logging in, access `10.8.0.2:5556` again, and you will be able to get OAuth information.
 <img src="./Snipaste_2024-02-21_17-56-43.png" alt="Snipaste_2024-02-21_17-56-43" style="zoom:50%;" />
 
-**注意**:
+**Note**:
 
-1. Secret 的配置中，`name` 和 `secret` 要与代码中的 `clientID` 和 `clientSecret` 一致。
+1. In the Secret configuration, `name` and `secret` must match the `clientID` and `clientSecret` in the code.
 
-2. 回调地址要一致。
+2. The callback address must match.
 
-3. `oidc.NewProvider(ctx, "http://ks-console.kubesphere-system.svc:30880")` 中的 url 被配置在`kubectl get cm -n kubesphere-system kubesphere-config` 的`authentication.issuer.host`下。如果您的程序并不在 k8s 中，需要将此 URL 修改为实际地址。在本地调试时，可以通过配置 hosts 文件实现，而无需修改。
+3. The URL in `oidc.NewProvider(ctx, "http://ks-console.kubesphere-system.svc:30880")` is configured in `authentication.issuer.host` in `kubectl get cm -n kubesphere-system kubesphere-config`. If your program is not in k8s, you need to modify this URL to the actual address. For local debugging, you can achieve this by configuring the hosts file without modifying it.
 
    ```bash
    root@m1:~# kubectl get cm -n kubesphere-system kubesphere-config -o yaml
@@ -334,32 +333,32 @@ nip.io
    192.168.50.218 ks-console.kubesphere-system.svc
    ```
 
-Harbor 示例
+Harbor Example
 
-配置 Harbor 使用 OIDC 登录。
+Configure Harbor to use OIDC login.
 
-> 注意: **Harbor** 要求使用 `https` ，因此需要为 KubeSphere 的 web 配置 https （操作略），并修改上述 `authentication.issuer.host` 为实际地址。
+> Note: **Harbor** requires `https`, so you need to configure https for KubeSphere's web (steps omitted) and modify the `authentication.issuer.host` to the actual address.
 
 <img src="./Snipaste_2024-02-21_18-20-19.png" alt="Snipaste_2024-02-21_18-20-19" style="zoom:50%;" />
 
-通过 OIDC 登录 Harbor。
+Log in to Harbor via OIDC.
 
 <img src="./Snipaste_2024-02-21_18-24-26.png" alt="Snipaste_2024-02-21_18-24-26" style="zoom:50%;" />
 
 ## Q&A
 
-**Q:** 安装扩展组件时是否需要特定的存储，如 SSD？
+**Q:** Is specific storage, such as SSD, required for installing extensions?
 
-**A:** 扩展组件是一个 helm 包，所以可以自行设置存储类型变量，让用户在安装时手动修改。
+**A:** An extension is a helm package, so you can set the storage type variable yourself and allow users to modify it manually during installation.
 
-**Q:** 扩展组件有 UI 界面，如自带一个监控面板，如何暴露？
+**Q:** If an extension has a UI interface, such as a built-in monitoring panel, how to expose it?
 
-**A:** 使用标准的 k8s svc 暴露方式自行进行暴露，暂时没有提供直接的 UI 入口。
+**A:** Use standard k8s svc exposure methods to expose it. There is no direct UI entry provided for now.
 
-**Q:** 如何使用工单系统和信息推送系统？
+**Q:** How to use the ticketing system and message push system?
 
-**A:** KubeSphere 实现了多种 IM/邮件等平台的对接，您可以调用 [KubeSphere API](https://docs.kubesphere.com.cn/reference/api/v4.0.0/introduction/) 来实现。
+**A:** KubeSphere has integrated with multiple IM/email platforms. You can call the [KubeSphere API](https://docs.kubesphere.com.cn/reference/api/v4.0.0/introduction/) to achieve this.
 
-**Q:** 是否存在用于遥测扩展组件运行状态的 API？
+**Q:** Is there an API for telemetry of extension running status?
 
-**A:** 暂时没有。
+**A:** Not currently available.
