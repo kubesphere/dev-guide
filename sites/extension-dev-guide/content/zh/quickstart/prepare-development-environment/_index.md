@@ -55,6 +55,3 @@ description: 介绍如何搭建扩展组件的开发环境
    ks-console-7ffb5954d8-qr8tx              1/1     Running   0              10d
    ks-controller-manager-758dc948f5-8n4ll   1/1     Running   0              10d
    ```
-
-   如果您使用的是 [KubeSphere Cloud](https://kubesphere.cloud/sign-up/) 上创建的集群，可在图中的位置下载 kubeconfig 文件。
-   <img src="./kubeconfig.png" alt="kubeconfig" style="zoom:50%;" />

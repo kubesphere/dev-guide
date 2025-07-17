@@ -78,11 +78,6 @@ KubeSphere 扩展组件前端开发需要使用 React。有关更多信息，请
 
 在配置本地运行环境之前，请先搭建好开发环境，获取 KubeSphere API Server 的访问地址。
 
-如果您使用的是 [KubeSphere Cloud](https://kubesphere.cloud/sign-up/) 上创建的集群，如下图所示创建一个外部服务，即可获取 API Server 的访问地址。
-
-<img src="./api-server.png" alt="api-server" style="zoom:50%;" />
-<img src="./api-server2.png" alt="api-server2" style="zoom:50%;" />
-
 然后在 `local_config.yaml` 文件中进行如下配置。
 
 ```yaml
