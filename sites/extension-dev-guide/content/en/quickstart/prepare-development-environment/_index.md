@@ -4,14 +4,14 @@ weight: 1
 description: Describes how to build a development environment for extensions.
 ---
 
-This section describes how to build a development environment for extensions. Before you start, make sure KubeSphere Luban and related development tools are installed.
+This section describes how to build a development environment for extensions. Before you start, make sure KubeSphere and related development tools are installed.
 
-* KubeSphere Luban: Deploy KubeSphere Luban Helm Chart in a K8s cluster to provide a base runtime environment for extensions.
+* KubeSphere: Deploy KubeSphere in a K8s cluster to provide a base runtime environment for extensions.
 
 * Development tools: Install [create-ks-project](https://github.com/kubesphere/create-ks-project) and [ksbuilder](https://github.com/kubesphere/ksbuilder) for initializing the extension project, packaging and publishing extensions, and you may need these development tools Node.js, Helm, kubectl, etc.
 
 
-## Install KubeSphere Luban
+## Install KubeSphere
 
 1. Create a Kubernetes Cluster
 
@@ -28,14 +28,19 @@ This section describes how to build a development environment for extensions. Be
    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
    ```
 
-2. Install KubeSphere Luban Helm Chart.
+2. Install KubeSphere
 
    ```bash
-   helm upgrade --install -n kubesphere-system --create-namespace ks-core  https://charts.kubesphere.io/main/ks-core-1.1.0.tgz --set apiserver.nodePort=30881 --debug --wait
+   chart=oci://hub.kubesphere.com.cn/kse/ks-core
+   version=1.2.2
+   helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --debug --wait --version $version --set apiserver.nodePort=30881 --reset-values
    ```
 
-For more configuration, refer to [KubeSphere Helm Chart Configurations](https://docs.kubesphere.com.cn/v4.0/03-install-and-uninstall/01-install-ks-core/#_%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE)。
+   More content can be found in [Online Installation of Kubernetes and KubeSphere](https://docs.kubesphere.co/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/).
 
+3. Activate KubeSphere
+
+   Apply for a free KubeSphere Community Edition license [here](https://kubesphere.co/apply-license/), and complete the [activation](https://docs.kubesphere.co/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/03-activate-ks/) after importing the license.
 
 ## Install development tools
 
