@@ -64,7 +64,6 @@ const menus = [
       <td>parent</td>
       <td>The mount point of the extension. Valid values:
         <ul>
-          <li><strong>topbar</strong>: mounts to the top navigation bar.</li>
           <li><strong>global</strong>: mounts to the extensions menu.</li>
           <li><strong>access</strong>: mounts to the left navigation pane on the Users and Roles page.</li>
           <li><strong>cluster</strong>: mounts the left navigation pane on the Cluster Management page.</li>

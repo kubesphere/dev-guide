@@ -64,7 +64,6 @@ const menus = [
       <td>parent</td>
       <td>扩展组件的挂载位置，取值可以为：
         <ul>
-          <li><strong>topbar</strong>：挂载到顶部菜单栏。</li>
           <li><strong>global</strong>：挂载到扩展组件菜单。</li>
           <li><strong>access</strong>：挂载到用户和角色管理页面左侧导航栏。</li>
           <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
