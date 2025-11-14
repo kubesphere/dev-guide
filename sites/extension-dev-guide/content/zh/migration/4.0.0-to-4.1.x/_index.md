@@ -8,7 +8,7 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 
 #### 前端
 
-`@ks-console/*` 依赖已迁移至 `https://registry.npm.kubesphere.com.cn` 并将于 2025 年 11 月 30 日从 `https://www.npmjs.com` 下架。安装前请参阅[自建 npm 仓库说明](../../faq/private-registry/) 了解用户名申请、`.npmrc` 配置及验证方式。
+`@ks-console/*` 依赖已全部迁移至 `https://registry.npm.kubesphere.com.cn`。安装前请参阅[自建 npm 仓库说明](../../faq/private-registry/) 了解用户名申请、`.npmrc` 配置及验证方式。
 
 ##### 安装/升级 KubeSphere 依赖包
 
