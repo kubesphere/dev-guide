@@ -8,6 +8,31 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 
 #### 前端
 
+##### 使用自建 npm 仓库
+
+`@ks-console/*` 依赖已迁移至自建 npm 仓库 `https://registry.npm.kubesphere.com.cn`。如需获取该仓库的账号和密码，请通过邮箱 <kubesphere@yunify.com> 联系我们。由于我们会在文档更新后删除发布在 `https://www.npmjs.com` 上的历史版本，请勿再从 npmjs.org 拉取相关依赖。
+
+1. 在扩展组件工程根目录创建或更新 `.npmrc`，并加入以下配置（`yarn create ks-project` 创建的工程已默认包含该文件）：
+
+   ```ini
+   @ks-console:registry=https://registry.npm.kubesphere.com.cn
+   ```
+
+2. 登录私有仓库，并执行以下命令确认连接与凭据有效：
+
+   ```shell
+   npm ping --registry https://registry.npm.kubesphere.com.cn
+   npm whoami --registry https://registry.npm.kubesphere.com.cn
+
+   npm notice PING https://registry.npm.kubesphere.com.cn/
+   npm notice PONG 150ms
+   partners
+   ```
+
+{{% notice note %}}
+如果仓库账号遗失或需要新增成员，请发送邮件至 <kubesphere@yunify.com> 申请，避免使用共享账号。
+{{% /notice %}}
+
 ##### 安装/升级 KubeSphere 依赖包
 
 安装/升级 `create-ks-project`
@@ -18,13 +43,13 @@ npm install -g create-ks-project
 
 安装/升级 KubeSphere Console 依赖包
 
-- [`@ks-console/appstore`](https://www.npmjs.com/package/@ks-console/appstore)
-- [`@ks-console/bootstrap`](https://www.npmjs.com/package/@ks-console/bootstrap)
-- [`@ks-console/console`](https://www.npmjs.com/package/@ks-console/console)
-- [`@ks-console/core`](https://www.npmjs.com/package/@ks-console/core)
-- [`@ks-console/locales`](https://www.npmjs.com/package/@ks-console/locales)
-- [`@ks-console/server`](https://www.npmjs.com/package/@ks-console/server)
-- [`@ks-console/shared`](https://www.npmjs.com/package/@ks-console/shared)
+- `@ks-console/appstore`
+- `@ks-console/bootstrap`
+- `@ks-console/console`
+- `@ks-console/core`
+- `@ks-console/locales`
+- `@ks-console/server`
+- `@ks-console/shared`
 
 ```shell
 yarn add -W \
@@ -38,7 +63,7 @@ yarn add -W \
 ```
 
 {{% notice note %}}
-`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。
+`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。安装时请确认 Yarn/npm 正在读取自建仓库，否则会因为 `https://www.npmjs.com` 不再托管这些依赖而导致安装失败。
 {{% /notice %}}
 
 安装/升级 Kube Design

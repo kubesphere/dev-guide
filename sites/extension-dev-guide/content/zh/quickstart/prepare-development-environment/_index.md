@@ -9,6 +9,10 @@ description: 介绍如何搭建扩展组件的开发环境
 * KubeSphere：准备 K8s 集群并部署 KubeSphere，为扩展组件提供基础的运行环境。
 * 开发工具：安装 [create-ks-project](https://github.com/kubesphere/create-ks-project) 和 [ksbuilder](https://github.com/kubesphere/ksbuilder) 用于初始化扩展组件项目、打包和发布扩展组件，你也可能需要用到以下开发工具 Node.js、Helm、kubectl 等。
 
+{{% notice warning %}}
+`@ks-console/*` 依赖已经迁移到私有 npm 仓库 `https://registry.npm.kubesphere.com.cn`，请通过 <kubesphere@yunify.com> 申请账号，并按照[自建 npm 仓库说明](../../faq/private-registry/) 配置 `.npmrc`，否则 `yarn install` 会因为无法访问 `https://www.npmjs.com` 上的旧包而失败。
+{{% /notice %}}
+
 ## 安装 KubeSphere
 
 1. 准备 Kubernetes 集群
