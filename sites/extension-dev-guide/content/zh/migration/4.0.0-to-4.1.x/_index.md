@@ -8,29 +8,8 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 
 #### 前端
 
-##### 使用自建 npm 仓库
-
-`@ks-console/*` 依赖已迁移至自建 npm 仓库 `https://registry.npm.kubesphere.com.cn`。如需获取该仓库的账号和密码，请通过邮箱 <kubesphere@yunify.com> 联系我们。由于我们会在文档更新后删除发布在 `https://www.npmjs.com` 上的历史版本，请勿再从 npmjs.org 拉取相关依赖。
-
-1. 在扩展组件工程根目录创建或更新 `.npmrc`，并加入以下配置（`yarn create ks-project` 创建的工程已默认包含该文件）：
-
-   ```ini
-   @ks-console:registry=https://registry.npm.kubesphere.com.cn
-   ```
-
-2. 登录私有仓库，并执行以下命令确认连接与凭据有效：
-
-   ```shell
-   npm ping --registry https://registry.npm.kubesphere.com.cn
-   npm whoami --registry https://registry.npm.kubesphere.com.cn
-
-   npm notice PING https://registry.npm.kubesphere.com.cn/
-   npm notice PONG 150ms
-   partners
-   ```
-
-{{% notice note %}}
-如果仓库账号遗失或需要新增成员，请发送邮件至 <kubesphere@yunify.com> 申请，避免使用共享账号。
+{{% notice warning %}}
+`@ks-console/*` 依赖已迁移至 `https://registry.npm.kubesphere.com.cn`，并将在 2025 年 11 月 30 日从 `https://www.npmjs.com` 下架。请参阅[自建 npm 仓库说明](../../faq/private-registry/) 完成账号申请、`.npmrc` 配置及连通性验证，否则安装命令将由于无法访问 npmjs.org 上的旧包而失败。
 {{% /notice %}}
 
 ##### 安装/升级 KubeSphere 依赖包
