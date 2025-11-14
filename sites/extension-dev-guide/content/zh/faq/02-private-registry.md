@@ -38,7 +38,7 @@ npm whoami --registry https://registry.npm.kubesphere.com.cn
 ```text
 npm notice PING https://registry.npm.kubesphere.com.cn/
 npm notice PONG 150ms
-<your-username>
+<YOUR-USERNAME>
 ```
 
 如输出所示，只要能够收到 `PONG` 并看到自己的用户名（上述示例中的 `<your-username>`），说明网络和凭据均配置正确。
