@@ -8,9 +8,7 @@ description: Learn how to upgrade from version 4.0.0 to 4.1.x.
 
 #### Frontend
 
-{{% notice warning %}}
-All `@ks-console/*` dependencies are hosted on `https://registry.npm.kubesphere.com.cn`, and they will be removed from `https://www.npmjs.com` on November 30, 2025. Follow the [Private npm Registry](../../faq/private-registry/) guide to request credentials, configure `.npmrc`, and verify connectivity; otherwise installation commands fail because npmjs.org no longer provides these packages.
-{{% /notice %}}
+All `@ks-console/*` dependencies are available only on `https://registry.npm.kubesphere.com.cn` and will be removed from `https://www.npmjs.com` on November 30, 2025. See the [Private npm Registry](../../faq/private-registry/) guide for username requests, `.npmrc` configuration, and verification instructions before installing.
 
 ##### Install/Upgrade KubeSphere Dependencies
 
@@ -22,13 +20,13 @@ npm install -g create-ks-project
 
 Install/Upgrade KubeSphere Console dependencies.
 
-- `@ks-console/appstore`
-- `@ks-console/bootstrap`
-- `@ks-console/console`
-- `@ks-console/core`
-- `@ks-console/locales`
-- `@ks-console/server`
-- `@ks-console/shared`
+- [`@ks-console/appstore`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/appstore)
+- [`@ks-console/bootstrap`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/bootstrap)
+- [`@ks-console/console`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/console)
+- [`@ks-console/core`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/core)
+- [`@ks-console/locales`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/locales)
+- [`@ks-console/server`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/server)
+- [`@ks-console/shared`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/shared)
 
 ```shell
 yarn add -W \

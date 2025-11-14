@@ -14,7 +14,7 @@ description: 如何对 KubeSphere 的前端 UI 进行扩展？
 
 在解耦巨石应用和实现动态扩展时，不可避免会考虑到近年来备受欢迎的`微前端`解决方案。著名的微前端实现，如 qiankun 和 micro-app，为了应对子应用的技术栈独立性和样式侵入问题，采取了大量措施，包括实施 JavaScript 沙箱和样式隔离等。然而，这种隔离通常是为了解决特定技术栈问题或团队协作问题而做出的妥协。如果将多个框架，如 React、Vue 和 Angular，融合到同一前端系统中，用户界面体验可能会不一致，而前端包的大小也可能显著增加。此外，各个子应用在各自独立的运行时中运行，可能与主应用的集成度不够紧密。
 
-在这种背景下，我们希望减轻对隔离性的需求，以实现一种更轻量的"微前端"，或者可以称之为`微模块`。在微模块架构中，子应用和主应用共享相同的技术栈，可以共享运行时。这有助于实现更一致的用户体验、更高的集成度和更便捷的依赖共享，从而提高运行效率。如上面的架构图所示，扩展组件的开发依赖通用的 [KubeDesign](https://github.com/kubesphere/kube-design)、`@ks-console/shared`（需从 `https://registry.npm.kubesphere.com.cn` 获取）等库。然后，使用[脚手架](https://github.com/kubesphere/create-ks-project)、CLI 等工具打包和发布扩展组件。在 Core（基座）的部分注册和运行扩展组件。
+在这种背景下，我们希望减轻对隔离性的需求，以实现一种更轻量的"微前端"，或者可以称之为`微模块`。在微模块架构中，子应用和主应用共享相同的技术栈，可以共享运行时。这有助于实现更一致的用户体验、更高的集成度和更便捷的依赖共享，从而提高运行效率。如上面的架构图所示，扩展组件的开发依赖通用的 [KubeDesign](https://github.com/kubesphere/kube-design)、[@ks-console/shared](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/shared) 等库。然后，使用[脚手架](https://github.com/kubesphere/create-ks-project)、CLI 等工具打包和发布扩展组件。在 Core（基座）的部分注册和运行扩展组件。
 
 ## 内核
 
@@ -136,4 +136,4 @@ export default extensionConfig;
 
 1. 通用组件库 [KubeDesign](https://github.com/kubesphere/kube-design)
 2. 前端脚手架工具 [create-ks-project](https://github.com/kubesphere/create-ks-project)
-3. 通用 util 库 `@ks-console/shared`（通过自建 npm 仓库获取）
+3. 通用 util 库 [@ks-console/shared](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/shared)

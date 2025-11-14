@@ -8,9 +8,7 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 
 #### 前端
 
-{{% notice warning %}}
-`@ks-console/*` 依赖已迁移至 `https://registry.npm.kubesphere.com.cn`，并将在 2025 年 11 月 30 日从 `https://www.npmjs.com` 下架。请参阅[自建 npm 仓库说明](../../faq/private-registry/) 完成账号申请、`.npmrc` 配置及连通性验证，否则安装命令将由于无法访问 npmjs.org 上的旧包而失败。
-{{% /notice %}}
+`@ks-console/*` 依赖已迁移至 `https://registry.npm.kubesphere.com.cn` 并将于 2025 年 11 月 30 日从 `https://www.npmjs.com` 下架。安装前请参阅[自建 npm 仓库说明](../../faq/private-registry/) 了解用户名申请、`.npmrc` 配置及验证方式。
 
 ##### 安装/升级 KubeSphere 依赖包
 
@@ -22,13 +20,13 @@ npm install -g create-ks-project
 
 安装/升级 KubeSphere Console 依赖包
 
-- `@ks-console/appstore`
-- `@ks-console/bootstrap`
-- `@ks-console/console`
-- `@ks-console/core`
-- `@ks-console/locales`
-- `@ks-console/server`
-- `@ks-console/shared`
+- [`@ks-console/appstore`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/appstore)
+- [`@ks-console/bootstrap`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/bootstrap)
+- [`@ks-console/console`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/console)
+- [`@ks-console/core`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/core)
+- [`@ks-console/locales`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/locales)
+- [`@ks-console/server`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/server)
+- [`@ks-console/shared`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/shared)
 
 ```shell
 yarn add -W \
