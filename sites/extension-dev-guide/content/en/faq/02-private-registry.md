@@ -20,10 +20,19 @@ Projects bootstrapped with `yarn create ks-project` (when `create-ks-project` is
 
 ## How do I log in?
 
-After configuring `.npmrc`, run the following command and enter the username, password (registry token), and email when prompted:
+After configuring `.npmrc`, run the following command and enter the username and password when prompted:
 
 ```shell
 npm login --registry https://registry.npm.kubesphere.com.cn
+```
+
+```text
+npm login --registry https://registry.npm.kubesphere.com.cn
+npm notice Log in on https://registry.npm.kubesphere.com.cn/
+Username: <YOUR-USERNAME>
+Password:
+
+Logged in on https://registry.npm.kubesphere.com.cn/.
 ```
 
 ## How do I verify the connection?
@@ -38,10 +47,10 @@ npm whoami --registry https://registry.npm.kubesphere.com.cn
 ```text
 npm notice PING https://registry.npm.kubesphere.com.cn/
 npm notice PONG 150ms
-sample-user
+<YOUR-USERNAME>
 ```
 
-When you see the `PONG` message together with your username (for example `sample-user` above), it means your network and credentials are working as expected.
+When you see the `PONG` message together with your username (for example `<YOUR-USERNAME>` above), it means your network and credentials are working as expected.
 
 {{% notice warning %}}
 All `@ks-console/*` packages on `https://www.npmjs.com` will be removed on November 30, 2025. After that date npmjs.org will no longer serve these dependencies, and installations fail if npm/Yarn still points to the public registry. Always ensure the registry URL is `https://registry.npm.kubesphere.com.cn` before installing or upgrading.
