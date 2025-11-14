@@ -26,6 +26,8 @@ After configuring `.npmrc`, run the following command and enter the username and
 npm login --registry https://registry.npm.kubesphere.com.cn
 ```
 
+For example:
+
 ```text
 npm login --registry https://registry.npm.kubesphere.com.cn
 npm notice Log in on https://registry.npm.kubesphere.com.cn/
@@ -43,6 +45,8 @@ Use the following commands to check connectivity and credential status:
 npm ping --registry https://registry.npm.kubesphere.com.cn
 npm whoami --registry https://registry.npm.kubesphere.com.cn
 ```
+
+For example:
 
 ```text
 npm notice PING https://registry.npm.kubesphere.com.cn/

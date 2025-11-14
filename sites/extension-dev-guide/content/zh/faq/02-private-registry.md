@@ -26,6 +26,8 @@ description: 如何访问 KubeSphere 扩展组件依赖所在的 npm 仓库
 npm login --registry https://registry.npm.kubesphere.com.cn
 ```
 
+输出示例如下：
+
 ```text
 npm notice Log in on https://registry.npm.kubesphere.com.cn/
 Username: <YOUR-USERNAME>
@@ -42,6 +44,8 @@ Logged in on https://registry.npm.kubesphere.com.cn/.
 npm ping --registry https://registry.npm.kubesphere.com.cn
 npm whoami --registry https://registry.npm.kubesphere.com.cn
 ```
+
+输出示例如下：
 
 ```text
 npm notice PING https://registry.npm.kubesphere.com.cn/
