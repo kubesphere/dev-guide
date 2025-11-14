@@ -29,7 +29,6 @@ npm login --registry https://registry.npm.kubesphere.com.cn
 For example:
 
 ```text
-npm login --registry https://registry.npm.kubesphere.com.cn
 npm notice Log in on https://registry.npm.kubesphere.com.cn/
 Username: <YOUR-USERNAME>
 Password:
