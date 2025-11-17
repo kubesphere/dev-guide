@@ -56,5 +56,5 @@ npm notice PONG 150ms
 When you see the `PONG` message together with your username (for example `<YOUR-USERNAME>` above), it means your network and credentials are working as expected.
 
 {{% notice warning %}}
-All `@ks-console/*` packages on `https://www.npmjs.com` will be removed on November 30, 2025. After that date npmjs.org will no longer serve these dependencies, and installations fail if npm/Yarn still points to the public registry. Always ensure the registry URL is `https://registry.npm.kubesphere.com.cn` before installing or upgrading.
+We plan to remove all `@ks-console/*` packages from `https://www.npmjs.com` in the future. After that, npmjs.org will no longer serve these dependencies, and installations fail if npm/Yarn still points to the public registry. Always ensure the registry URL is `https://registry.npm.kubesphere.com.cn` before installing or upgrading.
 {{% /notice %}}
