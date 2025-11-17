@@ -6,7 +6,7 @@ description: How to access the npm registry that hosts KubeSphere extension depe
 
 ## How do I get credentials?
 
-Dependencies such as `@ks-console/*` have been migrated to the private npm registry at `https://registry.npm.kubesphere.com.cn`. Email <kubesphere@yunify.com> with your organization details and use cases to request the username and password. Please avoid sharing the same account across different teams to keep the credentials secure.
+Dependencies such as `@ks-console/*` have been migrated to the private npm registry at <https://registry.npm.kubesphere.com.cn>. Email [kubesphere@yunify.com](mailto:kubesphere@yunify.com) with your organization details and use cases to request the username and password. Please avoid sharing the same account across different teams to keep the credentials secure.
 
 ## How do I configure `.npmrc`?
 
@@ -56,5 +56,5 @@ npm notice PONG 150ms
 When you see the `PONG` message together with your username (for example `<YOUR-USERNAME>` above), it means your network and credentials are working as expected.
 
 {{% notice warning %}}
-We plan to remove all `@ks-console/*` packages from `https://www.npmjs.com` in the future. After that, npmjs.org will no longer serve these dependencies, and installations fail if npm/Yarn still points to the public registry. Always ensure the registry URL is `https://registry.npm.kubesphere.com.cn` before installing or upgrading.
+We plan to remove all `@ks-console/*` packages from <https://www.npmjs.com> in the future. After that, npmjs.org will no longer serve these dependencies, and installations fail if npm/Yarn still points to the public registry. Always ensure the registry URL is <https://registry.npm.kubesphere.com.cn> before installing or upgrading.
 {{% /notice %}}

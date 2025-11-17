@@ -6,7 +6,7 @@ description: 如何访问 KubeSphere 扩展组件依赖所在的 npm 仓库
 
 ## 如何获取仓库用户名
 
-`@ks-console/*` 等扩展组件依赖已经迁移至自建 npm 仓库 `https://registry.npm.kubesphere.com.cn`。如需获取用户名和密码，请发送邮件至 <kubesphere@yunify.com>，并附上您的组织信息与用途说明。
+`@ks-console/*` 等扩展组件依赖已经迁移至自建 npm 仓库 <https://registry.npm.kubesphere.com.cn>。如需获取用户名和密码，请发送邮件至 [kubesphere@yunify.com](mailto:kubesphere@yunify.com)，并附上您的组织信息与用途说明。
 
 ## 如何配置 `.npmrc`
 
@@ -56,5 +56,5 @@ npm notice PONG 150ms
 如输出所示，只要能够收到 `PONG` 并看到自己的用户名（上述示例中的 `<YOUR-USERNAME>`），说明网络和凭据均配置正确。
 
 {{% notice warning %}}
-我们计划在未来删除 `https://www.npmjs.com` 上的所有 `@ks-console/*` 包。届时 npmjs.com 上的依赖将无法使用，如果安装命令仍指向官方 npm Registry 会因为无法拉取到依赖而失败。请务必确认 Yarn/npm 均指向 `https://registry.npm.kubesphere.com.cn` 后再执行安装或升级操作。
+我们计划在未来删除 <https://www.npmjs.com> 上的所有 `@ks-console/*` 包。届时 <https://www.npmjs.com> 上的依赖将无法使用，如果安装命令仍指向官方 npm Registry 会因为无法拉取到依赖而失败。请务必确认 Yarn/npm 均指向 <https://registry.npm.kubesphere.com.cn> 后再执行安装或升级操作。
 {{% /notice %}}

@@ -8,7 +8,7 @@ description: 如何从 4.0.0 升级到 4.1.x 版本
 
 #### 前端
 
-`@ks-console/*` 依赖已全部迁移至 `https://registry.npm.kubesphere.com.cn`。安装前请参阅[自建 npm 仓库说明](../../faq/private-registry/) 了解用户名申请、`.npmrc` 配置及验证方式。
+`@ks-console/*` 依赖已全部迁移至 <https://registry.npm.kubesphere.com.cn>。安装前请参阅[自建 npm 仓库说明](../../faq/private-registry/) 了解用户名申请、`.npmrc` 配置及验证方式。
 
 ##### 安装/升级 KubeSphere 依赖包
 
@@ -40,7 +40,7 @@ yarn add -W \
 ```
 
 {{% notice note %}}
-`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。安装时请确认 Yarn/npm 正在读取自建仓库，否则一旦 `https://www.npmjs.com` 不再提供这些依赖将导致安装失败。
+`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。安装时请确认 Yarn/npm 正在读取自建仓库，否则一旦 <https://www.npmjs.com> 不再提供这些依赖将导致安装失败。
 {{% /notice %}}
 
 安装/升级 Kube Design
