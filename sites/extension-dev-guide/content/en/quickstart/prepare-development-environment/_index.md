@@ -11,7 +11,7 @@ This section describes how to build a development environment for extensions. Be
 * Development tools: Install [create-ks-project](https://github.com/kubesphere/create-ks-project) and [ksbuilder](https://github.com/kubesphere/ksbuilder) for initializing the extension project, packaging and publishing extensions, and you may need these development tools Node.js, Helm, kubectl, etc.
 
 {{% notice warning %}}
-`@ks-console/*` dependencies are now hosted exclusively on the private npm registry <https://registry.npm.kubesphere.com.cn>. Request a username via <kubesphere@yunify.com> and configure `.npmrc` by following the [Private npm Registry](../../faq/private-registry/) guide; otherwise `yarn install` may fail once <https://www.npmjs.com> stops serving these packages.
+`@ks-console/*` dependencies are now hosted exclusively on the private npm registry <https://registry.npm.kubesphere.com.cn>. Request a username via <kubesphere@yunify.com> and configure `.npmrc` by following the [Private npm Registry](../../faq/02-private-registry/) guide; otherwise `yarn install` may fail once <https://www.npmjs.com> stops serving these packages.
 {{% /notice %}}
 
 ## Install KubeSphere

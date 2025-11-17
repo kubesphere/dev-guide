@@ -8,7 +8,7 @@ description: Learn how to upgrade from version 4.0.0 to 4.1.x.
 
 #### Frontend
 
-All `@ks-console/*` dependencies are available only on <https://registry.npm.kubesphere.com.cn>. See the [Private npm Registry](../../faq/private-registry/) guide for username requests, `.npmrc` configuration, and verification instructions before installing.
+All `@ks-console/*` dependencies are available only on <https://registry.npm.kubesphere.com.cn>. See the [Private npm Registry](../../faq/02-private-registry/) guide for username requests, `.npmrc` configuration, and verification instructions before installing.
 
 ##### Install/Upgrade KubeSphere Dependencies
 
