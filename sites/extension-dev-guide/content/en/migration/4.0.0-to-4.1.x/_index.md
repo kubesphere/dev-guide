@@ -40,7 +40,7 @@ yarn add -W \
 ```
 
 {{% notice note %}}
-The versions of `@ks-console/*` should ideally match the version of KubeSphere. Double-check that Yarn/npm reads from the private registry; otherwise, installation fails because `https://www.npmjs.com` no longer hosts these packages.
+The versions of `@ks-console/*` should ideally match the version of KubeSphere. Double-check that Yarn/npm reads from the private registry; otherwise, installation may fail once `https://www.npmjs.com` stops serving these packages.
 {{% /notice %}}
 
 Install/Upgrade Kube Design.

@@ -40,7 +40,7 @@ yarn add -W \
 ```
 
 {{% notice note %}}
-`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。安装时请确认 Yarn/npm 正在读取自建仓库，否则会因为 `https://www.npmjs.com` 不再托管这些依赖而导致安装失败。
+`@ks-console/*` 的版本最好和 KubeSphere 的版本保持一致。安装时请确认 Yarn/npm 正在读取自建仓库，否则一旦 `https://www.npmjs.com` 不再提供这些依赖将导致安装失败。
 {{% /notice %}}
 
 安装/升级 Kube Design
