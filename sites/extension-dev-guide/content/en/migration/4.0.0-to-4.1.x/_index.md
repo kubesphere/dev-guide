@@ -8,6 +8,8 @@ description: Learn how to upgrade from version 4.0.0 to 4.1.x.
 
 #### Frontend
 
+All `@ks-console/*` dependencies are available only on <https://registry.npm.kubesphere.com.cn>. See the [Private npm Registry](../../faq/02-private-registry/) guide for username requests, `.npmrc` configuration, and verification instructions before installing.
+
 ##### Install/Upgrade KubeSphere Dependencies
 
 Install/Upgrade `create-ks-project`.
@@ -18,13 +20,13 @@ npm install -g create-ks-project
 
 Install/Upgrade KubeSphere Console dependencies.
 
-- [`@ks-console/appstore`](https://www.npmjs.com/package/@ks-console/appstore)
-- [`@ks-console/bootstrap`](https://www.npmjs.com/package/@ks-console/bootstrap)
-- [`@ks-console/console`](https://www.npmjs.com/package/@ks-console/console)
-- [`@ks-console/core`](https://www.npmjs.com/package/@ks-console/core)
-- [`@ks-console/locales`](https://www.npmjs.com/package/@ks-console/locales)
-- [`@ks-console/server`](https://www.npmjs.com/package/@ks-console/server)
-- [`@ks-console/shared`](https://www.npmjs.com/package/@ks-console/shared)
+- [`@ks-console/appstore`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/appstore)
+- [`@ks-console/bootstrap`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/bootstrap)
+- [`@ks-console/console`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/console)
+- [`@ks-console/core`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/core)
+- [`@ks-console/locales`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/locales)
+- [`@ks-console/server`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/server)
+- [`@ks-console/shared`](https://registry.npm.kubesphere.com.cn/-/web/detail/@ks-console/shared)
 
 ```shell
 yarn add -W \
@@ -38,7 +40,7 @@ yarn add -W \
 ```
 
 {{% notice note %}}
-The versions of `@ks-console/*` should ideally match the version of KubeSphere.
+The versions of `@ks-console/*` should ideally match the version of KubeSphere. Double-check that Yarn/npm reads from the private registry; otherwise, installation may fail once <https://www.npmjs.com> stops serving these packages.
 {{% /notice %}}
 
 Install/Upgrade Kube Design.
