@@ -68,7 +68,6 @@ const menus = [
           <li><strong>access</strong>: mounts to the left navigation pane on the Users and Roles page.</li>
           <li><strong>cluster</strong>: mounts the left navigation pane on the Cluster Management page.</li>
           <li><strong>workspace</strong>: mounts the left navigation pane on the Workspace Management page.</li>
-          <li><strong>project</strong>: mounts the left navigation pane on the Project Management page.</li>
           <li><strong>platformSettings</strong>: mounts the left navigation pane on the Platform Settings page.</li>
         </ul>
           To mount to a submenu of the current menu, set the path to: <code>parent: 'cluster.xxxx.xxxx'</code>.

@@ -68,7 +68,6 @@ const menus = [
           <li><strong>access</strong>：挂载到用户和角色管理页面左侧导航栏。</li>
           <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
           <li><strong>workspace</strong>：挂载到企业空间管理页面左侧导航栏。</li>
-          <li><strong>project</strong>：挂载到项目管理页面左侧导航栏。</li>
           <li><strong>platformSettings</strong>：挂载到平台设置页面左侧导航栏。</li>
         </ul>
         若要挂载到当前菜单的子菜单下，设置 parent 的路径为： <code>parent: 'cluster.xxxx.xxxx'</code>
