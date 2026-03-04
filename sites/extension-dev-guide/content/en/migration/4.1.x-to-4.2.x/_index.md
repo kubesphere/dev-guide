@@ -8,22 +8,34 @@ description: Learn how to upgrade from version 4.1.x to 4.2.x.
 
 #### Frontend
 
-KubeSphere 4.2.0 introduces a redesigned UI, and the extension menu mount strategy has changed: `topbar` is no longer supported.
+KubeSphere 4.2.0 introduces a redesigned UI, and the extension entry mount strategy has changed: `topbar` and `project` are no longer supported.
 
 ##### Scope of impact
 
-- Extension frontend configurations where `menus` uses `parent: 'topbar'`.
-- Clusters with `ExtensionEntry` created and `spec.entries[].parent` set to `topbar`.
-- After the upgrade, entries previously mounted to `topbar` will no longer be displayed.
+- Scenarios in frontend extension configurations where `menus.parent` uses `topbar` or `project`.
+- Scenarios where `ExtensionEntry` is created in the cluster and `spec.entries[].parent` uses `topbar` or `project`.
+- After the upgrade, entries previously mounted to `topbar` and `project` will no longer be displayed.
+
+##### Pre-upgrade checks
+
+1. Check all `parent` fields in `menus`.
+2. Check all `ExtensionEntry.spec.entries[].parent` fields.
+3. If both `menus` and `ExtensionEntry` exist, verify `ExtensionEntry` first (it has higher priority and `menus` will be ignored).
 
 ##### Migration steps
 
-1. Change the `parent` of extension entries from `topbar` to `global` (including both `menus` and `ExtensionEntry`).
-2. If both `menus` and `ExtensionEntry` are configured, check `ExtensionEntry` first. It has higher priority, and `menus` will be ignored.
-3. Sign in to the KubeSphere Console, then pin extension entries to the top area through "Custom Component Entry" in the "Component Dock" to restore the previous `topbar` experience.
-4. Refer to [Mount Point](../../feature-customization/menu/) to verify whether other menu configurations meet expectations.
+###### Migrate `topbar` to `global`
 
-##### Configuration examples
+1. Change `parent` from `topbar` to `global` for extension entries (including both `menus` and `ExtensionEntry`).
+2. Sign in to the KubeSphere Console, then pin extension entries to the top area through "Custom Component Entry" in the "Component Dock" to restore the previous `topbar` experience.
+3. Refer to [Mount Point](../../feature-customization/menu/) to verify whether other menu configurations meet expectations.
+
+###### Migrate `project` to `workspace`
+
+1. Change `parent` from `project` to `workspace` for extension entries (including both `menus` and `ExtensionEntry`).
+2. Because the resource hierarchy changes, most existing features require re-adaptation or refactoring, including but not limited to interactions, route paths, and permission models.
+
+##### Configuration examples (migrating `topbar` as an example)
 
 Before upgrade (`menus`):
 
