@@ -1,10 +1,10 @@
 ---
 title: "概述"
 weight: 01
-description: 介绍 KubeSphere 4.0 扩展机制的背景和优势
+description: 介绍 KubeSphere v4 扩展机制的背景和优势
 ---
 
-## 为什么在 KubeSphere 4.0 引入扩展机制
+## 为什么在 KubeSphere v4 引入扩展机制
 
 自 2018 年 KubeSphere 混合多云容器管理平台诞生以来，已经发布了十几个版本，包括 3 个大版本。为了满足不断增长的用户需求，KubeSphere 集成了众多企业级功能，如多租户管理、多集群管理、DevOps、GitOps、服务网格、微服务、可观测性（包括监控、告警、日志、审计、事件、通知等）、应用商店、边缘计算、网络与存储管理等。
 
