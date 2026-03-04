@@ -13,17 +13,19 @@ description: 如何从 4.1.x 升级到 4.2.x 版本
 ##### 影响范围
 
 - 前端扩展配置中 `menus` 使用了 `parent: 'topbar'` 的场景。
+- 集群中创建了 `ExtensionEntry`，且 `spec.entries[].parent` 使用 `topbar` 的场景。
 - 升级后，原先挂载在 `topbar` 的入口将不再显示。
 
 ##### 迁移步骤
 
-1. 将扩展入口配置中的 `parent` 从 `topbar` 改为 `global`。
-2. 登录 KubeSphere 控制台，在「组件坞」中通过「自定义组件入口」将扩展组件固定到页面顶部，以还原原先 `topbar` 的使用体验。
-3. 参考[挂载位置](../../feature-customization/menu/)确认其他菜单配置是否符合预期。
+1. 将扩展入口配置中的 `parent` 从 `topbar` 改为 `global`（包括 `menus` 与 `ExtensionEntry`）。
+2. 如果你同时配置了 `menus` 和 `ExtensionEntry`，请优先检查 `ExtensionEntry`。它的优先级更高，`menus` 会被忽略。
+3. 登录 KubeSphere 控制台，在「组件坞」中通过「自定义组件入口」将扩展组件固定到页面顶部，以还原原先 `topbar` 的使用体验。
+4. 参考[挂载位置](../../feature-customization/menu/)确认其他菜单配置是否符合预期。
 
 ##### 配置示例
 
-升级前：
+`menus` 升级前：
 
 ```js
 const menus = [
@@ -35,7 +37,7 @@ const menus = [
 ];
 ```
 
-升级后：
+`menus` 升级后：
 
 ```js
 const menus = [
@@ -45,4 +47,24 @@ const menus = [
     title: 'EXAMPLE',
   },
 ];
+```
+
+`ExtensionEntry` 升级前：
+
+```yaml
+spec:
+  entries:
+    - parent: "topbar"
+      name: "example"
+      title: "EXAMPLE"
+```
+
+`ExtensionEntry` 升级后：
+
+```yaml
+spec:
+  entries:
+    - parent: "global"
+      name: "example"
+      title: "EXAMPLE"
 ```
