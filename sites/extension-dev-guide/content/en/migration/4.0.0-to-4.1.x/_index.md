@@ -1,6 +1,6 @@
 ---
 title: Upgrade from 4.0 to 4.1.x
-weight: 01
+weight: 99
 description: Learn how to upgrade from version 4.0.0 to 4.1.x.
 ---
 
