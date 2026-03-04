@@ -60,7 +60,7 @@ kubesphere-extensions
 
    const menus = [
     {
-      parent: 'topbar',
+      parent: 'global',
       name: 'hello-world',
       link: '/hello-world',
       title: 'HELLO_WORLD',

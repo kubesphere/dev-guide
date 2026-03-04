@@ -82,7 +82,7 @@ const menus = [
 </td>
     </tr>
     <tr>
-      <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>.</td>
+      <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code>.</td>
     </tr>
     <tr>
       <td>title</td><td>The extension name displayed on the menu. Please do not hard-code the parameter values. Instead, configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../internationalization">Internationalization</a>.</td>
@@ -111,4 +111,3 @@ const menus = [
     </tr>
   </tbody>
 </table>
-

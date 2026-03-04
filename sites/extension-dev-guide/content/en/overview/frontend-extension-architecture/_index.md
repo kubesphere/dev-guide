@@ -107,7 +107,7 @@ import locales from './locales'; // Import localization files
 // Define the entry point for the extension
 const menus = [
   {
-    parent: 'topbar', // Parent of the entry
+    parent: 'global', // Parent of the entry
     name: 'hello-world', // Entry name identifier
     link: '/hello-world', // Entry URL
     title: 'Hello World', // Entry name

@@ -52,7 +52,7 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
   To avoid key duplication between the core and various extensions, it is recommended to prefix the key of the term with the name of the extension, for example `HELLO_WORLD.HELLO_WORLD_DESC`. In the future, we may conduct checks and restrictions on duplicate terms.
   {{% /notice %}}
 
-2. Import the language package in `src/index.js`:
+1. Import the language package in `src/index.js`:
 
    ```js
    import routes from './routes';
@@ -60,7 +60,7 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
 
    const menus = [
     {
-      parent: 'topbar',
+      parent: 'global',
       name: 'hello-world',
       link: '/hello-world',
       title: 'HELLO_WORLD',
@@ -80,7 +80,7 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
    extensionConfig default extensionConfig;
    ```
 
-3. In the development of the frontend extension, use the global function `t()` to obtain the text content and pass the value to the variable. For example, use the following code in the `src/App.jsx` file:
+2. In the development of the frontend extension, use the global function `t()` to obtain the text content and pass the value to the variable. For example, use the following code in the `src/App.jsx` file:
 
    ```jsx
    export default function App() {
@@ -88,9 +88,9 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
    }
    ```
 
-4. Run the `yarn dev` command in the `frontend` directory to launch the frontend environment.
+3. Run the `yarn dev` command in the `frontend` directory to launch the frontend environment.
 
-5. Visit and log in to `http://localhost:8000`, click the current user's name in the upper right corner of the page, and then select `User Settings` to switch the language.
+4. Visit and log in to `http://localhost:8000`, click the current user's name in the upper right corner of the page, and then select `User Settings` to switch the language.
 
    Clicking `Hello World` in the `English` and `Simplified Chinese` language environments will display the following text respectively:
 
