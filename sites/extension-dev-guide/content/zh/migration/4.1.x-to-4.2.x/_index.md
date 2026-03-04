@@ -1,6 +1,6 @@
 ---
 title: 从 4.1.x 升级到 4.2.x
-weight: 01
+weight: 98
 description: 如何从 4.1.x 升级到 4.2.x 版本
 ---
 
