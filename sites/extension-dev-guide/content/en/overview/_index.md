@@ -4,7 +4,7 @@ weight: 1
 description: Describes why KubeSphere LuBan adopts an extension mechanism and how developers can benefit from it.
 ---
 
-## Why KubeSphere v4 adopts an extension mechanism
+## Why KubeSphere LuBan adopts an extension mechanism
 
 Since 2018, KubeSphere, a container management platform for hybrid clouds, has been iterated with three major versions and a dozen minor versions. To meet different business requirements, KubeSphere enables diverse enterprise-grade features, from multi-tenancy, multi-cluster management, DevOps, GitOps, service meshes, microservices, observability, app store, and edge computing, to networking and storage.
 
