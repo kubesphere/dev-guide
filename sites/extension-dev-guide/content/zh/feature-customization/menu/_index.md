@@ -10,10 +10,6 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 扩展组件可以挂载到以下位置：
 
-* 顶部菜单栏
-
-  <img src="./top-menu.png" style="max-width: 1000px; margin: 0px">
-
 * 扩展组件菜单
 
   在顶部菜单栏点击 <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
@@ -22,7 +18,7 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 * 左侧导航栏
   
-  KubeSphere 在集群管理、企业空间管理、项目管理、用户和角色管理、以及平台设置页面提供左侧导航栏。集群管理页面的左侧导航栏如下图所示。
+  KubeSphere 在集群管理、企业空间管理、用户和角色管理、以及平台设置页面提供左侧导航栏。集群管理页面的左侧导航栏如下图所示。
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px">
 
@@ -68,7 +64,6 @@ const menus = [
           <li><strong>access</strong>：挂载到用户和角色管理页面左侧导航栏。</li>
           <li><strong>cluster</strong>：挂载到集群管理页面左侧导航栏。</li>
           <li><strong>workspace</strong>：挂载到企业空间管理页面左侧导航栏。</li>
-          <li><strong>project</strong>：挂载到项目管理页面左侧导航栏。</li>
           <li><strong>platformSettings</strong>：挂载到平台设置页面左侧导航栏。</li>
         </ul>
         若要挂载到当前菜单的子菜单下，设置 parent 的路径为： <code>parent: 'cluster.xxxx.xxxx'</code>
@@ -82,7 +77,7 @@ const menus = [
       </td>
     </tr>
     <tr>
-      <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 和 <code>topbar</code> 时有效。</td>
+      <td>link</td><td>扩展组件的跳转路径。目前仅对 <code>parent</code> 取值为 <code>global</code> 时有效。</td>
     </tr>
     <tr>
       <td>title</td><td>扩展组件在菜单上显示的名称。请勿直接将参数值设置为硬编码的字符串，建议将参数值设置为词条的键，并通过 KubeSphere 提供的国际化接口实现多语言。有关更多信息，请参阅<a href="../internationalization">国际化</a>。</td>

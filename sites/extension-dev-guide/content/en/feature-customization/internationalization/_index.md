@@ -60,7 +60,7 @@ The following takes the [Hello World](../../quickstart/hello-world-extension/) e
 
    const menus = [
     {
-      parent: 'topbar',
+      parent: 'global',
       name: 'hello-world',
       link: '/hello-world',
       title: 'HELLO_WORLD',

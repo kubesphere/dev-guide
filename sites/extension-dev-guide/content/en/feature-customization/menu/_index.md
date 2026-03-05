@@ -10,10 +10,6 @@ This section describes how to configure the mount point of an extension in the K
 
 You can mount extensions to the following points:
 
-* Top navigation bar
-
-  <img src="./top-menu.png" style="max-width: 1000px; margin: 0px" />
-
 * Extensions menu
 
   In the top navigation bar, click <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> to open the menu.
@@ -22,7 +18,7 @@ You can mount extensions to the following points:
 
 * Left navigation pane
 
-  KubeSphere provides a left navigation pane for each of the following modules: users and roles, cluster management, workspace management, project management, and platform settings. Example:
+  KubeSphere provides a left navigation pane for each of the following modules: users and roles, cluster management, workspace management and platform settings. Example:
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px" />
 
@@ -68,7 +64,6 @@ const menus = [
           <li><strong>access</strong>: mounts to the left navigation pane on the Users and Roles page.</li>
           <li><strong>cluster</strong>: mounts the left navigation pane on the Cluster Management page.</li>
           <li><strong>workspace</strong>: mounts the left navigation pane on the Workspace Management page.</li>
-          <li><strong>project</strong>: mounts the left navigation pane on the Project Management page.</li>
           <li><strong>platformSettings</strong>: mounts the left navigation pane on the Platform Settings page.</li>
         </ul>
           To mount to a submenu of the current menu, set the path to: <code>parent: 'cluster.xxxx.xxxx'</code>.
@@ -82,7 +77,7 @@ const menus = [
 </td>
     </tr>
     <tr>
-      <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code> or <code>topbar</code>.</td>
+      <td>link</td><td>The link to the extension. This parameter is valid only when <code>parent</code> is set to <code>global</code>.</td>
     </tr>
     <tr>
       <td>title</td><td>The extension name displayed on the menu. Please do not hard-code the parameter values. Instead, configure the parameters as keys in the UI text and enable multi-language support by using the internationalization API of KubeSphere. For more information, please refer to <a href="../internationalization">Internationalization</a>.</td>
@@ -111,4 +106,3 @@ const menus = [
     </tr>
   </tbody>
 </table>
-

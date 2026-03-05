@@ -107,7 +107,7 @@ import locales from './locales'; // 导入国际化文件
 // 定义扩展组件入口
 const menus = [
   {
-    parent: 'topbar', // 入口父级
+    parent: 'global', // 入口父级
     name: 'hello-world', // 入口 name 标识
     link: '/hello-world', // 入口 url
     title: 'Hello World', // 入口名称

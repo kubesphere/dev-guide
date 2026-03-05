@@ -65,7 +65,7 @@ import locales from './locales';
 
 const menus = [
   {
-    parent: 'topbar',
+    parent: 'global',
     name: 'hello-world',
     title: 'Hello World',
     icon: 'cluster',
