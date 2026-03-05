@@ -24,13 +24,13 @@ KubeSphere 4.2.0 introduces a redesigned UI, and the extension entry mount strat
 
 ##### Migration steps
 
-###### Migrate `topbar` to `global`
+Migrate `topbar` to `global`
 
 1. Change `parent` from `topbar` to `global` for extension entries (including both `menus` and `ExtensionEntry`).
 2. Sign in to the KubeSphere Console, then pin extension entries to the top area through "Custom Component Entry" in the "Component Dock" to restore the previous `topbar` experience.
 3. Refer to [Mount Point](../../feature-customization/menu/) to verify whether other menu configurations meet expectations.
 
-###### Migrate `project` to `workspace`
+Migrate `project` to `workspace`
 
 1. Change `parent` from `project` to `workspace` for extension entries (including both `menus` and `ExtensionEntry`).
 2. Because the resource hierarchy changes, most existing features require re-adaptation or refactoring, including but not limited to interactions, route paths, and permission models.

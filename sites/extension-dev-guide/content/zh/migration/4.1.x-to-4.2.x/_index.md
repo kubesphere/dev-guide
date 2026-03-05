@@ -24,13 +24,13 @@ KubeSphere 4.2.0 引入了全新 UI，扩展入口挂载策略发生变更：`to
 
 ##### 迁移步骤
 
-###### `topbar` 迁移到 `global`
+`topbar` 迁移到 `global`
 
 1. 将扩展入口配置中的 `parent` 从 `topbar` 改为 `global`（包括 `menus` 与 `ExtensionEntry`）。
 2. 登录 KubeSphere 控制台，在「组件坞」中通过「自定义组件入口」将扩展入口固定到页面顶部，以还原原先 `topbar` 的使用体验。
 3. 参考[挂载位置](../../feature-customization/menu/)确认其他菜单配置是否符合预期。
 
-###### `project` 迁移到 `workspace`
+`project` 迁移到 `workspace`
 
 1. 将扩展入口配置中的 `parent` 从 `project` 改为 `workspace`（包括 `menus` 与 `ExtensionEntry`）。
 2. 由于资源层级发生变化，原先多数功能需要重新适配或重构，包含但不限于：交互、路由路径、权限模型等。
