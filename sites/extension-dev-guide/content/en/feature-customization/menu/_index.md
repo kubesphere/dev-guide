@@ -10,10 +10,6 @@ This section describes how to configure the mount point of an extension in the K
 
 You can mount extensions to the following points:
 
-* Top navigation bar
-
-  <img src="./top-menu.png" style="max-width: 1000px; margin: 0px" />
-
 * Extensions menu
 
   In the top navigation bar, click <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> to open the menu.
@@ -22,7 +18,7 @@ You can mount extensions to the following points:
 
 * Left navigation pane
 
-  KubeSphere provides a left navigation pane for each of the following modules: users and roles, cluster management, workspace management, project management, and platform settings. Example:
+  KubeSphere provides a left navigation pane for each of the following modules: users and roles, cluster management, workspace management and platform settings. Example:
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px" />
 

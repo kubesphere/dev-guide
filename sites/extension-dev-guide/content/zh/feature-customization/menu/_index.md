@@ -10,10 +10,6 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 扩展组件可以挂载到以下位置：
 
-* 顶部菜单栏
-
-  <img src="./top-menu.png" style="max-width: 1000px; margin: 0px">
-
 * 扩展组件菜单
 
   在顶部菜单栏点击 <img src="./grid.svg" style="max-width: 20px; margin: 0px; display: inline; vertical-align: top"> 图标打开菜单。
@@ -22,7 +18,7 @@ description: 介绍如何设置扩展组件在 KubeSphere Web 控制台的挂载
 
 * 左侧导航栏
   
-  KubeSphere 在集群管理、企业空间管理、项目管理、用户和角色管理、以及平台设置页面提供左侧导航栏。集群管理页面的左侧导航栏如下图所示。
+  KubeSphere 在集群管理、企业空间管理、用户和角色管理、以及平台设置页面提供左侧导航栏。集群管理页面的左侧导航栏如下图所示。
 
   <img src="./navigation-menu.png" style="max-width: 1000px; margin: 0px">
 
